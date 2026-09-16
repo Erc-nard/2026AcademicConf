@@ -1,0 +1,6 @@
+# Install in a separate Python 3.12 environment; keep model training environments separate.
+mediapipe==1.0.1
+opencv-contrib-python==5.0.0.93
+numpy==2.5.3
+imageio-ffmpeg==0.6.0
+yt-dlp==2026.8.19

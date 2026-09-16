@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-16",
+  "scope": "one train utterance; cross-dataset smoke test; not test-set baseline",
+  "sample_id": "8r1k9NLdSvE/000006",
+  "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+  "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+  "video_sha256": "248a8b92e624b5cdd653299817ad4831c5f5d38682266d151d6a2435f3dc5745",
+  "asd_sha256": "60ff47c9b7359d64c43cbdf003395bc857a470eefb95c10b8b4a9acd948ada32",
+  "landmarker_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+  "audio_used": false,
+  "reference_used_for_inference": false,
+  "frames": 121,
+  "fps": 25,
+  "shape": [
+    121,
+    96,
+    96,
+    3
+  ],
+  "device": "cpu",
+  "torch_version": "2.14.0+cpu",
+  "results": {
+    "ctc_greedy": {
+      "samples": 1,
+      "cer": 0.6842105263157895,
+      "wer": 0.8333333333333334,
+      "char_errors": 13,
+      "reference_chars": 19,
+      "word_errors": 5,
+      "reference_words": 6,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 13,
+          "reference_chars": 19,
+          "word_errors": 5,
+          "reference_words": 6
+        }
+      ]
+    },
+    "hybrid": {
+      "samples": 1,
+      "cer": 0.7894736842105263,
+      "wer": 1.0,
+      "char_errors": 15,
+      "reference_chars": 19,
+      "word_errors": 6,
+      "reference_words": 6,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 15,
+          "reference_chars": 19,
+          "word_errors": 6,
+          "reference_words": 6
+        }
+      ]
+    }
+  }
+}

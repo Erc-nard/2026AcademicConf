@@ -1,7 +1,8 @@
 # 1단계: 데이터 준비와 baseline 실행 조건
 
-현재 구현은 **데이터 준비 및 평가 도구**이다. 한국어 VSR 추론 모델, 자동 입 영역 추출,
-가림 실험, LLM 보정은 아직 구현·검증되지 않았다. `examples/synthetic_*`는 평가기 확인용
+이 문서는 최초 데이터 준비 단계의 기록이다. 이후 **실제 영상의 입 영역 추출과 OLKAVS
+영상 전용 추론 1건**까지 실행했다. 최신 재현 방법과 제한은 [2단계](STAGE2.md)를 참고한다.
+가림 실험과 LLM 보정은 아직 구현·검증되지 않았다. `examples/synthetic_*`는 평가기 확인용
 직접 작성 예시이며 연구 성능 수치가 아니다.
 
 ## 바로 실행
@@ -86,9 +87,10 @@ Unicode NFC 정규화, 공백 통일, 문장부호 보존을 사용한다. CER�
 - [x] 공식 목록 형식 조사 및 subset 선정 도구
 - [x] 공식 face crop 결과를 전사·split·이전 발화 ID에 연결하는 도구
 - [x] CER/WER 평가기와 합성 데이터 테스트
-- [ ] 실제 영상 및 ASD 메타데이터 확보
-- [ ] Mouth ROI 생성 및 시각적 확인
-- [ ] 한국어 checkpoint/tokenizer 확보
-- [ ] Video-only 한국어 추론 성공 및 실측 baseline 기록
+- [x] 실제 영상 1개 및 ASD 메타데이터 확보
+- [x] 발화 1개의 Mouth ROI 생성 및 시각적 확인(시제품 방식)
+- [x] OLKAVS 한국어 checkpoint/문자 사전 확보
+- [x] Video-only 한국어 추론 1건 및 동작 점검 수치 기록
+- [ ] 모델 학습 조건에 맞춘 전처리 확정 및 고정 subset의 clean baseline 측정
 
 위 항목 완료 후 0/20/40/60% occlusion → N-best 문맥 재정렬 → confidence gating 순서로 진행한다.
