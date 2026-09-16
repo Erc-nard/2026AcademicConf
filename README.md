@@ -1,5 +1,20 @@
 # 2026 공과대학 학술제 연구계획
 
+## 구현 진행 상황
+
+**2026-09-16: 1단계 데이터 준비·평가 도구 추가.** 실행 방법과 남은 조건은
+[1단계 가이드](docs/STAGE1.md)를 참고한다. 아래 본문은 연구계획이며 완료된 실험 결과가 아니다.
+
+- 공식 KMSAV 목록 검증 및 split을 유지하는 재현 가능한 subset 선정
+- 전처리된 얼굴 영상·전사·이전 가용 발화 ID를 연결하는 manifest 생성
+- 한국어 CER/WER 평가, 환경 점검, 자동 테스트
+- 실제 한국어 VSR 추론은 데이터·입 ROI·한국어 checkpoint 확보 후 검증 예정
+
+```console
+python -m kvsr doctor
+python -m unittest discover -s tests -v
+```
+
 ## 시각 정보 손실 환경에서 신뢰도 기반 대화 문맥을 활용한 한국어 Visual Speech Recognition
 
 > **핵심 아이디어**  

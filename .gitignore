@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.env
+data/raw/
+data/processed/
+data/manifests/
+checkpoints/
+results/
+external/
+*.pt
+*.pth
+*.mp4
+*.wav
+
