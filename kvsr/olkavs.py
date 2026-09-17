@@ -26,7 +26,41 @@ def collapse_ctc(frame_ids, blank=3, eos=2):
     return tokens
 
 
-def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder="ctc_greedy"):
+def prepare_frames(frames, fps, size, target_fps):
+    import cv2
+    import numpy as np
+    if not np.isfinite(fps) or fps <= 0 or len(frames) == 0:
+        raise ValueError("Frames and positive finite FPS are required")
+    if size not in {96, 224} or target_fps not in {None, 30}:
+        raise ValueError("Supported sizes: 96/224; target FPS: native/30")
+    if frames.shape[1:3] != (size, size):
+        frames = np.stack([cv2.resize(f, (size, size), interpolation=cv2.INTER_AREA) for f in frames])
+    output_fps = fps if target_fps is None else target_fps
+    # Match nearest source-frame centers; preserve clip duration within one output frame.
+    count = max(1, round(len(frames) * output_fps / fps))
+    indices = np.clip(np.floor((np.arange(count) + .5) * fps / output_fps).astype(int), 0, len(frames) - 1)
+    return frames[indices], float(output_fps)
+
+
+def chunk_frontend(frontend, video, chunk=48):
+    """Exact eval-mode chunks for OLKAVS' single temporal kernel of width five."""
+    import torch
+    if chunk < 1:
+        raise ValueError("chunk must be positive")
+    if frontend.training:
+        raise ValueError("Chunked frontend requires eval mode")
+    parts = []
+    length = video.shape[2]
+    for start in range(0, length, chunk):
+        end = min(length, start + chunk)
+        left, right = max(0, start - 2), min(length, end + 2)
+        features = frontend(video[:, :, left:right])
+        parts.append(features[:, start - left:end - left])
+    return torch.cat(parts, dim=1)
+
+
+def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder="ctc_greedy",
+                 size=96, target_fps=None):
     import numpy as np
     import torch
     if threads < 1:
@@ -49,10 +83,12 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
         frames = archive["frames"]
         fps = float(archive["fps"])
     if (frames.dtype != np.uint8 or frames.ndim != 4 or frames.shape[-1] != 3
-            or not 1 <= len(frames) <= 750 or frames.shape[1:3] != (96, 96)):
-        raise ValueError("Expected 1..750 uint8 BGR mouth frames of size 96x96")
+            or not 1 <= len(frames) <= 750 or frames.shape[1:3] not in {(96, 96), (224, 224)}):
+        raise ValueError("Expected 1..750 uint8 BGR mouth frames of size 96x96 or 224x224")
     if not np.isfinite(fps) or fps <= 0:
         raise ValueError("Invalid input FPS")
+    source_fps, source_frames = fps, len(frames)
+    frames, fps = prepare_frames(frames, fps, size, target_fps)
     torch.set_num_threads(threads)
     model = build_model(
         72, 0, architecture="video", loss_fn="hybrid", front_dim=512,
@@ -72,7 +108,8 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
     lengths = torch.tensor([len(frames)], dtype=torch.long)
     with torch.inference_mode():
         if decoder == "ctc_greedy":
-            encoded = model.encoder(video, lengths)  # No audio arguments.
+            front = chunk_frontend(model.encoder.front, video)
+            encoded = model.encoder.back(model.encoder.projection(front), lengths)
             features = model.medium(encoded)
             logits = model.decoder.ctcdecoder(features)[0]
             if not torch.isfinite(logits).all():
@@ -94,9 +131,10 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
                token_ids=tokens, decoder=decoder, confidence=None,
                model="OLKAVS multiview_lip", checkpoint_sha256=sha256(checkpoint),
                upstream_commit=revision, torch_version=torch.__version__,
-               preprocessing="mediapipe-mouth-prototype-v1; BGR global mean/std; no FPS conversion",
+               preprocessing="mediapipe-mouth-prototype-v1; BGR global mean/std; nearest-center FPS resampling",
                vocabulary_sha256=sha256(repo / "vocabulary/kor_grapheme.csv"),
                input_sha256=sha256(mouth), input_fps=fps, input_frames=len(frames),
+               source_fps=source_fps, source_frames=source_frames, input_size=size,
                audio_used=False, reference_used=False, device="cpu",
                status="cross-dataset preprocessing smoke test; not paper reproduction")
     write_jsonl(output, [row])

@@ -13,7 +13,7 @@ from .evaluation import evaluate
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Korean VSR stage 1 utilities (no model bundled)")
+    parser = argparse.ArgumentParser(description="Korean VSR research utilities (checkpoints downloaded separately)")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("doctor", help="Report dependencies; does not install or run inference")
     catalog = commands.add_parser("catalog", help="Validate the official KMSAV list")
@@ -45,6 +45,7 @@ def main():
     prep.add_argument("--video", type=Path, required=True)
     prep.add_argument("--model", type=Path, required=True)
     prep.add_argument("--output", type=Path, required=True)
+    prep.add_argument("--size", type=int, choices=[96, 224], default=96)
     infer = commands.add_parser("infer-olkavs", help="Video-only CTC smoke inference; no transcript/audio input")
     infer.add_argument("--mouth", type=Path, required=True)
     infer.add_argument("--checkpoint", type=Path, required=True)
@@ -53,6 +54,8 @@ def main():
     infer.add_argument("--output", type=Path, required=True)
     infer.add_argument("--threads", type=int, default=2)
     infer.add_argument("--decoder", choices=["ctc_greedy", "hybrid"], default="ctc_greedy")
+    infer.add_argument("--size", type=int, choices=[96, 224], default=96)
+    infer.add_argument("--target-fps", type=int, choices=[30])
     args = parser.parse_args()
     try:
         if args.command == "doctor":
@@ -61,7 +64,7 @@ def main():
                                     for name in ["torch", "cv2", "numpy", "fairseq"]},
                           executables={name: shutil.which(name) is not None
                                        for name in ["ffmpeg", "nvidia-smi"]},
-                          baseline_status="unverified: requires Korean checkpoint, tokenizer, mouth ROI and video-only decoding")
+                          baseline_status="Dependency inventory only; see experiment reports for verified runs")
         elif args.command == "catalog":
             rows = read_catalog(args.path)
             report = dict(videos=len(rows), splits=dict(Counter(r["split"] for r in rows)),
@@ -79,7 +82,7 @@ def main():
         elif args.command == "infer-olkavs":
             from .olkavs import infer_olkavs
             report = infer_olkavs(args.mouth, args.checkpoint, args.repo, args.id, args.output,
-                                 args.threads, args.decoder)
+                                 args.threads, args.decoder, args.size, args.target_fps)
         elif args.command in {"asd", "preprocess"}:
             from .asd import metadata_rows, read_asd_archive
             record = next((r for r in read_catalog(args.catalog) if r["video_id"] == args.video_id), None)
@@ -93,7 +96,7 @@ def main():
             else:
                 from .preprocessing import preprocess_sample
                 report = preprocess_sample(args.video, args.archive, args.video_id, args.utterance,
-                                           args.model, args.output, record["split"])
+                                           args.model, args.output, record["split"], args.size)
         else:
             report = evaluate(read_jsonl(args.references), read_jsonl(args.predictions))
             args.output.parent.mkdir(parents=True, exist_ok=True)

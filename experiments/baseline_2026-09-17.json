@@ -1,0 +1,704 @@
+{
+  "plan_sha256": "4bbfef5e8441944122e1804174b6022225af9059dcf26f4bf05a8b748ff049d8",
+  "plan": {
+    "scope": "single-video train development; not held-out test performance",
+    "video_id": "8r1k9NLdSvE",
+    "split": "train",
+    "max_seconds": 10,
+    "total_available": 26,
+    "selection_rule": "all utterances within duration limit",
+    "selected": [
+      {
+        "id": "8r1k9NLdSvE/000006",
+        "utterance": "000006",
+        "start_ms": 39294,
+        "end_ms": 44115
+      },
+      {
+        "id": "8r1k9NLdSvE/000018",
+        "utterance": "000018",
+        "start_ms": 190232,
+        "end_ms": 196294
+      },
+      {
+        "id": "8r1k9NLdSvE/000027",
+        "utterance": "000027",
+        "start_ms": 314117,
+        "end_ms": 323904
+      },
+      {
+        "id": "8r1k9NLdSvE/000033",
+        "utterance": "000033",
+        "start_ms": 395367,
+        "end_ms": 404484
+      }
+    ],
+    "excluded": [
+      {
+        "id": "8r1k9NLdSvE/000008",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000009",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000010",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000011",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000012",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000013",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000014",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000015",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000016",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000020",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000022",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000023",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000024",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000025",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000026",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000028",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000029",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000030",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000031",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000032",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000034",
+        "reason": "duration"
+      },
+      {
+        "id": "8r1k9NLdSvE/000035",
+        "reason": "duration"
+      }
+    ],
+    "profiles": {
+      "size96_native": {
+        "size": 96,
+        "target_fps": null,
+        "decoder": "ctc_greedy"
+      },
+      "size96_30fps": {
+        "size": 96,
+        "target_fps": 30,
+        "decoder": "ctc_greedy"
+      },
+      "size224_native": {
+        "size": 224,
+        "target_fps": null,
+        "decoder": "ctc_greedy"
+      },
+      "size224_30fps": {
+        "size": 224,
+        "target_fps": 30,
+        "decoder": "ctc_greedy"
+      }
+    },
+    "hashes": {
+      "video": "248a8b92e624b5cdd653299817ad4831c5f5d38682266d151d6a2435f3dc5745",
+      "asd": "60ff47c9b7359d64c43cbdf003395bc857a470eefb95c10b8b4a9acd948ada32",
+      "catalog": "24741a39d31d7e5f5f4baad8dbe315339bef63cc355b13884c133ef20dec0397",
+      "landmarker": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+      "checkpoint": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5"
+    }
+  },
+  "paired_ids": [
+    "8r1k9NLdSvE/000006",
+    "8r1k9NLdSvE/000018",
+    "8r1k9NLdSvE/000027",
+    "8r1k9NLdSvE/000033"
+  ],
+  "conditions": {
+    "size96_native": {
+      "selected": 4,
+      "succeeded": 4,
+      "failed": 0,
+      "coverage": 1.0,
+      "all_selected_failure_as_empty": {
+        "samples": 4,
+        "cer": 0.8275862068965517,
+        "wer": 1.0,
+        "char_errors": 96,
+        "reference_chars": 116,
+        "word_errors": 41,
+        "reference_words": 41,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 13,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "successful_only": {
+        "samples": 4,
+        "cer": 0.8275862068965517,
+        "wer": 1.0,
+        "char_errors": 96,
+        "reference_chars": 116,
+        "word_errors": 41,
+        "reference_words": 41,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 13,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "failures": []
+    },
+    "size96_30fps": {
+      "selected": 4,
+      "succeeded": 4,
+      "failed": 0,
+      "coverage": 1.0,
+      "all_selected_failure_as_empty": {
+        "samples": 4,
+        "cer": 0.8448275862068966,
+        "wer": 0.975609756097561,
+        "char_errors": 98,
+        "reference_chars": 116,
+        "word_errors": 40,
+        "reference_words": 41,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 11,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 36,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "successful_only": {
+        "samples": 4,
+        "cer": 0.8448275862068966,
+        "wer": 0.975609756097561,
+        "char_errors": 98,
+        "reference_chars": 116,
+        "word_errors": 40,
+        "reference_words": 41,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 11,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 36,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "failures": []
+    },
+    "size224_native": {
+      "selected": 4,
+      "succeeded": 4,
+      "failed": 0,
+      "coverage": 1.0,
+      "all_selected_failure_as_empty": {
+        "samples": 4,
+        "cer": 0.9655172413793104,
+        "wer": 1.0,
+        "char_errors": 112,
+        "reference_chars": 116,
+        "word_errors": 41,
+        "reference_words": 41,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 19,
+            "reference_chars": 19,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 20,
+            "reference_chars": 20,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 39,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "successful_only": {
+        "samples": 4,
+        "cer": 0.9655172413793104,
+        "wer": 1.0,
+        "char_errors": 112,
+        "reference_chars": 116,
+        "word_errors": 41,
+        "reference_words": 41,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 19,
+            "reference_chars": 19,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 20,
+            "reference_chars": 20,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 39,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "failures": []
+    },
+    "size224_30fps": {
+      "selected": 4,
+      "succeeded": 4,
+      "failed": 0,
+      "coverage": 1.0,
+      "all_selected_failure_as_empty": {
+        "samples": 4,
+        "cer": 0.9655172413793104,
+        "wer": 1.0,
+        "char_errors": 112,
+        "reference_chars": 116,
+        "word_errors": 41,
+        "reference_words": 41,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 19,
+            "reference_chars": 19,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 20,
+            "reference_chars": 20,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 39,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "successful_only": {
+        "samples": 4,
+        "cer": 0.9655172413793104,
+        "wer": 1.0,
+        "char_errors": 112,
+        "reference_chars": 116,
+        "word_errors": 41,
+        "reference_words": 41,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 19,
+            "reference_chars": 19,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 20,
+            "reference_chars": 20,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 39,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "failures": []
+    }
+  },
+  "paired_metrics": {
+    "size96_native": {
+      "samples": 4,
+      "cer": 0.8275862068965517,
+      "wer": 1.0,
+      "char_errors": 96,
+      "reference_chars": 116,
+      "word_errors": 41,
+      "reference_words": 41,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 13,
+          "reference_chars": 19,
+          "word_errors": 5,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 17,
+          "reference_chars": 20,
+          "word_errors": 6,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 34,
+          "reference_chars": 37,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 32,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        }
+      ]
+    },
+    "size96_30fps": {
+      "samples": 4,
+      "cer": 0.8448275862068966,
+      "wer": 0.975609756097561,
+      "char_errors": 98,
+      "reference_chars": 116,
+      "word_errors": 40,
+      "reference_words": 41,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 11,
+          "reference_chars": 19,
+          "word_errors": 5,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 17,
+          "reference_chars": 20,
+          "word_errors": 5,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 34,
+          "reference_chars": 37,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 36,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        }
+      ]
+    },
+    "size224_native": {
+      "samples": 4,
+      "cer": 0.9655172413793104,
+      "wer": 1.0,
+      "char_errors": 112,
+      "reference_chars": 116,
+      "word_errors": 41,
+      "reference_words": 41,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 19,
+          "reference_chars": 19,
+          "word_errors": 6,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 20,
+          "reference_chars": 20,
+          "word_errors": 5,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 34,
+          "reference_chars": 37,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 39,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        }
+      ]
+    },
+    "size224_30fps": {
+      "samples": 4,
+      "cer": 0.9655172413793104,
+      "wer": 1.0,
+      "char_errors": 112,
+      "reference_chars": 116,
+      "word_errors": 41,
+      "reference_words": 41,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 19,
+          "reference_chars": 19,
+          "word_errors": 6,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 20,
+          "reference_chars": 20,
+          "word_errors": 5,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 34,
+          "reference_chars": 37,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 39,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        }
+      ]
+    }
+  },
+  "inference_provenance": {
+    "size96_native": {
+      "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+      "torch_version": "2.14.0+cpu",
+      "vocabulary_sha256": "00a465a2b25c24e1f9962d407fc2648fe5ab58bef334378abede5293b3885c42",
+      "preprocessing": "mediapipe-mouth-prototype-v1; BGR global mean/std; nearest-center FPS resampling",
+      "device": "cpu"
+    },
+    "size96_30fps": {
+      "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+      "torch_version": "2.14.0+cpu",
+      "vocabulary_sha256": "00a465a2b25c24e1f9962d407fc2648fe5ab58bef334378abede5293b3885c42",
+      "preprocessing": "mediapipe-mouth-prototype-v1; BGR global mean/std; nearest-center FPS resampling",
+      "device": "cpu"
+    },
+    "size224_native": {
+      "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+      "torch_version": "2.14.0+cpu",
+      "vocabulary_sha256": "00a465a2b25c24e1f9962d407fc2648fe5ab58bef334378abede5293b3885c42",
+      "preprocessing": "mediapipe-mouth-prototype-v1; BGR global mean/std; nearest-center FPS resampling",
+      "device": "cpu"
+    },
+    "size224_30fps": {
+      "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+      "torch_version": "2.14.0+cpu",
+      "vocabulary_sha256": "00a465a2b25c24e1f9962d407fc2648fe5ab58bef334378abede5293b3885c42",
+      "preprocessing": "mediapipe-mouth-prototype-v1; BGR global mean/std; nearest-center FPS resampling",
+      "device": "cpu"
+    }
+  }
+}

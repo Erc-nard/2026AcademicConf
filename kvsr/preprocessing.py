@@ -119,10 +119,12 @@ def extract_mouths(faces, model, fps, size=96):
     return np.stack(mouths), trace
 
 
-def preprocess_sample(video, archive, video_id, utterance_index, model, output, split):
+def preprocess_sample(video, archive, video_id, utterance_index, model, output, split, size=96):
     import cv2
     import imageio_ffmpeg
     import numpy as np
+    if size not in {96, 224}:
+        raise ValueError("Mouth size must be 96 or 224")
     utterances = read_asd_archive(archive, video_id)
     utterance = next((u for u in utterances if u.index == utterance_index), None)
     if utterance is None:
@@ -133,7 +135,7 @@ def preprocess_sample(video, archive, video_id, utterance_index, model, output, 
     if not Path(video).is_file() or not Path(model).is_file():
         raise ValueError("Video or face landmark model is missing")
     faces, track = extract_faces(video, utterance, imageio_ffmpeg.get_ffmpeg_exe())
-    mouths, trace = extract_mouths(faces, model, utterance.fps)
+    mouths, trace = extract_mouths(faces, model, utterance.fps, size=size)
     output.mkdir(parents=True)
     np.savez_compressed(output / "mouth.npz", frames=mouths, fps=utterance.fps)
     writer = cv2.VideoWriter(str(output / "face.mp4"), cv2.VideoWriter_fourcc(*"mp4v"),
