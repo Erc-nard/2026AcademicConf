@@ -55,7 +55,8 @@ def main():
     infer.add_argument("--id", required=True)
     infer.add_argument("--output", type=Path, required=True)
     infer.add_argument("--threads", type=int, default=2)
-    infer.add_argument("--decoder", choices=["ctc_greedy", "hybrid"], default="ctc_greedy")
+    infer.add_argument("--decoder", choices=["ctc_greedy", "ctc_beam", "hybrid"], default="ctc_greedy")
+    infer.add_argument("--beam-size", type=int, default=25)
     infer.add_argument("--size", type=int, choices=[96, 224], default=96)
     infer.add_argument("--target-fps", type=int, choices=[30])
     args = parser.parse_args()
@@ -84,7 +85,7 @@ def main():
         elif args.command == "infer-olkavs":
             from .olkavs import infer_olkavs
             report = infer_olkavs(args.mouth, args.checkpoint, args.repo, args.id, args.output,
-                                 args.threads, args.decoder, args.size, args.target_fps)
+                                 args.threads, args.decoder, args.size, args.target_fps, args.beam_size)
         elif args.command in {"asd", "preprocess"}:
             from .asd import metadata_rows, read_asd_archive
             record = next((r for r in read_catalog(args.catalog) if r["video_id"] == args.video_id), None)

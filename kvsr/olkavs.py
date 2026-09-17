@@ -60,12 +60,14 @@ def chunk_frontend(frontend, video, chunk=48):
 
 
 def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder="ctc_greedy",
-                 size=96, target_fps=None):
+                 size=96, target_fps=None, beam_size=25):
     import numpy as np
     import torch
     if threads < 1:
         raise ValueError("threads must be positive")
-    if decoder not in {"ctc_greedy", "hybrid"}:
+    if not isinstance(beam_size, int) or beam_size < 1:
+        raise ValueError("beam_size must be a positive integer")
+    if decoder not in {"ctc_greedy", "ctc_beam", "hybrid"}:
         raise ValueError("Unknown decoder")
     repo = Path(repo).resolve()
     if not (repo / "avsr/utils/model_builder.py").is_file():
@@ -109,7 +111,7 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
     video = ((video - video.mean()) / std).permute(3, 0, 1, 2).unsqueeze(0)
     lengths = torch.tensor([len(frames)], dtype=torch.long)
     with torch.inference_mode():
-        if decoder == "ctc_greedy":
+        if decoder in {"ctc_greedy", "ctc_beam"}:
             front = chunk_frontend(model.encoder.front, video)
             encoded = model.encoder.back(model.encoder.projection(front), lengths)
             features = model.medium(encoded)
@@ -140,5 +142,13 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
                crop_scale=crop_scale, alignment=alignment,
                audio_used=False, reference_used=False, device="cpu",
                status="cross-dataset preprocessing smoke test; not paper reproduction")
+    if decoder == "ctc_beam":
+        from .nbest import prefix_beam, render_candidates
+        candidates = render_candidates(prefix_beam(logits.log_softmax(-1).tolist(), beam_size),
+                                       vocabulary, grp2char)
+        row.update(greedy_hypothesis=row["hypothesis"], greedy_token_ids=tokens,
+                   candidates=candidates, beam_size=beam_size, language_model_used=False,
+                   score_note="Pruned prefix log mass; rendered duplicates keep best prefix; not confidence")
+        row.update({key: candidates[0][key] for key in ("hypothesis", "raw_graphemes", "token_ids")})
     write_jsonl(output, [row])
     return row
