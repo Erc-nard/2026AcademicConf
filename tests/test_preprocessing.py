@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 from kvsr.asd import parse_asd
-from kvsr.preprocessing import extract_faces, square_crop
+from kvsr.preprocessing import extract_faces, square_crop, roll_transform
 
 
 HAS_VIDEO = all(importlib.util.find_spec(name) for name in ["numpy", "cv2", "imageio_ffmpeg"])
@@ -12,6 +12,29 @@ HAS_VIDEO = all(importlib.util.find_spec(name) for name in ["numpy", "cv2", "ima
 
 @unittest.skipUnless(HAS_VIDEO, "Install requirements-preprocessing.txt for video integration tests")
 class PreprocessingTests(unittest.TestCase):
+    def test_eye_rotation_levels_line_and_marks_padding(self):
+        import cv2
+        import numpy as np
+        frame = np.full((100, 100, 3), 160, np.uint8)
+        eyes = np.array([[25., 35.], [75., 55.]])
+        rotated, valid, matrix, angle = roll_transform(frame, *eyes)
+        transformed = cv2.transform(eyes[None], matrix)[0]
+        self.assertAlmostEqual(transformed[0, 1], transformed[1, 1], places=5)
+        self.assertGreater(angle, 0)
+        self.assertEqual(rotated.shape, frame.shape)
+        self.assertEqual(valid[50, 50], 255)
+        self.assertEqual(valid.min(), 0)
+
+    def test_zero_roll_preserves_pixels_and_invalid_eyes_fail(self):
+        import numpy as np
+        frame = np.full((100, 100, 3), 160, np.uint8)
+        rotated, valid, _, angle = roll_transform(frame, (20., 30.), (80., 30.))
+        np.testing.assert_array_equal(frame, rotated)
+        self.assertEqual(valid.min(), 255)
+        self.assertEqual(angle, 0)
+        with self.assertRaises(ValueError):
+            roll_transform(frame, (20., 30.), (20., 30.))
+
     def test_frame_timing_and_face_box_on_decodable_video(self):
         import cv2
         import imageio_ffmpeg

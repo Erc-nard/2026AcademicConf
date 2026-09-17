@@ -55,7 +55,8 @@ python -m kvsr.batch --archive data/raw/kmsav_asd_v0.2.zip --catalog external/km
 
 - `plan.json`: 예측 전에 저장하는 대상 ID·제외 사유·네 조건·데이터/가중치 해시.
 - `references.jsonl`: 평가용 정답. 추론 프로세스에는 넘기지 않는다.
-- `crops/<utterance>/`: 각 발화의 입 배열, 얼굴 미리보기, 프레임별 좌표.
+- `crops/<recipe>/<utterance>/`: 각 발화의 입 배열, 얼굴 미리보기, 프레임별 좌표.
+  (최초 3단계 실행은 recipe 하위 폴더 없이 저장했다.)
 - `<condition>/predictions.jsonl`: 조건별 전체 성공 예측과 추론 출처.
 - `*.log`, `progress.json`: 작업 로그와 진행 상황.
 - `summary.json`: 성공률, 실패 원인, 전체/성공 항목/공통 성공 ID의 CER·WER.

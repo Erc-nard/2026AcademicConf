@@ -80,14 +80,32 @@ def extract_faces(video, utterance, ffmpeg):
     return faces, tracking
 
 
-def extract_mouths(faces, model, fps, size=96):
+def roll_transform(frame, eye_left, eye_right):
+    """Rotate the eye line to horizontal; return a real-pixel validity mask."""
+    import cv2
+    import numpy as np
+    left, right = sorted([np.asarray(eye_left), np.asarray(eye_right)], key=lambda p: p[0])
+    delta = right - left
+    if not np.isfinite(delta).all() or np.linalg.norm(delta) < 2:
+        raise ValueError("Invalid eye geometry")
+    angle = math.degrees(math.atan2(delta[1], delta[0]))
+    h, w = frame.shape[:2]
+    matrix = cv2.getRotationMatrix2D(tuple((left + right) / 2), angle, 1)
+    rotated = cv2.warpAffine(frame, matrix, (w, h), flags=cv2.INTER_LINEAR)
+    valid = cv2.warpAffine(np.full((h, w), 255, np.uint8), matrix, (w, h), flags=cv2.INTER_LINEAR)
+    return rotated, valid, matrix, angle
+
+
+def extract_mouths(faces, model, fps, size=96, crop_scale=1.7, align="none"):
     import cv2
     import mediapipe as mp
     import numpy as np
+    if not math.isfinite(crop_scale) or not 1 <= crop_scale <= 3 or align not in {"none", "eyes"}:
+        raise ValueError("crop-scale must be 1..3 and align must be none/eyes")
     options = mp.tasks.vision.FaceLandmarkerOptions(
         base_options=mp.tasks.BaseOptions(model_asset_buffer=Path(model).read_bytes()),
         running_mode=mp.tasks.vision.RunningMode.VIDEO, num_faces=1)
-    geometry = []
+    geometry, transformed, masks, rotations, matrices = [], [], [], [], []
     with mp.tasks.vision.FaceLandmarker.create_from_options(options) as detector:
         for i, frame in enumerate(faces):
             result = detector.detect_for_video(
@@ -101,8 +119,19 @@ def extract_mouths(faces, model, fps, size=96):
             xy = np.array([(points[k].x * frame.shape[1], points[k].y * frame.shape[0]) for k in ring])
             if not np.isfinite(xy).all():
                 raise ValueError("Non-finite face landmarks")
+            angle = 0.0
+            matrix = np.array([[1., 0., 0.], [0., 1., 0.]])
+            valid = np.full(frame.shape[:2], 255, np.uint8)
+            if align == "eyes":
+                eyes = [(points[k].x * frame.shape[1], points[k].y * frame.shape[0]) for k in [33, 263]]
+                frame, valid, matrix, angle = roll_transform(frame, *eyes)
+                xy = cv2.transform(xy[None].astype(np.float64), matrix)[0]
+            transformed.append(frame)
+            masks.append(valid)
+            rotations.append(angle)
+            matrices.append(matrix.tolist())
             low, high = xy.min(axis=0), xy.max(axis=0)
-            geometry.append((0.5 * (low + high), float(max(high - low) * 1.7)))
+            geometry.append((0.5 * (low + high), float(max(high - low) * crop_scale)))
     side = float(np.median([g[1] for g in geometry]))
     mouths, trace = [], []
     for i, (center, _) in enumerate(geometry):
@@ -113,13 +142,17 @@ def extract_mouths(faces, model, fps, size=96):
             raise ValueError("Mouth context window exceeds the entire face crop")
         bounded = np.clip(center, extent / 2 + .5,
                           np.array([width, height]) - extent / 2 - .5)
-        mouths.append(square_crop(faces[i], bounded, side, size))
+        if square_crop(masks[i], bounded, side, math.ceil(side)).min() < 255:
+            raise ValueError(f"Aligned mouth contains rotation padding at frame {i}")
+        mouths.append(square_crop(transformed[i], bounded, side, size))
         trace.append(dict(frame=i, center=bounded.tolist(), detected_center=center.tolist(),
-                          shifted=bool(np.any(bounded != center)), side=side, detected=True))
+                          shifted=bool(np.any(bounded != center)), side=side, detected=True,
+                          angle_degrees=rotations[i], affine_matrix=matrices[i], align=align))
     return np.stack(mouths), trace
 
 
-def preprocess_sample(video, archive, video_id, utterance_index, model, output, split, size=96):
+def preprocess_sample(video, archive, video_id, utterance_index, model, output, split, size=96,
+                      crop_scale=1.7, align="none"):
     import cv2
     import imageio_ffmpeg
     import numpy as np
@@ -135,9 +168,12 @@ def preprocess_sample(video, archive, video_id, utterance_index, model, output, 
     if not Path(video).is_file() or not Path(model).is_file():
         raise ValueError("Video or face landmark model is missing")
     faces, track = extract_faces(video, utterance, imageio_ffmpeg.get_ffmpeg_exe())
-    mouths, trace = extract_mouths(faces, model, utterance.fps, size=size)
+    mouths, trace = extract_mouths(faces, model, utterance.fps, size=size, crop_scale=crop_scale, align=align)
+    if align == "eyes":
+        faces = [cv2.warpAffine(f, np.array(t["affine_matrix"]), (224, 224)) for f, t in zip(faces, trace)]
     output.mkdir(parents=True)
-    np.savez_compressed(output / "mouth.npz", frames=mouths, fps=utterance.fps)
+    np.savez_compressed(output / "mouth.npz", frames=mouths, fps=utterance.fps,
+                        crop_scale=crop_scale, align=align)
     writer = cv2.VideoWriter(str(output / "face.mp4"), cv2.VideoWriter_fourcc(*"mp4v"),
                              utterance.fps, (224, 224))
     if not writer.isOpened():
@@ -167,6 +203,7 @@ def preprocess_sample(video, archive, video_id, utterance_index, model, output, 
                   face_video=str((output / "face.mp4").resolve()),
                   color_order="BGR", shape=list(mouths.shape),
                   preprocessing="mediapipe-mouth-prototype-v1", avhubert_compatible=False,
+                  crop_scale=crop_scale, align=align, face_preview_aligned=(align == "eyes"),
                   audio_used=False, model_sha256=sha256(model), video_sha256=sha256(video),
                   asd_sha256=sha256(archive), face_track=track, mouth_track=trace)
     (output / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")

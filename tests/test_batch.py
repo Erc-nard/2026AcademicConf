@@ -1,11 +1,19 @@
 import importlib.util
 import unittest
 
-from kvsr.batch import summarize
+from kvsr.batch import summarize, paired_comparisons
 from kvsr.olkavs import prepare_frames, chunk_frontend
 
 
 class CoverageTests(unittest.TestCase):
+    def test_pairwise_matching_survives_an_all_failed_condition(self):
+        refs = [dict(id="a", reference="가나"), dict(id="b", reference="다라")]
+        predictions = dict(first=[dict(id="a", hypothesis="가나"), dict(id="b", hypothesis="다라")],
+                           second=[dict(id="a", hypothesis="가다")], failed=[])
+        pairs = paired_comparisons(refs, predictions)
+        self.assertEqual(pairs["first__vs__second"]["ids"], ["a"])
+        self.assertEqual(pairs["first__vs__second"]["metrics"]["second"]["cer"], .5)
+        self.assertIsNone(pairs["first__vs__failed"]["metrics"])
     def test_failures_are_not_silently_excluded(self):
         refs = [dict(id="a", reference="가나"), dict(id="b", reference="다라")]
         result = summarize(refs, [dict(id="a", hypothesis="가나")], [dict(id="b", error="missing face")])

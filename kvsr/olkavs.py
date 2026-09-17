@@ -82,6 +82,8 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
     with np.load(mouth, allow_pickle=False) as archive:
         frames = archive["frames"]
         fps = float(archive["fps"])
+        crop_scale = float(archive["crop_scale"]) if "crop_scale" in archive else 1.7
+        alignment = str(archive["align"]) if "align" in archive else "none"
     if (frames.dtype != np.uint8 or frames.ndim != 4 or frames.shape[-1] != 3
             or not 1 <= len(frames) <= 750 or frames.shape[1:3] not in {(96, 96), (224, 224)}):
         raise ValueError("Expected 1..750 uint8 BGR mouth frames of size 96x96 or 224x224")
@@ -135,6 +137,7 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
                vocabulary_sha256=sha256(repo / "vocabulary/kor_grapheme.csv"),
                input_sha256=sha256(mouth), input_fps=fps, input_frames=len(frames),
                source_fps=source_fps, source_frames=source_frames, input_size=size,
+               crop_scale=crop_scale, alignment=alignment,
                audio_used=False, reference_used=False, device="cpu",
                status="cross-dataset preprocessing smoke test; not paper reproduction")
     write_jsonl(output, [row])
