@@ -90,6 +90,12 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
         interpolated_frames = int(archive["interpolated_frames"]) if "interpolated_frames" in archive else 0
         track_boundary_limit = int(archive["track_boundary_limit"]) if "track_boundary_limit" in archive else 2
         boundary_extended_frames = int(archive["boundary_extended_frames"]) if "boundary_extended_frames" in archive else None
+        missing_policy = str(archive["missing_policy"]) if "missing_policy" in archive else "strict"
+        if missing_policy not in {"strict", "mask"}:
+            raise ValueError("Unknown stored missing policy")
+        if missing_policy == "mask" and "roi_observed" not in archive:
+            raise ValueError("Masked input requires ROI availability")
+        observed = archive["roi_observed"] if missing_policy == "mask" else np.ones(len(frames), dtype=np.bool_)
     if (frames.dtype != np.uint8 or frames.ndim != 4 or frames.shape[-1] != 3
             or not 1 <= len(frames) <= 750 or frames.shape[1:3] not in {(96, 96), (224, 224)}):
         raise ValueError("Expected 1..750 uint8 BGR mouth frames of size 96x96 or 224x224")
@@ -97,6 +103,33 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
         raise ValueError("Invalid input FPS")
     source_fps, source_frames = fps, len(frames)
     frames, fps = prepare_frames(frames, fps, size, target_fps)
+    from .missing import resample_availability, normalize_available
+    observed = resample_availability(observed, source_frames, source_fps, len(frames), fps)
+    availability = dict(missing_policy=missing_policy, usable_frames=int(observed.sum()),
+        missing_frames=int((~observed).sum()), usable_fraction=float(observed.mean()),
+        timeline_preserved=True, model_mask_channel=False,
+        normalization="usable pixels mean/std; missing normalized pixels zero" if missing_policy == "mask" else "all pixels mean/std",
+        interpretation="ROI extraction availability; not ground-truth face visibility or confidence")
+    if not observed.any():
+        row = dict(id=sample_id, hypothesis="", token_ids=[], raw_graphemes="", decoder=decoder,
+            confidence=None, status="abstained_no_usable_roi", inference_performed=False,
+            availability=availability, source_fps=source_fps, source_frames=source_frames,
+            input_fps=fps, input_frames=len(frames), input_size=size, input_sha256=sha256(mouth),
+            checkpoint_sha256=sha256(checkpoint), upstream_commit=revision,
+            vocabulary_sha256=sha256(repo / "vocabulary/kor_grapheme.csv"), torch_version=torch.__version__,
+            preprocessing="mediapipe-mouth-prototype-v1; all ROI unavailable; no model execution",
+            device="cpu", audio_used=False, reference_used=False)
+        if decoder in {"ctc_beam", "hybrid_rescore"}:
+            empty = dict(hypothesis="", token_ids=[], raw_graphemes="", log_mass=None,
+                         status="abstained_no_usable_roi")
+            row.update(greedy_hypothesis="", greedy_token_ids=[], candidates=[empty],
+                       beam_size=beam_size, language_model_used=False,
+                       score_note="Abstention placeholder for evaluation; no model score")
+            if decoder == "hybrid_rescore":
+                row.update(ctc_candidates=[empty], hybrid_settings=dict(inference_performed=False,
+                    method="abstained; candidate search not executed"))
+        write_jsonl(output, [row])
+        return row
     from .corruption import corrupt_frames
     frames, corruption_info = corrupt_frames(frames, corruption)
     torch.set_num_threads(threads)
@@ -110,11 +143,7 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
     state = torch.load(checkpoint, map_location="cpu", weights_only=True)
     model.load_state_dict(state, strict=True)
     model.eval()
-    video = torch.from_numpy(frames).float()
-    std = video.std()
-    if not torch.isfinite(std) or std <= 0:
-        raise ValueError("Input video has zero or invalid variance")
-    video = ((video - video.mean()) / std).permute(3, 0, 1, 2).unsqueeze(0)
+    video = normalize_available(frames, observed)
     lengths = torch.tensor([len(frames)], dtype=torch.long)
     with torch.inference_mode():
         if decoder in {"ctc_greedy", "ctc_beam", "hybrid_rescore"}:
@@ -151,6 +180,10 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
                audio_used=False, reference_used=False, device="cpu",
                status="cross-dataset preprocessing smoke test; not paper reproduction")
     row["corruption"] = corruption_info
+    row["availability"] = availability
+    row["inference_performed"] = True
+    if missing_policy == "mask":
+        row["preprocessing"] = "mediapipe-mouth-prototype-v1; BGR usable ROI mean/std; missing normalized frames zero; nearest-center FPS"
     if decoder != "hybrid":
         probs = logits.softmax(-1)
         row["ctc_diagnostics"] = dict(

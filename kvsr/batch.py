@@ -63,6 +63,22 @@ def run_command(arguments, log, timeout, env):
     return None
 
 
+def summarize_decisions(references, rows, failures):
+    for row in rows:
+        if row.get("status") == "abstained_no_usable_roi" and (
+                row["hypothesis"] != "" or row.get("inference_performed") is not False):
+            raise ValueError("Abstention must have empty hypothesis and no model execution")
+    result = summarize(references, rows, failures)
+    inferred = [r for r in rows if r.get("inference_performed", True)]
+    ids = {r["id"] for r in inferred}
+    result.update(inference_performed=len(inferred),
+        abstained=sum(r.get("status") == "abstained_no_usable_roi" for r in rows),
+        coverage_definition="returned outputs including explicit abstentions; inspect inference_performed separately",
+        inferred_only=evaluate([r for r in references if r["id"] in ids], inferred) if inferred else None,
+        availability={r["id"]: r.get("availability") for r in rows})
+    return result
+
+
 def run(args):
     profiles = CROP_PROFILES if args.suite == "crop" else {k: (*v, 1.7, "none") for k, v in PROFILES.items()}
     if args.suite == "baseline":
@@ -95,6 +111,7 @@ def run(args):
                 excluded=[dict(id=f"{u.video_id}/{u.index}", reason="duration" if
                     u.end_ms-u.start_ms > args.max_seconds*1000 else "sample_limit") for u in items if u not in selected],
                 suite=args.suite, landmark_max_gap=args.landmark_max_gap, track_boundary_limit=args.track_boundary_limit,
+                missing_policy=args.missing_policy,
                 profiles={k: dict(size=v[0], target_fps=v[1], crop_scale=v[2], align=v[3],
                                   decoder="ctc_greedy") for k, v in profiles.items()},
                 hashes={name: sha256(path) for name, path in [("video", args.video), ("asd", args.archive),
@@ -119,7 +136,8 @@ def run(args):
                                     "--video", args.video, "--model", args.model, "--size", 224,
                                     "--crop-scale", scale, "--align", align,
                                     "--landmark-max-gap", args.landmark_max_gap,
-                                    "--track-boundary-limit", args.track_boundary_limit, "--output", output], log, 180, env)
+                                    "--track-boundary-limit", args.track_boundary_limit,
+                                    "--missing-policy", args.missing_policy, "--output", output], log, 180, env)
             error = cache[recipe]
             failure = error
             destination = root / name / f"{item.index}.jsonl"
@@ -146,7 +164,7 @@ def run(args):
                    inference_provenance={p: {k: predictions[p][0][k] for k in
                        ["upstream_commit", "torch_version", "vocabulary_sha256", "preprocessing", "device"]}
                        if predictions[p] else None for p in profiles},
-                   conditions={p: summarize(references, predictions[p], failures[p]) for p in profiles},
+                   conditions={p: summarize_decisions(references, predictions[p], failures[p]) for p in profiles},
                    paired_metrics={p: evaluate([r for r in references if r["id"] in common],
                                               [r for r in predictions[p] if r["id"] in common])
                                    if common else None for p in profiles})
@@ -165,6 +183,7 @@ def main():
     parser.add_argument("--max-samples", type=int)
     parser.add_argument("--landmark-max-gap", type=int, choices=range(4), default=0)
     parser.add_argument("--track-boundary-limit", type=int, choices=[2, 4], default=2)
+    parser.add_argument("--missing-policy", choices=["strict", "mask"], default="strict")
     parser.add_argument("--suite", choices=["size-fps", "crop", "baseline"], default="size-fps")
     args = parser.parse_args()
     try:

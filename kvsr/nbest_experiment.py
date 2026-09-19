@@ -77,6 +77,8 @@ def main():
             [dict(id=r["id"], candidates=r["ctc_candidates"]) for r in predictions])
     greedy = [dict(id=r["id"], hypothesis=r["greedy_hypothesis"]) for r in predictions]
     summary.update(greedy=evaluate(references, greedy), scope=source["scope"],
+                   inference_performed=sum(r.get("inference_performed", True) for r in predictions),
+                   abstained_ids=[r["id"] for r in predictions if r.get("status") == "abstained_no_usable_roi"],
                    diagnostics={r["id"]: r.get("ctc_diagnostics") for r in predictions},
                    corruption={r["id"]: r.get("corruption") for r in predictions},
                    plan_sha256=sha256(args.output / "plan.json"),

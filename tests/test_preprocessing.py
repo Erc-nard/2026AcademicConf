@@ -56,6 +56,20 @@ class PreprocessingTests(unittest.TestCase):
             self.assertEqual([r["source_frame_one_based"] for r in track], [3, 4, 5])
             for frame, expected in zip(faces, [40, 60, 80]):
                 self.assertLess(abs(float(frame.mean()) - expected), 3)
+            from dataclasses import replace
+            gappy = replace(utterance, start_ms=0, end_ms=400,
+                            boxes=((6,10,10,20,20),(7,10,10,20,20)))
+            masked, trace = extract_faces(video, gappy, imageio_ffmpeg.get_ffmpeg_exe(), missing_policy="mask")
+            self.assertEqual([r["source_frame_one_based"] for r in trace], list(range(1,11)))
+            self.assertEqual([r["available"] for r in trace], [False]*3+[True]*6+[False])
+            for index, frame in enumerate(masked):
+                if trace[index]["available"]:
+                    self.assertLess(abs(float(frame.mean()) - index*20), 3)
+                else:
+                    self.assertTrue((frame == 127).all())
+                    self.assertEqual(trace[index]["reason"], "track_missing")
+            with self.assertRaises(ValueError):
+                extract_faces(video, gappy, imageio_ffmpeg.get_ffmpeg_exe())
 
     def test_crop_rejects_border_and_preserves_center_pixels(self):
         import numpy as np
