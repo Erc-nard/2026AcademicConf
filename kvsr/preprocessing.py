@@ -96,12 +96,40 @@ def roll_transform(frame, eye_left, eye_right):
     return rotated, valid, matrix, angle
 
 
-def extract_mouths(faces, model, fps, size=96, crop_scale=1.7, align="none"):
+def fill_geometry_gaps(geometry, max_gap):
+    """Interpolate bounded interior coordinate gaps only; never fabricate pixels."""
+    import numpy as np
+    if not isinstance(max_gap, int) or not 0 <= max_gap <= 3:
+        raise ValueError("landmark-max-gap must be an integer from 0 to 3")
+    output = list(geometry)
+    index = 0
+    while index < len(output):
+        if output[index] is not None:
+            index += 1
+            continue
+        start = index
+        while index < len(output) and output[index] is None:
+            index += 1
+        if start == 0 or index == len(output) or index-start > max_gap:
+            raise ValueError(f"Unrecoverable landmark gap at crop frame {start}; length {index-start}")
+        left, right = geometry[start-1], geometry[index]
+        for j in range(start, index):
+            fraction = (j-start+1)/(index-start+1)
+            output[j] = ((1-fraction)*np.asarray(left[0]) + fraction*np.asarray(right[0]),
+                         (1-fraction)*left[1] + fraction*right[1])
+    return output
+
+
+def extract_mouths(faces, model, fps, size=96, crop_scale=1.7, align="none", landmark_max_gap=0):
     import cv2
     import mediapipe as mp
     import numpy as np
     if not math.isfinite(crop_scale) or not 1 <= crop_scale <= 3 or align not in {"none", "eyes"}:
         raise ValueError("crop-scale must be 1..3 and align must be none/eyes")
+    if not isinstance(landmark_max_gap, int) or not 0 <= landmark_max_gap <= 3:
+        raise ValueError("landmark-max-gap must be 0..3")
+    if landmark_max_gap and align != "none":
+        raise ValueError("Landmark gap interpolation currently requires align=none")
     options = mp.tasks.vision.FaceLandmarkerOptions(
         base_options=mp.tasks.BaseOptions(model_asset_buffer=Path(model).read_bytes()),
         running_mode=mp.tasks.vision.RunningMode.VIDEO, num_faces=1)
@@ -112,7 +140,14 @@ def extract_mouths(faces, model, fps, size=96, crop_scale=1.7, align="none"):
                 mp.Image(image_format=mp.ImageFormat.SRGB, data=cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)),
                 round(i * 1000 / fps))
             if len(result.face_landmarks) != 1:
-                raise ValueError(f"Face landmark detection failed at crop frame {i}; no synthetic fill applied")
+                if not landmark_max_gap:
+                    raise ValueError(f"Face landmark detection failed at crop frame {i}; no synthetic fill applied")
+                geometry.append(None)
+                transformed.append(frame)
+                masks.append(np.full(frame.shape[:2], 255, np.uint8))
+                rotations.append(0.)
+                matrices.append([[1., 0., 0.], [0., 1., 0.]])
+                continue
             points = result.face_landmarks[0]
             # MediaPipe's outer lip ring. Fixed median size avoids per-frame scale pumping.
             ring = [61, 40, 37, 0, 267, 270, 291, 321, 314, 17, 84, 91]
@@ -132,6 +167,8 @@ def extract_mouths(faces, model, fps, size=96, crop_scale=1.7, align="none"):
             matrices.append(matrix.tolist())
             low, high = xy.min(axis=0), xy.max(axis=0)
             geometry.append((0.5 * (low + high), float(max(high - low) * crop_scale)))
+    detected = [g is not None for g in geometry]
+    geometry = fill_geometry_gaps(geometry, landmark_max_gap)
     side = float(np.median([g[1] for g in geometry]))
     mouths, trace = [], []
     for i, (center, _) in enumerate(geometry):
@@ -146,13 +183,14 @@ def extract_mouths(faces, model, fps, size=96, crop_scale=1.7, align="none"):
             raise ValueError(f"Aligned mouth contains rotation padding at frame {i}")
         mouths.append(square_crop(transformed[i], bounded, side, size))
         trace.append(dict(frame=i, center=bounded.tolist(), detected_center=center.tolist(),
-                          shifted=bool(np.any(bounded != center)), side=side, detected=True,
+                          shifted=bool(np.any(bounded != center)), side=side, detected=detected[i],
+                          geometry_interpolated=not detected[i],
                           angle_degrees=rotations[i], affine_matrix=matrices[i], align=align))
     return np.stack(mouths), trace
 
 
 def preprocess_sample(video, archive, video_id, utterance_index, model, output, split, size=96,
-                      crop_scale=1.7, align="none"):
+                      crop_scale=1.7, align="none", landmark_max_gap=0):
     import cv2
     import imageio_ffmpeg
     import numpy as np
@@ -168,12 +206,14 @@ def preprocess_sample(video, archive, video_id, utterance_index, model, output, 
     if not Path(video).is_file() or not Path(model).is_file():
         raise ValueError("Video or face landmark model is missing")
     faces, track = extract_faces(video, utterance, imageio_ffmpeg.get_ffmpeg_exe())
-    mouths, trace = extract_mouths(faces, model, utterance.fps, size=size, crop_scale=crop_scale, align=align)
+    mouths, trace = extract_mouths(faces, model, utterance.fps, size=size, crop_scale=crop_scale, align=align,
+                                  landmark_max_gap=landmark_max_gap)
     if align == "eyes":
         faces = [cv2.warpAffine(f, np.array(t["affine_matrix"]), (224, 224)) for f, t in zip(faces, trace)]
     output.mkdir(parents=True)
     np.savez_compressed(output / "mouth.npz", frames=mouths, fps=utterance.fps,
-                        crop_scale=crop_scale, align=align)
+                        crop_scale=crop_scale, align=align, landmark_max_gap=landmark_max_gap,
+                        interpolated_frames=sum(not t["detected"] for t in trace))
     writer = cv2.VideoWriter(str(output / "face.mp4"), cv2.VideoWriter_fourcc(*"mp4v"),
                              utterance.fps, (224, 224))
     if not writer.isOpened():
@@ -204,6 +244,8 @@ def preprocess_sample(video, archive, video_id, utterance_index, model, output, 
                   color_order="BGR", shape=list(mouths.shape),
                   preprocessing="mediapipe-mouth-prototype-v1", avhubert_compatible=False,
                   crop_scale=crop_scale, align=align, face_preview_aligned=(align == "eyes"),
+                  landmark_max_gap=landmark_max_gap,
+                  interpolated_frames=sum(not t["detected"] for t in trace),
                   audio_used=False, model_sha256=sha256(model), video_sha256=sha256(video),
                   asd_sha256=sha256(archive), face_track=track, mouth_track=trace)
     (output / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")

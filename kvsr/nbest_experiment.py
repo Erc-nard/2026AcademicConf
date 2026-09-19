@@ -20,6 +20,8 @@ def main():
     parser.add_argument("--repo", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--beam-size", type=int, default=25)
+    parser.add_argument("--decoder", choices=["ctc_beam", "hybrid_rescore"], default="ctc_beam")
+    parser.add_argument("--corruption", choices=["none", "spatial25", "spatial50", "temporal25"], default="none")
     args = parser.parse_args()
     if args.beam_size < 1:
         parser.error("beam size must be positive")
@@ -36,8 +38,10 @@ def main():
     for row in inputs:
         row["sha256"] = sha256(row["mouth"])
     save("plan.json", dict(scope=source["scope"], source_plan_sha256=sha256(args.source / "plan.json"),
-                           inputs=inputs, beam_size=args.beam_size, ks=[1, 5, 10, 25],
-                           decoder="ctc_beam", size=96, target_fps=None,
+                           inputs=inputs, beam_size=args.beam_size, ks=[1, 5, 10, 25, 100],
+                           decoder=args.decoder, corruption=args.corruption, size=96, target_fps=None,
+                           hybrid_settings=dict(attention_beam=5, max_tokens=128, ctc_weight=.6)
+                               if args.decoder == "hybrid_rescore" else None,
                            checkpoint_sha256=sha256(args.checkpoint),
                            reference_used_in_decoding=False, language_model_used=False))
     environment = dict(os.environ, PYTHONIOENCODING="utf-8", MPLCONFIGDIR=str((args.output / "matplotlib").resolve()))
@@ -47,7 +51,8 @@ def main():
         output = args.output / f"{stem}.jsonl"
         command = [sys.executable, "-m", "kvsr", "infer-olkavs", "--mouth", row["mouth"],
                    "--checkpoint", str(args.checkpoint), "--repo", str(args.repo), "--id", row["id"],
-                   "--output", str(output), "--decoder", "ctc_beam", "--beam-size", str(args.beam_size)]
+                   "--output", str(output), "--decoder", args.decoder, "--beam-size", str(args.beam_size),
+                   "--corruption", args.corruption]
         try:
             with (args.output / f"{stem}.log").open("w", encoding="utf-8") as log:
                 subprocess.run(command, env=environment, stdout=log, stderr=subprocess.STDOUT,
@@ -65,9 +70,15 @@ def main():
     if failures:
         save("summary.json", dict(status="incomplete; no partial accuracy claim", failures=failures))
         raise SystemExit(1)
-    summary = evaluate_nbest(references, predictions)
+    summary = evaluate_nbest(references, predictions, ks=(1, 5, 10, 25, 100))
+    if args.decoder == "hybrid_rescore":
+        summary["hybrid_search"] = {r["id"]: r["hybrid_settings"] for r in predictions}
+        summary["ctc_comparison"] = evaluate_nbest(references,
+            [dict(id=r["id"], candidates=r["ctc_candidates"]) for r in predictions])
     greedy = [dict(id=r["id"], hypothesis=r["greedy_hypothesis"]) for r in predictions]
     summary.update(greedy=evaluate(references, greedy), scope=source["scope"],
+                   diagnostics={r["id"]: r.get("ctc_diagnostics") for r in predictions},
+                   corruption={r["id"]: r.get("corruption") for r in predictions},
                    plan_sha256=sha256(args.output / "plan.json"),
                    beam_size=args.beam_size, coverage=dict(selected=len(inputs), succeeded=len(predictions), failed=0),
                    provenance=[{k: r[k] for k in ("id", "input_sha256", "checkpoint_sha256",

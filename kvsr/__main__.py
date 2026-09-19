@@ -48,6 +48,7 @@ def main():
     prep.add_argument("--size", type=int, choices=[96, 224], default=96)
     prep.add_argument("--crop-scale", type=float, default=1.7)
     prep.add_argument("--align", choices=["none", "eyes"], default="none")
+    prep.add_argument("--landmark-max-gap", type=int, choices=range(4), default=0)
     infer = commands.add_parser("infer-olkavs", help="Video-only CTC smoke inference; no transcript/audio input")
     infer.add_argument("--mouth", type=Path, required=True)
     infer.add_argument("--checkpoint", type=Path, required=True)
@@ -55,8 +56,9 @@ def main():
     infer.add_argument("--id", required=True)
     infer.add_argument("--output", type=Path, required=True)
     infer.add_argument("--threads", type=int, default=2)
-    infer.add_argument("--decoder", choices=["ctc_greedy", "ctc_beam", "hybrid"], default="ctc_greedy")
+    infer.add_argument("--decoder", choices=["ctc_greedy", "ctc_beam", "hybrid", "hybrid_rescore"], default="ctc_greedy")
     infer.add_argument("--beam-size", type=int, default=25)
+    infer.add_argument("--corruption", choices=["none", "spatial25", "spatial50", "temporal25"], default="none")
     infer.add_argument("--size", type=int, choices=[96, 224], default=96)
     infer.add_argument("--target-fps", type=int, choices=[30])
     args = parser.parse_args()
@@ -85,7 +87,8 @@ def main():
         elif args.command == "infer-olkavs":
             from .olkavs import infer_olkavs
             report = infer_olkavs(args.mouth, args.checkpoint, args.repo, args.id, args.output,
-                                 args.threads, args.decoder, args.size, args.target_fps, args.beam_size)
+                                 args.threads, args.decoder, args.size, args.target_fps, args.beam_size,
+                                 args.corruption)
         elif args.command in {"asd", "preprocess"}:
             from .asd import metadata_rows, read_asd_archive
             record = next((r for r in read_catalog(args.catalog) if r["video_id"] == args.video_id), None)
@@ -100,7 +103,7 @@ def main():
                 from .preprocessing import preprocess_sample
                 report = preprocess_sample(args.video, args.archive, args.video_id, args.utterance,
                                            args.model, args.output, record["split"], args.size,
-                                           args.crop_scale, args.align)
+                                           args.crop_scale, args.align, args.landmark_max_gap)
         else:
             report = evaluate(read_jsonl(args.references), read_jsonl(args.predictions))
             args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -65,11 +65,15 @@ def run_command(arguments, log, timeout, env):
 
 def run(args):
     profiles = CROP_PROFILES if args.suite == "crop" else {k: (*v, 1.7, "none") for k, v in PROFILES.items()}
+    if args.suite == "baseline":
+        profiles = {"scale17_none": CROP_PROFILES["scale17_none"]}
     root = args.output.resolve()
     if root.exists():
         raise ValueError("Output exists; use a new run directory")
     if args.max_seconds <= 0:
         raise ValueError("max-seconds must be positive")
+    if args.max_samples is not None and args.max_samples < 1:
+        raise ValueError("max-samples must be positive")
     record = next((r for r in read_catalog(args.catalog) if r["video_id"] == args.video_id), None)
     if record is None or record["split"] != "train" or record["flags"]:
         raise ValueError("Development benchmark requires an unflagged train video")
@@ -78,16 +82,19 @@ def run(args):
             raise ValueError(f"Missing input: {path}")
     items = read_asd_archive(args.archive, args.video_id)
     selected = [u for u in items if u.end_ms - u.start_ms <= args.max_seconds * 1000]
+    selected = selected[:args.max_samples]
     if not selected:
         raise ValueError("No utterances satisfy the duration rule")
     root.mkdir(parents=True)
     plan = dict(scope="single-video train development; not held-out test performance",
                 video_id=args.video_id, split="train", max_seconds=args.max_seconds,
-                total_available=len(items), selection_rule="all utterances within duration limit",
+                total_available=len(items), max_samples=args.max_samples,
+                selection_rule="chronological first N within duration limit" if args.max_samples else "all utterances within duration limit",
                 selected=[dict(id=f"{u.video_id}/{u.index}", utterance=u.index,
                                start_ms=u.start_ms, end_ms=u.end_ms) for u in selected],
-                excluded=[dict(id=f"{u.video_id}/{u.index}", reason="duration") for u in items if u not in selected],
-                suite=args.suite,
+                excluded=[dict(id=f"{u.video_id}/{u.index}", reason="duration" if
+                    u.end_ms-u.start_ms > args.max_seconds*1000 else "sample_limit") for u in items if u not in selected],
+                suite=args.suite, landmark_max_gap=args.landmark_max_gap,
                 profiles={k: dict(size=v[0], target_fps=v[1], crop_scale=v[2], align=v[3],
                                   decoder="ctc_greedy") for k, v in profiles.items()},
                 hashes={name: sha256(path) for name, path in [("video", args.video), ("asd", args.archive),
@@ -110,7 +117,8 @@ def run(args):
                 cache[recipe] = run_command(["preprocess", "--archive", args.archive, "--catalog", args.catalog,
                                     "--video-id", args.video_id, "--utterance", item.index,
                                     "--video", args.video, "--model", args.model, "--size", 224,
-                                    "--crop-scale", scale, "--align", align, "--output", output], log, 180, env)
+                                    "--crop-scale", scale, "--align", align,
+                                    "--landmark-max-gap", args.landmark_max_gap, "--output", output], log, 180, env)
             error = cache[recipe]
             failure = error
             destination = root / name / f"{item.index}.jsonl"
@@ -153,7 +161,9 @@ def main():
         parser.add_argument(f"--{name}", type=Path, required=True)
     parser.add_argument("--video-id", required=True)
     parser.add_argument("--max-seconds", type=float, default=10)
-    parser.add_argument("--suite", choices=["size-fps", "crop"], default="size-fps")
+    parser.add_argument("--max-samples", type=int)
+    parser.add_argument("--landmark-max-gap", type=int, choices=range(4), default=0)
+    parser.add_argument("--suite", choices=["size-fps", "crop", "baseline"], default="size-fps")
     args = parser.parse_args()
     try:
         run(args)

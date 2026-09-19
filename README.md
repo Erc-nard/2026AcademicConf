@@ -1,651 +1,231 @@
-# 2026 공과대학 학술제 연구계획
+# 2026 공과대학 학술제 — 한국어 VSR 진행 보고서
 
-## 구현 진행 상황
+**최종 갱신: 2026-09-19.** 이 README는 실제 실행 결과를 정리한 보고서다.
+초기 아이디어와 예정 실험은 [최초 연구계획](docs/RESEARCH_PLAN.md)에 별도로 보존했다.
 
-**2026-09-17: CTC N-best 후보 추출과 oracle CER 진단까지 완료.**
-[1단계 가이드](docs/STAGE1.md), [2단계 실행·검증 기록](docs/STAGE2.md),
-[3단계 기본 성능 비교](docs/STAGE3.md), [4단계 crop·정렬 비교](docs/STAGE4.md),
-[5단계 N-best·oracle 평가](docs/STAGE5.md)를 참고한다.
-아래 연구계획의 가설과 전체 실험은 아직 검증되지 않았다.
+## 현재 결론
 
-- 공식 KMSAV 목록 검증 및 split을 유지하는 재현 가능한 subset 선정
-- 전처리된 얼굴 영상·전사·이전 가용 발화 ID를 연결하는 manifest 생성
-- 한국어 CER/WER 평가, 환경 점검, 자동 테스트
-- 실제 발화 121프레임의 입 ROI 추출 및 OLKAVS 가중치 strict 로딩
-- 음성·정답 전사를 입력하지 않는 CTC/hybrid 추론 실행
-- 첫 1건은 CTC CER 68.4%, hybrid CER 78.9%로 정확도가 낮음(전체 성능 아님)
-- 고정된 4개 train 발화에서 96×96·25 FPS CER 82.8%; 224×224 조건은 96.6%
-- 모든 조건의 처리 성공률 100%; 단일 영상 개발 실험이며 test-set 성능은 미측정
-- 위 성공률은 3단계 크기/FPS 비교 기준. 4단계 눈 기준 정렬은 회전 여백으로 일부/전체 실패
-- crop 1.3배는 CER 85.3%; 기존 1.7배·정렬 없음(CER 82.8%)을 기본값으로 유지
-- CTC beam 1순위 CER 81.9%; 정답을 보고 후보를 고른 oracle CER 80.2%로 후보 내 개선 여지는 작음
-- oracle은 실제 자막 성능이 아님. 문맥 보정은 아직 미실행; 자동 테스트 32개 통과
+음성 없이 영상에서 한국어 자막을 만드는 실행·평가 파이프라인을 구현했다.
+그러나 **현재 인식 품질과 전처리 성공률로는 문맥 보정의 효과를 주장할 수 없다.**
+다중 후보 생성, hybrid 재점수화, 합성 가림, 다른 영상 확장까지 실제 실행했다.
 
-```console
-python -m kvsr doctor
-python -m unittest discover -s tests -v
+- 기존 4개 발화: CTC greedy CER 82.76%, CTC beam 1순위 CER 81.90%.
+- CTC 후보를 정답으로 고른 oracle CER 80.17%: 순위 선택만으로 줄일 여지가 작다.
+- attention 후보를 합쳐 재점수화한 hybrid 1순위 CER 87.07%.
+  후보 전체 oracle도 80.17%로 같았다. 기본 decoder를 바꾸지 않았다.
+- 입 ROI의 중앙을 가린 합성 실험에서 CER이 약 96~97%까지 증가했다.
+- 시간상 중간 25% 프레임을 가리면 4개 모두 평균 최대 출력 확률이 높아졌고,
+  그중 3개는 문자 오류도 증가했다. 이 확률을 자막 신뢰도로 사용해서는 안 된다.
+- 표본을 3개 train 영상, 16개 발화로 확장했다. 엄격한 전처리 성공은 **11/16**,
+  실패를 빈 출력으로 포함한 전체 CER은 **93.01%**다.
+
+모든 수치는 개발용 표본의 결과다. held-out test, 문맥 보정, 신뢰도 보정, 사용자 실험은 아직 수행하지 않았다.
+
+## 이번 작업에서 완료한 범위
+
+| 작업 | 실행 범위 | 상태 |
+|---|---|---|
+| CTC N-best 및 oracle | 기존 4개 발화, beam 25 | 완료 |
+| CTC/attention 후보 합집합 재점수화 | 같은 4개 발화 | 완료 |
+| 합성 가림 | 4개 발화 × 4조건 = 16회 | 모두 성공 |
+| 영상 확장 | 새 train 영상 2개 × 6발화 = 12회 | 실패 포함 집계 |
+| 짧은 랜드마크 공백 보간 | 새 영상의 같은 12개 발화 | 별도 조건 비교 완료 |
+| 자동 검증 | 로컬 전체 테스트 40개 | 통과 |
+| 보고서 | 이 README와 공개 수치 JSON | 작성 완료 |
+
+## 데이터와 재현 조건
+
+공식 [ETRI KMSAV](https://github.com/etri/kmsav) 목록에서 split을 유지하고 flagged 항목을 제외했다.
+영상 선택은 seed 2026의 SHA256 순서이며, 처음 3개 train 영상을 사용했다.
+첫 영상은 10초 이하 모든 발화 4개, 새 두 영상은 10초 이하 발화 중 시간순 첫 6개씩이다.
+대상과 설정은 각 실험의 `plan.json`에 추론 전에 고정했다. 새 영상 선정은
+[확장 계획](experiments/expansion_plan_2026-09-19.json)에 공개했다.
+
+- 모델: [OLKAVS multiview_lip](https://github.com/IIP-Sogang/olkavs-avspeech), 영상 전용, 가중치 strict 로딩.
+- 실행: Windows, Python 3.12, PyTorch 2.14.0+cpu, CPU 2 threads. GPU 학습은 수행하지 않았다.
+- 전처리: 공식 ASD 얼굴 상자 → MediaPipe 입 랜드마크 → crop 1.7배, 정렬 없음,
+  224×224 ROI 저장 → 96×96 모델 입력, 25 FPS, BGR 전역 평균/표준편차 정규화.
+- 체크포인트 SHA256: `f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5`.
+- upstream commit: `af2feda3e3ac91ff3fef2454fcee662366ce9f4b`.
+- 입력·어휘·가중치 해시, 후보 수, 실패 사유는 각 JSON과 로컬 실행 기록에 남겼다.
+
+학습 당시 입력 조건을 완전히 확인하지 못했고 KMSAV와 OLKAVS는 다른 데이터다.
+따라서 논문 성능 재현으로 표현하지 않는다. 실제 영상·전사·후보 문장·가중치는 저장소에 올리지 않는다.
+
+## 평가 규칙
+
+CER은 전체 문자 편집 오류 / 전체 정답 문자 수다. Unicode NFC, 연속 공백 정규화 후
+CER에서는 공백을 제거하고 문장부호는 유지한다. WER은 공백 기준 단어 단위다.
+삽입 오류가 많으면 100%를 넘을 수 있다. 발화별 CER의 단순 평균은 사용하지 않는다.
+
+실패한 발화를 조용히 제외하지 않는다. 전체 지표에서는 빈 출력으로 계산하며,
+처리 성공률과 성공한 발화만의 CER을 함께 표시한다. 두 값의 표본은 서로 다르다.
+Oracle은 정답을 보고 최선의 후보를 고르는 **진단용 하한 오류율**이며 배포 가능한 성능이 아니다.
+WER도 CER로 선택한 후보에서 계산한다. 후보 생성에는 정답·음성·이전 전사를 넣지 않았다.
+
+## 1. 기존 전처리 비교
+
+기존 영상 4개 발화, 정답 116문자/41단어 기준이다.
+
+| 조건 | CER | 처리 성공 |
+|---|---:|---:|
+| 96×96, 원본 25 FPS, crop 1.7, 정렬 없음 | 82.76% | 4/4 |
+| 96×96, 30 FPS | 84.48% | 4/4 |
+| 224×224, 25 또는 30 FPS | 96.55% | 4/4 |
+| crop 1.3, 정렬 없음 | 85.34% | 4/4 |
+| crop 1.7, 눈 기준 회전 정렬 | 실패 | 0/4 |
+| crop 1.3, 눈 기준 회전 정렬 | 87.93% (실패 포함) | 3/4 |
+
+회전 정렬 실패는 이미 잘린 얼굴 영역을 회전하면서 바깥 픽셀이 부족해진 경우다.
+정렬 자체가 일반적으로 나쁘다는 결론은 아니다. 현재 기본 전처리를 유지한다.
+[상세 기록](docs/STAGE4.md).
+
+## 2. CTC N-best와 hybrid 후보 확장
+
+CTC prefix beam 25에서 모든 72개 토큰을 고려하고, 정규화된 동일 문자열은 중복 제거했다.
+CTC 후보 수는 발화별 23/6/25/25개다. top 1 CER은 81.90%, oracle top 5/10/25는 모두 80.17%였다.
+이 후보군에서는 완벽한 선택도 top 1보다 문자 오류 2개(1.72%p)만 줄인다.
+[5단계 기록](docs/STAGE5.md), [CTC 원리](https://distill.pub/2017/ctc/).
+
+추가 실험은 attention beam 5로 종료 후보 25개를 만든 뒤 CTC 후보와 합치는 **2단계 재점수화**다.
+가중치는 사전에 CTC 0.6 + attention 0.4로 고정했고 길이 보너스는 없다.
+양쪽에서 EOS를 포함한 전체 시퀀스 로그 확률을 계산한다. CTC는 정확한 forward 합산이다.
+attention 후보 생성은 최대 128토큰으로 제한했으며 4개 모두 한도에 도달하기 전에 종료했다.
+이는 [joint CTC/attention 검색 논문](https://arxiv.org/abs/1706.02737)의 prefix 공동 탐색 재현이 아니다.
+
+| Hybrid 상위 K에서 CER oracle | 문자 오류 | CER | WER |
+|---|---:|---:|---:|
+| 1 | 101 / 116 | 87.07% | 102.44% |
+| 5 | 100 / 116 | 86.21% | 102.44% |
+| 10 | 99 / 116 | 85.34% | 102.44% |
+| 25 | 93 / 116 | 80.17% | 102.44% |
+| 100 | 93 / 116 | 80.17% | 102.44% |
+
+중복 제거 후 후보 수는 47, 31, 43, 44개다.
+K=1은 정답에 따른 선택 여지가 없는 실제 1순위 결과이며, K=100은 가용 후보 전체를 뜻한다.
+후보를 늘려도 더 좋은 oracle을 얻지 못했고 재점수화한 1순위는 악화됐다.
+따라서 이 hybrid를 기본값으로 채택하지 않는다. 점수는 보정된 신뢰도가 아니다.
+
+## 3. 합성 가림과 출력 점수 진단
+
+크기를 맞춘 uint8 입력에서 값 127로 가린 뒤 기존 전역 정규화를 적용했다.
+`spatial25/50`은 전체 프레임에서 ROI 중앙의 가로 전체, 높이 25%/50% 띠를 가린다.
+`temporal25`는 영상 중간 25% 프레임 전체를 가린다. 반올림한 실제 비율은 JSON에 기록했다.
+현실의 손·마스크·옆얼굴을 완전히 재현하는 실험은 아니다.
+
+| 조건 | Greedy CER | Beam 1순위 CER | 후보 전체 oracle CER | 평균 최대 확률 | blank argmax 비율 |
+|---|---:|---:|---:|---:|---:|
+| none | 82.76% | 81.90% | 80.17% | 0.759 | 0.695 |
+| spatial25 | 95.69% | 95.69% | 94.83% | 0.629 | 0.681 |
+| spatial50 | 96.55% | 96.55% | 96.55% | 0.609 | 0.704 |
+| temporal25 | 84.48% | 85.34% | 82.76% | 0.811 | 0.786 |
+
+진단 열은 프레임 평균을 구한 다음 발화별 단순 평균을 낸 값이다. CER의 가중 방식과 다르다.
+시간 가림에서는 네 발화 모두 최대 확률이 올라갔지만 세 발화는 오류가 증가했다.
+blank 비율도 증가했다. 높은 프레임 확률이 올바른 문장을 보장하지 않는 구체적인 반례다.
+여기서 신뢰도 임계값을 맞추거나 성능 향상을 주장하지 않는다.
+
+## 4. 다른 영상으로 확장
+
+동일한 greedy baseline으로 비교했다. 새 두 영상의 입 crop contact sheet도 확인했다.
+손과 마이크가 포함된 장면, 옆얼굴이 있는 표본이다. 일부 성공 표본의 육안 확인이며
+전체 프레임의 정답 ROI를 별도로 주석한 것은 아니다.
+
+| 영상 ID | 처리 성공 | 실패 포함 CER | 성공 발화만 CER |
+|---|---:|---:|---:|
+| `8r1k9NLdSvE` | 4/4 | 82.76% | 82.76% |
+| `5TaVl7-lU4k` | 3/6 | 98.45% | 96.55% |
+| `D-hzf2x_XO0` | 4/6 | 91.61% | 86.46% |
+| 전체 | 11/16 | 93.01% | 88.72% |
+
+전체 오류는 492/529문자다.
+성공한 발화만의 오류는 291/328문자이며,
+실패 포함 지표와 분모가 다르다. 영상 수와 발화 수가 작고 개발 과정에서 확인한 표본이므로
+일반화 성능 추정이나 통계적 유의성 주장을 하지 않는다.
+
+엄격한 전처리에서 발생한 실패:
+
+- `5TaVl7-lU4k/000005`: Face landmark detection failed at crop frame 126; no synthetic fill applied
+- `5TaVl7-lU4k/000009`: Face track missing at frame 2386
+- `5TaVl7-lU4k/000019`: Face track missing at frame 4310
+- `D-hzf2x_XO0/000031`: Face landmark detection failed at crop frame 0; no synthetic fill applied
+- `D-hzf2x_XO0/000052`: Face landmark detection failed at crop frame 32; no synthetic fill applied
+
+## 5. 짧은 랜드마크 공백 복구 실험
+
+새 영상 12개 발화에 대해 최대 3프레임의 내부 랜드마크 공백만 양쪽 검출 좌표 사이에서
+선형 보간했다. 실제 영상 픽셀은 그대로 사용했다. 시작/끝 공백, 4프레임 이상 공백,
+공식 얼굴 track 누락은 복구하지 않는다. 눈 회전 정렬과 함께 쓰는 것은 지원하지 않는다.
+`--landmark-max-gap 3`으로 켜며 **기본값은 0**으로 유지했다.
+
+| 영상 | 기존 성공 | 보간 조건 성공 | 새로 복구된 발화 |
+|---|---:|---:|---:|
+| `5TaVl7-lU4k` | 3/6 | 3/6 | 0 |
+| `D-hzf2x_XO0` | 4/6 | 4/6 | 0 |
+
+공통 성공 표본의 토큰 동일 여부와 실제 보간 프레임 수는 확장 결과 JSON에 기록했다.
+보간 조건에서도 남은 실패:
+
+- `5TaVl7-lU4k/000005`: Unrecoverable landmark gap at crop frame 126; length 16
+- `5TaVl7-lU4k/000009`: Face track missing at frame 2386
+- `5TaVl7-lU4k/000019`: Face track missing at frame 4310
+- `D-hzf2x_XO0/000031`: Unrecoverable landmark gap at crop frame 0; length 43
+- `D-hzf2x_XO0/000052`: Unrecoverable landmark gap at crop frame 152; length 12
+
+## 구현과 검증
+
+- `kvsr/nbest.py`: blank/반복 문자를 올바르게 합산하는 CTC prefix beam과 독립 oracle 평가.
+- `kvsr/hybrid.py`: attention 후보 생성, CTC 정확한 시퀀스 점수, 2단계 후보 재점수화.
+- `kvsr/corruption.py`, `kvsr/robustness.py`: 고정 합성 손상과 4조건 실행·집계.
+- `kvsr/batch.py`: 최대 표본 수를 미리 고정하는 단일 baseline 실행, 실패 포함 평가.
+- `kvsr/preprocessing.py`: 제한적인 좌표 보간, 픽셀 생성 없음, 보간 프레임 provenance.
+- 로컬 **40개 테스트 통과**. CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
+  EOS/반복 문자, 실패 누락 방지, 합성 마스크 범위, 보간 경계/길이 제한을 검증했다.
+- 새 clean 실행과 hybrid 실행의 greedy 토큰은 이전 4단계의 네 발화와 모두 같았다.
+- GitHub CI는 코드 검증용이며 데이터·체크포인트를 내려받아 전체 실험을 재실행하지 않는다.
+
+## 재실행
+
+현재 로컬 `.venv`, 공식 외부 저장소, 모델 및 데이터가 준비된 환경에서 실행한다.
+처음 준비하는 경우 [2단계 안내](docs/STAGE2.md)를 먼저 따른다. 기존 출력 폴더는 덮어쓰지 않는다.
+
+```powershell
+# 자동 검증
+.venv/Scripts/python.exe -m unittest discover -s tests -v
+
+# 후보 확장 (source는 기존 4단계 crop)
+.venv/Scripts/python.exe -m kvsr.nbest_experiment --source results/crop_2026-09-17 --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/hybrid_repeat --decoder hybrid_rescore
+
+# 합성 가림 네 조건
+.venv/Scripts/python.exe -m kvsr.robustness --source results/crop_2026-09-17 --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/robustness_repeat
+
+# 새 영상 고정 6개 발화; 보간 비교에는 --landmark-max-gap 3과 다른 output을 사용
+.venv/Scripts/python.exe -m kvsr.batch --suite baseline --max-samples 6 --archive data/raw/kmsav_asd_v0.2.zip --catalog external/kmsav/data/list.txt --video-id 5TaVl7-lU4k --video data/raw/5TaVl7-lU4k.mp4 --model checkpoints/face_landmarker.task --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/baseline_repeat
 ```
 
-## 시각 정보 손실 환경에서 신뢰도 기반 대화 문맥을 활용한 한국어 Visual Speech Recognition
-
-> **핵심 아이디어**  
-> 영상에서 화자의 입술이 일부 가려지거나 잘 보이지 않는 상황에서, 립리딩(Visual Speech Recognition, VSR) 결과의 신뢰도를 판단하고 이전 대화 문맥을 활용해 자막을 보정한다.
-
----
-
-## 1. 연구 배경
-
-Visual Speech Recognition(VSR)은 음성 없이 화자의 입술 움직임만으로 발화를 인식하는 기술이다. 최근에는 딥러닝 기반의 영상 특징 추출과 Transformer 계열의 시퀀스 모델링을 활용하여 문장 단위의 립리딩이 가능해지고 있다.
-
-하지만 실제 영화, 드라마, 인터뷰, 유튜브 영상 등에서는 화자의 입이 항상 선명하게 보이지 않는다. 다음과 같은 상황에서는 시각 정보가 쉽게 손실된다.
-
-- 손이나 물체로 입이 가려지는 경우
-- 화자가 고개를 돌리는 경우
-- 다른 사람이 화면 앞을 지나가는 경우
-- 화면 전환으로 얼굴 일부가 사라지는 경우
-- 저화질, 모션 블러, 어두운 조명 등으로 입술 형태를 확인하기 어려운 경우
-
-기존 VSR은 현재 영상에서 얻는 시각적 증거에 크게 의존하기 때문에 이러한 상황에서 인식 오류가 증가한다. 반면 사람은 발화를 이해할 때 입모양뿐 아니라 **앞뒤 대화의 흐름과 언어적 문맥**을 함께 활용한다.
-
-예를 들어 이전 대화가 다음과 같다고 하자.
-
-```text
-A: 오늘 수업 몇 시에 끝나?
-B: 세 시쯤.
-A: 그럼 학교 언제 갈 거야?
-```
-
-이후 발화의 입술 영상이 일부 가려져 VSR이 다음과 같은 후보를 출력했다고 가정한다.
-
-```text
-1. 오늘 학교에 갈 거야.  0.32
-2. 오늘 학원에 갈 거야.  0.29
-3. 오늘 회사에 갈 거야.  0.19
-```
-
-현재 입모양만으로는 세 후보가 비슷하지만, 이전 대화까지 고려하면 `학교`가 더 자연스러운 후보가 된다.
-
-본 연구에서는 이러한 특성을 이용하여 **시각 정보가 불완전할 때 대화 문맥이 VSR의 오류를 어느 정도까지 보완할 수 있는지** 분석한다.
-
----
-
-## 2. 연구 목적
-
-본 연구의 목적은 새로운 VSR 모델 자체를 개발하는 것이 아니라, 기존 VSR 모델을 활용하여 다음을 검증하는 것이다.
-
-1. 입술 영상의 시각 정보가 손실될수록 VSR 성능이 얼마나 감소하는지 분석한다.
-2. 이전 대화 문맥을 제공했을 때 VSR 오류가 얼마나 복원되는지 확인한다.
-3. 시각 정보가 불확실한 경우에만 문맥을 적극적으로 사용하는 방식이 항상 문맥을 사용하는 방식보다 안정적인지 검증한다.
-4. 잘못된 문맥이 주어졌을 때 LLM이 오히려 올바른 VSR 결과를 훼손하는 문제를 분석한다.
-
----
-
-## 3. 연구 질문
-
-### RQ1. 시각 정보 손실은 VSR 성능에 어떤 영향을 미치는가?
-
-입술 영역의 가림 비율을 단계적으로 증가시키며 CER(Character Error Rate) 및 WER(Word Error Rate)의 변화를 측정한다.
-
-### RQ2. 이전 대화 문맥은 가려진 발화를 얼마나 보완할 수 있는가?
-
-VSR 결과만 사용하는 모델과 이전 대화 문맥을 함께 사용하는 모델의 성능을 비교한다.
-
-### RQ3. 시각 정보 손실이 클수록 문맥의 효과가 커지는가?
-
-Occlusion 비율에 따라 Context 적용 전후의 성능 차이를 비교한다.
-
-### RQ4. VSR의 신뢰도에 따라 문맥 사용 여부를 조절하면 과도한 보정을 줄일 수 있는가?
-
-VSR confidence가 충분히 높을 때는 기존 결과를 유지하고, confidence가 낮을 때만 문맥 기반 reranking을 수행한다.
-
-### RQ5. 잘못된 문맥이 주어졌을 때 Context Model은 얼마나 쉽게 영향을 받는가?
-
-실제 이전 대화와 의도적으로 잘못 만든 대화를 각각 제공하여 over-correction 및 hallucination 문제를 분석한다.
-
----
-
-## 4. 연구 가설
-
-| 가설 | 내용 |
-| --- | --- |
-| H1 | 입술 영역의 시각 정보 손실률이 증가할수록 VSR의 CER/WER이 증가한다. |
-| H2 | 이전 대화 문맥을 제공하면 occlusion 환경에서 CER/WER이 감소한다. |
-| H3 | 시각 정보 손실률이 높을수록 대화 문맥에 의한 성능 개선 폭이 증가한다. |
-| H4 | VSR confidence에 따라 문맥 사용 여부를 조절하면 문맥을 항상 사용하는 방식보다 잘못된 보정을 감소시킬 수 있다. |
-
----
-
-## 5. 제안 시스템
-
-전체 시스템은 다음과 같이 구성한다.
-
-```text
-Video
-  │
-  ▼
-Face / Mouth ROI Extraction
-  │
-  ▼
-Pretrained VSR Model
-  │
-  ├── N-best hypotheses
-  └── Confidence score
-           │
-           ▼
-    Reliability Decision
-      ┌───────────────┐
-      │               │
-High Confidence    Low Confidence
-      │               │
- VSR 유지       Previous Dialogue
-                      +
-                 LLM Reranking
-                      │
-      └───────────────┘
-              │
-              ▼
-        Final Subtitle
-```
-
-### 핵심 원칙
-
-LLM이 영상만 보고 새로운 문장을 자유롭게 생성하도록 하지 않는다.
-
-가능하면 VSR이 생성한 **N-best candidate 중 하나를 선택하는 reranking 방식**을 우선 사용한다.
-
-이를 통해 문맥을 이용하면서도 LLM이 영상에 존재하지 않는 내용을 임의로 만들어내는 hallucination을 제한한다.
-
----
-
-## 6. 데이터셋
-
-### KMSAV
-
-한국어 실험을 위해 ETRI에서 공개한 **KMSAV (Korean Multi-speaker Spontaneous Audio-Visual Speech Recognition Dataset)** 사용을 우선 검토한다.
-
-KMSAV 공개 저장소는 다음과 같은 데이터를 제공한다.
-
-- 약 83시간의 한국어 audiovisual 콘텐츠
-- 다양한 주제의 YouTube 영상
-- 다화자 자연 대화
-- 수동 검증된 transcription
-- 각 utterance의 active speaker face region metadata
-- utterance 단위 영상 추출 및 전처리 스크립트
-
-본 연구에서는 전체 데이터가 필요하지 않으며, 실험에 필요한 일부 subset을 선별하여 사용한다.
-
-> Dataset: https://github.com/etri/kmsav
-
----
-
-## 7. Baseline VSR
-
-VSR 모델을 처음부터 새로 학습하는 것은 연구 범위를 크게 증가시키므로, 공개 pretrained/baseline 모델을 사용한다.
-
-우선 검토 대상은 다음과 같다.
-
-- AV-HuBERT 계열
-- KMSAV 공식 저장소에 포함된 AV-HuBERT 기반 코드
-- 필요 시 Auto-AVSR 등의 공개 VSR 구현 참고
-
-본 연구의 핵심은 VSR architecture 자체가 아니라 **시각 정보 손실과 문맥 보정 효과의 관계**에 있다.
-
----
-
-## 8. Occlusion 데이터 생성
-
-실제 영상에서 입이 가려진 장면만 별도로 수집하는 대신, 정상 영상에 인위적인 occlusion을 적용하여 통제된 실험 환경을 만든다.
-
-### 8.1 Temporal Occlusion
-
-일정 비율의 프레임에서 입 영역을 제거하거나 가린다.
-
-```text
-Clean
-████████████████████
-
-20%
-████□□□█████████████
-
-40%
-████□□□□□□□█████████
-
-60%
-██□□□□□□□□□□□□██████
-```
-
-이는 화면 전환, 고개 회전, 일시적인 가림 등으로 특정 구간의 입술 움직임을 확인하기 어려운 상황을 모사한다.
-
-### 8.2 Spatial Occlusion
-
-프레임 내 입 ROI 일부를 사각형 mask 등으로 가린다.
-
-```text
-┌─────────────┐
-│    Nose     │
-│  █████████  │  ← Mouth Occlusion
-│    Chin     │
-└─────────────┘
-```
-
-### Occlusion Level
-
-초기 실험은 다음 네 단계로 구성한다.
-
-| Level | Occlusion |
-| --- | ---: |
-| Clean | 0% |
-| Mild | 20% |
-| Moderate | 40% |
-| Severe | 60% |
-
----
-
-## 9. 비교 모델
-
-| Model | Visual | Sentence LM | Previous Dialogue | Confidence Gating |
-| --- | :---: | :---: | :---: | :---: |
-| B0 | O | - | - | - |
-| B1 | O | O | - | - |
-| M1 | O | O | O | - |
-| **M2 (Ours)** | O | O | O | O |
-
-### B0. VSR Only
-
-```text
-Lip Video → VSR → Subtitle
-```
-
-시각 정보만 사용하는 기본 baseline이다.
-
-### B1. VSR + Language Model
-
-현재 문장 내부의 언어적 문맥을 활용하여 VSR 후보를 보정한다.
-
-이는 LLM/Language Model 기반 VSR 연구와 비교하기 위한 baseline이다.
-
-### M1. VSR + Previous Dialogue
-
-```text
-VSR N-best Candidates
-        +
-Previous Dialogue
-        │
-        ▼
-      LLM
-        │
-        ▼
-   Reranking Result
-```
-
-현재 문장뿐 아니라 이전 utterance를 활용한다.
-
-### M2. Reliability-Aware Context Fusion
-
-VSR confidence에 따라 문맥 사용 정도를 조절한다.
-
-초기 구현에서는 복잡한 neural fusion 대신 threshold 기반 방식을 사용한다.
-
-```text
-confidence >= 0.8
-→ VSR 결과 유지
-
-0.5 <= confidence < 0.8
-→ N-best candidate reranking
-
-confidence < 0.5
-→ Previous Dialogue를 적극 활용한 reranking
-```
-
-Threshold는 validation set을 통해 조정한다.
-
----
-
-## 10. 평가 지표
-
-### 10.1 CER (Character Error Rate)
-
-한국어의 경우 띄어쓰기와 형태소의 영향을 고려하여 CER을 주 평가 지표로 사용한다.
-
-```text
-Reference : 오늘 학교에 갑니다
-Prediction: 오늘 학원에 갑니다
-```
-
-두 문장의 문자 단위 edit distance를 이용하여 오류율을 계산한다.
-
-### 10.2 WER (Word Error Rate)
-
-보조 지표로 단어 단위 오류율을 함께 측정한다.
-
-### 10.3 Correction Rate
-
-Baseline VSR이 틀린 사례 중 Context Model이 올바르게 수정한 비율을 측정한다.
-
-```text
-Baseline Error = 100
-Context Corrected = 34
-
-Correction Rate = 34%
-```
-
-### 10.4 Harm Rate
-
-Baseline VSR이 이미 맞게 예측했지만 Context Model이 오히려 틀리게 수정한 비율을 측정한다.
-
-```text
-Baseline Correct = 100
-Context-corrupted = 7
-
-Harm Rate = 7%
-```
-
-본 연구에서는 단순 CER 감소뿐 아니라 **Correction Rate를 높이면서 Harm Rate를 낮추는 것**을 목표로 한다.
-
----
-
-## 11. 주요 실험
-
-### Experiment 1. Occlusion에 따른 VSR 성능 저하
-
-| Model | 0% | 20% | 40% | 60% |
-| --- | ---: | ---: | ---: | ---: |
-| VSR Only | CER | CER | CER | CER |
-
-시각 정보 손실량과 VSR 성능 간 관계를 분석한다.
-
-### Experiment 2. Dialogue Context의 효과
-
-| Model | 0% | 20% | 40% | 60% |
-| --- | ---: | ---: | ---: | ---: |
-| VSR Only | CER | CER | CER | CER |
-| VSR + LM | CER | CER | CER | CER |
-| VSR + Dialogue | CER | CER | CER | CER |
-| Reliability-aware | CER | CER | CER | CER |
-
-Occlusion 수준이 높아질수록 context의 효과가 증가하는지 확인한다.
-
-### Experiment 3. Oracle Context vs Predicted Context
-
-실제 서비스에서는 이전 자막도 VSR이 생성한 결과이기 때문에 오류가 누적될 수 있다.
-
-두 조건을 비교한다.
-
-- **Oracle Context**: 정답 transcription을 이전 대화로 사용
-- **Predicted Context**: 모델이 이전에 생성한 subtitle을 사용
-
-| Context | CER |
-| --- | ---: |
-| None | - |
-| Predicted Context | - |
-| Oracle Context | - |
-
-이를 통해 문맥 정보가 완벽할 때의 upper bound와 실제 환경에서의 성능 차이를 확인한다.
-
-### Experiment 4. Misleading Context
-
-의도적으로 잘못된 이전 대화를 제공한다.
-
-```text
-Actual Context:
-"학교 언제 갈 거야?"
-
-Misleading Context:
-"회사 언제 갈 거야?"
-```
-
-Context를 항상 사용하는 모델이 잘못된 문맥에 얼마나 영향을 받는지 측정하고 Reliability-aware 방식이 이를 완화할 수 있는지 검증한다.
-
-| Context | VSR Only | Always Context | Reliability-aware |
-| --- | ---: | ---: | ---: |
-| Correct | CER | CER | CER |
-| None | CER | - | - |
-| Misleading | CER | CER | CER |
-
----
-
-## 12. 기대 결과
-
-예상되는 경향은 다음과 같다.
-
-1. Occlusion이 증가할수록 VSR Only 모델의 CER/WER이 증가한다.
-2. Clean 또는 Mild 조건에서는 Dialogue Context에 의한 개선 폭이 크지 않을 수 있다.
-3. Moderate/Severe 조건에서는 이전 대화 문맥이 VSR 오류를 더 많이 보완할 가능성이 있다.
-4. Context를 항상 적용하면 일부 정상 예측을 잘못 수정하는 문제가 발생할 수 있다.
-5. Reliability-aware 방식은 VSR이 확실한 경우 기존 결과를 유지함으로써 Harm Rate를 감소시킬 가능성이 있다.
-
-실험 결과가 예상과 다르더라도 의미가 있다. 예를 들어 occlusion이 지나치게 커졌을 때 context만으로는 발화를 복원할 수 없다면, **언어 문맥이 시각적 증거를 대체할 수 있는 한계**를 분석할 수 있다.
-
----
-
-## 13. 연구 차별점
-
-LLM을 활용한 VSR 자체는 이미 선행 연구가 존재하므로 이를 새로운 기술이라고 주장하지 않는다.
-
-본 연구의 초점은 다음과 같다.
-
-1. **한국어 VSR에서 시각 정보 손실 수준에 따른 성능 저하 분석**
-2. **Occlusion 수준과 대화 문맥의 보완 효과 간 관계 분석**
-3. **VSR 신뢰도에 따라 문맥의 개입 여부를 결정하는 reliability-aware reranking 실험**
-4. **잘못된 문맥으로 발생하는 over-correction 및 hallucination 분석**
-
-즉, 기존 VSR 또는 LLM 구조 자체보다 **시각적 불확실성과 문맥 정보의 상호작용을 통제된 조건에서 분석하는 것**을 연구 기여로 설정한다.
-
----
-
-## 14. 선행 연구와의 차이
-
-### VSP-LLM (EMNLP Findings 2024)
-
-VSP-LLM은 LLM의 강력한 context modeling 능력을 Visual Speech Processing에 활용한다. 본 연구와 마찬가지로 입모양의 모호성을 언어적 문맥을 통해 보완한다는 점에서 중요한 선행 연구이다.
-
-그러나 본 연구는 LLM-VSR 자체를 새롭게 제안하는 것이 아니라, **입술 영역의 시각적 손실 정도를 통제하면서 외부 대화 문맥의 효과와 부작용을 분석**하는 데 초점을 둔다.
-
-- Paper: https://aclanthology.org/2024.findings-emnlp.666/
-- Code: https://github.com/Sally-SH/VSP-LLM
-
-### Restoring Speaking Lips from Occlusion for AVSR (AAAI 2024)
-
-실제 영상에서 입술이 가려지는 문제를 다루며, occluded lip region 자체를 복원하여 AVSR 성능 저하를 완화한다.
-
-본 연구는 영상 자체를 복원하는 대신 **언어 및 대화 문맥을 이용해 recognition 결과를 보완**한다는 점에서 접근 방법이 다르다.
-
-- Paper: https://ojs.aaai.org/index.php/AAAI/article/view/29882
-
-### Not Only Vision (ICCV 2025)
-
-Visual information 외에 주제, 설명 등 Peripheral Information을 VSR에 활용하고 서로 다른 정보의 충돌을 선택적으로 처리한다.
-
-본 연구에서는 보다 구체적으로 **occlusion으로 인한 시각 정보 손실과 이전 대화 문맥의 상호작용**을 분석하며, 잘못된 문맥에 의한 성능 저하까지 평가한다.
-
-- Paper: https://openaccess.thecvf.com/content/ICCV2025/html/Yuan_Not_Only_Vision_Evolve_Visual_Speech_Recognition_via_Peripheral_Information_ICCV_2025_paper.html
-
----
-
-## 15. 연구 기여 정리
-
-본 연구의 목표 기여는 다음 네 가지이다.
-
-1. 한국어 VSR 환경에서 입술 영역의 시각 정보 손실률과 인식 오류 간 관계를 정량적으로 분석한다.
-2. 시각 정보 손실 환경에서 이전 대화 문맥이 VSR 결과를 얼마나 보완하는지 분석한다.
-3. VSR confidence 기반의 선택적 context reranking 방식을 구현하고 Always-Context 방식과 비교한다.
-4. 잘못된 문맥으로 인해 발생하는 over-correction 문제를 Correction Rate 및 Harm Rate 관점에서 분석한다.
-
----
-
-## 16. 구현 계획
-
-### Week 1 — Dataset & Baseline
-
-- [ ] KMSAV 데이터 구조 확인
-- [ ] 연구용 subset 선정
-- [ ] 영상/전사문/발화 순서 연결 확인
-- [ ] Face/Mouth ROI 추출
-- [ ] Pretrained VSR baseline inference 성공
-
-**완료 기준:** `영상 → 입 영역 → 한국어 VSR 결과` 파이프라인 동작
-
-### Week 2 — Baseline Evaluation
-
-- [ ] CER/WER evaluation 코드 작성
-- [ ] Clean test set baseline 측정
-- [ ] N-best candidate 및 confidence 추출 방법 확인
-
-### Week 3 — Occlusion Generator
-
-- [ ] Temporal occlusion 구현
-- [ ] Spatial occlusion 구현
-- [ ] 0/20/40/60% test set 생성
-- [ ] Occlusion 수준별 baseline 성능 측정
-
-### Week 4 — Context Reranker
-
-- [ ] 이전 utterance 연결
-- [ ] LLM prompt 설계
-- [ ] N-best candidate reranking 구현
-- [ ] Oracle Context 실험
-- [ ] Predicted Context 실험
-
-### Week 5 — Reliability-aware Method
-
-- [ ] Confidence threshold 설계
-- [ ] Reliability gating 구현
-- [ ] Correction Rate 측정
-- [ ] Harm Rate 측정
-- [ ] Misleading Context 실험
-
-### Week 6 — Analysis & Demo
-
-- [ ] 전체 실험표 작성
-- [ ] CER/Occlusion 그래프 작성
-- [ ] 대표 성공/실패 사례 분석
-- [ ] 학술제 논문 작성
-- [ ] 간단한 데모 UI 제작
-
----
-
-## 17. 최소 구현 범위
-
-시간이 부족할 경우 아래 범위까지만 완료해도 핵심 연구 질문을 검증할 수 있다.
-
-```text
-KMSAV
-  ↓
-Pretrained VSR
-  ↓
-Occlusion 0 / 20 / 40 / 60%
-  ↓
-Previous Dialogue + LLM Reranking
-  ↓
-CER Comparison
-```
-
-시간이 남을 경우 다음 순서로 확장한다.
-
-1. Confidence gating
-2. Misleading Context
-3. Scene Context
-4. 실시간/웹 데모
-
----
-
-## 18. 향후 확장: Scene Context
-
-초기 연구에서는 변수 통제를 위해 대화 문맥만 사용한다.
-
-추후에는 영상 전체 장면에서 얻은 semantic information을 함께 사용할 수 있다.
-
-```text
-                 ┌─ Mouth Encoder → VSR Candidates
-Video Frames ────┤
-                 └─ Scene Encoder → Scene Information
-
-Previous Dialogue
-        +
-Scene Information
-        +
-VSR Candidates
-        │
-        ▼
-Context Reranking
-```
-
-예를 들어 강의실, 병원, 식당 등의 장소 정보가 ambiguous word의 후보 선택에 도움을 줄 수 있는지 추가 실험할 수 있다.
-
----
-
-## 19. 예상 데모
-
-학술제 전시에서는 다음 정보를 시각적으로 보여주는 간단한 데모를 목표로 한다.
-
-```text
-┌────────────────────────────────────────┐
-│                 VIDEO                  │
-│                                        │
-│                  🙂                    │
-│             ┌─────────┐                │
-│             │ Mouth   │                │
-│             └─────────┘                │
-│                                        │
-│       "오늘 학교에 갈 거야."          │
-├────────────────────────────────────────┤
-│ Visual Confidence       42%            │
-│ VSR Candidates          학교 / 학원    │
-│ Previous Context        "수업 몇 시?" │
-│ Context Correction      ✓              │
-│ Occlusion               40%            │
-└────────────────────────────────────────┘
-```
-
-사용자가 Occlusion level을 변경하면서 VSR Only와 Context-aware 결과를 직접 비교할 수 있도록 구성한다.
-
----
-
-## 20. 현재 우선순위
-
-현재 가장 먼저 확인해야 하는 것은 LLM이나 UI가 아니다.
-
-> **KMSAV의 실제 영상 하나를 이용하여 `영상 → Mouth ROI → VSR → 한국어 문장` baseline이 정상적으로 동작하는지 검증하는 것**
-
-이 단계가 성공한 이후에 occlusion과 context 실험을 순차적으로 추가한다.
-
----
-
-## References
-
-1. Yeo, J., Han, S., Kim, M., & Ro, Y. M. (2024). **Where Visual Speech Meets Language: VSP-LLM Framework for Efficient and Context-Aware Visual Speech Processing.** Findings of EMNLP 2024.  
-   https://aclanthology.org/2024.findings-emnlp.666/
-
-2. Wang, J., Pan, Z., Zhang, M., Tan, R. T., & Li, H. (2024). **Restoring Speaking Lips from Occlusion for Audio-Visual Speech Recognition.** AAAI 2024.  
-   https://ojs.aaai.org/index.php/AAAI/article/view/29882
-
-3. Yuan, Z., Yang, S., Shan, S., & Chen, X. (2025). **Not Only Vision: Evolve Visual Speech Recognition via Peripheral Information.** ICCV 2025.  
-   https://openaccess.thecvf.com/content/ICCV2025/html/Yuan_Not_Only_Vision_Evolve_Visual_Speech_Recognition_via_Peripheral_Information_ICCV_2025_paper.html
-
-4. ETRI. **KMSAV: Korean Multi-speaker Spontaneous Audio-Visual Speech Recognition Dataset.**  
-   https://github.com/etri/kmsav
-
-5. VSP-LLM Official Implementation.  
-   https://github.com/Sally-SH/VSP-LLM
-
----
-
-## Repository Goal
-
-본 저장소는 2026년 공과대학 학술제 제출을 목표로 진행하는 연구의 코드, 실험 결과 및 문서를 관리한다.
-
-연구 진행에 따라 다음 내용을 순차적으로 추가할 예정이다.
-
-```text
-2026AcademicConf/
-├── README.md
-├── data/
-├── preprocessing/
-├── src/
-│   ├── vsr/
-│   ├── occlusion/
-│   └── context_reranking/
-├── evaluation/
-├── experiments/
-└── results/
-```
+## 결과 파일
+
+| 기록 | 공개 수치 |
+|---|---|
+| 기존 baseline | [baseline JSON](experiments/baseline_2026-09-17.json) |
+| crop/정렬 | [crop JSON](experiments/crop_2026-09-17.json) |
+| CTC N-best | [N-best JSON](experiments/nbest_2026-09-17.json) |
+| hybrid 후보 | [hybrid JSON](experiments/hybrid_2026-09-19.json) |
+| 합성 가림/출력 점수 | [robustness JSON](experiments/robustness_2026-09-19.json) |
+| 영상 확장/보간 비교 | [expansion JSON](experiments/expansion_2026-09-19.json) |
+
+이전 단계 상세 기록: [1단계](docs/STAGE1.md), [2단계](docs/STAGE2.md),
+[3단계](docs/STAGE3.md), [4단계](docs/STAGE4.md), [5단계](docs/STAGE5.md).
+
+## 남은 과제와 다음 진행 순서
+
+1. 실패 구간의 얼굴 track·랜드마크·시각적 가림을 구분해 진단하고, 긴 공백과 옆얼굴의 처리 정책을 정한다.
+2. 학습 입력 규격과 전처리를 더 정확히 맞추거나 한국어 VSR baseline을 교체/적응시킨다.
+   높은 CER의 원인이 어느 한 가지라고 현재 실험만으로 단정하지 않는다.
+3. 별도 개발·평가 영상과 화자 구성을 확보한 후 모델 점수와 실제 오류의 관계를 보정한다.
+4. 후보 품질이 확보되면 정답 대신 이전 **인식 결과**를 사용하는 문맥 보정을 추가한다.
+   문맥 없음/문맥 사용/잘못된 문맥/손상 입력을 같은 표본에서 비교한다.
+5. 최종 조건을 고정한 뒤 held-out test, 처리 속도, 수정으로 새로 생긴 오류, 사용자 평가를 보고한다.
+
+현재 완료한 것은 연구용 baseline과 실패·후보·가림 진단이다. 실사용 자막 시스템이나
+문맥 기반 성능 향상, calibrated confidence, 논문 성능 재현을 완료했다고 표현하지 않는다.

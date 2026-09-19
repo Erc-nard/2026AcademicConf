@@ -60,14 +60,14 @@ def chunk_frontend(frontend, video, chunk=48):
 
 
 def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder="ctc_greedy",
-                 size=96, target_fps=None, beam_size=25):
+                 size=96, target_fps=None, beam_size=25, corruption="none"):
     import numpy as np
     import torch
     if threads < 1:
         raise ValueError("threads must be positive")
     if not isinstance(beam_size, int) or beam_size < 1:
         raise ValueError("beam_size must be a positive integer")
-    if decoder not in {"ctc_greedy", "ctc_beam", "hybrid"}:
+    if decoder not in {"ctc_greedy", "ctc_beam", "hybrid", "hybrid_rescore"}:
         raise ValueError("Unknown decoder")
     repo = Path(repo).resolve()
     if not (repo / "avsr/utils/model_builder.py").is_file():
@@ -86,6 +86,8 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
         fps = float(archive["fps"])
         crop_scale = float(archive["crop_scale"]) if "crop_scale" in archive else 1.7
         alignment = str(archive["align"]) if "align" in archive else "none"
+        landmark_max_gap = int(archive["landmark_max_gap"]) if "landmark_max_gap" in archive else 0
+        interpolated_frames = int(archive["interpolated_frames"]) if "interpolated_frames" in archive else 0
     if (frames.dtype != np.uint8 or frames.ndim != 4 or frames.shape[-1] != 3
             or not 1 <= len(frames) <= 750 or frames.shape[1:3] not in {(96, 96), (224, 224)}):
         raise ValueError("Expected 1..750 uint8 BGR mouth frames of size 96x96 or 224x224")
@@ -93,6 +95,8 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
         raise ValueError("Invalid input FPS")
     source_fps, source_frames = fps, len(frames)
     frames, fps = prepare_frames(frames, fps, size, target_fps)
+    from .corruption import corrupt_frames
+    frames, corruption_info = corrupt_frames(frames, corruption)
     torch.set_num_threads(threads)
     model = build_model(
         72, 0, architecture="video", loss_fn="hybrid", front_dim=512,
@@ -111,7 +115,7 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
     video = ((video - video.mean()) / std).permute(3, 0, 1, 2).unsqueeze(0)
     lengths = torch.tensor([len(frames)], dtype=torch.long)
     with torch.inference_mode():
-        if decoder in {"ctc_greedy", "ctc_beam"}:
+        if decoder in {"ctc_greedy", "ctc_beam", "hybrid_rescore"}:
             front = chunk_frontend(model.encoder.front, video)
             encoded = model.encoder.back(model.encoder.projection(front), lengths)
             features = model.medium(encoded)
@@ -140,15 +144,32 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
                input_sha256=sha256(mouth), input_fps=fps, input_frames=len(frames),
                source_fps=source_fps, source_frames=source_frames, input_size=size,
                crop_scale=crop_scale, alignment=alignment,
+               landmark_max_gap=landmark_max_gap, interpolated_frames=interpolated_frames,
                audio_used=False, reference_used=False, device="cpu",
                status="cross-dataset preprocessing smoke test; not paper reproduction")
-    if decoder == "ctc_beam":
+    row["corruption"] = corruption_info
+    if decoder != "hybrid":
+        probs = logits.softmax(-1)
+        row["ctc_diagnostics"] = dict(
+            mean_max_probability=float(probs.max(-1).values.mean()),
+            mean_entropy_nats=float(-(probs * logits.log_softmax(-1)).sum(-1).mean()),
+            blank_argmax_fraction=float((logits.argmax(-1) == 3).float().mean()),
+            calibrated=False)
+    if decoder in {"ctc_beam", "hybrid_rescore"}:
         from .nbest import prefix_beam, render_candidates
         candidates = render_candidates(prefix_beam(logits.log_softmax(-1).tolist(), beam_size),
                                        vocabulary, grp2char)
+        if decoder == "hybrid_rescore":
+            from .hybrid import hybrid_candidates
+            row["ctc_candidates"] = candidates
+            candidates, settings = hybrid_candidates(model, features, logits.log_softmax(-1),
+                                                     candidates, vocabulary, grp2char)
+            row["hybrid_settings"] = settings
         row.update(greedy_hypothesis=row["hypothesis"], greedy_token_ids=tokens,
                    candidates=candidates, beam_size=beam_size, language_model_used=False,
                    score_note="Pruned prefix log mass; rendered duplicates keep best prefix; not confidence")
         row.update({key: candidates[0][key] for key in ("hypothesis", "raw_graphemes", "token_ids")})
+        if decoder == "hybrid_rescore":
+            row["score_note"] = "0.6 exact CTC + 0.4 attention sequence log probability, EOS included; not confidence"
     write_jsonl(output, [row])
     return row

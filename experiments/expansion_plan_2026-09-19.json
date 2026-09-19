@@ -1,0 +1,97 @@
+{
+  "scope": "train development expansion; not held-out",
+  "video_selection": "first 3 unflagged train videos, SHA256 order, seed 2026; first video already evaluated",
+  "max_seconds": 10,
+  "max_samples_per_new_video": 6,
+  "utterance_selection": "chronological first 6 eligible utterances before inference",
+  "new_videos": [
+    {
+      "record": {
+        "video_id": "5TaVl7-lU4k",
+        "domain": "issu",
+        "participants": 4,
+        "duration_seconds": 2449.0,
+        "split": "train",
+        "flags": [],
+        "selection_seed": 2026,
+        "catalog_sha256": "24741a39d31d7e5f5f4baad8dbe315339bef63cc355b13884c133ef20dec0397"
+      },
+      "selected": [
+        {
+          "id": "5TaVl7-lU4k/000005",
+          "start_ms": 50822,
+          "end_ms": 56461
+        },
+        {
+          "id": "5TaVl7-lU4k/000008",
+          "start_ms": 81639,
+          "end_ms": 86566
+        },
+        {
+          "id": "5TaVl7-lU4k/000009",
+          "start_ms": 86566,
+          "end_ms": 95965
+        },
+        {
+          "id": "5TaVl7-lU4k/000015",
+          "start_ms": 139817,
+          "end_ms": 147351
+        },
+        {
+          "id": "5TaVl7-lU4k/000016",
+          "start_ms": 147351,
+          "end_ms": 156558
+        },
+        {
+          "id": "5TaVl7-lU4k/000019",
+          "start_ms": 172384,
+          "end_ms": 180347
+        }
+      ]
+    },
+    {
+      "record": {
+        "video_id": "D-hzf2x_XO0",
+        "domain": "issu",
+        "participants": 2,
+        "duration_seconds": 789.0,
+        "split": "train",
+        "flags": [],
+        "selection_seed": 2026,
+        "catalog_sha256": "24741a39d31d7e5f5f4baad8dbe315339bef63cc355b13884c133ef20dec0397"
+      },
+      "selected": [
+        {
+          "id": "D-hzf2x_XO0/000030",
+          "start_ms": 95425,
+          "end_ms": 101189
+        },
+        {
+          "id": "D-hzf2x_XO0/000031",
+          "start_ms": 101189,
+          "end_ms": 102869
+        },
+        {
+          "id": "D-hzf2x_XO0/000032",
+          "start_ms": 102869,
+          "end_ms": 104709
+        },
+        {
+          "id": "D-hzf2x_XO0/000034",
+          "start_ms": 105426,
+          "end_ms": 106607
+        },
+        {
+          "id": "D-hzf2x_XO0/000052",
+          "start_ms": 148844,
+          "end_ms": 155380
+        },
+        {
+          "id": "D-hzf2x_XO0/000062",
+          "start_ms": 191619,
+          "end_ms": 199362
+        }
+      ]
+    }
+  ]
+}
