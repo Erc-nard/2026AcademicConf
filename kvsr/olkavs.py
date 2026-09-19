@@ -88,6 +88,8 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
         alignment = str(archive["align"]) if "align" in archive else "none"
         landmark_max_gap = int(archive["landmark_max_gap"]) if "landmark_max_gap" in archive else 0
         interpolated_frames = int(archive["interpolated_frames"]) if "interpolated_frames" in archive else 0
+        track_boundary_limit = int(archive["track_boundary_limit"]) if "track_boundary_limit" in archive else 2
+        boundary_extended_frames = int(archive["boundary_extended_frames"]) if "boundary_extended_frames" in archive else None
     if (frames.dtype != np.uint8 or frames.ndim != 4 or frames.shape[-1] != 3
             or not 1 <= len(frames) <= 750 or frames.shape[1:3] not in {(96, 96), (224, 224)}):
         raise ValueError("Expected 1..750 uint8 BGR mouth frames of size 96x96 or 224x224")
@@ -145,6 +147,7 @@ def infer_olkavs(mouth, checkpoint, repo, sample_id, output, threads=2, decoder=
                source_fps=source_fps, source_frames=source_frames, input_size=size,
                crop_scale=crop_scale, alignment=alignment,
                landmark_max_gap=landmark_max_gap, interpolated_frames=interpolated_frames,
+               track_boundary_limit=track_boundary_limit, boundary_extended_frames=boundary_extended_frames,
                audio_used=False, reference_used=False, device="cpu",
                status="cross-dataset preprocessing smoke test; not paper reproduction")
     row["corruption"] = corruption_info

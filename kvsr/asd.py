@@ -25,15 +25,17 @@ class Utterance:
         return (self.start_ms * self.fps // 1000,
                 math.ceil(self.end_ms * self.fps / 1000))
 
-    def box_at(self, frame_index):
-        """Only interpolate inside track; boundary extension is limited to 2 frames."""
+    def box_at(self, frame_index, boundary_limit=2):
+        """Interpolate short internal gaps; boundary hold is 2 frames, optionally 4."""
+        if boundary_limit not in (2, 4):
+            raise ValueError("Boundary extension limit must be 2 or 4 frames")
         indices = [b[0] for b in self.boxes]
         offset = bisect.bisect_left(indices, frame_index)
         if offset < len(indices) and indices[offset] == frame_index:
             return self.boxes[offset][1:]
         if offset in (0, len(indices)):
             row = self.boxes[0 if offset == 0 else -1]
-            if abs(row[0] - frame_index) > 2:
+            if abs(row[0] - frame_index) > boundary_limit:
                 raise ValueError(f"Face track missing at frame {frame_index}")
             return row[1:]
         left, right = self.boxes[offset - 1], self.boxes[offset]

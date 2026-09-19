@@ -32,7 +32,7 @@ def square_crop(frame, center, side, size):
     return cv2.resize(frame[y:y + side, x:x + side], (size, size), interpolation=cv2.INTER_AREA)
 
 
-def extract_faces(video, utterance, ffmpeg):
+def extract_faces(video, utterance, ffmpeg, track_boundary_limit=2):
     """Decode a bounded utterance; map official one-based boxes to a 25fps timeline."""
     import cv2
     import numpy as np
@@ -62,11 +62,12 @@ def extract_faces(video, utterance, ffmpeg):
                 if len(raw) != frame_bytes:
                     raise ValueError(f"Video ended before expected frame {number}")
                 frame = np.frombuffer(raw, dtype=np.uint8).reshape(utterance.height, utterance.width, 3)
-                x, y, w, h = utterance.box_at(number + 1)
+                x, y, w, h = utterance.box_at(number + 1, boundary_limit=track_boundary_limit)
                 if x < 0 or y < 0 or x + w > utterance.width or y + h > utterance.height:
                     raise ValueError(f"ASD face box exceeds image at frame {number + 1}")
                 faces.append(cv2.resize(frame[y:y + h, x:x + w], (224, 224)))
-                tracking.append(dict(source_frame_one_based=number + 1, box=[x, y, w, h]))
+                tracking.append(dict(source_frame_one_based=number + 1, box=[x, y, w, h],
+                    boundary_extended=(number+1 < utterance.boxes[0][0] or number+1 > utterance.boxes[-1][0])))
             process.stdout.close()
             code = process.wait(timeout=30)
             if code:
@@ -190,7 +191,7 @@ def extract_mouths(faces, model, fps, size=96, crop_scale=1.7, align="none", lan
 
 
 def preprocess_sample(video, archive, video_id, utterance_index, model, output, split, size=96,
-                      crop_scale=1.7, align="none", landmark_max_gap=0):
+                      crop_scale=1.7, align="none", landmark_max_gap=0, track_boundary_limit=2):
     import cv2
     import imageio_ffmpeg
     import numpy as np
@@ -205,7 +206,7 @@ def preprocess_sample(video, archive, video_id, utterance_index, model, output, 
         raise ValueError(f"Output already exists; choose a new directory: {output}")
     if not Path(video).is_file() or not Path(model).is_file():
         raise ValueError("Video or face landmark model is missing")
-    faces, track = extract_faces(video, utterance, imageio_ffmpeg.get_ffmpeg_exe())
+    faces, track = extract_faces(video, utterance, imageio_ffmpeg.get_ffmpeg_exe(), track_boundary_limit)
     mouths, trace = extract_mouths(faces, model, utterance.fps, size=size, crop_scale=crop_scale, align=align,
                                   landmark_max_gap=landmark_max_gap)
     if align == "eyes":
@@ -213,7 +214,9 @@ def preprocess_sample(video, archive, video_id, utterance_index, model, output, 
     output.mkdir(parents=True)
     np.savez_compressed(output / "mouth.npz", frames=mouths, fps=utterance.fps,
                         crop_scale=crop_scale, align=align, landmark_max_gap=landmark_max_gap,
-                        interpolated_frames=sum(not t["detected"] for t in trace))
+                        interpolated_frames=sum(not t["detected"] for t in trace),
+                        track_boundary_limit=track_boundary_limit,
+                        boundary_extended_frames=sum(t["boundary_extended"] for t in track))
     writer = cv2.VideoWriter(str(output / "face.mp4"), cv2.VideoWriter_fourcc(*"mp4v"),
                              utterance.fps, (224, 224))
     if not writer.isOpened():
@@ -245,6 +248,8 @@ def preprocess_sample(video, archive, video_id, utterance_index, model, output, 
                   preprocessing="mediapipe-mouth-prototype-v1", avhubert_compatible=False,
                   crop_scale=crop_scale, align=align, face_preview_aligned=(align == "eyes"),
                   landmark_max_gap=landmark_max_gap,
+                  track_boundary_limit=track_boundary_limit,
+                  boundary_extended_frames=sum(t["boundary_extended"] for t in track),
                   interpolated_frames=sum(not t["detected"] for t in trace),
                   audio_used=False, model_sha256=sha256(model), video_sha256=sha256(video),
                   asd_sha256=sha256(archive), face_track=track, mouth_track=trace)

@@ -49,6 +49,7 @@ def main():
     prep.add_argument("--crop-scale", type=float, default=1.7)
     prep.add_argument("--align", choices=["none", "eyes"], default="none")
     prep.add_argument("--landmark-max-gap", type=int, choices=range(4), default=0)
+    prep.add_argument("--track-boundary-limit", type=int, choices=[2, 4], default=2)
     infer = commands.add_parser("infer-olkavs", help="Video-only CTC smoke inference; no transcript/audio input")
     infer.add_argument("--mouth", type=Path, required=True)
     infer.add_argument("--checkpoint", type=Path, required=True)
@@ -103,7 +104,7 @@ def main():
                 from .preprocessing import preprocess_sample
                 report = preprocess_sample(args.video, args.archive, args.video_id, args.utterance,
                                            args.model, args.output, record["split"], args.size,
-                                           args.crop_scale, args.align, args.landmark_max_gap)
+                                           args.crop_scale, args.align, args.landmark_max_gap, args.track_boundary_limit)
         else:
             report = evaluate(read_jsonl(args.references), read_jsonl(args.predictions))
             args.output.parent.mkdir(parents=True, exist_ok=True)

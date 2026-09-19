@@ -94,7 +94,7 @@ def run(args):
                                start_ms=u.start_ms, end_ms=u.end_ms) for u in selected],
                 excluded=[dict(id=f"{u.video_id}/{u.index}", reason="duration" if
                     u.end_ms-u.start_ms > args.max_seconds*1000 else "sample_limit") for u in items if u not in selected],
-                suite=args.suite, landmark_max_gap=args.landmark_max_gap,
+                suite=args.suite, landmark_max_gap=args.landmark_max_gap, track_boundary_limit=args.track_boundary_limit,
                 profiles={k: dict(size=v[0], target_fps=v[1], crop_scale=v[2], align=v[3],
                                   decoder="ctc_greedy") for k, v in profiles.items()},
                 hashes={name: sha256(path) for name, path in [("video", args.video), ("asd", args.archive),
@@ -118,7 +118,8 @@ def run(args):
                                     "--video-id", args.video_id, "--utterance", item.index,
                                     "--video", args.video, "--model", args.model, "--size", 224,
                                     "--crop-scale", scale, "--align", align,
-                                    "--landmark-max-gap", args.landmark_max_gap, "--output", output], log, 180, env)
+                                    "--landmark-max-gap", args.landmark_max_gap,
+                                    "--track-boundary-limit", args.track_boundary_limit, "--output", output], log, 180, env)
             error = cache[recipe]
             failure = error
             destination = root / name / f"{item.index}.jsonl"
@@ -163,6 +164,7 @@ def main():
     parser.add_argument("--max-seconds", type=float, default=10)
     parser.add_argument("--max-samples", type=int)
     parser.add_argument("--landmark-max-gap", type=int, choices=range(4), default=0)
+    parser.add_argument("--track-boundary-limit", type=int, choices=[2, 4], default=2)
     parser.add_argument("--suite", choices=["size-fps", "crop", "baseline"], default="size-fps")
     args = parser.parse_args()
     try:
