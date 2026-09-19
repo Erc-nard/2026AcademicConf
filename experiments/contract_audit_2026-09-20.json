@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+  "upstream_sources": {
+    "dataset\\dataset.py": "ed194ad0368d0e69b08c4770ab2492beb92c111f414b3efd31e8ca192ae0bf04",
+    "vocabulary\\utils.py": "e18e2d6021c38649902cfb43b7aefc03fddf68345f6f6a20ab2c8e58b11e1e95",
+    "avsr\\models\\encoder.py": "4b74db62d8cf5e272b2b435d677bf78c93d3f48599f3191a5ce5492b58eb9fd4",
+    "preprocess.py": "5f358e07949f652a71f41cd1fceea5c24cac711a7d89a2f7932959932af68790"
+  },
+  "torch_version": "2.14.0+cpu",
+  "opencv_version": "5.0.0",
+  "device": "cpu",
+  "threads": 2,
+  "state_keys": 1221,
+  "parameters": 45191824,
+  "tolerances": {
+    "normalization": [
+      1e-06,
+      1e-05
+    ],
+    "frontend": [
+      1e-05,
+      1e-05
+    ],
+    "logits": [
+      0.0001,
+      0.0001
+    ]
+  },
+  "reference_used": false,
+  "audio_used": false,
+  "rows": [
+    {
+      "id": "000006",
+      "input_sha256": "130cd8f327aec40845b5a4d15fae3577289c037056d59ebded52fbdeb708899d",
+      "frames": 53,
+      "lossless_bgr_equal": true,
+      "normalization_max_abs": 0.0,
+      "normalization_close": true,
+      "frontend_max_abs": 0.0,
+      "frontend_close": true,
+      "logits_max_abs": 0.0,
+      "logits_close": true,
+      "greedy_equal": true
+    },
+    {
+      "id": "000018",
+      "input_sha256": "f8bbc7006ccf2c21f3d871f77ca7d1a5e645f7c49e9daeaaa926a163e65f6649",
+      "frames": 53,
+      "lossless_bgr_equal": true,
+      "normalization_max_abs": 0.0,
+      "normalization_close": true,
+      "frontend_max_abs": 0.0,
+      "frontend_close": true,
+      "logits_max_abs": 0.0,
+      "logits_close": true,
+      "greedy_equal": true
+    },
+    {
+      "id": "000027",
+      "input_sha256": "e36004c2610824270505ebadec024ed8a560c9f98878aad63339584c1f4a298b",
+      "frames": 53,
+      "lossless_bgr_equal": true,
+      "normalization_max_abs": 0.0,
+      "normalization_close": true,
+      "frontend_max_abs": 0.0,
+      "frontend_close": true,
+      "logits_max_abs": 0.0,
+      "logits_close": true,
+      "greedy_equal": true
+    },
+    {
+      "id": "000033",
+      "input_sha256": "cdc186cc6e8b6cf83100f76ec7259f7769a24bee2e8ccde57c28f0af4c75c8bd",
+      "frames": 53,
+      "lossless_bgr_equal": true,
+      "normalization_max_abs": 0.0,
+      "normalization_close": true,
+      "frontend_max_abs": 0.0,
+      "frontend_close": true,
+      "logits_max_abs": 0.0,
+      "logits_close": true,
+      "greedy_equal": true
+    }
+  ],
+  "hangul_roundtrip": {
+    "tested": 11172,
+    "failed": 0,
+    "phrases_tested": 4,
+    "phrases_failed": 0
+  },
+  "limitations": [
+    "53-frame prefixes of four existing development clips, not full-clip accuracy evaluation",
+    "Lossless transport isolates color/layout/normalization; does not reproduce training MP4 compression or annotated lip boxes",
+    "Valid Hangul roundtrip does not validate malformed predicted grapheme sequences"
+  ],
+  "passed": true
+}

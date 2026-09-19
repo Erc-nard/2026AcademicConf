@@ -3,7 +3,11 @@
 **최종 갱신: 2026-09-20.** 이 README는 실제 실행 결과를 정리한 보고서다.
 초기 아이디어와 예정 실험은 [최초 연구계획](docs/RESEARCH_PLAN.md)에 별도로 보존했다.
 
-**최신 결과:** ROI를 얻지 못한 프레임을 표시하고 시간축을 유지하는 실험을 완료했다.
+**최신 검증:** 공식 OLKAVS 입력·모델 경로와 현재 구현을 비교했다. 네 발화의 첫 53프레임에서
+정규화, 분할 frontend, 최종 CTC logits가 모두 정확히 일치했고, 한글 11,172음절의 변환도 통과했다.
+입력 호환성의 제한된 검증이며 인식 성능 개선 실험은 아니다. 상세 내용은 8절에 기록했다.
+
+**직전 결과:** ROI를 얻지 못한 프레임을 표시하고 시간축을 유지하는 실험을 완료했다.
 기존 실패 5건 중 4건을 추가 추론했고, ROI가 전혀 없는 1건은 자막을 보류했다.
 같은 16개 발화에서 전체 CER은 **93.01% → 89.79%**다. 추가 추론 4건의 CER도 90.96%로 높다.
 정확한 자막을 확보했다는 의미는 아니며, 아래 7절에 방법과 한계를 기록했다.
@@ -307,6 +311,50 @@ JSON의 `succeeded`/`coverage`는 보류를 포함한 반환 성공이며,
 .venv/Scripts/python.exe -m kvsr.masked_report --baseline results/crop_2026-09-17 --baseline results/expansion_2026-09-19/5TaVl7-lU4k --baseline results/expansion_2026-09-19/D-hzf2x_XO0 --candidate results/masked_2026-09-20 --plan experiments/masked_plan_2026-09-20.json --output results/mask_report_repeat.json
 ```
 
+## 8. 공식 입력·모델 경로 호환성 검증 (9/20)
+
+`kvsr.contract_audit`로 공식 `_parse_video` 함수를 원문 그대로 추출·실행하고,
+공식 encoder 전체 실행과 현재 분할 실행을 같은 체크포인트에서 비교했다.
+정답 전사와 음성은 사용하지 않았다. 기존 네 발화의 **첫 53프레임만** 사용하여
+실제 분할 경계인 48프레임을 넘도록 했다. 전체 발화 성능 재평가는 아니다.
+
+| 검사 | 실제 결과 |
+|---|---|
+| 체크포인트 strict 로딩 | 1,221개 state key, 45,191,824개 parameter |
+| FFV1 무손실 저장·읽기 BGR 픽셀 | 4/4 원본과 동일 |
+| 공식 정규화와 현재 정규화 최대 절대 차이 | 네 입력 모두 0 |
+| 전체/분할 frontend 최대 절대 차이 | 네 입력 모두 0 |
+| 공식 전체 경로/현재 경로 최종 CTC logits 차이 | 네 입력 모두 0 |
+| CTC greedy 토큰 | 4/4 동일 |
+| 공식 한글 분해→조합 | 현대 한글 11,172음절 및 합성 문장 4개, 실패 0 |
+
+공식 로더는 OpenCV BGR, float32, 전체 픽셀 평균·표준편차 정규화를 사용한다.
+공식 코드는 먼저 평균을 빼고 표준편차를 구하며 현재 코드는 원 픽셀에서 표준편차를 구한다.
+측정한 네 입력에서는 수치 차이가 없었으므로 기존 구현과 실험 결과를 유지했다.
+한글 검사는 유효한 입력의 왕복 변환만 확인한다. 모델이 생성한 잘못된 자모열의
+탈락·조합 문제까지 해결했다는 뜻은 아니다.
+
+아직 맞추지 못한 부분은 남아 있다. 공식 전처리에는 주석으로 제공되는 입 상자,
+`INTER_LINEAR`, 기본 224×224·30fps, MP4 저장 단계가 있다. 현재 입력은 MediaPipe 기반
+입 상자, `INTER_AREA`, 96×96·원본 25fps, NPZ 저장이다. 이번 무손실 검사는 색상·배열·정규화
+및 모델 실행을 분리해 확인했으며, 학습 당시 ROI와 압축 특성을 재현하지 않는다.
+앞선 크기/FPS 비교에서 224·30fps로 바꾸는 것만으로는 개선되지 않았다.
+공식 학습 전사 전처리는 숫자를 한글로 바꾸고 문장부호 등을 제거하지만, 현재 CER은
+원 전사의 문장부호를 보존한다. 평가 규칙 차이도 남아 있으며 기존 CER을 소급 변경하지 않았다.
+
+공식 `single_infer`에는 B,C,T,H,W 배열에서 길이를 `size(1)`로 만드는 코드도 있다.
+현재 구현은 실제 프레임 수 T를 전달하며, 이 공식 단일 추론 코드를 복제하지 않았다.
+따라서 이를 현재 높은 CER의 원인으로 해석하지 않는다.
+
+공식 소스 기준은 [OLKAVS 고정 커밋](https://github.com/IIP-Sogang/olkavs-avspeech/tree/af2feda3e3ac91ff3fef2454fcee662366ce9f4b)이다.
+공개 JSON에는 체크포인트·입력·공식 소스 해시와 오차만 기록했다.
+다음 우선순위는 ROI 정의와 리사이즈·저장 방식의 차이를 고정 표본에서 분리 비교하는 것이다.
+현 단계에서 높은 CER의 원인을 특정하거나 문맥 보정으로 해결된다고 주장할 수 없다.
+
+```powershell
+.venv/Scripts/python.exe -m kvsr.contract_audit --repo external/olkavs --checkpoint checkpoints/olkavs_multiview_lip.pt --source results/crop_2026-09-17 --output results/contract_audit_repeat
+```
+
 ## 구현과 검증
 
 - `kvsr/nbest.py`: blank/반복 문자를 올바르게 합산하는 CTC prefix beam과 독립 oracle 평가.
@@ -352,6 +400,7 @@ JSON의 `succeeded`/`coverage`는 보류를 포함한 반환 성공이며,
 | 영상 확장/보간 비교 | [expansion JSON](experiments/expansion_2026-09-19.json) |
 | 실패 프레임/재검출/경계 연장 | [failure audit JSON](experiments/failure_audit_2026-09-19.json) |
 | ROI 미가용 표시·부분 영상 추론 | [masked JSON](experiments/masked_2026-09-20.json) |
+| 공식 입력·모델 경로 호환성 | [contract audit JSON](experiments/contract_audit_2026-09-20.json) |
 
 이전 단계 상세 기록: [1단계](docs/STAGE1.md), [2단계](docs/STAGE2.md),
 [3단계](docs/STAGE3.md), [4단계](docs/STAGE4.md), [5단계](docs/STAGE5.md).
