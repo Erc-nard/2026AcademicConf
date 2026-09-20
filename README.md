@@ -3,7 +3,11 @@
 **최종 갱신: 2026-09-20.** 이 README는 실제 실행 결과를 정리한 보고서다.
 초기 아이디어와 예정 실험은 [최초 연구계획](docs/RESEARCH_PLAN.md)에 별도로 보존했다.
 
-**최신 검증:** 공식 OLKAVS 입력·모델 경로와 현재 구현을 비교했다. 네 발화의 첫 53프레임에서
+**최신 실험:** 같은 네 발화에서 마지막 리사이즈와 MP4 저장을 분리해 16회 추론했다.
+기존 AREA+NPZ CER 82.76%, LINEAR+NPZ 83.62%, AREA+MP4 82.76%, LINEAR+MP4 85.34%다.
+개선 근거가 없어 기본 설정을 유지했다. 아래 9절에 고정 조건과 한계를 기록했다.
+
+**직전 검증:** 공식 OLKAVS 입력·모델 경로와 현재 구현을 비교했다. 네 발화의 첫 53프레임에서
 정규화, 분할 frontend, 최종 CTC logits가 모두 정확히 일치했고, 한글 11,172음절의 변환도 통과했다.
 입력 호환성의 제한된 검증이며 인식 성능 개선 실험은 아니다. 상세 내용은 8절에 기록했다.
 
@@ -348,11 +352,49 @@ JSON의 `succeeded`/`coverage`는 보류를 포함한 반환 성공이며,
 
 공식 소스 기준은 [OLKAVS 고정 커밋](https://github.com/IIP-Sogang/olkavs-avspeech/tree/af2feda3e3ac91ff3fef2454fcee662366ce9f4b)이다.
 공개 JSON에는 체크포인트·입력·공식 소스 해시와 오차만 기록했다.
-다음 우선순위는 ROI 정의와 리사이즈·저장 방식의 차이를 고정 표본에서 분리 비교하는 것이다.
+리사이즈·저장 방식의 분리 비교는 아래 9절에서 진행했으며, ROI 정의 차이는 아직 남아 있다.
 현 단계에서 높은 CER의 원인을 특정하거나 문맥 보정으로 해결된다고 주장할 수 없다.
 
 ```powershell
 .venv/Scripts/python.exe -m kvsr.contract_audit --repo external/olkavs --checkpoint checkpoints/olkavs_multiview_lip.pt --source results/crop_2026-09-17 --output results/contract_audit_repeat
+```
+
+## 9. 마지막 리사이즈·MP4 저장 분리 비교 (9/20)
+
+이전과 같은 train 영상 `8r1k9NLdSvE`의 네 발화 전체를 사용했다. 총 116글자·41단어이며,
+발화별 프레임 수는 121, 153, 246, 229이다. 기존 224×224 입 ROI에서 **마지막 96×96 축소**만
+AREA 또는 LINEAR로 바꾸고, 각각 NPZ 그대로 입력하는 조건과 MP4로 저장·재디코딩하는 조건을 비교했다.
+입 영역 위치·크기, 원본 25fps, 모델, CTC greedy, 정규화, 평가 규칙은 고정했다.
+조건과 입력 해시를 실행 전에 `plan.json`으로 저장하고, 정답은 16회 추론 완료 후 평가에서만 읽었다.
+
+| 마지막 축소 | 저장 경로 | 완료 | 글자 오류 / 116 | CER | WER |
+|---|---|---:|---:|---:|---:|
+| AREA | NPZ, 기존 기준 | 4/4 | 96 | 82.76% | 100.00% |
+| LINEAR | NPZ | 4/4 | 97 | 83.62% | 100.00% |
+| AREA | MP4 재디코딩 | 4/4 | 96 | 82.76% | 97.56% |
+| LINEAR | MP4 재디코딩 | 4/4 | 99 | 85.34% | 97.56% |
+
+- 기준 조건의 네 토큰열은 이전 baseline과 모두 동일했다.
+- LINEAR+NPZ는 기준보다 한 발화에서 글자 오류가 1개 늘고, 세 발화는 오류 수가 같았다.
+- AREA+MP4는 한 발화에서 1개 감소하고 다른 발화에서 1개 증가하여 전체 CER은 같았다.
+- LINEAR+MP4는 두 발화에서 총 3개 증가했다. 나머지 두 발화는 오류 수가 같았다.
+- 오류 수가 같다고 출력이 같은 것은 아니다. 기준 대비 토큰열 변경은 각각 3/4, 4/4, 4/4였다.
+
+MP4는 OpenCV `mp4v` 기본 인코더 설정을 사용했고, 네 발화 모두 프레임 수·크기·FPS를 유지했다.
+재디코딩 전후 픽셀 MAE는 0–255 척도에서 2.83–3.08이었다. 새 테스트에서 시간 순서와 색상 채널도 확인했다.
+두 MP4 조건의 WER 감소는 단어 오류 1개 차이이며, 이 작은 개발 표본에서 일반적인 개선이라고 해석하지 않는다.
+
+**결정:** AREA+NPZ 기본 설정을 유지한다. 마지막 축소나 이 MP4 저장 단계를 바꾸는 것만으로
+높은 CER이 해결된다는 근거를 얻지 못했다. 한 영상의 네 발화에 대한 탐색 결과이며 통계적 우월성 주장이 아니다.
+처음 얼굴·입 영역을 자를 때의 보간 방식은 그대로다. MP4도 96×96·25fps에서 적용했으므로
+공식 학습 입력 전체를 재현한 것이 아니다. 다음 비교는 원 영상에서 같은 입 좌표를 사용해 직접 96px로
+추출하는 방식과 현재 224px 중간 ROI를 거치는 방식의 차이를 분리하는 것이다.
+
+공개 기록에는 수치·ID·해시만 포함한다. 원 영상, 정답, 예측 문장, 재인코딩 영상은 로컬에만 남겼다.
+재실행은 기존 네 발화 crop과 체크포인트가 준비된 환경에서 새 출력 폴더를 지정한다.
+
+```powershell
+.venv/Scripts/python.exe -m kvsr.transport_experiment --source results/crop_2026-09-17 --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/transport_repeat
 ```
 
 ## 구현과 검증
@@ -364,8 +406,11 @@ JSON의 `succeeded`/`coverage`는 보류를 포함한 반환 성공이며,
 - `kvsr/preprocessing.py`: 제한적인 좌표 보간, 픽셀 생성 없음, 보간 프레임 provenance.
 - `kvsr/diagnostics.py`: 정답 전사 없이 실패 프레임 구간과 IMAGE 재검출 결과를 집계한다.
 - `kvsr/missing.py`, `kvsr/masked_report.py`: ROI 미가용 프레임의 정규화·시간축 유지와 고정 표본 비교.
-- 로컬 **49개 테스트 통과**. CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
+- `kvsr/transport_experiment.py`: 고정 2×2 리사이즈·저장 비교, 입력 무결성·기준 재현 검사.
+- 로컬 `.venv`에서 **52개 테스트 통과**. CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
   EOS/반복 문자, 실패 누락 방지, 합성 마스크 범위, 보간 경계/길이 제한을 검증했다.
+  이번에 축소 기준 일치, MP4 시간·색상 유지, 잘못된 입력 거부 검사를 추가했다.
+  선택 의존성이 없는 기본 Python에서는 52개 중 20개를 건너뛰고 나머지가 통과했다.
 - 새 clean 실행과 hybrid 실행의 greedy 토큰은 이전 4단계의 네 발화와 모두 같았다.
 - GitHub CI는 코드 검증용이며 데이터·체크포인트를 내려받아 전체 실험을 재실행하지 않는다.
 
@@ -401,6 +446,7 @@ JSON의 `succeeded`/`coverage`는 보류를 포함한 반환 성공이며,
 | 실패 프레임/재검출/경계 연장 | [failure audit JSON](experiments/failure_audit_2026-09-19.json) |
 | ROI 미가용 표시·부분 영상 추론 | [masked JSON](experiments/masked_2026-09-20.json) |
 | 공식 입력·모델 경로 호환성 | [contract audit JSON](experiments/contract_audit_2026-09-20.json) |
+| 마지막 리사이즈·MP4 저장 분리 비교 | [transport JSON](experiments/transport_2026-09-20.json) |
 
 이전 단계 상세 기록: [1단계](docs/STAGE1.md), [2단계](docs/STAGE2.md),
 [3단계](docs/STAGE3.md), [4단계](docs/STAGE4.md), [5단계](docs/STAGE5.md).

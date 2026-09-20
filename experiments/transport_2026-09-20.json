@@ -1,0 +1,657 @@
+{
+  "plan": {
+    "scope": "four fixed utterances from one train video; exploratory paired sensitivity, no held-out claim",
+    "source_plan_sha256": "e41c54998efe9b098f420b2f3bc4329f76694d1cff63bfb6d2ac5626b8569524",
+    "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+    "inputs": [
+      {
+        "id": "8r1k9NLdSvE/000006",
+        "utterance": "000006",
+        "sha256": "130cd8f327aec40845b5a4d15fae3577289c037056d59ebded52fbdeb708899d"
+      },
+      {
+        "id": "8r1k9NLdSvE/000018",
+        "utterance": "000018",
+        "sha256": "f8bbc7006ccf2c21f3d871f77ca7d1a5e645f7c49e9daeaaa926a163e65f6649"
+      },
+      {
+        "id": "8r1k9NLdSvE/000027",
+        "utterance": "000027",
+        "sha256": "e36004c2610824270505ebadec024ed8a560c9f98878aad63339584c1f4a298b"
+      },
+      {
+        "id": "8r1k9NLdSvE/000033",
+        "utterance": "000033",
+        "sha256": "cdc186cc6e8b6cf83100f76ec7259f7769a24bee2e8ccde57c28f0af4c75c8bd"
+      }
+    ],
+    "conditions": [
+      {
+        "name": "area_npz",
+        "interpolation": "area",
+        "transport": "npz"
+      },
+      {
+        "name": "linear_npz",
+        "interpolation": "linear",
+        "transport": "npz"
+      },
+      {
+        "name": "area_mp4",
+        "interpolation": "area",
+        "transport": "mp4"
+      },
+      {
+        "name": "linear_mp4",
+        "interpolation": "linear",
+        "transport": "mp4"
+      }
+    ],
+    "fixed": {
+      "size": 96,
+      "target_fps": null,
+      "crop_scale": 1.7,
+      "alignment": "none",
+      "decoder": "ctc_greedy",
+      "threads": 2
+    },
+    "opencv_version": "5.0.0",
+    "reference_used_in_decoding": false,
+    "audio_used": false,
+    "mp4_settings": "OpenCV mp4v defaults; encode after final resize, retain source FPS",
+    "limitations": [
+      "Only final 224-to-96 resize changes; original face and mouth crop interpolation remains unchanged",
+      "MP4 at 96px/native FPS is an isolated codec probe, not full official training preprocessing",
+      "No adoption decision based on this single-video development set"
+    ]
+  },
+  "plan_sha256": "8e8410d2d5f946dd02f89b46e0becf05547288b067a7b7d647bdba705fc402d5",
+  "metrics": {
+    "area_npz": {
+      "samples": 4,
+      "cer": 0.8275862068965517,
+      "wer": 1.0,
+      "char_errors": 96,
+      "reference_chars": 116,
+      "word_errors": 41,
+      "reference_words": 41,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 13,
+          "reference_chars": 19,
+          "word_errors": 5,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 17,
+          "reference_chars": 20,
+          "word_errors": 6,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 34,
+          "reference_chars": 37,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 32,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        }
+      ]
+    },
+    "linear_npz": {
+      "samples": 4,
+      "cer": 0.8362068965517241,
+      "wer": 1.0,
+      "char_errors": 97,
+      "reference_chars": 116,
+      "word_errors": 41,
+      "reference_words": 41,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 13,
+          "reference_chars": 19,
+          "word_errors": 5,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 17,
+          "reference_chars": 20,
+          "word_errors": 6,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 34,
+          "reference_chars": 37,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 33,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        }
+      ]
+    },
+    "area_mp4": {
+      "samples": 4,
+      "cer": 0.8275862068965517,
+      "wer": 0.975609756097561,
+      "char_errors": 96,
+      "reference_chars": 116,
+      "word_errors": 40,
+      "reference_words": 41,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 12,
+          "reference_chars": 19,
+          "word_errors": 5,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 17,
+          "reference_chars": 20,
+          "word_errors": 5,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 35,
+          "reference_chars": 37,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 32,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        }
+      ]
+    },
+    "linear_mp4": {
+      "samples": 4,
+      "cer": 0.853448275862069,
+      "wer": 0.975609756097561,
+      "char_errors": 99,
+      "reference_chars": 116,
+      "word_errors": 40,
+      "reference_words": 41,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 13,
+          "reference_chars": 19,
+          "word_errors": 5,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 17,
+          "reference_chars": 20,
+          "word_errors": 5,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 35,
+          "reference_chars": 37,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 34,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        }
+      ]
+    }
+  },
+  "paired_vs_area_npz": {
+    "area_npz": {
+      "better": 0,
+      "equal": 4,
+      "worse": 0,
+      "changed_token_sequences": 0
+    },
+    "linear_npz": {
+      "better": 0,
+      "equal": 3,
+      "worse": 1,
+      "changed_token_sequences": 3
+    },
+    "area_mp4": {
+      "better": 1,
+      "equal": 2,
+      "worse": 1,
+      "changed_token_sequences": 4
+    },
+    "linear_mp4": {
+      "better": 0,
+      "equal": 2,
+      "worse": 2,
+      "changed_token_sequences": 4
+    }
+  },
+  "baseline_tokens_equal_previous": true,
+  "coverage": {
+    "planned": 16,
+    "completed": 16,
+    "failed": 0
+  },
+  "provenance": {
+    "area_npz": [
+      {
+        "id": "8r1k9NLdSvE/000006",
+        "input_sha256": "2df5d2bc2ba6b73f36e3a1069a80d43014dc3185e04a2d152acacc384864b95e",
+        "transport": {
+          "frames": 121,
+          "fps": 25.0,
+          "shape": [
+            121,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 0.0,
+          "transport_pixel_mse": 0.0,
+          "transport_pixel_max_abs": 0.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 121,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000018",
+        "input_sha256": "c1795481b8f43bef975bc5677238689e9982f37ebcb597dd45cd5e028cc82902",
+        "transport": {
+          "frames": 153,
+          "fps": 25.0,
+          "shape": [
+            153,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 0.0,
+          "transport_pixel_mse": 0.0,
+          "transport_pixel_max_abs": 0.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 153,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000027",
+        "input_sha256": "0e5379924f8f1a6e510cfb1e7b9c6062d98a6a83df9ca805f8f422d9bcf1bc30",
+        "transport": {
+          "frames": 246,
+          "fps": 25.0,
+          "shape": [
+            246,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 0.0,
+          "transport_pixel_mse": 0.0,
+          "transport_pixel_max_abs": 0.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 246,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000033",
+        "input_sha256": "4524e7112e679bf61f42b5849cd1085e796c11bc8b88006c4d577e238e5dac79",
+        "transport": {
+          "frames": 229,
+          "fps": 25.0,
+          "shape": [
+            229,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 0.0,
+          "transport_pixel_mse": 0.0,
+          "transport_pixel_max_abs": 0.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 229,
+        "input_fps": 25.0,
+        "input_size": 96
+      }
+    ],
+    "linear_npz": [
+      {
+        "id": "8r1k9NLdSvE/000006",
+        "input_sha256": "b4852fc81403ab54fac6b9ecf2c809b66789803b25e7a40f11077bc15afa6e40",
+        "transport": {
+          "frames": 121,
+          "fps": 25.0,
+          "shape": [
+            121,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 0.0,
+          "transport_pixel_mse": 0.0,
+          "transport_pixel_max_abs": 0.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 121,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000018",
+        "input_sha256": "3643b246eea4d3a91c25a198cba6cd40b99cbe352f84bc3b0a82ab83286d8367",
+        "transport": {
+          "frames": 153,
+          "fps": 25.0,
+          "shape": [
+            153,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 0.0,
+          "transport_pixel_mse": 0.0,
+          "transport_pixel_max_abs": 0.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 153,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000027",
+        "input_sha256": "059afbc1bdacae29c0ac6cb2a4790418664785db7bf3eb4773d63e3987eaf34d",
+        "transport": {
+          "frames": 246,
+          "fps": 25.0,
+          "shape": [
+            246,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 0.0,
+          "transport_pixel_mse": 0.0,
+          "transport_pixel_max_abs": 0.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 246,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000033",
+        "input_sha256": "a0e979bc80d59f1c77ba5c6d7fbfd35b551b270bc9bec7d4969a52f24d046f47",
+        "transport": {
+          "frames": 229,
+          "fps": 25.0,
+          "shape": [
+            229,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 0.0,
+          "transport_pixel_mse": 0.0,
+          "transport_pixel_max_abs": 0.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 229,
+        "input_fps": 25.0,
+        "input_size": 96
+      }
+    ],
+    "area_mp4": [
+      {
+        "id": "8r1k9NLdSvE/000006",
+        "input_sha256": "4272e0738f41211cc86b3ecce80aa7a1d656991bc80c270ef20aa6bfbdd1c540",
+        "transport": {
+          "frames": 121,
+          "fps": 25.0,
+          "shape": [
+            121,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 3.027167797088623,
+          "transport_pixel_mse": 14.63421630859375,
+          "transport_pixel_max_abs": 26.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 121,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000018",
+        "input_sha256": "82444f4d3e4ad1af867a9e484e38b376636336bf4a5b7793e3a5985b1188907f",
+        "transport": {
+          "frames": 153,
+          "fps": 25.0,
+          "shape": [
+            153,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 2.8497684001922607,
+          "transport_pixel_mse": 12.853682518005371,
+          "transport_pixel_max_abs": 27.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 153,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000027",
+        "input_sha256": "1b1f228a1383ad28348e567ff593a0ddddf00ff4accc51848067ffb143657a5f",
+        "transport": {
+          "frames": 246,
+          "fps": 25.0,
+          "shape": [
+            246,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 2.8306119441986084,
+          "transport_pixel_mse": 12.57729434967041,
+          "transport_pixel_max_abs": 32.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 246,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000033",
+        "input_sha256": "8d5059f2c9a0ee26a388c01688c623efb7903185d0849d88a383e7ec840251a5",
+        "transport": {
+          "frames": 229,
+          "fps": 25.0,
+          "shape": [
+            229,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 2.8795957565307617,
+          "transport_pixel_mse": 13.031234741210938,
+          "transport_pixel_max_abs": 29.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 229,
+        "input_fps": 25.0,
+        "input_size": 96
+      }
+    ],
+    "linear_mp4": [
+      {
+        "id": "8r1k9NLdSvE/000006",
+        "input_sha256": "1dc0fde92ee3e57b7fcb16b39a312528c2f5edade6bcfb807ede713dead528e5",
+        "transport": {
+          "frames": 121,
+          "fps": 25.0,
+          "shape": [
+            121,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 3.0764353275299072,
+          "transport_pixel_mse": 15.152189254760742,
+          "transport_pixel_max_abs": 28.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 121,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000018",
+        "input_sha256": "1d7a59ec00da4988f1af71a9b09259c7d0fbc1cb3d5800efe429d5cb953ea5c5",
+        "transport": {
+          "frames": 153,
+          "fps": 25.0,
+          "shape": [
+            153,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 2.8946380615234375,
+          "transport_pixel_mse": 13.306843757629395,
+          "transport_pixel_max_abs": 29.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 153,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000027",
+        "input_sha256": "c8acce049ac3e0e0471f30bfd55e028301c7c2d0e6d2c8ad078012a51bd99b71",
+        "transport": {
+          "frames": 246,
+          "fps": 25.0,
+          "shape": [
+            246,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 2.8742403984069824,
+          "transport_pixel_mse": 13.059436798095703,
+          "transport_pixel_max_abs": 29.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 246,
+        "input_fps": 25.0,
+        "input_size": 96
+      },
+      {
+        "id": "8r1k9NLdSvE/000033",
+        "input_sha256": "2c10bbfeba476323783e7fe1ac1e505837204c776f2e49021b1b4d5cd698a80f",
+        "transport": {
+          "frames": 229,
+          "fps": 25.0,
+          "shape": [
+            229,
+            96,
+            96,
+            3
+          ],
+          "transport_pixel_mae": 2.920958995819092,
+          "transport_pixel_mse": 13.513792991638184,
+          "transport_pixel_max_abs": 33.0,
+          "timeline_preserved": true
+        },
+        "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "input_frames": 229,
+        "input_fps": 25.0,
+        "input_size": 96
+      }
+    ]
+  }
+}
