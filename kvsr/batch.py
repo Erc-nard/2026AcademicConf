@@ -1,6 +1,6 @@
-"""Frozen, failure-aware single-video development benchmark.
+"""Frozen, failure-aware single-video train/validation development benchmark.
 
-Run with python -m kvsr.batch --help. Never use this train subset as a test score.
+Run with python -m kvsr.batch --help. Neither development split is a final test score.
 """
 
 import argparse
@@ -79,6 +79,14 @@ def summarize_decisions(references, rows, failures):
     return result
 
 
+def validate_split(record, requested, suite):
+    if (requested not in {'train', 'valid'} or record is None
+            or record['split'] != requested or record['flags']):
+        raise ValueError('Benchmark requires an unflagged video from the explicitly requested train/valid split')
+    if requested == 'valid' and suite != 'baseline':
+        raise ValueError('Validation runner accepts a fixed baseline only')
+
+
 def run(args):
     profiles = CROP_PROFILES if args.suite == "crop" else {k: (*v, 1.7, "none") for k, v in PROFILES.items()}
     if args.suite == "baseline":
@@ -91,8 +99,8 @@ def run(args):
     if args.max_samples is not None and args.max_samples < 1:
         raise ValueError("max-samples must be positive")
     record = next((r for r in read_catalog(args.catalog) if r["video_id"] == args.video_id), None)
-    if record is None or record["split"] != "train" or record["flags"]:
-        raise ValueError("Development benchmark requires an unflagged train video")
+    split = getattr(args, 'split', 'train')
+    validate_split(record, split, args.suite)
     for path in [args.video, args.archive, args.model, args.checkpoint]:
         if not path.is_file():
             raise ValueError(f"Missing input: {path}")
@@ -102,8 +110,8 @@ def run(args):
     if not selected:
         raise ValueError("No utterances satisfy the duration rule")
     root.mkdir(parents=True)
-    plan = dict(scope="single-video train development; not held-out test performance",
-                video_id=args.video_id, split="train", max_seconds=args.max_seconds,
+    plan = dict(scope=f"single-video {split} development check; not final held-out test performance",
+                video_id=args.video_id, split=split, max_seconds=args.max_seconds,
                 total_available=len(items), max_samples=args.max_samples,
                 selection_rule="chronological first N within duration limit" if args.max_samples else "all utterances within duration limit",
                 selected=[dict(id=f"{u.video_id}/{u.index}", utterance=u.index,
@@ -179,6 +187,7 @@ def main():
     for name in ["archive", "catalog", "video", "model", "checkpoint", "repo", "output"]:
         parser.add_argument(f"--{name}", type=Path, required=True)
     parser.add_argument("--video-id", required=True)
+    parser.add_argument("--split", choices=['train', 'valid'], default='train')
     parser.add_argument("--max-seconds", type=float, default=10)
     parser.add_argument("--max-samples", type=int)
     parser.add_argument("--landmark-max-gap", type=int, choices=range(4), default=0)

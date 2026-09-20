@@ -1,0 +1,633 @@
+{
+  "plan": {
+    "sources": [
+      {
+        "video_id": "8r1k9NLdSvE",
+        "references_sha256": "f7f62439c33c27476e5969663c3c936faf01d7c51842b4a6e4bf640e6b2666b1",
+        "predictions_sha256": "0be65417f5e3b89b161671d421018b62d67daf64825e9bc7a2fe88cccd166a70"
+      },
+      {
+        "video_id": "5TaVl7-lU4k",
+        "references_sha256": "00ad3a69141c79b47bff867beeed836e0dd008d934393bdf2e5b329d3fbd0c90",
+        "predictions_sha256": "9c250f38aca6af617093b6532bbc550061c42420d22367c84a65d77baa7363c8"
+      },
+      {
+        "video_id": "D-hzf2x_XO0",
+        "references_sha256": "8bdd936b7137a4562142633f1eff81cdb56267e84487b2e843ec047f5a7097c2",
+        "predictions_sha256": "969bb5f455204ecc87a78e1e5312b6702b22b92fe3a8b8dfa2807a015293f8dd"
+      }
+    ],
+    "scope": "same frozen 16 masked-baseline train development predictions",
+    "rule": "Delete Unicode general-category P characters from references and hypotheses; retain all other scoring rules",
+    "model_rerun": false,
+    "primary_metric_changed": false,
+    "unicode_version": "15.0.0"
+  },
+  "plan_sha256": "8771ceda3a790b3c59e4eaa84b58c352b42078b27511b74da7f22c2463e51330",
+  "overall": {
+    "primary": {
+      "samples": 16,
+      "cer": 0.8979206049149339,
+      "wer": 0.9837837837837838,
+      "char_errors": 475,
+      "reference_chars": 529,
+      "word_errors": 182,
+      "reference_words": 185,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 13,
+          "reference_chars": 19,
+          "word_errors": 5,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 17,
+          "reference_chars": 20,
+          "word_errors": 6,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 34,
+          "reference_chars": 37,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 32,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "5TaVl7-lU4k/000005",
+          "char_errors": 32,
+          "reference_chars": 34,
+          "word_errors": 14,
+          "reference_words": 14
+        },
+        {
+          "id": "5TaVl7-lU4k/000008",
+          "char_errors": 17,
+          "reference_chars": 19,
+          "word_errors": 7,
+          "reference_words": 7
+        },
+        {
+          "id": "5TaVl7-lU4k/000009",
+          "char_errors": 46,
+          "reference_chars": 53,
+          "word_errors": 17,
+          "reference_words": 19
+        },
+        {
+          "id": "5TaVl7-lU4k/000015",
+          "char_errors": 38,
+          "reference_chars": 39,
+          "word_errors": 14,
+          "reference_words": 14
+        },
+        {
+          "id": "5TaVl7-lU4k/000016",
+          "char_errors": 57,
+          "reference_chars": 58,
+          "word_errors": 21,
+          "reference_words": 21
+        },
+        {
+          "id": "5TaVl7-lU4k/000019",
+          "char_errors": 49,
+          "reference_chars": 55,
+          "word_errors": 16,
+          "reference_words": 16
+        },
+        {
+          "id": "D-hzf2x_XO0/000030",
+          "char_errors": 29,
+          "reference_chars": 32,
+          "word_errors": 12,
+          "reference_words": 12
+        },
+        {
+          "id": "D-hzf2x_XO0/000031",
+          "char_errors": 13,
+          "reference_chars": 13,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "D-hzf2x_XO0/000032",
+          "char_errors": 12,
+          "reference_chars": 15,
+          "word_errors": 8,
+          "reference_words": 8
+        },
+        {
+          "id": "D-hzf2x_XO0/000034",
+          "char_errors": 4,
+          "reference_chars": 4,
+          "word_errors": 2,
+          "reference_words": 2
+        },
+        {
+          "id": "D-hzf2x_XO0/000052",
+          "char_errors": 44,
+          "reference_chars": 46,
+          "word_errors": 13,
+          "reference_words": 13
+        },
+        {
+          "id": "D-hzf2x_XO0/000062",
+          "char_errors": 38,
+          "reference_chars": 45,
+          "word_errors": 14,
+          "reference_words": 15
+        }
+      ]
+    },
+    "punctuation_removed_auxiliary": {
+      "samples": 16,
+      "cer": 0.89453125,
+      "wer": 0.9837837837837838,
+      "char_errors": 458,
+      "reference_chars": 512,
+      "word_errors": 182,
+      "reference_words": 185,
+      "normalization": "NFC; delete Unicode category P characters on both sides; collapse whitespace; CER excludes whitespace",
+      "details": [
+        {
+          "id": "8r1k9NLdSvE/000006",
+          "char_errors": 12,
+          "reference_chars": 18,
+          "word_errors": 5,
+          "reference_words": 6
+        },
+        {
+          "id": "8r1k9NLdSvE/000018",
+          "char_errors": 16,
+          "reference_chars": 19,
+          "word_errors": 6,
+          "reference_words": 5
+        },
+        {
+          "id": "8r1k9NLdSvE/000027",
+          "char_errors": 33,
+          "reference_chars": 36,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "8r1k9NLdSvE/000033",
+          "char_errors": 32,
+          "reference_chars": 40,
+          "word_errors": 15,
+          "reference_words": 15
+        },
+        {
+          "id": "5TaVl7-lU4k/000005",
+          "char_errors": 31,
+          "reference_chars": 33,
+          "word_errors": 14,
+          "reference_words": 14
+        },
+        {
+          "id": "5TaVl7-lU4k/000008",
+          "char_errors": 17,
+          "reference_chars": 19,
+          "word_errors": 7,
+          "reference_words": 7
+        },
+        {
+          "id": "5TaVl7-lU4k/000009",
+          "char_errors": 44,
+          "reference_chars": 51,
+          "word_errors": 17,
+          "reference_words": 19
+        },
+        {
+          "id": "5TaVl7-lU4k/000015",
+          "char_errors": 38,
+          "reference_chars": 39,
+          "word_errors": 14,
+          "reference_words": 14
+        },
+        {
+          "id": "5TaVl7-lU4k/000016",
+          "char_errors": 54,
+          "reference_chars": 55,
+          "word_errors": 21,
+          "reference_words": 21
+        },
+        {
+          "id": "5TaVl7-lU4k/000019",
+          "char_errors": 48,
+          "reference_chars": 54,
+          "word_errors": 16,
+          "reference_words": 16
+        },
+        {
+          "id": "D-hzf2x_XO0/000030",
+          "char_errors": 27,
+          "reference_chars": 30,
+          "word_errors": 12,
+          "reference_words": 12
+        },
+        {
+          "id": "D-hzf2x_XO0/000031",
+          "char_errors": 12,
+          "reference_chars": 12,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "D-hzf2x_XO0/000032",
+          "char_errors": 12,
+          "reference_chars": 15,
+          "word_errors": 8,
+          "reference_words": 8
+        },
+        {
+          "id": "D-hzf2x_XO0/000034",
+          "char_errors": 4,
+          "reference_chars": 4,
+          "word_errors": 2,
+          "reference_words": 2
+        },
+        {
+          "id": "D-hzf2x_XO0/000052",
+          "char_errors": 41,
+          "reference_chars": 43,
+          "word_errors": 13,
+          "reference_words": 13
+        },
+        {
+          "id": "D-hzf2x_XO0/000062",
+          "char_errors": 37,
+          "reference_chars": 44,
+          "word_errors": 14,
+          "reference_words": 15
+        }
+      ]
+    },
+    "removed_reference_characters": 17,
+    "removed_hypothesis_characters": 0,
+    "reference_punctuation_categories": {
+      "Po": 17
+    },
+    "hypothesis_punctuation_categories": {},
+    "reference_characters_requiring_at_least_one_edit_if_hypotheses_have_no_punctuation": 17,
+    "limitations": [
+      "Auxiliary diagnostic only; primary scoring and predictions remain unchanged",
+      "Changing the reference denominator means CER differences are not model error reductions",
+      "Not an exact reproduction of upstream transcription refinement: digits, percent and alternative readings are untouched",
+      "Removing punctuation can change the best edit alignment; error-count difference is not an attribution to individual errors"
+    ]
+  },
+  "per_video": {
+    "8r1k9NLdSvE": {
+      "primary": {
+        "samples": 4,
+        "cer": 0.8275862068965517,
+        "wer": 1.0,
+        "char_errors": 96,
+        "reference_chars": 116,
+        "word_errors": 41,
+        "reference_words": 41,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 13,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "punctuation_removed_auxiliary": {
+        "samples": 4,
+        "cer": 0.8230088495575221,
+        "wer": 1.0,
+        "char_errors": 93,
+        "reference_chars": 113,
+        "word_errors": 41,
+        "reference_words": 41,
+        "normalization": "NFC; delete Unicode category P characters on both sides; collapse whitespace; CER excludes whitespace",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 12,
+            "reference_chars": 18,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 16,
+            "reference_chars": 19,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 33,
+            "reference_chars": 36,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          }
+        ]
+      },
+      "removed_reference_characters": 3,
+      "removed_hypothesis_characters": 0,
+      "reference_punctuation_categories": {
+        "Po": 3
+      },
+      "hypothesis_punctuation_categories": {},
+      "reference_characters_requiring_at_least_one_edit_if_hypotheses_have_no_punctuation": 3,
+      "limitations": [
+        "Auxiliary diagnostic only; primary scoring and predictions remain unchanged",
+        "Changing the reference denominator means CER differences are not model error reductions",
+        "Not an exact reproduction of upstream transcription refinement: digits, percent and alternative readings are untouched",
+        "Removing punctuation can change the best edit alignment; error-count difference is not an attribution to individual errors"
+      ]
+    },
+    "5TaVl7-lU4k": {
+      "primary": {
+        "samples": 6,
+        "cer": 0.9263565891472868,
+        "wer": 0.978021978021978,
+        "char_errors": 239,
+        "reference_chars": 258,
+        "word_errors": 89,
+        "reference_words": 91,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 17,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 46,
+            "reference_chars": 53,
+            "word_errors": 17,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 38,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 57,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 49,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          }
+        ]
+      },
+      "punctuation_removed_auxiliary": {
+        "samples": 6,
+        "cer": 0.9243027888446215,
+        "wer": 0.978021978021978,
+        "char_errors": 232,
+        "reference_chars": 251,
+        "word_errors": 89,
+        "reference_words": 91,
+        "normalization": "NFC; delete Unicode category P characters on both sides; collapse whitespace; CER excludes whitespace",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 31,
+            "reference_chars": 33,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 17,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 44,
+            "reference_chars": 51,
+            "word_errors": 17,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 38,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 54,
+            "reference_chars": 55,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 48,
+            "reference_chars": 54,
+            "word_errors": 16,
+            "reference_words": 16
+          }
+        ]
+      },
+      "removed_reference_characters": 7,
+      "removed_hypothesis_characters": 0,
+      "reference_punctuation_categories": {
+        "Po": 7
+      },
+      "hypothesis_punctuation_categories": {},
+      "reference_characters_requiring_at_least_one_edit_if_hypotheses_have_no_punctuation": 7,
+      "limitations": [
+        "Auxiliary diagnostic only; primary scoring and predictions remain unchanged",
+        "Changing the reference denominator means CER differences are not model error reductions",
+        "Not an exact reproduction of upstream transcription refinement: digits, percent and alternative readings are untouched",
+        "Removing punctuation can change the best edit alignment; error-count difference is not an attribution to individual errors"
+      ]
+    },
+    "D-hzf2x_XO0": {
+      "primary": {
+        "samples": 6,
+        "cer": 0.9032258064516129,
+        "wer": 0.9811320754716981,
+        "char_errors": 140,
+        "reference_chars": 155,
+        "word_errors": 52,
+        "reference_words": 53,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 29,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 12,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 38,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ]
+      },
+      "punctuation_removed_auxiliary": {
+        "samples": 6,
+        "cer": 0.8986486486486487,
+        "wer": 0.9811320754716981,
+        "char_errors": 133,
+        "reference_chars": 148,
+        "word_errors": 52,
+        "reference_words": 53,
+        "normalization": "NFC; delete Unicode category P characters on both sides; collapse whitespace; CER excludes whitespace",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 27,
+            "reference_chars": 30,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 12,
+            "reference_chars": 12,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 12,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 41,
+            "reference_chars": 43,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 37,
+            "reference_chars": 44,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ]
+      },
+      "removed_reference_characters": 7,
+      "removed_hypothesis_characters": 0,
+      "reference_punctuation_categories": {
+        "Po": 7
+      },
+      "hypothesis_punctuation_categories": {},
+      "reference_characters_requiring_at_least_one_edit_if_hypotheses_have_no_punctuation": 7,
+      "limitations": [
+        "Auxiliary diagnostic only; primary scoring and predictions remain unchanged",
+        "Changing the reference denominator means CER differences are not model error reductions",
+        "Not an exact reproduction of upstream transcription refinement: digits, percent and alternative readings are untouched",
+        "Removing punctuation can change the best edit alignment; error-count difference is not an attribution to individual errors"
+      ]
+    }
+  }
+}

@@ -1,11 +1,20 @@
 import importlib.util
 import unittest
 
-from kvsr.batch import summarize, paired_comparisons
+from kvsr.batch import summarize, paired_comparisons, validate_split
 from kvsr.olkavs import prepare_frames, chunk_frontend
 
 
 class CoverageTests(unittest.TestCase):
+    def test_validation_requires_explicit_matching_split_and_fixed_baseline(self):
+        valid = dict(split='valid',flags=[])
+        validate_split(valid,'valid','baseline')
+        validate_split(dict(split='train',flags=[]),'train','crop')
+        for record, split, suite in [(valid,'train','baseline'), (valid,'valid','crop'),
+            (dict(split='test',flags=[]),'test','baseline'), (dict(split='valid',flags=['flag']),'valid','baseline')]:
+            with self.assertRaises(ValueError):
+                validate_split(record,split,suite)
+
     def test_pairwise_matching_survives_an_all_failed_condition(self):
         refs = [dict(id="a", reference="가나"), dict(id="b", reference="다라")]
         predictions = dict(first=[dict(id="a", hypothesis="가나"), dict(id="b", hypothesis="다라")],

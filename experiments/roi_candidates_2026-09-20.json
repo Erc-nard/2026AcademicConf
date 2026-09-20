@@ -1,0 +1,717 @@
+{
+  "source_summary_sha256": "7f09728db16cd3b9ea0a8b06deb8d704a7ce7366330a5dff06629c6fa6b45bbb",
+  "input_hashes": [
+    {
+      "id": "8r1k9NLdSvE/000006",
+      "condition": "control",
+      "prediction_sha256": "2ee9f527cc013c945acae92770556077ce9c3747aea8211752021d8612015519"
+    },
+    {
+      "id": "8r1k9NLdSvE/000006",
+      "condition": "face_direct",
+      "prediction_sha256": "3cf76dbc901bd0804f1efb58a128298fe996dd7816f482aecb4223cf58e75eb5"
+    },
+    {
+      "id": "8r1k9NLdSvE/000006",
+      "condition": "source_direct",
+      "prediction_sha256": "52094d3ffe169756f05aa3291baa1bee8f7671988cbc14143e186e1982ad7b6f"
+    },
+    {
+      "id": "8r1k9NLdSvE/000018",
+      "condition": "control",
+      "prediction_sha256": "684efe4009a6300d7629ab583008c54ad958f195da2abbe09c4868f0854273e3"
+    },
+    {
+      "id": "8r1k9NLdSvE/000018",
+      "condition": "face_direct",
+      "prediction_sha256": "7c6f461c2a051461007f5633cd2bc5c27f91555776a94b5c08d97efaec97ab4e"
+    },
+    {
+      "id": "8r1k9NLdSvE/000018",
+      "condition": "source_direct",
+      "prediction_sha256": "38113cf7258c9938903fd3b3f042712254b4985806b2e4c4e4e9cf4a2de8e50e"
+    },
+    {
+      "id": "8r1k9NLdSvE/000027",
+      "condition": "control",
+      "prediction_sha256": "d6024ed0f18ec7c36b9521ea31bd9d628c88c0bb123bf9f638d40018761ebb83"
+    },
+    {
+      "id": "8r1k9NLdSvE/000027",
+      "condition": "face_direct",
+      "prediction_sha256": "aa3c12ea21739df7dda5bef437bdff364b944257d6150812304e254cf9641736"
+    },
+    {
+      "id": "8r1k9NLdSvE/000027",
+      "condition": "source_direct",
+      "prediction_sha256": "5a60dd60a0851cace28519d59df302e734e5860b5484d66173ba18cdeb33215a"
+    },
+    {
+      "id": "8r1k9NLdSvE/000033",
+      "condition": "control",
+      "prediction_sha256": "845120a16ba27109ef19adeda27c92cb65afe9e5ccb3809a0b97db5d918efabe"
+    },
+    {
+      "id": "8r1k9NLdSvE/000033",
+      "condition": "face_direct",
+      "prediction_sha256": "af58e55794223af14a74275408f494b6a0e72d1f7cd71e30979a6f61c58fb377"
+    },
+    {
+      "id": "8r1k9NLdSvE/000033",
+      "condition": "source_direct",
+      "prediction_sha256": "6ee7c46879579331f006769b04e18898032dddeddf886135357f11133e7ef502"
+    },
+    {
+      "id": "5TaVl7-lU4k/000005",
+      "condition": "control",
+      "prediction_sha256": "cb09df8e46d7e9779bc70d12e98129bf130c86a76d9aa6eb587185ca51740ac7"
+    },
+    {
+      "id": "5TaVl7-lU4k/000005",
+      "condition": "face_direct",
+      "prediction_sha256": "8914b9761e71934f5124a0b2638c9d99d003b8f9288b4da942409c01d7b81acd"
+    },
+    {
+      "id": "5TaVl7-lU4k/000005",
+      "condition": "source_direct",
+      "prediction_sha256": "e5b34c17d00396f3b9dc6bed910a3c4cb4bcf819ade293912bb07d6a4ecd9f58"
+    },
+    {
+      "id": "5TaVl7-lU4k/000008",
+      "condition": "control",
+      "prediction_sha256": "aa76bb729c233e164af25a6984bffeac6f85edd3160dc899144b95f8702ca222"
+    },
+    {
+      "id": "5TaVl7-lU4k/000008",
+      "condition": "face_direct",
+      "prediction_sha256": "ae65a8dc247357550b5a5998dfc229644f59f97fbfc395b4fc8860d50001d11e"
+    },
+    {
+      "id": "5TaVl7-lU4k/000008",
+      "condition": "source_direct",
+      "prediction_sha256": "6e567660a88bfb9260ff641e8dea8ed0b10733b33d6a96e188dc803ca63509b9"
+    },
+    {
+      "id": "5TaVl7-lU4k/000009",
+      "condition": "control",
+      "prediction_sha256": "6fc3850661b287994e2195e045a0c8ff2574b99c58cbcae78cce772f28f4382a"
+    },
+    {
+      "id": "5TaVl7-lU4k/000009",
+      "condition": "face_direct",
+      "prediction_sha256": "11aa26b13946d3d17aa4dab990067803089b58a58df229769e3e747b7d5e05c0"
+    },
+    {
+      "id": "5TaVl7-lU4k/000009",
+      "condition": "source_direct",
+      "prediction_sha256": "e33b41f201394728e2bbc1d124de6101402c86d02628bcccd3f279339c00d95a"
+    },
+    {
+      "id": "5TaVl7-lU4k/000015",
+      "condition": "control",
+      "prediction_sha256": "7dd138b002f86cadc5a09ea99e715413cc3f1736bf8a98e0bad1ba3c718e0cf6"
+    },
+    {
+      "id": "5TaVl7-lU4k/000015",
+      "condition": "face_direct",
+      "prediction_sha256": "c39b912517945476396a50c74914d75c5be3f57bc81686739a9186c83d4ee124"
+    },
+    {
+      "id": "5TaVl7-lU4k/000015",
+      "condition": "source_direct",
+      "prediction_sha256": "a22c54f0336c2844e5c70a898d020cc4763913fa4cfb6b9929a40dcca919daf7"
+    },
+    {
+      "id": "5TaVl7-lU4k/000016",
+      "condition": "control",
+      "prediction_sha256": "62446d2b947bf537fa1f4b0df5bcacda3675dd253e22acbf3eb5b418cc615cf7"
+    },
+    {
+      "id": "5TaVl7-lU4k/000016",
+      "condition": "face_direct",
+      "prediction_sha256": "fb93b6dbf58cc9dea658afcfc9fe0b29af6bf312da44bc8b0130d29a4577c572"
+    },
+    {
+      "id": "5TaVl7-lU4k/000016",
+      "condition": "source_direct",
+      "prediction_sha256": "91f749daf2e83723eb7a925e90f01d0a92c94d5a02c70060503d13fc5f92c27e"
+    },
+    {
+      "id": "5TaVl7-lU4k/000019",
+      "condition": "control",
+      "prediction_sha256": "83b2b71ae44258c09095eb7a61cdae30ffb38068dd7d6bee290ac804d30ca0e3"
+    },
+    {
+      "id": "5TaVl7-lU4k/000019",
+      "condition": "face_direct",
+      "prediction_sha256": "823b343fcdfec9c61b32f6024d95eb4c4bc8641410fbfcdec8764e1dd9c52e1c"
+    },
+    {
+      "id": "5TaVl7-lU4k/000019",
+      "condition": "source_direct",
+      "prediction_sha256": "8996563556c38281b4a58519199b36b8aa8ff9ba134ef4dc42e2f6285cdc26f9"
+    },
+    {
+      "id": "D-hzf2x_XO0/000030",
+      "condition": "control",
+      "prediction_sha256": "730c1e15157ca982e4a547f8d4ac21d10d44fbe492d6846ca536b48a05bd797b"
+    },
+    {
+      "id": "D-hzf2x_XO0/000030",
+      "condition": "face_direct",
+      "prediction_sha256": "d3a461381a9e7b99ca011197d1a32e887dccc355863a3822f317107a223beb47"
+    },
+    {
+      "id": "D-hzf2x_XO0/000030",
+      "condition": "source_direct",
+      "prediction_sha256": "2f650b568e3052ae8a8d9f224e6a98ef7e64531826089270a03112aea14bf66f"
+    },
+    {
+      "id": "D-hzf2x_XO0/000031",
+      "condition": "control",
+      "prediction_sha256": "3ed3d42868dea5cb53f74a695f4daf4351ba341199796b1d590a7562d175099c"
+    },
+    {
+      "id": "D-hzf2x_XO0/000031",
+      "condition": "face_direct",
+      "prediction_sha256": "3ed3d42868dea5cb53f74a695f4daf4351ba341199796b1d590a7562d175099c"
+    },
+    {
+      "id": "D-hzf2x_XO0/000031",
+      "condition": "source_direct",
+      "prediction_sha256": "3ed3d42868dea5cb53f74a695f4daf4351ba341199796b1d590a7562d175099c"
+    },
+    {
+      "id": "D-hzf2x_XO0/000032",
+      "condition": "control",
+      "prediction_sha256": "080a8e428ac41e9d20e4d47aa9ace33d11fc5d295f03e6523701e1924ee08237"
+    },
+    {
+      "id": "D-hzf2x_XO0/000032",
+      "condition": "face_direct",
+      "prediction_sha256": "9367cb1991a344825831b9fa9b3dc812c40d3aaa44ca72ab920981cccb362487"
+    },
+    {
+      "id": "D-hzf2x_XO0/000032",
+      "condition": "source_direct",
+      "prediction_sha256": "02910fb238bed11b9fe1aa8a824c7db6bd4946af4de1d7a27eeae074310c830b"
+    },
+    {
+      "id": "D-hzf2x_XO0/000034",
+      "condition": "control",
+      "prediction_sha256": "9e022bfd933554ceefcda35672168c5de305f3bdb01a71b10904536fa657f03f"
+    },
+    {
+      "id": "D-hzf2x_XO0/000034",
+      "condition": "face_direct",
+      "prediction_sha256": "05d18b97447b20b46da61ce4b80624102e94be5ef26fa3d40522d0f30842c680"
+    },
+    {
+      "id": "D-hzf2x_XO0/000034",
+      "condition": "source_direct",
+      "prediction_sha256": "28403820d3965edc0044af5603fd5f7573d47b8509311fbada66227f297a3a32"
+    },
+    {
+      "id": "D-hzf2x_XO0/000052",
+      "condition": "control",
+      "prediction_sha256": "6b5f8cd8c497f02027d16856e0858a4744854f8f3bb21a0c3647213eecf549d7"
+    },
+    {
+      "id": "D-hzf2x_XO0/000052",
+      "condition": "face_direct",
+      "prediction_sha256": "30d339be9ac0177e58597a0e68d3769fd2475b6112ac138d6e360fa21e5f9865"
+    },
+    {
+      "id": "D-hzf2x_XO0/000052",
+      "condition": "source_direct",
+      "prediction_sha256": "f30d2acd65bf5ca731edfede001aa9657a6945e7636246eba93362a912c34a51"
+    },
+    {
+      "id": "D-hzf2x_XO0/000062",
+      "condition": "control",
+      "prediction_sha256": "08307536b730c2bb63a07d1905df3bbe3764edd9271a51741aa0b1c7e7e3904d"
+    },
+    {
+      "id": "D-hzf2x_XO0/000062",
+      "condition": "face_direct",
+      "prediction_sha256": "bf7642b16cd0851f62d91de1fb45481669941e5e2ca8eacbb1e4535548701776"
+    },
+    {
+      "id": "D-hzf2x_XO0/000062",
+      "condition": "source_direct",
+      "prediction_sha256": "228b8c231a95c8da0e19aa744b50e710b6c127c9062d80a4385a278973231554"
+    }
+  ],
+  "reference_hashes": [
+    {
+      "video_id": "8r1k9NLdSvE",
+      "sha256": "f7f62439c33c27476e5969663c3c936faf01d7c51842b4a6e4bf640e6b2666b1"
+    },
+    {
+      "video_id": "5TaVl7-lU4k",
+      "sha256": "00ad3a69141c79b47bff867beeed836e0dd008d934393bdf2e5b329d3fbd0c90"
+    },
+    {
+      "video_id": "D-hzf2x_XO0",
+      "sha256": "8bdd936b7137a4562142633f1eff81cdb56267e84487b2e843ec047f5a7097c2"
+    }
+  ],
+  "condition_order": [
+    "control",
+    "face_direct",
+    "source_direct"
+  ],
+  "report": {
+    "oracle_by_k": {
+      "1": {
+        "samples": 16,
+        "cer": 0.8979206049149339,
+        "wer": 0.9837837837837838,
+        "char_errors": 475,
+        "reference_chars": 529,
+        "word_errors": 182,
+        "reference_words": 185,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 13,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 17,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 46,
+            "reference_chars": 53,
+            "word_errors": 17,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 38,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 57,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 49,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 29,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 12,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 38,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ],
+        "selected_ranks": {
+          "8r1k9NLdSvE/000006": 1,
+          "8r1k9NLdSvE/000018": 1,
+          "8r1k9NLdSvE/000027": 1,
+          "8r1k9NLdSvE/000033": 1,
+          "5TaVl7-lU4k/000005": 1,
+          "5TaVl7-lU4k/000008": 1,
+          "5TaVl7-lU4k/000009": 1,
+          "5TaVl7-lU4k/000015": 1,
+          "5TaVl7-lU4k/000016": 1,
+          "5TaVl7-lU4k/000019": 1,
+          "D-hzf2x_XO0/000030": 1,
+          "D-hzf2x_XO0/000031": 1,
+          "D-hzf2x_XO0/000032": 1,
+          "D-hzf2x_XO0/000034": 1,
+          "D-hzf2x_XO0/000052": 1,
+          "D-hzf2x_XO0/000062": 1
+        }
+      },
+      "2": {
+        "samples": 16,
+        "cer": 0.8979206049149339,
+        "wer": 0.9837837837837838,
+        "char_errors": 475,
+        "reference_chars": 529,
+        "word_errors": 182,
+        "reference_words": 185,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 13,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 17,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 46,
+            "reference_chars": 53,
+            "word_errors": 17,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 38,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 57,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 49,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 29,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 12,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 38,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ],
+        "selected_ranks": {
+          "8r1k9NLdSvE/000006": 1,
+          "8r1k9NLdSvE/000018": 1,
+          "8r1k9NLdSvE/000027": 1,
+          "8r1k9NLdSvE/000033": 1,
+          "5TaVl7-lU4k/000005": 1,
+          "5TaVl7-lU4k/000008": 1,
+          "5TaVl7-lU4k/000009": 1,
+          "5TaVl7-lU4k/000015": 1,
+          "5TaVl7-lU4k/000016": 1,
+          "5TaVl7-lU4k/000019": 1,
+          "D-hzf2x_XO0/000030": 1,
+          "D-hzf2x_XO0/000031": 1,
+          "D-hzf2x_XO0/000032": 1,
+          "D-hzf2x_XO0/000034": 1,
+          "D-hzf2x_XO0/000052": 1,
+          "D-hzf2x_XO0/000062": 1
+        }
+      },
+      "3": {
+        "samples": 16,
+        "cer": 0.8922495274102079,
+        "wer": 0.9837837837837838,
+        "char_errors": 472,
+        "reference_chars": 529,
+        "word_errors": 182,
+        "reference_words": 185,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 13,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 32,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 16,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 46,
+            "reference_chars": 53,
+            "word_errors": 17,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 38,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 57,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 49,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 29,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 12,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 38,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ],
+        "selected_ranks": {
+          "8r1k9NLdSvE/000006": 1,
+          "8r1k9NLdSvE/000018": 1,
+          "8r1k9NLdSvE/000027": 3,
+          "8r1k9NLdSvE/000033": 1,
+          "5TaVl7-lU4k/000005": 1,
+          "5TaVl7-lU4k/000008": 3,
+          "5TaVl7-lU4k/000009": 1,
+          "5TaVl7-lU4k/000015": 1,
+          "5TaVl7-lU4k/000016": 1,
+          "5TaVl7-lU4k/000019": 1,
+          "D-hzf2x_XO0/000030": 1,
+          "D-hzf2x_XO0/000031": 1,
+          "D-hzf2x_XO0/000032": 1,
+          "D-hzf2x_XO0/000034": 1,
+          "D-hzf2x_XO0/000052": 1,
+          "D-hzf2x_XO0/000062": 1
+        }
+      }
+    },
+    "candidate_counts": {
+      "8r1k9NLdSvE/000006": 2,
+      "8r1k9NLdSvE/000018": 2,
+      "8r1k9NLdSvE/000027": 3,
+      "8r1k9NLdSvE/000033": 3,
+      "5TaVl7-lU4k/000005": 3,
+      "5TaVl7-lU4k/000008": 3,
+      "5TaVl7-lU4k/000009": 2,
+      "5TaVl7-lU4k/000015": 3,
+      "5TaVl7-lU4k/000016": 3,
+      "5TaVl7-lU4k/000019": 2,
+      "D-hzf2x_XO0/000030": 2,
+      "D-hzf2x_XO0/000031": 1,
+      "D-hzf2x_XO0/000032": 2,
+      "D-hzf2x_XO0/000034": 2,
+      "D-hzf2x_XO0/000052": 3,
+      "D-hzf2x_XO0/000062": 3
+    },
+    "interpretation": "Reference-assisted CER oracle; not deployable accuracy. WER uses CER-selected candidate."
+  },
+  "scope": "same 16 train development utterances, including one all-ROI-missing abstention",
+  "duplicate_policy": "deduplicate identical rendered hypotheses, preserve fixed condition order",
+  "inference_rerun": false,
+  "interpretation": "Uses ground truth to select the least-CER whole-utterance candidate; not available at deployment"
+}

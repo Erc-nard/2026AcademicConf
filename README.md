@@ -3,9 +3,12 @@
 **최종 갱신: 2026-09-20.** 이 README는 실제 실행 결과를 정리한 보고서다.
 초기 아이디어와 예정 실험은 [최초 연구계획](docs/RESEARCH_PLAN.md)에 별도로 보존했다.
 
-**최신 실험:** 같은 네 발화에서 마지막 리사이즈와 MP4 저장을 분리해 16회 추론했다.
-기존 AREA+NPZ CER 82.76%, LINEAR+NPZ 83.62%, AREA+MP4 82.76%, LINEAR+MP4 85.34%다.
-개선 근거가 없어 기본 설정을 유지했다. 아래 9절에 고정 조건과 한계를 기록했다.
+**최신 진행:** 입 영역 추출 3조건×16발화, 문장부호 평가 점검, 새 validation 영상 검증,
+CPU 출력층 적응까지 완료했다. 세 전처리 중 기존 조건이 가장 낮은 CER 89.79%를 유지했다.
+새 validation에서 기본 CER은 95.71%였고, 출력층만 학습한 뒤에는 97.14%로 나빠졌다.
+학습 자료의 점수 개선을 일반화 성능으로 해석하지 않으며 기본 모델을 유지한다. 상세 내용은 10–14절이다.
+
+**앞선 실험:** 마지막 리사이즈와 MP4 저장의 16회 비교에서도 개선을 확인하지 못했다(9절).
 
 **직전 검증:** 공식 OLKAVS 입력·모델 경로와 현재 구현을 비교했다. 네 발화의 첫 53프레임에서
 정규화, 분할 frontend, 최종 CTC logits가 모두 정확히 일치했고, 한글 11,172음절의 변환도 통과했다.
@@ -37,6 +40,12 @@
   실패를 빈 출력으로 포함한 전체 CER은 **93.01%**다.
 - 9/20의 실험적 `mask` 정책은 **15개 추론 + 1개 명시적 보류**로 처리했다.
   보류를 포함한 CER은 **89.79%**다. 기존 성공 11건의 ROI 픽셀과 예측 토큰은 모두 같았다.
+- 중간 리사이즈 생략은 CER 89.98%, 원 영상 직접 추출은 90.55%였다.
+  세 전처리 후보를 정답으로 선택한 oracle도 89.22%여서 후보 선택의 개선 여지가 작았다.
+- 공식 valid에서 새로 확보한 한 영상의 6개 발화는 CER 95.71%였다.
+  사전 선택한 다른 영상은 비공개여서 6개 발화를 자료 접근 실패로 따로 집계했다.
+- CTC 출력층 18,504개 파라미터만 200회 학습했다. train CER은 70.89%로 줄었으나
+  available validation CER은 97.14%로 증가했다. 이 적응 가중치를 채택하지 않았다.
 
 모든 수치는 개발용 표본의 결과다. held-out test, 문맥 보정, 신뢰도 보정, 사용자 실험은 아직 수행하지 않았다.
 
@@ -51,7 +60,11 @@
 | 짧은 랜드마크 공백 보간 | 새 영상의 같은 12개 발화 | 별도 조건 비교 완료 |
 | 실패 원인 진단·경계 연장 | 실패 5건 진단 + 같은 12발화 재검증 | 기본값 유지 |
 | ROI 미가용 표시·부분 영상 추론 | 같은 16발화 재실행 | 15개 추론, 1개 보류 |
-| 자동 검증 | 로컬 전체 테스트 49개 | 통과 |
+| 입 영역 재추출 비교 | 3조건×16발화, 48개 출력 | 조건별 15개 추론·1개 보류 |
+| 문장부호·전처리 후보 oracle | 기존 16발화 | 보조 진단 완료 |
+| 새 validation | 사전 선택 2영상×6발화 | 6개 추론, 6개 자료 접근 실패 |
+| CPU 출력층 적응 | 15개 train 발화, 고정 200 update | validation 악화로 미채택 |
+| 자동 검증 | 로컬 전체 테스트 68개 | 통과 |
 | 보고서 | 이 README와 공개 수치 JSON | 작성 완료 |
 
 ## 데이터와 재현 조건
@@ -387,14 +400,144 @@ MP4는 OpenCV `mp4v` 기본 인코더 설정을 사용했고, 네 발화 모두 
 **결정:** AREA+NPZ 기본 설정을 유지한다. 마지막 축소나 이 MP4 저장 단계를 바꾸는 것만으로
 높은 CER이 해결된다는 근거를 얻지 못했다. 한 영상의 네 발화에 대한 탐색 결과이며 통계적 우월성 주장이 아니다.
 처음 얼굴·입 영역을 자를 때의 보간 방식은 그대로다. MP4도 96×96·25fps에서 적용했으므로
-공식 학습 입력 전체를 재현한 것이 아니다. 다음 비교는 원 영상에서 같은 입 좌표를 사용해 직접 96px로
-추출하는 방식과 현재 224px 중간 ROI를 거치는 방식의 차이를 분리하는 것이다.
+공식 학습 입력 전체를 재현한 것이 아니다. 원 영상 직접 추출과 중간 입 ROI 생략 비교는 아래 10절에서 진행했다.
 
 공개 기록에는 수치·ID·해시만 포함한다. 원 영상, 정답, 예측 문장, 재인코딩 영상은 로컬에만 남겼다.
 재실행은 기존 네 발화 crop과 체크포인트가 준비된 환경에서 새 출력 폴더를 지정한다.
 
 ```powershell
 .venv/Scripts/python.exe -m kvsr.transport_experiment --source results/crop_2026-09-17 --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/transport_repeat
+```
+
+## 10. 고정 입 좌표의 재추출 비교와 후보 oracle (9/20)
+
+앞서 mask 정책으로 처리한 train 3영상·16발화를 그대로 사용했다. 세 조건, 원 영상·체크포인트·좌표
+해시를 실행 전에 고정했다. 랜드마크를 다시 검출하지 않고 저장된 좌표와 미가용 표시를 재사용했다.
+
+| 조건 | 영상 처리 경로 | 글자 오류 / 529 | CER | 기준보다 개선/동일/악화한 발화 |
+|---|---|---:|---:|---|
+| control | 원 영상 → 얼굴 224 → 입 224 → 입 96 | 475 | 89.79% | 기준 |
+| face_direct | 원 영상 → 얼굴 224 → 입 96 | 476 | 89.98% | 0 / 15 / 1 |
+| source_direct | 원 영상의 대응 입 영역 → 입 96 | 479 | 90.55% | 2 / 9 / 5 |
+
+각 조건에서 15개는 실제 추론하고 입 ROI가 전혀 없는 같은 1개는 빈 자막으로 보류했다.
+따라서 **48개 출력 = 45회 실제 추론 + 3개 보류**다. 모든 조건의 WER은 98.38%였다.
+원 영상을 다시 디코딩하여 재구성한 control의 224px 입 픽셀은 기존 16개 입력과 모두 같았고,
+96px 추론 토큰도 기존 결과와 모두 같았다. 미가용 프레임을 삭제하거나 시간을 바꾸지 않았다.
+
+| 영상 | control CER | face_direct CER | source_direct CER |
+|---|---:|---:|---:|
+| `8r1k9NLdSvE` | 82.76% | 82.76% | 83.62% |
+| `5TaVl7-lU4k` | 92.64% | 92.64% | 93.02% |
+| `D-hzf2x_XO0` | 90.32% | 90.97% | 91.61% |
+
+source_direct는 얼굴 224px 좌표계의 입 사각형을 원 영상 얼굴 상자로 역변환하고,
+왼쪽·위는 floor, 오른쪽·아래는 ceil로 원 픽셀 경계에 맞췄다. 최대 경계 이동은 0.996 원본 픽셀이다.
+따라서 원 영상 직접 추출에는 리사이즈 횟수뿐 아니라 이 작은 경계 차이도 포함된다.
+입 위치가 실제로 정확한지 수작업 정답으로 보증하는 실험은 아니다.
+
+세 조건의 완성 문장 후보를 중복 제거한 후, 정답을 보고 발화별 CER이 가장 작은 후보를 고른
+oracle은 **472/529 = 89.22%**였다. 기준보다 줄일 수 있는 글자 오류는 3개, 약 0.57%p뿐이다.
+이는 실제 선택기가 달성한 성능이 아니다. 후보 품질이 크게 나아지지 않아 기본 처리를 유지했다.
+
+```powershell
+.venv/Scripts/python.exe -m kvsr.roi_replay --source results/masked_2026-09-20 --videos data/raw --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/roi_replay_repeat
+.venv/Scripts/python.exe -m kvsr.roi_candidates --source results/roi_replay_repeat --references results/masked_2026-09-20 --output results/roi_candidates_repeat.json
+```
+
+## 11. 문장부호 평가 민감도 (9/20)
+
+기존 mask baseline의 예측을 바꾸지 않고, 정답·예측 양쪽에서 Unicode 일반 범주 `P`의 문자를
+삭제하는 보조 평가를 실시했다. 숫자나 다른 기호를 고치지 않았으며 기본 CER 규칙은 그대로다.
+
+| 평가 | 글자 오류 / 정답 글자 | CER | WER |
+|---|---:|---:|---:|
+| 원래 규칙 | 475 / 529 | 89.79% | 98.38% |
+| 문장부호 제거, 보조 규칙 | 458 / 512 | 89.45% | 98.38% |
+
+정답에서 17개 문장부호가 제거됐고 예측에는 문장부호가 없었다.
+오류 수와 분모가 함께 바뀌므로 이를 모델 성능 향상으로 보고하지 않는다.
+문장부호 차이만으로 현재 높은 오류율을 설명할 수 없었다.
+이 규칙은 숫자 읽기 등을 바꾸는 공식 학습 전사 전처리 전체의 재현도 아니다.
+
+```powershell
+.venv/Scripts/python.exe -m kvsr.punctuation_audit --source results/masked_2026-09-20 --output results/punctuation_repeat
+```
+
+## 12. 새 official validation 영상 확인 (9/20)
+
+조건 변경 없이 `AREA+NPZ`, 96px·원본 FPS, CTC greedy, mask 정책을 실행했다.
+공식 valid의 무표시 영상 중 seed 2026의 SHA256 순서로 첫 두 영상을 골랐으며,
+영상별로 10초 이하인 발화의 시간순 첫 6개를 다운로드 전에 고정했다.
+이를 위한 runner는 `--split valid --suite baseline`만 허용하며 test 분할은 허용하지 않는다.
+
+| 고정 영상 | 발화 수 | 결과 |
+|---|---:|---|
+| `rGR4FdaIvw8` | 6 | 6회 추론 완료, CER **67/70 = 95.71%**, WER 100.00% |
+| `_WF84v2g-jo` | 6 | YouTube가 `Private video` 반환, 자료 접근 실패, 추론 없음 |
+
+확보한 영상은 계획한 여섯 발화를 모두 포함했다. ROI 가용 프레임은 순서대로
+20/20, 29/30, 46/46, 11/47, 92/100, 134/138이었다. 일부 프레임이 없는 네 발화도
+시간축을 유지해 처리했지만, 추론이 완료됐다는 사실은 정확한 자막이 나왔다는 뜻이 아니다.
+
+비공개 영상을 다른 영상으로 교체하지 않았다. 전체 사전 선택 12개 중 자료·출력 coverage는 50%다.
+접근 실패 6개를 빈 출력으로 포함한 운영 집계는 **387/390 = 99.23%**지만,
+이는 모델이 실제 처리한 영상의 CER과 구분해야 한다. private 영상의 오류 320개는 접근 실패에 따른
+평가용 삭제 처리이지 모델이 인식하여 만든 오류가 아니다. 데이터 접근 사유는 별도 acquisition JSON에 기록했다.
+새 영상은 한 개뿐이고 최종 test 분할도 아니므로 광범위한 일반화 성능을 주장하지 않는다.
+
+```powershell
+# 원 실행에서는 prepare-only로 먼저 고정한 뒤 영상 다운로드를 시도했다.
+.venv/Scripts/python.exe -m kvsr.validation_experiment --prepare-only --catalog external/kmsav/data/list.txt --archive data/raw/kmsav_asd_v0.2.zip --videos data/raw --model checkpoints/face_landmarker.task --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/validation_repeat
+# 같은 비공개 상태라면 해당 ID를 명시적으로 접근 실패로 보존한다.
+.venv/Scripts/python.exe -m kvsr.validation_experiment --catalog external/kmsav/data/list.txt --archive data/raw/kmsav_asd_v0.2.zip --videos data/raw --model checkpoints/face_landmarker.task --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/validation_repeat --unavailable-video=_WF84v2g-jo
+```
+
+## 13. 대체 모델 공개 자료 확인 (9/20)
+
+자료 조사는 실제 추론 결과와 별개다. 다음 공개 자료를 확인했으며, 한국어 자유 문장 VSR에
+바로 교체할 수 있는 새 가중치는 이번 확인 범위에서 확보하지 못했다.
+
+| 후보 | 확인한 범위와 판단 |
+|---|---|
+| [KMSAV AV-HuBERT 안내](https://github.com/etri/kmsav/blob/8a96a7d147eccfc8236ae78f42d32f681f5a46e2/avhubert/README.md) | 한국어 데이터 준비·fine-tuning 예제와 로컬 학습 결과 경로를 제공한다. 확인한 안내에는 한국어 fine-tuned 가중치 직접 다운로드 링크가 없다. |
+| [MuAViC 공식 모델 목록](https://github.com/facebookresearch/muavic/blob/main/README.md#models) | 공개 모델의 언어 목록에 한국어가 없다. 그대로 한국어 자막 baseline으로 대체하지 않는다. |
+| [LMD-VSR 공식 모델 목록](https://github.com/JeongHun0716/lmd-vsr#pretrained-models) | 공개 VSR 가중치는 영어·스페인어·프랑스어·이탈리아어·포르투갈어용이다. 한국어 적응이 별도로 필요하다. |
+| [articulation-therapy 모델 카드](https://huggingface.co/westhnu/articulation-therapy-lipreading) | 출력이 117개 문장 클래스인 분류기다. 임의의 한국어 문장을 생성하는 현재 과제의 대체 모델로 사용하지 않는다. |
+
+“공개 한국어 모델이 전혀 없다”는 결론은 아니다. 현재 OLKAVS 가중치는 계속 보존하고,
+실제 한국어 decoder·가중치·입력 규격을 확인한 모델만 후속 비교 대상으로 삼는다.
+
+## 14. CPU에서 CTC 출력층만 적응한 실험 (9/20)
+
+전체 모델을 학습할 GPU 환경 없이 가능한 진단으로, 영상 encoder와 medium을 고정하고
+마지막 CTC 선형층의 **18,504개 파라미터**만 학습했다. 입력은 기존 train 16개 발화이며,
+ROI가 전혀 없는 1개는 gradient 계산에서 제외하되 전체 train 평가에는 빈 출력으로 남겼다.
+고정 특징을 추출한 21개 발화(사용 가능한 train 15개 + validation 6개)의 초기 예측과,
+미가용 train 1개의 빈 예측은 모두 이전 결과와 일치했다.
+
+학습 전에 seed 2026, full batch 15개, Adam 학습률 0.001, weight decay 0,
+gradient norm 1.0, **고정 200 update 후 마지막 가중치 평가**를 정했다.
+CTC는 실제 프레임 길이와 blank=3을 사용하며, 정렬 불가능한 target을 검사하고 무한 loss를 숨기지 않는다.
+학습 target은 공식 `refine_transcription`으로 숫자 읽기·문장부호 등을 처리한 뒤 자모로 분해하고 EOS를 붙였다.
+보고 CER은 기존처럼 원 전사의 문장부호·숫자를 유지한다.
+
+| 평가 자료 | 초기 글자 오류 / 글자 수 | 적응 후 | 초기 CER | 적응 후 CER |
+|---|---:|---:|---:|---:|
+| train 16개, 보류 포함 | 475 / 529 | 375 / 529 | 89.79% | **70.89%** |
+| 확보된 validation 6개 | 67 / 70 | 68 / 70 | 95.71% | **97.14%** |
+
+train loss는 2.83188에서 1.38164로 줄었다. validation WER은 100.00%에서 103.85%로 증가했다.
+WER은 삽입 오류가 있으면 100%를 넘을 수 있다. 학습 자료 적합도는 좋아졌지만 새 영상에서의
+개선이 확인되지 않았으므로 적응 가중치를 기본 모델에 적용하지 않았다.
+
+validation의 baseline 점수는 앞 단계에서 이미 확인했지만, 이 실험의 gradient·학습 target·가중치
+선택에는 validation 정답을 쓰지 않았다. 정답은 학습과 모든 decoding이 끝난 뒤 읽었다.
+이전부터 반복 사용한 train 소표본과 한 validation 영상으로 진행한 탐색이며, 과적합 위험이 크다.
+영상 특징·예측·적응 가중치는 로컬 `results/head_adaptation_2026-09-20`에만 저장했다.
+
+```powershell
+.venv/Scripts/python.exe -m kvsr.head_adaptation --train results/masked_2026-09-20 --validation results/validation_2026-09-20 --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/head_adaptation_repeat
 ```
 
 ## 구현과 검증
@@ -407,10 +550,15 @@ MP4는 OpenCV `mp4v` 기본 인코더 설정을 사용했고, 네 발화 모두 
 - `kvsr/diagnostics.py`: 정답 전사 없이 실패 프레임 구간과 IMAGE 재검출 결과를 집계한다.
 - `kvsr/missing.py`, `kvsr/masked_report.py`: ROI 미가용 프레임의 정규화·시간축 유지와 고정 표본 비교.
 - `kvsr/transport_experiment.py`: 고정 2×2 리사이즈·저장 비교, 입력 무결성·기준 재현 검사.
-- 로컬 `.venv`에서 **52개 테스트 통과**. CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
+- `kvsr/roi_replay.py`, `kvsr/roi_candidates.py`: 고정 좌표 재추출 및 전처리 후보 oracle.
+- `kvsr/punctuation_audit.py`: 기존 예측의 문장부호 보조 평가, 기본 점수 보존.
+- `kvsr/validation_experiment.py`: 사전 표본 고정, split·설정·입력 해시 검사, 접근 실패 보존.
+- `kvsr/head_adaptation.py`: 고정 특징과 CTC 출력층만 사용하는 CPU 적응 진단.
+- 로컬 `.venv`에서 **68개 테스트 통과**. CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
   EOS/반복 문자, 실패 누락 방지, 합성 마스크 범위, 보간 경계/길이 제한을 검증했다.
   이번에 축소 기준 일치, MP4 시간·색상 유지, 잘못된 입력 거부 검사를 추가했다.
-  선택 의존성이 없는 기본 Python에서는 52개 중 20개를 건너뛰고 나머지가 통과했다.
+  좌표 역변환·원 픽셀 재현, 문장부호 분모 변경, validation 설정 고정, CTC target 정렬 검사도 포함한다.
+  선택 의존성이 없는 기본 Python에서는 68개 중 23개를 건너뛰고 나머지가 통과했다.
 - 새 clean 실행과 hybrid 실행의 greedy 토큰은 이전 4단계의 네 발화와 모두 같았다.
 - GitHub CI는 코드 검증용이며 데이터·체크포인트를 내려받아 전체 실험을 재실행하지 않는다.
 
@@ -447,18 +595,24 @@ MP4는 OpenCV `mp4v` 기본 인코더 설정을 사용했고, 네 발화 모두 
 | ROI 미가용 표시·부분 영상 추론 | [masked JSON](experiments/masked_2026-09-20.json) |
 | 공식 입력·모델 경로 호환성 | [contract audit JSON](experiments/contract_audit_2026-09-20.json) |
 | 마지막 리사이즈·MP4 저장 분리 비교 | [transport JSON](experiments/transport_2026-09-20.json) |
+| 고정 입 좌표 재추출 | [ROI replay JSON](experiments/roi_replay_2026-09-20.json) |
+| 전처리 후보 oracle | [ROI candidates JSON](experiments/roi_candidates_2026-09-20.json) |
+| 문장부호 보조 평가 | [punctuation JSON](experiments/punctuation_2026-09-20.json) |
+| 새 validation | [사전 계획](experiments/validation_plan_2026-09-20.json), [접근 기록](experiments/validation_acquisition_2026-09-20.json), [실행 결과](experiments/validation_2026-09-20.json) |
+| CPU 출력층 적응 | [head adaptation JSON](experiments/head_adaptation_2026-09-20.json) |
 
 이전 단계 상세 기록: [1단계](docs/STAGE1.md), [2단계](docs/STAGE2.md),
 [3단계](docs/STAGE3.md), [4단계](docs/STAGE4.md), [5단계](docs/STAGE5.md).
 
 ## 남은 과제와 다음 진행 순서
 
-1. ROI 미가용 표시와 전체 미가용 시 자막 보류는 구현·개발 검증했다.
-   다음에는 옆얼굴 ROI 획득 개선 및 별도 영상에서의 부분 미가용 입력 검증을 진행한다.
-   정답을 유지한 채 실패 프레임만 잘라내거나 성공 표본만 골라 성능을 올리지 않는다.
-2. 학습 입력 규격과 전처리를 더 정확히 맞추거나 한국어 VSR baseline을 교체/적응시킨다.
-   높은 CER의 원인이 어느 한 가지라고 현재 실험만으로 단정하지 않는다.
-3. 별도 개발·평가 영상과 화자 구성을 확보한 후 모델 점수와 실제 오류의 관계를 보정한다.
+1. 데이터 접근 가능성을 포함한 더 큰 train·valid 표본과 화자 구성을 먼저 고정한다.
+   현재 15개 train 발화의 출력층 적응은 validation 개선으로 이어지지 않았다.
+   비공개 표본을 조용히 교체하거나, 성공한 발화만으로 정확도를 보고하지 않는다.
+2. 한국어 fine-tuned 가중치를 실제 확보하거나, 늘어난 데이터에서 특징 고정/부분 적응을 비교한다.
+   학습 전 표본과 설정을 기록하고 validation 결과를 보고 반복 조정한 경우 이를 명시한다.
+   전체 모델 적응은 별도 연산 자원 검토가 필요하다. 현재 한계를 리사이즈 하나로 설명하지 않는다.
+3. 옆얼굴 ROI 획득과 미가용 입력 처리를 개선하고, 별도 자료에서 점수와 실제 오류를 보정한다.
 4. 후보 품질이 확보되면 정답 대신 이전 **인식 결과**를 사용하는 문맥 보정을 추가한다.
    문맥 없음/문맥 사용/잘못된 문맥/손상 입력을 같은 표본에서 비교한다.
 5. 최종 조건을 고정한 뒤 held-out test, 처리 속도, 수정으로 새로 생긴 오류, 사용자 평가를 보고한다.

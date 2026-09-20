@@ -1,0 +1,770 @@
+{
+  "plan": {
+    "split": "valid",
+    "seed": 2026,
+    "video_selection": "first two unflagged official valid videos in seeded SHA256 order",
+    "utterance_selection": "chronological first six utterances with duration <=10 seconds",
+    "videos": [
+      {
+        "video_id": "rGR4FdaIvw8",
+        "domain": "dram",
+        "selected": [
+          {
+            "id": "rGR4FdaIvw8/000004",
+            "utterance": "000004",
+            "start_ms": 3556,
+            "end_ms": 4290
+          },
+          {
+            "id": "rGR4FdaIvw8/000006",
+            "utterance": "000006",
+            "start_ms": 5000,
+            "end_ms": 6162
+          },
+          {
+            "id": "rGR4FdaIvw8/000008",
+            "utterance": "000008",
+            "start_ms": 8290,
+            "end_ms": 10085
+          },
+          {
+            "id": "rGR4FdaIvw8/000026",
+            "utterance": "000026",
+            "start_ms": 98557,
+            "end_ms": 100389
+          },
+          {
+            "id": "rGR4FdaIvw8/000040",
+            "utterance": "000040",
+            "start_ms": 139401,
+            "end_ms": 143369
+          },
+          {
+            "id": "rGR4FdaIvw8/000047",
+            "utterance": "000047",
+            "start_ms": 154721,
+            "end_ms": 160217
+          }
+        ]
+      },
+      {
+        "video_id": "_WF84v2g-jo",
+        "domain": "issu",
+        "selected": [
+          {
+            "id": "_WF84v2g-jo/000002",
+            "utterance": "000002",
+            "start_ms": 13567,
+            "end_ms": 18404
+          },
+          {
+            "id": "_WF84v2g-jo/000003",
+            "utterance": "000003",
+            "start_ms": 18555,
+            "end_ms": 26044
+          },
+          {
+            "id": "_WF84v2g-jo/000004",
+            "utterance": "000004",
+            "start_ms": 26367,
+            "end_ms": 36193
+          },
+          {
+            "id": "_WF84v2g-jo/000005",
+            "utterance": "000005",
+            "start_ms": 36278,
+            "end_ms": 45081
+          },
+          {
+            "id": "_WF84v2g-jo/000006",
+            "utterance": "000006",
+            "start_ms": 45326,
+            "end_ms": 50650
+          },
+          {
+            "id": "_WF84v2g-jo/000011",
+            "utterance": "000011",
+            "start_ms": 78219,
+            "end_ms": 87850
+          }
+        ]
+      }
+    ],
+    "hashes": {
+      "catalog": "24741a39d31d7e5f5f4baad8dbe315339bef63cc355b13884c133ef20dec0397",
+      "archive": "60ff47c9b7359d64c43cbdf003395bc857a470eefb95c10b8b4a9acd948ada32",
+      "landmarker": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+      "checkpoint": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5"
+    },
+    "settings": {
+      "suite": "baseline",
+      "missing_policy": "mask",
+      "size": 96,
+      "target_fps": null,
+      "crop_scale": 1.7,
+      "align": "none",
+      "landmark_max_gap": 0,
+      "track_boundary_limit": 2,
+      "decoder": "ctc_greedy"
+    },
+    "scope": "new official validation videos; one fixed condition, not final held-out test",
+    "no_replacement_on_download_or_preprocessing_failure": true,
+    "references_used_in_decoding": false
+  },
+  "plan_sha256": "ad3b14135422501e38324be1f2331799f820a7e359ef3e3e0b89b975f2b13fa5",
+  "per_video": {
+    "rGR4FdaIvw8": {
+      "summary": {
+        "selected": 6,
+        "succeeded": 6,
+        "failed": 0,
+        "coverage": 1.0,
+        "all_selected_failure_as_empty": {
+          "samples": 6,
+          "cer": 0.9571428571428572,
+          "wer": 1.0,
+          "char_errors": 67,
+          "reference_chars": 70,
+          "word_errors": 26,
+          "reference_words": 26,
+          "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+          "details": [
+            {
+              "id": "rGR4FdaIvw8/000004",
+              "char_errors": 3,
+              "reference_chars": 3,
+              "word_errors": 1,
+              "reference_words": 1
+            },
+            {
+              "id": "rGR4FdaIvw8/000006",
+              "char_errors": 5,
+              "reference_chars": 5,
+              "word_errors": 1,
+              "reference_words": 1
+            },
+            {
+              "id": "rGR4FdaIvw8/000008",
+              "char_errors": 8,
+              "reference_chars": 9,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "rGR4FdaIvw8/000026",
+              "char_errors": 8,
+              "reference_chars": 8,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "rGR4FdaIvw8/000040",
+              "char_errors": 16,
+              "reference_chars": 16,
+              "word_errors": 6,
+              "reference_words": 6
+            },
+            {
+              "id": "rGR4FdaIvw8/000047",
+              "char_errors": 27,
+              "reference_chars": 29,
+              "word_errors": 12,
+              "reference_words": 12
+            }
+          ]
+        },
+        "successful_only": {
+          "samples": 6,
+          "cer": 0.9571428571428572,
+          "wer": 1.0,
+          "char_errors": 67,
+          "reference_chars": 70,
+          "word_errors": 26,
+          "reference_words": 26,
+          "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+          "details": [
+            {
+              "id": "rGR4FdaIvw8/000004",
+              "char_errors": 3,
+              "reference_chars": 3,
+              "word_errors": 1,
+              "reference_words": 1
+            },
+            {
+              "id": "rGR4FdaIvw8/000006",
+              "char_errors": 5,
+              "reference_chars": 5,
+              "word_errors": 1,
+              "reference_words": 1
+            },
+            {
+              "id": "rGR4FdaIvw8/000008",
+              "char_errors": 8,
+              "reference_chars": 9,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "rGR4FdaIvw8/000026",
+              "char_errors": 8,
+              "reference_chars": 8,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "rGR4FdaIvw8/000040",
+              "char_errors": 16,
+              "reference_chars": 16,
+              "word_errors": 6,
+              "reference_words": 6
+            },
+            {
+              "id": "rGR4FdaIvw8/000047",
+              "char_errors": 27,
+              "reference_chars": 29,
+              "word_errors": 12,
+              "reference_words": 12
+            }
+          ]
+        },
+        "failures": [],
+        "inference_performed": 6,
+        "abstained": 0,
+        "coverage_definition": "returned outputs including explicit abstentions; inspect inference_performed separately",
+        "inferred_only": {
+          "samples": 6,
+          "cer": 0.9571428571428572,
+          "wer": 1.0,
+          "char_errors": 67,
+          "reference_chars": 70,
+          "word_errors": 26,
+          "reference_words": 26,
+          "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+          "details": [
+            {
+              "id": "rGR4FdaIvw8/000004",
+              "char_errors": 3,
+              "reference_chars": 3,
+              "word_errors": 1,
+              "reference_words": 1
+            },
+            {
+              "id": "rGR4FdaIvw8/000006",
+              "char_errors": 5,
+              "reference_chars": 5,
+              "word_errors": 1,
+              "reference_words": 1
+            },
+            {
+              "id": "rGR4FdaIvw8/000008",
+              "char_errors": 8,
+              "reference_chars": 9,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "rGR4FdaIvw8/000026",
+              "char_errors": 8,
+              "reference_chars": 8,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "rGR4FdaIvw8/000040",
+              "char_errors": 16,
+              "reference_chars": 16,
+              "word_errors": 6,
+              "reference_words": 6
+            },
+            {
+              "id": "rGR4FdaIvw8/000047",
+              "char_errors": 27,
+              "reference_chars": 29,
+              "word_errors": 12,
+              "reference_words": 12
+            }
+          ]
+        },
+        "availability": {
+          "rGR4FdaIvw8/000004": {
+            "missing_policy": "mask",
+            "usable_frames": 20,
+            "missing_frames": 0,
+            "usable_fraction": 1.0,
+            "timeline_preserved": true,
+            "model_mask_channel": false,
+            "normalization": "usable pixels mean/std; missing normalized pixels zero",
+            "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+          },
+          "rGR4FdaIvw8/000006": {
+            "missing_policy": "mask",
+            "usable_frames": 29,
+            "missing_frames": 1,
+            "usable_fraction": 0.9666666666666667,
+            "timeline_preserved": true,
+            "model_mask_channel": false,
+            "normalization": "usable pixels mean/std; missing normalized pixels zero",
+            "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+          },
+          "rGR4FdaIvw8/000008": {
+            "missing_policy": "mask",
+            "usable_frames": 46,
+            "missing_frames": 0,
+            "usable_fraction": 1.0,
+            "timeline_preserved": true,
+            "model_mask_channel": false,
+            "normalization": "usable pixels mean/std; missing normalized pixels zero",
+            "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+          },
+          "rGR4FdaIvw8/000026": {
+            "missing_policy": "mask",
+            "usable_frames": 11,
+            "missing_frames": 36,
+            "usable_fraction": 0.23404255319148937,
+            "timeline_preserved": true,
+            "model_mask_channel": false,
+            "normalization": "usable pixels mean/std; missing normalized pixels zero",
+            "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+          },
+          "rGR4FdaIvw8/000040": {
+            "missing_policy": "mask",
+            "usable_frames": 92,
+            "missing_frames": 8,
+            "usable_fraction": 0.92,
+            "timeline_preserved": true,
+            "model_mask_channel": false,
+            "normalization": "usable pixels mean/std; missing normalized pixels zero",
+            "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+          },
+          "rGR4FdaIvw8/000047": {
+            "missing_policy": "mask",
+            "usable_frames": 134,
+            "missing_frames": 4,
+            "usable_fraction": 0.9710144927536232,
+            "timeline_preserved": true,
+            "model_mask_channel": false,
+            "normalization": "usable pixels mean/std; missing normalized pixels zero",
+            "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+          }
+        }
+      },
+      "plan_sha256": "d1e4c42979b3e64e1ca171ecb2692c0321afc4c522a6263e79c187c298ae0353",
+      "video_sha256": "fcdeb88c91132bcc898bf60be1191ff3141f728458c784de9e33532ccacdb4af",
+      "inference_provenance": {
+        "upstream_commit": "af2feda3e3ac91ff3fef2454fcee662366ce9f4b",
+        "torch_version": "2.14.0+cpu",
+        "vocabulary_sha256": "00a465a2b25c24e1f9962d407fc2648fe5ab58bef334378abede5293b3885c42",
+        "preprocessing": "mediapipe-mouth-prototype-v1; BGR usable ROI mean/std; missing normalized frames zero; nearest-center FPS",
+        "device": "cpu"
+      }
+    },
+    "_WF84v2g-jo": {
+      "summary": {
+        "selected": 6,
+        "succeeded": 0,
+        "failed": 6,
+        "coverage": 0.0,
+        "all_selected_failure_as_empty": {
+          "samples": 6,
+          "cer": 1.0,
+          "wer": 1.0,
+          "char_errors": 320,
+          "reference_chars": 320,
+          "word_errors": 100,
+          "reference_words": 100,
+          "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+          "details": [
+            {
+              "id": "_WF84v2g-jo/000002",
+              "char_errors": 40,
+              "reference_chars": 40,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "_WF84v2g-jo/000003",
+              "char_errors": 57,
+              "reference_chars": 57,
+              "word_errors": 18,
+              "reference_words": 18
+            },
+            {
+              "id": "_WF84v2g-jo/000004",
+              "char_errors": 66,
+              "reference_chars": 66,
+              "word_errors": 20,
+              "reference_words": 20
+            },
+            {
+              "id": "_WF84v2g-jo/000005",
+              "char_errors": 62,
+              "reference_chars": 62,
+              "word_errors": 25,
+              "reference_words": 25
+            },
+            {
+              "id": "_WF84v2g-jo/000006",
+              "char_errors": 36,
+              "reference_chars": 36,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "_WF84v2g-jo/000011",
+              "char_errors": 59,
+              "reference_chars": 59,
+              "word_errors": 18,
+              "reference_words": 18
+            }
+          ]
+        },
+        "successful_only": null,
+        "failures": [
+          {
+            "id": "_WF84v2g-jo/000002",
+            "stage": "acquisition",
+            "error": "Frozen source video unavailable; no replacement selected"
+          },
+          {
+            "id": "_WF84v2g-jo/000003",
+            "stage": "acquisition",
+            "error": "Frozen source video unavailable; no replacement selected"
+          },
+          {
+            "id": "_WF84v2g-jo/000004",
+            "stage": "acquisition",
+            "error": "Frozen source video unavailable; no replacement selected"
+          },
+          {
+            "id": "_WF84v2g-jo/000005",
+            "stage": "acquisition",
+            "error": "Frozen source video unavailable; no replacement selected"
+          },
+          {
+            "id": "_WF84v2g-jo/000006",
+            "stage": "acquisition",
+            "error": "Frozen source video unavailable; no replacement selected"
+          },
+          {
+            "id": "_WF84v2g-jo/000011",
+            "stage": "acquisition",
+            "error": "Frozen source video unavailable; no replacement selected"
+          }
+        ],
+        "inference_performed": 0,
+        "abstained": 0,
+        "coverage_definition": "returned outputs including explicit abstentions; inspect inference_performed separately",
+        "inferred_only": null,
+        "availability": {}
+      },
+      "acquisition_status": "unavailable; no inference attempted"
+    }
+  },
+  "overall": {
+    "selected": 12,
+    "succeeded": 6,
+    "failed": 6,
+    "coverage": 0.5,
+    "all_selected_failure_as_empty": {
+      "samples": 12,
+      "cer": 0.9923076923076923,
+      "wer": 1.0,
+      "char_errors": 387,
+      "reference_chars": 390,
+      "word_errors": 126,
+      "reference_words": 126,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "rGR4FdaIvw8/000004",
+          "char_errors": 3,
+          "reference_chars": 3,
+          "word_errors": 1,
+          "reference_words": 1
+        },
+        {
+          "id": "rGR4FdaIvw8/000006",
+          "char_errors": 5,
+          "reference_chars": 5,
+          "word_errors": 1,
+          "reference_words": 1
+        },
+        {
+          "id": "rGR4FdaIvw8/000008",
+          "char_errors": 8,
+          "reference_chars": 9,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "rGR4FdaIvw8/000026",
+          "char_errors": 8,
+          "reference_chars": 8,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "rGR4FdaIvw8/000040",
+          "char_errors": 16,
+          "reference_chars": 16,
+          "word_errors": 6,
+          "reference_words": 6
+        },
+        {
+          "id": "rGR4FdaIvw8/000047",
+          "char_errors": 27,
+          "reference_chars": 29,
+          "word_errors": 12,
+          "reference_words": 12
+        },
+        {
+          "id": "_WF84v2g-jo/000002",
+          "char_errors": 40,
+          "reference_chars": 40,
+          "word_errors": 9,
+          "reference_words": 9
+        },
+        {
+          "id": "_WF84v2g-jo/000003",
+          "char_errors": 57,
+          "reference_chars": 57,
+          "word_errors": 18,
+          "reference_words": 18
+        },
+        {
+          "id": "_WF84v2g-jo/000004",
+          "char_errors": 66,
+          "reference_chars": 66,
+          "word_errors": 20,
+          "reference_words": 20
+        },
+        {
+          "id": "_WF84v2g-jo/000005",
+          "char_errors": 62,
+          "reference_chars": 62,
+          "word_errors": 25,
+          "reference_words": 25
+        },
+        {
+          "id": "_WF84v2g-jo/000006",
+          "char_errors": 36,
+          "reference_chars": 36,
+          "word_errors": 10,
+          "reference_words": 10
+        },
+        {
+          "id": "_WF84v2g-jo/000011",
+          "char_errors": 59,
+          "reference_chars": 59,
+          "word_errors": 18,
+          "reference_words": 18
+        }
+      ]
+    },
+    "successful_only": {
+      "samples": 6,
+      "cer": 0.9571428571428572,
+      "wer": 1.0,
+      "char_errors": 67,
+      "reference_chars": 70,
+      "word_errors": 26,
+      "reference_words": 26,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "rGR4FdaIvw8/000004",
+          "char_errors": 3,
+          "reference_chars": 3,
+          "word_errors": 1,
+          "reference_words": 1
+        },
+        {
+          "id": "rGR4FdaIvw8/000006",
+          "char_errors": 5,
+          "reference_chars": 5,
+          "word_errors": 1,
+          "reference_words": 1
+        },
+        {
+          "id": "rGR4FdaIvw8/000008",
+          "char_errors": 8,
+          "reference_chars": 9,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "rGR4FdaIvw8/000026",
+          "char_errors": 8,
+          "reference_chars": 8,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "rGR4FdaIvw8/000040",
+          "char_errors": 16,
+          "reference_chars": 16,
+          "word_errors": 6,
+          "reference_words": 6
+        },
+        {
+          "id": "rGR4FdaIvw8/000047",
+          "char_errors": 27,
+          "reference_chars": 29,
+          "word_errors": 12,
+          "reference_words": 12
+        }
+      ]
+    },
+    "failures": [
+      {
+        "id": "_WF84v2g-jo/000002",
+        "stage": "acquisition",
+        "error": "Frozen source video unavailable; no replacement selected"
+      },
+      {
+        "id": "_WF84v2g-jo/000003",
+        "stage": "acquisition",
+        "error": "Frozen source video unavailable; no replacement selected"
+      },
+      {
+        "id": "_WF84v2g-jo/000004",
+        "stage": "acquisition",
+        "error": "Frozen source video unavailable; no replacement selected"
+      },
+      {
+        "id": "_WF84v2g-jo/000005",
+        "stage": "acquisition",
+        "error": "Frozen source video unavailable; no replacement selected"
+      },
+      {
+        "id": "_WF84v2g-jo/000006",
+        "stage": "acquisition",
+        "error": "Frozen source video unavailable; no replacement selected"
+      },
+      {
+        "id": "_WF84v2g-jo/000011",
+        "stage": "acquisition",
+        "error": "Frozen source video unavailable; no replacement selected"
+      }
+    ],
+    "inference_performed": 6,
+    "abstained": 0,
+    "coverage_definition": "returned outputs including explicit abstentions; inspect inference_performed separately",
+    "inferred_only": {
+      "samples": 6,
+      "cer": 0.9571428571428572,
+      "wer": 1.0,
+      "char_errors": 67,
+      "reference_chars": 70,
+      "word_errors": 26,
+      "reference_words": 26,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "rGR4FdaIvw8/000004",
+          "char_errors": 3,
+          "reference_chars": 3,
+          "word_errors": 1,
+          "reference_words": 1
+        },
+        {
+          "id": "rGR4FdaIvw8/000006",
+          "char_errors": 5,
+          "reference_chars": 5,
+          "word_errors": 1,
+          "reference_words": 1
+        },
+        {
+          "id": "rGR4FdaIvw8/000008",
+          "char_errors": 8,
+          "reference_chars": 9,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "rGR4FdaIvw8/000026",
+          "char_errors": 8,
+          "reference_chars": 8,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "rGR4FdaIvw8/000040",
+          "char_errors": 16,
+          "reference_chars": 16,
+          "word_errors": 6,
+          "reference_words": 6
+        },
+        {
+          "id": "rGR4FdaIvw8/000047",
+          "char_errors": 27,
+          "reference_chars": 29,
+          "word_errors": 12,
+          "reference_words": 12
+        }
+      ]
+    },
+    "availability": {
+      "rGR4FdaIvw8/000004": {
+        "missing_policy": "mask",
+        "usable_frames": 20,
+        "missing_frames": 0,
+        "usable_fraction": 1.0,
+        "timeline_preserved": true,
+        "model_mask_channel": false,
+        "normalization": "usable pixels mean/std; missing normalized pixels zero",
+        "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+      },
+      "rGR4FdaIvw8/000006": {
+        "missing_policy": "mask",
+        "usable_frames": 29,
+        "missing_frames": 1,
+        "usable_fraction": 0.9666666666666667,
+        "timeline_preserved": true,
+        "model_mask_channel": false,
+        "normalization": "usable pixels mean/std; missing normalized pixels zero",
+        "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+      },
+      "rGR4FdaIvw8/000008": {
+        "missing_policy": "mask",
+        "usable_frames": 46,
+        "missing_frames": 0,
+        "usable_fraction": 1.0,
+        "timeline_preserved": true,
+        "model_mask_channel": false,
+        "normalization": "usable pixels mean/std; missing normalized pixels zero",
+        "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+      },
+      "rGR4FdaIvw8/000026": {
+        "missing_policy": "mask",
+        "usable_frames": 11,
+        "missing_frames": 36,
+        "usable_fraction": 0.23404255319148937,
+        "timeline_preserved": true,
+        "model_mask_channel": false,
+        "normalization": "usable pixels mean/std; missing normalized pixels zero",
+        "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+      },
+      "rGR4FdaIvw8/000040": {
+        "missing_policy": "mask",
+        "usable_frames": 92,
+        "missing_frames": 8,
+        "usable_fraction": 0.92,
+        "timeline_preserved": true,
+        "model_mask_channel": false,
+        "normalization": "usable pixels mean/std; missing normalized pixels zero",
+        "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+      },
+      "rGR4FdaIvw8/000047": {
+        "missing_policy": "mask",
+        "usable_frames": 134,
+        "missing_frames": 4,
+        "usable_fraction": 0.9710144927536232,
+        "timeline_preserved": true,
+        "model_mask_channel": false,
+        "normalization": "usable pixels mean/std; missing normalized pixels zero",
+        "interpretation": "ROI extraction availability; not ground-truth face visibility or confidence"
+      }
+    }
+  }
+}

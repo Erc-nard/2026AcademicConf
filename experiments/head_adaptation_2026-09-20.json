@@ -1,0 +1,585 @@
+{
+  "plan": {
+    "scope": "tiny train adaptation pilot; one previously inspected validation video, not a held-out test",
+    "inputs": [
+      {
+        "id": "8r1k9NLdSvE/000006",
+        "split": "train",
+        "mouth_sha256": "4713474628e83958e4b7214d119eb4a09946d670a05193b1f1e42800bbb41e7a"
+      },
+      {
+        "id": "8r1k9NLdSvE/000018",
+        "split": "train",
+        "mouth_sha256": "acb2701523c7f93d797b7501fdda9dfd9ebd407c385bd725d59f7bab1399832d"
+      },
+      {
+        "id": "8r1k9NLdSvE/000027",
+        "split": "train",
+        "mouth_sha256": "e14a0ac3eb3d2d8fe8cb3d3ecafb93d56b0984cd8767cda073f21143afa9f00c"
+      },
+      {
+        "id": "8r1k9NLdSvE/000033",
+        "split": "train",
+        "mouth_sha256": "bd74fa7c647f79ea44c2907e6132a1498d337c444320d9a17a1be22d17fc7654"
+      },
+      {
+        "id": "5TaVl7-lU4k/000005",
+        "split": "train",
+        "mouth_sha256": "f6a350cbaa5abbd540c5ed1412a2c5485feb4ce704fe220a9541572c193b77ed"
+      },
+      {
+        "id": "5TaVl7-lU4k/000008",
+        "split": "train",
+        "mouth_sha256": "9607ea9c1e8930f5d12d82cf1a3d36761680dd6be251bbd50238afbd97c729f5"
+      },
+      {
+        "id": "5TaVl7-lU4k/000009",
+        "split": "train",
+        "mouth_sha256": "0ad29ce26e3d8adc620cd5db924d0de9bb16b2126a1b636fa9864901fd0549ab"
+      },
+      {
+        "id": "5TaVl7-lU4k/000015",
+        "split": "train",
+        "mouth_sha256": "1ed8da94eeb43ed531d0724ea5150b1e88ed4cae2d9a05570ac98a03dac22321"
+      },
+      {
+        "id": "5TaVl7-lU4k/000016",
+        "split": "train",
+        "mouth_sha256": "4c18d27e2c9e5c22af202fa669df0b798787cd025c93e779be56ac55c3d312d0"
+      },
+      {
+        "id": "5TaVl7-lU4k/000019",
+        "split": "train",
+        "mouth_sha256": "84b381fd8c60db09ab88f4b772b206da38478238f5acc961935dc520e0eb570d"
+      },
+      {
+        "id": "D-hzf2x_XO0/000030",
+        "split": "train",
+        "mouth_sha256": "3e1b9b913bb574fc1f26c08f2a75c0400bfd19f2f7b56f282e946fdc6b049fb1"
+      },
+      {
+        "id": "D-hzf2x_XO0/000031",
+        "split": "train",
+        "mouth_sha256": "8a3c136606e180ad702a97b8010c99609a6de59e7bab0451c4627ca8e01d50b8"
+      },
+      {
+        "id": "D-hzf2x_XO0/000032",
+        "split": "train",
+        "mouth_sha256": "94f3088e4da114afc6343b0eff4c98d9921f3fc9c49b406b50d3f1b0bfc23224"
+      },
+      {
+        "id": "D-hzf2x_XO0/000034",
+        "split": "train",
+        "mouth_sha256": "2e95c5a095e8f926b2a17e473660d7c2d736ae7d87c5c6a27f63d1a12beb377a"
+      },
+      {
+        "id": "D-hzf2x_XO0/000052",
+        "split": "train",
+        "mouth_sha256": "7f80e3e3cd95a501f0093a153331cd6af1104071e642bb08587391e2c8330eff"
+      },
+      {
+        "id": "D-hzf2x_XO0/000062",
+        "split": "train",
+        "mouth_sha256": "e64470c871522480d0f87e5df8e4d5ab301933cd64eb71004b5344b42f4a121e"
+      },
+      {
+        "id": "rGR4FdaIvw8/000004",
+        "split": "valid",
+        "mouth_sha256": "ac4bc5d24576451a8d6488241d4b94dbb6843cd30390c9578aef99c6f9bd1a97"
+      },
+      {
+        "id": "rGR4FdaIvw8/000006",
+        "split": "valid",
+        "mouth_sha256": "6ac635b2efb843d8667261db17c28d286dbc56e49371a55fdadd46f377e03ea9"
+      },
+      {
+        "id": "rGR4FdaIvw8/000008",
+        "split": "valid",
+        "mouth_sha256": "26aaba657c343d66055c982000e7624bc0dcdacbcf0030d65bac2879b89e9657"
+      },
+      {
+        "id": "rGR4FdaIvw8/000026",
+        "split": "valid",
+        "mouth_sha256": "b7bcb978913801bf5e8d2f40c2e4e4517204829915fb363924ed373f0796e820"
+      },
+      {
+        "id": "rGR4FdaIvw8/000040",
+        "split": "valid",
+        "mouth_sha256": "5e9d41a994e38ced9b63b0f9ff85476224125297a010950d15b9437fffee864b"
+      },
+      {
+        "id": "rGR4FdaIvw8/000047",
+        "split": "valid",
+        "mouth_sha256": "43b201518b8de35a8e81da69c756b781f628d3066d7e3f6084ec3e2cb2959f86"
+      }
+    ],
+    "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+    "official_refinement_sha256": "5f358e07949f652a71f41cd1fceea5c24cac711a7d89a2f7932959932af68790",
+    "vocabulary_sha256": "00a465a2b25c24e1f9962d407fc2648fe5ab58bef334378abede5293b3885c42",
+    "train_reference_hashes": {
+      "8r1k9NLdSvE": "f7f62439c33c27476e5969663c3c936faf01d7c51842b4a6e4bf640e6b2666b1",
+      "5TaVl7-lU4k": "00ad3a69141c79b47bff867beeed836e0dd008d934393bdf2e5b329d3fbd0c90",
+      "D-hzf2x_XO0": "8bdd936b7137a4562142633f1eff81cdb56267e84487b2e843ec047f5a7097c2"
+    },
+    "validation_summary_sha256": "8f040f1dd7ee341a257a878f7929e7c54ea45d98c95ec91596b8819ba6d7d457",
+    "settings": {
+      "seed": 2026,
+      "steps": 200,
+      "optimizer": "Adam",
+      "learning_rate": 0.001,
+      "weight_decay": 0.0,
+      "gradient_clip_norm": 1.0,
+      "batch": "all usable train utterances",
+      "loss": "CTCLoss mean, true input lengths, blank=3, zero_infinity=False",
+      "target": "official refine_transcription -> char2grp -> vocabulary, append EOS=2",
+      "trainable": "only decoder.ctcdecoder.fc weight and bias; encoder/medium/attention frozen",
+      "checkpoint_selection": "fixed final step; no early stopping or validation selection"
+    },
+    "audio_used": false,
+    "validation_references_used_in_training": false,
+    "limitations": [
+      "15 usable train utterances from three videos are too small for a generalization claim",
+      "One all-missing train sample is excluded from gradient updates but retained as empty output in evaluation",
+      "Private validation video remains unavailable and is not used for training or model-quality scoring"
+    ]
+  },
+  "plan_sha256": "d8ac770872ab2844e540471f28cd758ea17f097e6b1790c846ad98ac0b3f71f2",
+  "metrics": {
+    "train_all": {
+      "baseline": {
+        "samples": 16,
+        "cer": 0.8979206049149339,
+        "wer": 0.9837837837837838,
+        "char_errors": 475,
+        "reference_chars": 529,
+        "word_errors": 182,
+        "reference_words": 185,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 13,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 17,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 46,
+            "reference_chars": 53,
+            "word_errors": 17,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 38,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 57,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 49,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 29,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 12,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 38,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ]
+      },
+      "adapted": {
+        "samples": 16,
+        "cer": 0.7088846880907372,
+        "wer": 0.9297297297297298,
+        "char_errors": 375,
+        "reference_chars": 529,
+        "word_errors": 172,
+        "reference_words": 185,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 3,
+            "reference_chars": 19,
+            "word_errors": 2,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 5,
+            "reference_chars": 20,
+            "word_errors": 4,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 23,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 29,
+            "reference_chars": 40,
+            "word_errors": 14,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 22,
+            "reference_chars": 34,
+            "word_errors": 13,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 10,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 44,
+            "reference_chars": 53,
+            "word_errors": 18,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 34,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 53,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 46,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 19,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 3,
+            "reference_chars": 15,
+            "word_errors": 6,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 27,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ]
+      }
+    },
+    "validation_available": {
+      "baseline": {
+        "samples": 6,
+        "cer": 0.9571428571428572,
+        "wer": 1.0,
+        "char_errors": 67,
+        "reference_chars": 70,
+        "word_errors": 26,
+        "reference_words": 26,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "rGR4FdaIvw8/000004",
+            "char_errors": 3,
+            "reference_chars": 3,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000006",
+            "char_errors": 5,
+            "reference_chars": 5,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000008",
+            "char_errors": 8,
+            "reference_chars": 9,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000026",
+            "char_errors": 8,
+            "reference_chars": 8,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000040",
+            "char_errors": 16,
+            "reference_chars": 16,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "rGR4FdaIvw8/000047",
+            "char_errors": 27,
+            "reference_chars": 29,
+            "word_errors": 12,
+            "reference_words": 12
+          }
+        ]
+      },
+      "adapted": {
+        "samples": 6,
+        "cer": 0.9714285714285714,
+        "wer": 1.0384615384615385,
+        "char_errors": 68,
+        "reference_chars": 70,
+        "word_errors": 27,
+        "reference_words": 26,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "rGR4FdaIvw8/000004",
+            "char_errors": 3,
+            "reference_chars": 3,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000006",
+            "char_errors": 5,
+            "reference_chars": 5,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000008",
+            "char_errors": 9,
+            "reference_chars": 9,
+            "word_errors": 4,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000026",
+            "char_errors": 8,
+            "reference_chars": 8,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000040",
+            "char_errors": 16,
+            "reference_chars": 16,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "rGR4FdaIvw8/000047",
+            "char_errors": 27,
+            "reference_chars": 29,
+            "word_errors": 12,
+            "reference_words": 12
+          }
+        ]
+      }
+    }
+  },
+  "loss_trace": [
+    {
+      "step": 0,
+      "loss": 2.831883192062378
+    },
+    {
+      "step": 20,
+      "loss": 2.3443477153778076
+    },
+    {
+      "step": 40,
+      "loss": 2.08719539642334
+    },
+    {
+      "step": 60,
+      "loss": 1.9114857912063599
+    },
+    {
+      "step": 80,
+      "loss": 1.7837852239608765
+    },
+    {
+      "step": 100,
+      "loss": 1.684998869895935
+    },
+    {
+      "step": 120,
+      "loss": 1.6046020984649658
+    },
+    {
+      "step": 140,
+      "loss": 1.5370402336120605
+    },
+    {
+      "step": 160,
+      "loss": 1.478723406791687
+    },
+    {
+      "step": 180,
+      "loss": 1.4273698329925537
+    },
+    {
+      "step": 200,
+      "loss": 1.3816415071487427
+    }
+  ],
+  "trainable_parameters": 18504,
+  "train_samples_with_features": 15,
+  "train_all_missing_retained_in_evaluation": 1,
+  "baseline_tokens_equal_previous": true,
+  "head_sha256": "940471d78b6a81acba3acea3d0f38f38b560a621b3df5b4b8be0e29317c7ccfb",
+  "torch_version": "2.14.0+cpu",
+  "frozen_parameter_tensors": 636,
+  "feature_hashes": {
+    "5TaVl7-lU4k_000005.npy": "cfd2c727acbd90e9cfb173a6e9ad5d8287f057e4260e085d46080a1debf79e6f",
+    "5TaVl7-lU4k_000008.npy": "1b9a5551b45fafdd987920d5f8557087b369fd035ca9ac1cf1f1e53e7d0e3196",
+    "5TaVl7-lU4k_000009.npy": "d60a3d4b4e722f208cadf23788bb15fd254ff81d32f09d6f19d5f0301f9a9ef9",
+    "5TaVl7-lU4k_000015.npy": "856788ddc4dc868a79d958cb81f4ffd4a91d1f7e8053d84d98ee3862998d94e7",
+    "5TaVl7-lU4k_000016.npy": "6d2b14704092273eef6d821be1dd94f6d1d4549b6d6b8761b565f0844da581ff",
+    "5TaVl7-lU4k_000019.npy": "c5e670a3ddda2bcdaef2a00fc860d10061c12a2fd25ae3776850f65f842d717f",
+    "8r1k9NLdSvE_000006.npy": "9adbba1cda89673d6b8fb57407a621b47cf9d489e9f10ea40ba6c203fe9c858c",
+    "8r1k9NLdSvE_000018.npy": "e7b014003f6dafb8f3d0bd42b190f3e67be906b1e7ecaee0ed141a9576886a94",
+    "8r1k9NLdSvE_000027.npy": "703bf83fe44fd487887ad93223cd8f9d78ecdc3bc12715a970b85af0bb8cc831",
+    "8r1k9NLdSvE_000033.npy": "43da076b31129861c2fd7b1fd780b7775592eb1cb4932d432695c9497624bc83",
+    "D-hzf2x_XO0_000030.npy": "98aecd3780d8bf58b67cd32b9fd0fddc623c086a3663afe0e8d1fcaa8a57fd85",
+    "D-hzf2x_XO0_000032.npy": "54aa9a883937510c4c40c8f6f4c1eca86f709f7e43ab714753a6b970be71a10e",
+    "D-hzf2x_XO0_000034.npy": "ebf9bd42c03db616feffac44eb83e2e606291ac870235e8f69efe1fda4108834",
+    "D-hzf2x_XO0_000052.npy": "58f76da10bdf2688c702f687167a3853788e21fbc64d42a0d1bc2c7138489375",
+    "D-hzf2x_XO0_000062.npy": "e9eed9bfc977d10314e67cbd8462245b6655865cb18537245d4569f35961cd28",
+    "rGR4FdaIvw8_000004.npy": "f7b8896807464e210da1c1d51f36bc3d6d95324fdcf6a8e554a4c361c1fe7ef9",
+    "rGR4FdaIvw8_000006.npy": "3d12d01c193c8347cf1f59fc354e21da3dc964d1dc694926ec33fd85fd5c3fe2",
+    "rGR4FdaIvw8_000008.npy": "91b10b33029ca876e8b8d10fc73ab823175dbfef41233ce9ff4b9456bca1fd5d",
+    "rGR4FdaIvw8_000026.npy": "0b89b26117ba705162fe411159ef8287ea7e44fc4160c166c05f0fd68ab6dec3",
+    "rGR4FdaIvw8_000040.npy": "fdccf0f8071233f4e3fa67f6afe910e2a0100933d7ff2358614dee0aa627429b",
+    "rGR4FdaIvw8_000047.npy": "6659af5ea9a71f7df82b45650a3295f5770d312c72573f8f5df5e8e7b0c3afc9"
+  }
+}

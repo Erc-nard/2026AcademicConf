@@ -1,0 +1,21 @@
+{
+  "checked_date": "2026-09-20",
+  "method": "yt-dlp, video-only 1280x720 MP4, maximum 1 GiB per file, no cookies or authentication",
+  "frozen_plan_sha256": "ad3b14135422501e38324be1f2331799f820a7e359ef3e3e0b89b975f2b13fa5",
+  "sources": [
+    {
+      "video_id": "rGR4FdaIvw8",
+      "status": "downloaded",
+      "format_id": "136",
+      "sha256": "fcdeb88c91132bcc898bf60be1191ff3141f728458c784de9e33532ccacdb4af",
+      "bytes": 14976980
+    },
+    {
+      "video_id": "_WF84v2g-jo",
+      "status": "unavailable",
+      "reported_error": "Private video",
+      "inference_attempted": false,
+      "replacement_selected": false
+    }
+  ]
+}
