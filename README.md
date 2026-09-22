@@ -1,12 +1,12 @@
 # 2026 공과대학 학술제 — 한국어 VSR 진행 보고서
 
-**최종 갱신: 2026-09-20.** 이 README는 실제 실행 결과를 정리한 보고서다.
+**최종 갱신: 2026-09-22.** 이 README는 실제 실행 결과를 정리한 보고서다.
 초기 아이디어와 예정 실험은 [최초 연구계획](docs/RESEARCH_PLAN.md)에 별도로 보존했다.
 
-**최신 진행:** 입 영역 추출 3조건×16발화, 문장부호 평가 점검, 새 validation 영상 검증,
-CPU 출력층 적응까지 완료했다. 세 전처리 중 기존 조건이 가장 낮은 CER 89.79%를 유지했다.
-새 validation에서 기본 CER은 95.71%였고, 출력층만 학습한 뒤에는 97.14%로 나빠졌다.
-학습 자료의 점수 개선을 일반화 성능으로 해석하지 않으며 기본 모델을 유지한다. 상세 내용은 10–14절이다.
+**최신 모델 실험:** 준비된 train 48개·validation 12개를 실제 모델에 넣고,
+출력층만 학습하는 조건과 중간 신경망까지 학습하는 조건을 각각 400회 실행했다.
+중간층+출력층 조건의 train CER은 **90.26% → 70.71%**였지만 validation은 **94.81% → 102.96%**였다.
+학습 자료 적합도 개선이 새 영상 성능으로 이어지지 않아 기본 모델을 유지한다. 상세 결과는 15–17절이다.
 
 **앞선 실험:** 마지막 리사이즈와 MP4 저장의 16회 비교에서도 개선을 확인하지 못했다(9절).
 
@@ -64,7 +64,10 @@ CPU 출력층 적응까지 완료했다. 세 전처리 중 기존 조건이 가�
 | 문장부호·전처리 후보 oracle | 기존 16발화 | 보조 진단 완료 |
 | 새 validation | 사전 선택 2영상×6발화 | 6개 추론, 6개 자료 접근 실패 |
 | CPU 출력층 적응 | 15개 train 발화, 고정 200 update | validation 악화로 미채택 |
-| 자동 검증 | 로컬 전체 테스트 68개 | 통과 |
+| train 확장 및 출력층 재학습 | 48개 선정, 47개 학습, 200 update | 고정 표본 비교 완료 |
+| 추가 validation | 새로운 영상 6개 발화 | 5개 추론, 1개 전처리 실패 포함 |
+| 중간 신경망 학습 | head-only / medium+head 각각 400 update | train 48·valid 12 평가 완료 |
+| 자동 검증 | 로컬 전체 테스트 74개 | 통과 |
 | 보고서 | 이 README와 공개 수치 JSON | 작성 완료 |
 
 ## 데이터와 재현 조건
@@ -540,6 +543,88 @@ validation의 baseline 점수는 앞 단계에서 이미 확인했지만, 이 �
 .venv/Scripts/python.exe -m kvsr.head_adaptation --train results/masked_2026-09-20 --validation results/validation_2026-09-20 --checkpoint checkpoints/olkavs_multiview_lip.pt --repo external/olkavs --output results/head_adaptation_repeat
 ```
 
+## 15. train 16→48개 확장 및 동일 표본 비교
+
+같은 세 train 영상에서 10초 이하 발화를 시간순으로 최대 22개씩 고정하여 **4+22+22=48개**로 늘렸다.
+새 영상·검증된 새 화자를 추가한 실험은 아니다. 47개는 실제 추론됐고 기존의 전체 ROI 미가용 1개는
+빈 자막으로 보류했다. 기존 16개 발화의 토큰은 모두 이전 실행과 같았다.
+
+이전과 같은 출력층 학습 설정(Adam 0.001, full batch, 200 update, 마지막 가중치)을 적용했다.
+기존 21개 유효 특징 캐시는 입력·체크포인트·특징 파일 해시를 확인하여 재사용했다.
+캐시 경로로 기존 16개 실험을 재실행하여 손실, 평가 수치, 최종 파라미터가 비트 단위로 같음을 확인했다.
+
+아래 각 행은 **세 모델에 똑같은 평가 발화**를 넣은 결과다.
+
+| 평가 발화 | 기존 모델 CER | 16개 표본으로 학습한 head | 48개 표본으로 학습한 head |
+|---|---:|---:|---:|
+| 기존 train 16개 | 89.79% | 70.89% | 84.50% |
+| 추가 train 32개 | 90.47% | 90.91% | 83.57% |
+| 전체 train 48개 | 90.26% | 84.58% | 83.86% |
+| 기존 validation 6개 | 95.71% | 97.14% | 101.43% |
+
+48개 head의 학습 loss는 3.21908→1.99957이었다. 기존 head보다 추가 train에서는 좋아졌지만,
+기존 train에서 악화됐고 validation 개선도 없었다. 전체 train 글자 오류는 기존 head 1,415개에서
+확장 head 1,403개로 12개 줄었다(분모 1,673). 표본 구성 변경을 숨기고 서로 다른 train CER끼리
+비교하지 않는다. 같은 200 update라도 full batch가 커져 총 학습 표본 노출량은 늘었다.
+
+## 16. 세 번째 validation 영상에서 고정 가중치 평가
+
+seed 2026의 공식 valid 순서에서 세 번째인 `VYLaaU2kAsE`를 추가했고,
+10초 이하 시간순 첫 6개 발화를 다운로드 전에 고정했다. 앞선 비공개 영상의 실패 기록은 유지하며
+이를 대체한 것으로 계산하지 않는다. 이 추가 영상은 두 head의 학습 입력에 없음을 검사했다.
+
+6개 중 5개는 추론했고, `000019`는 ASD 얼굴 상자가 영상 밖으로 나가 전처리에 실패했다.
+실패를 빈 자막으로 포함한 결과는 다음과 같다. 정답은 65글자다.
+
+| 모델 | 글자 오류 | CER |
+|---|---:|---:|
+| 기존 모델 | 61 | 93.85% |
+| 16개 표본 head, 200 update | 64 | 98.46% |
+| 48개 표본 head, 200 update | 64 | 98.46% |
+
+가중치는 추가 영상 평가 전에 고정했으며 결과를 보고 다시 학습하지 않았다.
+기존·추가 validation의 12개 발화를 합하면 기존 모델 128/135=94.81%, 작은 head 132/135=97.78%,
+확장 head 135/135=100.00%다. 이 집계에는 접근 가능한 두 영상의 전처리 실패 1개가 포함되고,
+이전 비공개 영상의 접근 실패 6개는 별도 기록에 남아 있다. 최종 test 평가나 화자 독립 평가가 아니다.
+
+## 17. 실제 모델 실험: 중간 신경망+CTC 출력층 학습 (9/22)
+
+데이터 정제를 추가하지 않고 준비된 **train 48개, validation 12개**를 모델에 넣었다.
+동일한 고정 영상 encoder 출력에서 아래 두 학습 조건을 비교했다.
+
+- **head_only:** 마지막 CTC 선형층 18,504개 파라미터 학습.
+- **medium_head:** 기존 medium MLP와 CTC 출력층의 546,120개 파라미터 학습.
+
+두 조건은 원래 체크포인트에서 각각 시작했다. seed 2026, batch 4, Adam 0.0001,
+gradient norm 1.0, **동일한 샘플 순서로 400 update**, 마지막 가중치 평가를 고정했다.
+영상 encoder는 고정하고 BatchNorm running statistics는 eval 상태로 유지했다.
+실제 학습에 사용한 발화는 47개이며, 전체 ROI 미가용 train 1개와 전처리 실패 valid 1개는
+모든 조건의 평가에 빈 출력으로 포함했다. 새로 계산한 초기 토큰은 이전 baseline과 모두 일치했다.
+
+| 동일 평가 자료 | 기존 모델 | head_only | medium_head |
+|---|---:|---:|---:|
+| train 48개 CER | 90.26% (1510/1673) | 88.94% (1488/1673) | **70.71% (1183/1673)** |
+| validation 12개 CER | **94.81% (128/135)** | 97.78% (132/135) | 102.96% (139/135) |
+| `rGR4FdaIvw8` 6개 CER | 95.71% | 98.57% | 105.71% |
+| `VYLaaU2kAsE` 6개 CER | 93.85% | 96.92% | 100.00% |
+
+CER도 삽입 오류가 있으면 100%를 넘을 수 있다. 17절의 head_only는 15–16절과 학습률·batch·update가
+다른 새 대조 조건이다. medium_head와의 비교에는 17절의 동일 조건 head_only를 사용한다.
+기록된 loss는 매번 다른 minibatch의 값이므로 전체 train loss의 단조 감소 곡선으로 해석하지 않는다.
+
+**결과:** 중간층까지 학습하면 train에서는 더 잘 맞지만 두 validation 영상 모두 개선되지 않았다.
+학습 조건을 바꾸거나 파라미터를 더 많이 학습하는 것만으로 현재 표본의 일반화 문제가 해결되지는 않았다.
+validation은 작은 개발 표본이며 이미 여러 번 평가됐으므로 통계적 우열이나 최종 성능을 주장하지 않는다.
+실험 가중치는 별도 파일로 보존하고 기본 모델에는 적용하지 않았다.
+
+실제 정답과 세 조건의 자막은 로컬 `results/medium_experiment_2026-09-22/sample_outputs.md`에
+나란히 기록했다. 전체 예측 JSONL과 학습 가중치도 같은 로컬 폴더에 있다. 공개 저장소에는 수치와 해시만 올린다.
+
+```powershell
+# 기존 데이터·공식 코드·체크포인트가 준비된 환경에서 새로운 output 지정
+.venv/Scripts/python.exe -m kvsr.medium_experiment --output results/medium_experiment_repeat
+```
+
 ## 구현과 검증
 
 - `kvsr/nbest.py`: blank/반복 문자를 올바르게 합산하는 CTC prefix beam과 독립 oracle 평가.
@@ -554,11 +639,15 @@ validation의 baseline 점수는 앞 단계에서 이미 확인했지만, 이 �
 - `kvsr/punctuation_audit.py`: 기존 예측의 문장부호 보조 평가, 기본 점수 보존.
 - `kvsr/validation_experiment.py`: 사전 표본 고정, split·설정·입력 해시 검사, 접근 실패 보존.
 - `kvsr/head_adaptation.py`: 고정 특징과 CTC 출력층만 사용하는 CPU 적응 진단.
-- 로컬 `.venv`에서 **68개 테스트 통과**. CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
+- `kvsr/train_expansion.py`, `kvsr/adaptation_comparison.py`: 48개 train 선정·실행과 동일 표본 비교.
+- `kvsr/head_validation.py`: 학습 입력에 없는 추가 validation 영상에서 고정 head 평가.
+- `kvsr/medium_experiment.py`: 실제 영상 encoder 실행, 두 학습 조건 400 update, 60발화 평가와 로컬 자막 비교표.
+- 로컬 `.venv`에서 **74개 테스트 통과**. CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
   EOS/반복 문자, 실패 누락 방지, 합성 마스크 범위, 보간 경계/길이 제한을 검증했다.
   이번에 축소 기준 일치, MP4 시간·색상 유지, 잘못된 입력 거부 검사를 추가했다.
   좌표 역변환·원 픽셀 재현, 문장부호 분모 변경, validation 설정 고정, CTC target 정렬 검사도 포함한다.
-  선택 의존성이 없는 기본 Python에서는 68개 중 23개를 건너뛰고 나머지가 통과했다.
+  특징 캐시 변조·입력 불일치 거부와 기존/추가 학습 표본 분리도 검사했다.
+  선택 의존성이 없는 기본 Python에서는 74개 중 25개를 건너뛰고 나머지가 통과했다.
 - 새 clean 실행과 hybrid 실행의 greedy 토큰은 이전 4단계의 네 발화와 모두 같았다.
 - GitHub CI는 코드 검증용이며 데이터·체크포인트를 내려받아 전체 실험을 재실행하지 않는다.
 
@@ -600,6 +689,10 @@ validation의 baseline 점수는 앞 단계에서 이미 확인했지만, 이 �
 | 문장부호 보조 평가 | [punctuation JSON](experiments/punctuation_2026-09-20.json) |
 | 새 validation | [사전 계획](experiments/validation_plan_2026-09-20.json), [접근 기록](experiments/validation_acquisition_2026-09-20.json), [실행 결과](experiments/validation_2026-09-20.json) |
 | CPU 출력층 적응 | [head adaptation JSON](experiments/head_adaptation_2026-09-20.json) |
+| train 48개 확장 | [계획](experiments/train48_plan_2026-09-20.json), [실행](experiments/train48_2026-09-20.json), [학습](experiments/head48_2026-09-20.json) |
+| 동일 표본 head 비교 | [comparison JSON](experiments/adaptation_comparison_2026-09-20.json), [캐시 재현](experiments/feature_cache_regression_2026-09-20.json) |
+| 추가 validation | [계획](experiments/validation_extension_plan_2026-09-20.json), [전처리·baseline](experiments/validation_extension_2026-09-20.json), [head 비교](experiments/head_validation_extension_2026-09-20.json) |
+| 중간 신경망+출력층 학습 | [실험 JSON](experiments/medium_experiment_2026-09-22.json) |
 
 이전 단계 상세 기록: [1단계](docs/STAGE1.md), [2단계](docs/STAGE2.md),
 [3단계](docs/STAGE3.md), [4단계](docs/STAGE4.md), [5단계](docs/STAGE5.md).
@@ -607,7 +700,7 @@ validation의 baseline 점수는 앞 단계에서 이미 확인했지만, 이 �
 ## 남은 과제와 다음 진행 순서
 
 1. 데이터 접근 가능성을 포함한 더 큰 train·valid 표본과 화자 구성을 먼저 고정한다.
-   현재 15개 train 발화의 출력층 적응은 validation 개선으로 이어지지 않았다.
+   47개 train 발화의 출력층 및 중간층 적응도 validation 개선으로 이어지지 않았다.
    비공개 표본을 조용히 교체하거나, 성공한 발화만으로 정확도를 보고하지 않는다.
 2. 한국어 fine-tuned 가중치를 실제 확보하거나, 늘어난 데이터에서 특징 고정/부분 적응을 비교한다.
    학습 전 표본과 설정을 기록하고 validation 결과를 보고 반복 조정한 경우 이를 명시한다.

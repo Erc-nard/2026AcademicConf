@@ -1,0 +1,8 @@
+{
+  "original_summary_sha256": "d04088b5b3fb1a255f04b1674d28b02c22bb8cbfa84c4073e86f0eae2a47b320",
+  "replay_summary_sha256": "08687dc7810d9aef681d0b43609392a9bd37b97e437ac58adc138e732d3e0f74",
+  "cache_hits": 21,
+  "head_parameters_bitwise_equal": true,
+  "loss_trace_equal": true,
+  "metrics_equal": true
+}

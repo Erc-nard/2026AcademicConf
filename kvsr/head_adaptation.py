@@ -14,7 +14,7 @@ import re
 import sys
 
 from .data import read_jsonl, write_jsonl
-from .evaluation import evaluate
+from .evaluation import evaluate,indexed
 from .preprocessing import sha256
 
 
@@ -40,7 +40,31 @@ def build_targets(reference, refine, decompose, char_to_id, frames):
     return tokens
 
 
-def run(train, validation, checkpoint, repo, output):
+def read_cached_feature(root, summary, sample_id, mouth_hash, checkpoint_hash, frames):
+    """Reject stale or corrupted caches; absence of an entry is a cache miss."""
+    import numpy as np
+    if summary['plan']['checkpoint_sha256']!=checkpoint_hash:
+        raise ValueError('Feature cache checkpoint mismatch')
+    entries={r['id']:r for r in summary['plan']['inputs']}
+    if sample_id not in entries:
+        return None
+    if entries[sample_id]['mouth_sha256']!=mouth_hash:
+        raise ValueError('Feature cache input mismatch')
+    video_id,utterance=sample_id.split('/')
+    name=f'{video_id}_{utterance}.npy'
+    path=root/'features'/name
+    expected=summary['feature_hashes'].get(name)
+    if expected is None:
+        return None
+    if sha256(path)!=expected:
+        raise ValueError('Feature cache bytes changed')
+    feature=np.load(path,allow_pickle=False)
+    if feature.dtype!=np.float32 or feature.shape!=(frames,256) or not np.isfinite(feature).all():
+        raise ValueError('Feature cache shape, type or values invalid')
+    return feature
+
+
+def run(train, validation, checkpoint, repo, output, feature_cache=None):
     import numpy as np
     import torch
     from .missing import normalize_available
@@ -85,25 +109,34 @@ def run(train, validation, checkpoint, repo, output):
             raise ValueError('Validation source split mismatch')
         for row in actual['selected']:
             rows.append(dict(id=row['id'],utterance=row['utterance'],video_id=video['video_id'],split='valid',root=root))
-    if len(rows)!=22 or len({r['id'] for r in rows})!=22:
-        raise ValueError('Expected 16 train and six available validation samples')
+    train_count=sum(r['split']=='train' for r in rows)
+    if train_count not in (16,48) or len(rows)-train_count!=6 or len({r['id'] for r in rows})!=len(rows):
+        raise ValueError('Expected frozen 16/48 train and six available validation samples')
+    failed_inputs={}
+    for root in {r['root'] for r in rows}:
+        source_summary=json.loads((root/'summary.json').read_text(encoding='utf-8'))
+        for failure in source_summary['conditions']['scale17_none']['failures']:
+            failed_inputs[failure['id']]=failure['stage']
     inputs=[]
     for row in rows:
         mouth=row['root']/'crops/scale1.7_none'/row['utterance']/'mouth.npz'
-        inputs.append(dict(id=row['id'],split=row['split'],mouth_sha256=sha256(mouth)))
-    frozen=dict(scope='tiny train adaptation pilot; one previously inspected validation video, not a held-out test',
+        inputs.append(dict(id=row['id'],split=row['split'],mouth_sha256=sha256(mouth) if row['id'] not in failed_inputs else None))
+    cached_summary=json.loads((feature_cache/'summary.json').read_text(encoding='utf-8')) if feature_cache else None
+    frozen=dict(scope='small train adaptation pilot; one previously inspected validation video, not a held-out test',
         inputs=inputs,checkpoint_sha256=sha256(checkpoint),official_refinement_sha256=sha256(repo/'preprocess.py'),
         vocabulary_sha256=sha256(repo/'vocabulary/kor_grapheme.csv'),
         train_reference_hashes={v:sha256(train/v/'references.jsonl') for v in ['8r1k9NLdSvE','5TaVl7-lU4k','D-hzf2x_XO0']},
         validation_summary_sha256=sha256(validation/'summary.json'),
+        feature_cache_summary_sha256=sha256(feature_cache/'summary.json') if feature_cache else None,
+        excluded_training_policy='no features, empty/unsupported normalized target, or impossible CTC alignment; all retained in evaluation',
         settings=dict(seed=2026,steps=200,optimizer='Adam',learning_rate=.001,weight_decay=0.,gradient_clip_norm=1.,
             batch='all usable train utterances',loss='CTCLoss mean, true input lengths, blank=3, zero_infinity=False',
             target='official refine_transcription -> char2grp -> vocabulary, append EOS=2',
             trainable='only decoder.ctcdecoder.fc weight and bias; encoder/medium/attention frozen',
             checkpoint_selection='fixed final step; no early stopping or validation selection'),
         audio_used=False,validation_references_used_in_training=False,
-        limitations=['15 usable train utterances from three videos are too small for a generalization claim',
-            'One all-missing train sample is excluded from gradient updates but retained as empty output in evaluation',
+        limitations=['A small set of train utterances from three videos is insufficient for a generalization claim',
+            'Failed/all-missing samples are excluded from gradient updates but retained as empty output in evaluation',
             'Private validation video remains unavailable and is not used for training or model-quality scoring'])
     save('plan.json',frozen)
     model=build_model(72,0,architecture='video',loss_fn='hybrid',front_dim=512,
@@ -115,21 +148,31 @@ def run(train, validation, checkpoint, repo, output):
     head=copy.deepcopy(model.decoder.ctcdecoder).requires_grad_(True)
     features={}
     baseline=[]
+    cache_hits=0
     (output/'features').mkdir()
     for index,row in enumerate(rows,1):
+        if row['id'] in failed_inputs:
+            features[row['id']]=None
+            baseline.append(dict(id=row['id'],hypothesis='',token_ids=[]))
+            continue
         mouth=row['root']/'crops/scale1.7_none'/row['utterance']/'mouth.npz'
         with np.load(mouth,allow_pickle=False) as data:
             frames,_=prepare_frames(data['frames'],float(data['fps']),96,None)
             observed=data['roi_observed']
         if observed.any():
-            video=normalize_available(frames,observed)
+            cached=read_cached_feature(feature_cache,cached_summary,row['id'],sha256(mouth),frozen['checkpoint_sha256'],len(frames)) if cached_summary else None
+            if cached is not None:
+                features[row['id']]=torch.from_numpy(cached.copy())
+                cache_hits+=1
+            else:
+                video=normalize_available(frames,observed)
+                with torch.inference_mode():
+                    front=chunk_frontend(model.encoder.front,video)
+                    encoded=model.encoder.back(model.encoder.projection(front),torch.tensor([len(frames)]))
+                    feature=model.medium(encoded)[0]
+                features[row['id']]=feature.clone()  # Outside inference_mode: safe for head gradients.
             with torch.inference_mode():
-                front=chunk_frontend(model.encoder.front,video)
-                encoded=model.encoder.back(model.encoder.projection(front),torch.tensor([len(frames)]))
-                feature=model.medium(encoded)[0]
-                logits=model.decoder.ctcdecoder(feature)
-                tokens=collapse_ctc(logits.argmax(-1).tolist())
-            features[row['id']]=feature.clone()  # Outside inference_mode: safe to save for head gradients.
+                tokens=collapse_ctc(model.decoder.ctcdecoder(features[row['id']]).argmax(-1).tolist())
             np.save(output/'features'/f"{row['video_id']}_{row['utterance']}.npy",features[row['id']].numpy(),allow_pickle=False)
         else:
             features[row['id']]=None
@@ -139,15 +182,32 @@ def run(train, validation, checkpoint, repo, output):
     prior={}
     for root in {r['root'] for r in rows}:
         prior.update({r['id']:r for r in read_jsonl(root/'scale17_none/predictions.jsonl')})
+    prior.update({sample_id:dict(token_ids=[]) for sample_id in failed_inputs})
     if not all(row['token_ids']==prior[row['id']]['token_ids'] for row in baseline):
         raise ValueError('Feature-cache baseline differs from recorded predictions')
     train_refs=[]
     for video_id in ['8r1k9NLdSvE','5TaVl7-lU4k','D-hzf2x_XO0']:
         train_refs.extend(read_jsonl(train/video_id/'references.jsonl'))
-    selected_refs=[r for r in train_refs if features[r['id']] is not None]
+    if set(indexed(train_refs,'reference'))!={r['id'] for r in rows if r['split']=='train'}:
+        raise ValueError('Training references must match the frozen training IDs exactly')
+    selected_refs,labels,exclusions=[],[],[]
+    for reference in train_refs:
+        feature=features[reference['id']]
+        if feature is None:
+            exclusions.append(dict(id=reference['id'],reason='no usable features',stage=failed_inputs.get(reference['id'],'all_roi_missing')))
+            continue
+        try:
+            target=build_targets(reference['reference'],namespace['refine_transcription'],char2grp,char_to_id,len(feature))
+        except ValueError as error:
+            exclusions.append(dict(id=reference['id'],reason=str(error),stage='training_target'))
+            continue
+        selected_refs.append(reference)
+        labels.append(target)
+    if not selected_refs:
+        raise ValueError('No eligible training samples')
+    save('training_eligibility.json',dict(selected=len(train_refs),used=len(selected_refs),excluded=exclusions))
     x=torch.nn.utils.rnn.pad_sequence([features[r['id']] for r in selected_refs],batch_first=True)
     lengths=torch.tensor([len(features[r['id']]) for r in selected_refs],dtype=torch.long)
-    labels=[build_targets(r['reference'],namespace['refine_transcription'],char2grp,char_to_id,int(n)) for r,n in zip(selected_refs,lengths)]
     targets=torch.tensor([t for label in labels for t in label],dtype=torch.long)
     target_lengths=torch.tensor([len(label) for label in labels],dtype=torch.long)
     criterion=torch.nn.CTCLoss(blank=3,reduction='mean',zero_infinity=False)
@@ -185,8 +245,11 @@ def run(train, validation, checkpoint, repo, output):
         metrics[name]={condition:evaluate(refs,[r for r in predictions if r['id'] in ids])
             for condition,predictions in [('baseline',baseline),('adapted',adapted)]}
     save('summary.json',dict(plan=frozen,plan_sha256=sha256(output/'plan.json'),metrics=metrics,loss_trace=losses,
-        trainable_parameters=sum(p.numel() for p in head.parameters()),train_samples_with_features=len(selected_refs),
-        train_all_missing_retained_in_evaluation=len(train_refs)-len(selected_refs),
+        trainable_parameters=sum(p.numel() for p in head.parameters()),
+        train_samples_with_features=sum(features[r['id']] is not None for r in train_refs),
+        train_samples_used_for_updates=len(selected_refs),
+        train_all_missing_retained_in_evaluation=sum(features[r['id']] is None and r['id'] not in failed_inputs for r in train_refs),
+        training_exclusions=exclusions,feature_cache_hits=cache_hits,
         baseline_tokens_equal_previous=True,head_sha256=sha256(output/'ctc_head.pt'),torch_version=torch.__version__,
         frozen_parameter_tensors=sum(1 for p in model.parameters() if not p.requires_grad),
         feature_hashes={p.name:sha256(p) for p in sorted((output/'features').glob('*.npy'))}))
@@ -196,5 +259,6 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ['train','validation','checkpoint','repo','output']:
         parser.add_argument('--'+name,type=Path,required=True)
+    parser.add_argument('--feature-cache',type=Path)
     args=parser.parse_args()
-    run(args.train,args.validation,args.checkpoint,args.repo,args.output)
+    run(args.train,args.validation,args.checkpoint,args.repo,args.output,args.feature_cache)

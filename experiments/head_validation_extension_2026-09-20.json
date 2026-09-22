@@ -1,0 +1,266 @@
+{
+  "plan": {
+    "selection_sha256": "7d539182708437d0ca5563901d8084a1314b53885b79ac05e41d54046d7a012c",
+    "batch_summary_sha256": "0179265711fda5525c562db0ad90da2549aca5b9a0c88151fd5081b58fdfbd51",
+    "small_head_sha256": "940471d78b6a81acba3acea3d0f38f38b560a621b3df5b4b8be0e29317c7ccfb",
+    "expanded_head_sha256": "c83a1d3b26cceaeeae25152f2f4b05951f1f6fda1dbfd4b78ce7f661f46a39d2",
+    "base_checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+    "video_id": "VYLaaU2kAsE",
+    "selected": [
+      {
+        "id": "VYLaaU2kAsE/000008",
+        "utterance": "000008",
+        "start_ms": 17478,
+        "end_ms": 18742
+      },
+      {
+        "id": "VYLaaU2kAsE/000019",
+        "utterance": "000019",
+        "start_ms": 82844,
+        "end_ms": 86469
+      },
+      {
+        "id": "VYLaaU2kAsE/000027",
+        "utterance": "000027",
+        "start_ms": 106760,
+        "end_ms": 108530
+      },
+      {
+        "id": "VYLaaU2kAsE/000032",
+        "utterance": "000032",
+        "start_ms": 119551,
+        "end_ms": 121835
+      },
+      {
+        "id": "VYLaaU2kAsE/000038",
+        "utterance": "000038",
+        "start_ms": 131598,
+        "end_ms": 133411
+      },
+      {
+        "id": "VYLaaU2kAsE/000045",
+        "utterance": "000045",
+        "start_ms": 177171,
+        "end_ms": 179754
+      }
+    ],
+    "training_performed": false,
+    "scope": "additional official valid video, fixed heads; no checkpoint selection on these references"
+  },
+  "plan_sha256": "306c87f5b70cf75f8dde055e38236ab673343fb1b4d872b3db4f14abe5246f67",
+  "metrics": {
+    "baseline": {
+      "samples": 6,
+      "cer": 0.9384615384615385,
+      "wer": 1.05,
+      "char_errors": 61,
+      "reference_chars": 65,
+      "word_errors": 21,
+      "reference_words": 20,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "VYLaaU2kAsE/000008",
+          "char_errors": 3,
+          "reference_chars": 2,
+          "word_errors": 1,
+          "reference_words": 1
+        },
+        {
+          "id": "VYLaaU2kAsE/000019",
+          "char_errors": 18,
+          "reference_chars": 18,
+          "word_errors": 6,
+          "reference_words": 6
+        },
+        {
+          "id": "VYLaaU2kAsE/000027",
+          "char_errors": 11,
+          "reference_chars": 12,
+          "word_errors": 4,
+          "reference_words": 4
+        },
+        {
+          "id": "VYLaaU2kAsE/000032",
+          "char_errors": 7,
+          "reference_chars": 11,
+          "word_errors": 3,
+          "reference_words": 2
+        },
+        {
+          "id": "VYLaaU2kAsE/000038",
+          "char_errors": 11,
+          "reference_chars": 11,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "VYLaaU2kAsE/000045",
+          "char_errors": 11,
+          "reference_chars": 11,
+          "word_errors": 4,
+          "reference_words": 4
+        }
+      ]
+    },
+    "small_head": {
+      "samples": 6,
+      "cer": 0.9846153846153847,
+      "wer": 1.0,
+      "char_errors": 64,
+      "reference_chars": 65,
+      "word_errors": 20,
+      "reference_words": 20,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "VYLaaU2kAsE/000008",
+          "char_errors": 4,
+          "reference_chars": 2,
+          "word_errors": 1,
+          "reference_words": 1
+        },
+        {
+          "id": "VYLaaU2kAsE/000019",
+          "char_errors": 18,
+          "reference_chars": 18,
+          "word_errors": 6,
+          "reference_words": 6
+        },
+        {
+          "id": "VYLaaU2kAsE/000027",
+          "char_errors": 12,
+          "reference_chars": 12,
+          "word_errors": 4,
+          "reference_words": 4
+        },
+        {
+          "id": "VYLaaU2kAsE/000032",
+          "char_errors": 9,
+          "reference_chars": 11,
+          "word_errors": 2,
+          "reference_words": 2
+        },
+        {
+          "id": "VYLaaU2kAsE/000038",
+          "char_errors": 10,
+          "reference_chars": 11,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "VYLaaU2kAsE/000045",
+          "char_errors": 11,
+          "reference_chars": 11,
+          "word_errors": 4,
+          "reference_words": 4
+        }
+      ]
+    },
+    "expanded_head": {
+      "samples": 6,
+      "cer": 0.9846153846153847,
+      "wer": 1.05,
+      "char_errors": 64,
+      "reference_chars": 65,
+      "word_errors": 21,
+      "reference_words": 20,
+      "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+      "details": [
+        {
+          "id": "VYLaaU2kAsE/000008",
+          "char_errors": 6,
+          "reference_chars": 2,
+          "word_errors": 1,
+          "reference_words": 1
+        },
+        {
+          "id": "VYLaaU2kAsE/000019",
+          "char_errors": 18,
+          "reference_chars": 18,
+          "word_errors": 6,
+          "reference_words": 6
+        },
+        {
+          "id": "VYLaaU2kAsE/000027",
+          "char_errors": 12,
+          "reference_chars": 12,
+          "word_errors": 4,
+          "reference_words": 4
+        },
+        {
+          "id": "VYLaaU2kAsE/000032",
+          "char_errors": 7,
+          "reference_chars": 11,
+          "word_errors": 3,
+          "reference_words": 2
+        },
+        {
+          "id": "VYLaaU2kAsE/000038",
+          "char_errors": 11,
+          "reference_chars": 11,
+          "word_errors": 3,
+          "reference_words": 3
+        },
+        {
+          "id": "VYLaaU2kAsE/000045",
+          "char_errors": 10,
+          "reference_chars": 11,
+          "word_errors": 4,
+          "reference_words": 4
+        }
+      ]
+    }
+  },
+  "availability": [
+    {
+      "id": "VYLaaU2kAsE/000008",
+      "frames": 33,
+      "usable_frames": 9,
+      "inference_performed": true
+    },
+    {
+      "id": "VYLaaU2kAsE/000019",
+      "frames": null,
+      "usable_frames": 0,
+      "inference_performed": false
+    },
+    {
+      "id": "VYLaaU2kAsE/000027",
+      "frames": 45,
+      "usable_frames": 38,
+      "inference_performed": true
+    },
+    {
+      "id": "VYLaaU2kAsE/000032",
+      "frames": 58,
+      "usable_frames": 37,
+      "inference_performed": true
+    },
+    {
+      "id": "VYLaaU2kAsE/000038",
+      "frames": 47,
+      "usable_frames": 47,
+      "inference_performed": true
+    },
+    {
+      "id": "VYLaaU2kAsE/000045",
+      "frames": 65,
+      "usable_frames": 64,
+      "inference_performed": true
+    }
+  ],
+  "failures": [
+    {
+      "id": "VYLaaU2kAsE/000019",
+      "stage": "preprocess",
+      "error": "error: ASD face box exceeds image at frame 2072"
+    }
+  ],
+  "baseline_tokens_equal": true,
+  "inference_performed": 5,
+  "limitations": [
+    "One additional video with six selected utterances is not a final test set",
+    "Previous inaccessible validation video remains recorded separately, not replaced"
+  ]
+}

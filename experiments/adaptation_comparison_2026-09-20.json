@@ -1,0 +1,2441 @@
+{
+  "original_summary_sha256": "d04088b5b3fb1a255f04b1674d28b02c22bb8cbfa84c4073e86f0eae2a47b320",
+  "expanded_summary_sha256": "82bb32d794ae53f6f423a2a2fa13559dd7ffb8938a48438f51d0463cb3a78a53",
+  "original_head_replay_equal": true,
+  "group_ids": {
+    "train_original": [
+      "5TaVl7-lU4k/000005",
+      "5TaVl7-lU4k/000008",
+      "5TaVl7-lU4k/000009",
+      "5TaVl7-lU4k/000015",
+      "5TaVl7-lU4k/000016",
+      "5TaVl7-lU4k/000019",
+      "8r1k9NLdSvE/000006",
+      "8r1k9NLdSvE/000018",
+      "8r1k9NLdSvE/000027",
+      "8r1k9NLdSvE/000033",
+      "D-hzf2x_XO0/000030",
+      "D-hzf2x_XO0/000031",
+      "D-hzf2x_XO0/000032",
+      "D-hzf2x_XO0/000034",
+      "D-hzf2x_XO0/000052",
+      "D-hzf2x_XO0/000062"
+    ],
+    "train_added": [
+      "5TaVl7-lU4k/000024",
+      "5TaVl7-lU4k/000025",
+      "5TaVl7-lU4k/000026",
+      "5TaVl7-lU4k/000027",
+      "5TaVl7-lU4k/000030",
+      "5TaVl7-lU4k/000033",
+      "5TaVl7-lU4k/000036",
+      "5TaVl7-lU4k/000038",
+      "5TaVl7-lU4k/000039",
+      "5TaVl7-lU4k/000040",
+      "5TaVl7-lU4k/000042",
+      "5TaVl7-lU4k/000043",
+      "5TaVl7-lU4k/000044",
+      "5TaVl7-lU4k/000045",
+      "5TaVl7-lU4k/000046",
+      "5TaVl7-lU4k/000051",
+      "D-hzf2x_XO0/000063",
+      "D-hzf2x_XO0/000064",
+      "D-hzf2x_XO0/000066",
+      "D-hzf2x_XO0/000067",
+      "D-hzf2x_XO0/000068",
+      "D-hzf2x_XO0/000076",
+      "D-hzf2x_XO0/000090",
+      "D-hzf2x_XO0/000092",
+      "D-hzf2x_XO0/000094",
+      "D-hzf2x_XO0/000095",
+      "D-hzf2x_XO0/000096",
+      "D-hzf2x_XO0/000098",
+      "D-hzf2x_XO0/000104",
+      "D-hzf2x_XO0/000115",
+      "D-hzf2x_XO0/000117",
+      "D-hzf2x_XO0/000118"
+    ],
+    "train_all": [
+      "5TaVl7-lU4k/000005",
+      "5TaVl7-lU4k/000008",
+      "5TaVl7-lU4k/000009",
+      "5TaVl7-lU4k/000015",
+      "5TaVl7-lU4k/000016",
+      "5TaVl7-lU4k/000019",
+      "5TaVl7-lU4k/000024",
+      "5TaVl7-lU4k/000025",
+      "5TaVl7-lU4k/000026",
+      "5TaVl7-lU4k/000027",
+      "5TaVl7-lU4k/000030",
+      "5TaVl7-lU4k/000033",
+      "5TaVl7-lU4k/000036",
+      "5TaVl7-lU4k/000038",
+      "5TaVl7-lU4k/000039",
+      "5TaVl7-lU4k/000040",
+      "5TaVl7-lU4k/000042",
+      "5TaVl7-lU4k/000043",
+      "5TaVl7-lU4k/000044",
+      "5TaVl7-lU4k/000045",
+      "5TaVl7-lU4k/000046",
+      "5TaVl7-lU4k/000051",
+      "8r1k9NLdSvE/000006",
+      "8r1k9NLdSvE/000018",
+      "8r1k9NLdSvE/000027",
+      "8r1k9NLdSvE/000033",
+      "D-hzf2x_XO0/000030",
+      "D-hzf2x_XO0/000031",
+      "D-hzf2x_XO0/000032",
+      "D-hzf2x_XO0/000034",
+      "D-hzf2x_XO0/000052",
+      "D-hzf2x_XO0/000062",
+      "D-hzf2x_XO0/000063",
+      "D-hzf2x_XO0/000064",
+      "D-hzf2x_XO0/000066",
+      "D-hzf2x_XO0/000067",
+      "D-hzf2x_XO0/000068",
+      "D-hzf2x_XO0/000076",
+      "D-hzf2x_XO0/000090",
+      "D-hzf2x_XO0/000092",
+      "D-hzf2x_XO0/000094",
+      "D-hzf2x_XO0/000095",
+      "D-hzf2x_XO0/000096",
+      "D-hzf2x_XO0/000098",
+      "D-hzf2x_XO0/000104",
+      "D-hzf2x_XO0/000115",
+      "D-hzf2x_XO0/000117",
+      "D-hzf2x_XO0/000118"
+    ],
+    "validation": [
+      "rGR4FdaIvw8/000004",
+      "rGR4FdaIvw8/000006",
+      "rGR4FdaIvw8/000008",
+      "rGR4FdaIvw8/000026",
+      "rGR4FdaIvw8/000040",
+      "rGR4FdaIvw8/000047"
+    ]
+  },
+  "metrics": {
+    "train_original": {
+      "baseline": {
+        "samples": 16,
+        "cer": 0.8979206049149339,
+        "wer": 0.9837837837837838,
+        "char_errors": 475,
+        "reference_chars": 529,
+        "word_errors": 182,
+        "reference_words": 185,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 17,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 46,
+            "reference_chars": 53,
+            "word_errors": 17,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 38,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 57,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 49,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 13,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 29,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 12,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 38,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ]
+      },
+      "small_head": {
+        "samples": 16,
+        "cer": 0.7088846880907372,
+        "wer": 0.9297297297297298,
+        "char_errors": 375,
+        "reference_chars": 529,
+        "word_errors": 172,
+        "reference_words": 185,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 22,
+            "reference_chars": 34,
+            "word_errors": 13,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 10,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 44,
+            "reference_chars": 53,
+            "word_errors": 18,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 34,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 53,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 46,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 3,
+            "reference_chars": 19,
+            "word_errors": 2,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 5,
+            "reference_chars": 20,
+            "word_errors": 4,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 23,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 29,
+            "reference_chars": 40,
+            "word_errors": 14,
+            "reference_words": 15
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 19,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 3,
+            "reference_chars": 15,
+            "word_errors": 6,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 27,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ]
+      },
+      "expanded_head": {
+        "samples": 16,
+        "cer": 0.8449905482041588,
+        "wer": 0.972972972972973,
+        "char_errors": 447,
+        "reference_chars": 529,
+        "word_errors": 180,
+        "reference_words": 185,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 29,
+            "reference_chars": 34,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 19,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 44,
+            "reference_chars": 53,
+            "word_errors": 18,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 37,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 56,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 48,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 10,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 12,
+            "reference_chars": 20,
+            "word_errors": 4,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 31,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 31,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 28,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 10,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 1,
+            "reference_chars": 4,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 42,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 36,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          }
+        ]
+      }
+    },
+    "train_added": {
+      "baseline": {
+        "samples": 32,
+        "cer": 0.9047202797202797,
+        "wer": 0.9920844327176781,
+        "char_errors": 1035,
+        "reference_chars": 1144,
+        "word_errors": 376,
+        "reference_words": 379,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000024",
+            "char_errors": 39,
+            "reference_chars": 40,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000025",
+            "char_errors": 30,
+            "reference_chars": 37,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000026",
+            "char_errors": 51,
+            "reference_chars": 61,
+            "word_errors": 22,
+            "reference_words": 22
+          },
+          {
+            "id": "5TaVl7-lU4k/000027",
+            "char_errors": 52,
+            "reference_chars": 59,
+            "word_errors": 18,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000030",
+            "char_errors": 15,
+            "reference_chars": 15,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "5TaVl7-lU4k/000033",
+            "char_errors": 36,
+            "reference_chars": 38,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000036",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000038",
+            "char_errors": 46,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 17
+          },
+          {
+            "id": "5TaVl7-lU4k/000039",
+            "char_errors": 35,
+            "reference_chars": 41,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000040",
+            "char_errors": 45,
+            "reference_chars": 52,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000042",
+            "char_errors": 41,
+            "reference_chars": 45,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000043",
+            "char_errors": 37,
+            "reference_chars": 46,
+            "word_errors": 14,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000044",
+            "char_errors": 42,
+            "reference_chars": 47,
+            "word_errors": 17,
+            "reference_words": 18
+          },
+          {
+            "id": "5TaVl7-lU4k/000045",
+            "char_errors": 52,
+            "reference_chars": 56,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000046",
+            "char_errors": 52,
+            "reference_chars": 60,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000051",
+            "char_errors": 67,
+            "reference_chars": 68,
+            "word_errors": 24,
+            "reference_words": 24
+          },
+          {
+            "id": "D-hzf2x_XO0/000063",
+            "char_errors": 38,
+            "reference_chars": 41,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 13,
+            "reference_chars": 16,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "D-hzf2x_XO0/000066",
+            "char_errors": 12,
+            "reference_chars": 13,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000067",
+            "char_errors": 22,
+            "reference_chars": 28,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000068",
+            "char_errors": 20,
+            "reference_chars": 23,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000076",
+            "char_errors": 40,
+            "reference_chars": 42,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "D-hzf2x_XO0/000090",
+            "char_errors": 26,
+            "reference_chars": 26,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000092",
+            "char_errors": 8,
+            "reference_chars": 8,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000094",
+            "char_errors": 23,
+            "reference_chars": 25,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 11,
+            "reference_chars": 12,
+            "word_errors": 4,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000096",
+            "char_errors": 31,
+            "reference_chars": 34,
+            "word_errors": 11,
+            "reference_words": 11
+          },
+          {
+            "id": "D-hzf2x_XO0/000098",
+            "char_errors": 21,
+            "reference_chars": 23,
+            "word_errors": 9,
+            "reference_words": 7
+          },
+          {
+            "id": "D-hzf2x_XO0/000104",
+            "char_errors": 21,
+            "reference_chars": 21,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000115",
+            "char_errors": 17,
+            "reference_chars": 17,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 6,
+            "reference_chars": 6,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000118",
+            "char_errors": 54,
+            "reference_chars": 55,
+            "word_errors": 17,
+            "reference_words": 17
+          }
+        ]
+      },
+      "small_head": {
+        "samples": 32,
+        "cer": 0.9090909090909091,
+        "wer": 1.0474934036939314,
+        "char_errors": 1040,
+        "reference_chars": 1144,
+        "word_errors": 397,
+        "reference_words": 379,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000024",
+            "char_errors": 38,
+            "reference_chars": 40,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000025",
+            "char_errors": 30,
+            "reference_chars": 37,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000026",
+            "char_errors": 55,
+            "reference_chars": 61,
+            "word_errors": 22,
+            "reference_words": 22
+          },
+          {
+            "id": "5TaVl7-lU4k/000027",
+            "char_errors": 52,
+            "reference_chars": 59,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000030",
+            "char_errors": 14,
+            "reference_chars": 15,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "5TaVl7-lU4k/000033",
+            "char_errors": 35,
+            "reference_chars": 38,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000036",
+            "char_errors": 30,
+            "reference_chars": 34,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000038",
+            "char_errors": 50,
+            "reference_chars": 55,
+            "word_errors": 21,
+            "reference_words": 17
+          },
+          {
+            "id": "5TaVl7-lU4k/000039",
+            "char_errors": 36,
+            "reference_chars": 41,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000040",
+            "char_errors": 45,
+            "reference_chars": 52,
+            "word_errors": 20,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000042",
+            "char_errors": 39,
+            "reference_chars": 45,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000043",
+            "char_errors": 37,
+            "reference_chars": 46,
+            "word_errors": 15,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000044",
+            "char_errors": 43,
+            "reference_chars": 47,
+            "word_errors": 18,
+            "reference_words": 18
+          },
+          {
+            "id": "5TaVl7-lU4k/000045",
+            "char_errors": 53,
+            "reference_chars": 56,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000046",
+            "char_errors": 54,
+            "reference_chars": 60,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000051",
+            "char_errors": 63,
+            "reference_chars": 68,
+            "word_errors": 24,
+            "reference_words": 24
+          },
+          {
+            "id": "D-hzf2x_XO0/000063",
+            "char_errors": 39,
+            "reference_chars": 41,
+            "word_errors": 15,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 15,
+            "reference_chars": 16,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "D-hzf2x_XO0/000066",
+            "char_errors": 14,
+            "reference_chars": 13,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000067",
+            "char_errors": 22,
+            "reference_chars": 28,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000068",
+            "char_errors": 21,
+            "reference_chars": 23,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000076",
+            "char_errors": 41,
+            "reference_chars": 42,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "D-hzf2x_XO0/000090",
+            "char_errors": 24,
+            "reference_chars": 26,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000092",
+            "char_errors": 8,
+            "reference_chars": 8,
+            "word_errors": 5,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000094",
+            "char_errors": 23,
+            "reference_chars": 25,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 11,
+            "reference_chars": 12,
+            "word_errors": 6,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000096",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 11,
+            "reference_words": 11
+          },
+          {
+            "id": "D-hzf2x_XO0/000098",
+            "char_errors": 21,
+            "reference_chars": 23,
+            "word_errors": 10,
+            "reference_words": 7
+          },
+          {
+            "id": "D-hzf2x_XO0/000104",
+            "char_errors": 20,
+            "reference_chars": 21,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000115",
+            "char_errors": 17,
+            "reference_chars": 17,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 6,
+            "reference_chars": 6,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000118",
+            "char_errors": 52,
+            "reference_chars": 55,
+            "word_errors": 17,
+            "reference_words": 17
+          }
+        ]
+      },
+      "expanded_head": {
+        "samples": 32,
+        "cer": 0.8356643356643356,
+        "wer": 0.9841688654353562,
+        "char_errors": 956,
+        "reference_chars": 1144,
+        "word_errors": 373,
+        "reference_words": 379,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000024",
+            "char_errors": 37,
+            "reference_chars": 40,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000025",
+            "char_errors": 28,
+            "reference_chars": 37,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000026",
+            "char_errors": 49,
+            "reference_chars": 61,
+            "word_errors": 21,
+            "reference_words": 22
+          },
+          {
+            "id": "5TaVl7-lU4k/000027",
+            "char_errors": 53,
+            "reference_chars": 59,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000030",
+            "char_errors": 11,
+            "reference_chars": 15,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "5TaVl7-lU4k/000033",
+            "char_errors": 36,
+            "reference_chars": 38,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000036",
+            "char_errors": 31,
+            "reference_chars": 34,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000038",
+            "char_errors": 43,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 17
+          },
+          {
+            "id": "5TaVl7-lU4k/000039",
+            "char_errors": 35,
+            "reference_chars": 41,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000040",
+            "char_errors": 40,
+            "reference_chars": 52,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000042",
+            "char_errors": 39,
+            "reference_chars": 45,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000043",
+            "char_errors": 38,
+            "reference_chars": 46,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000044",
+            "char_errors": 39,
+            "reference_chars": 47,
+            "word_errors": 18,
+            "reference_words": 18
+          },
+          {
+            "id": "5TaVl7-lU4k/000045",
+            "char_errors": 52,
+            "reference_chars": 56,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000046",
+            "char_errors": 51,
+            "reference_chars": 60,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000051",
+            "char_errors": 64,
+            "reference_chars": 68,
+            "word_errors": 24,
+            "reference_words": 24
+          },
+          {
+            "id": "D-hzf2x_XO0/000063",
+            "char_errors": 33,
+            "reference_chars": 41,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 10,
+            "reference_chars": 16,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "D-hzf2x_XO0/000066",
+            "char_errors": 5,
+            "reference_chars": 13,
+            "word_errors": 4,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000067",
+            "char_errors": 16,
+            "reference_chars": 28,
+            "word_errors": 7,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000068",
+            "char_errors": 17,
+            "reference_chars": 23,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000076",
+            "char_errors": 40,
+            "reference_chars": 42,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "D-hzf2x_XO0/000090",
+            "char_errors": 25,
+            "reference_chars": 26,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000092",
+            "char_errors": 1,
+            "reference_chars": 8,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000094",
+            "char_errors": 20,
+            "reference_chars": 25,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 11,
+            "reference_chars": 12,
+            "word_errors": 4,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000096",
+            "char_errors": 30,
+            "reference_chars": 34,
+            "word_errors": 11,
+            "reference_words": 11
+          },
+          {
+            "id": "D-hzf2x_XO0/000098",
+            "char_errors": 15,
+            "reference_chars": 23,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "D-hzf2x_XO0/000104",
+            "char_errors": 16,
+            "reference_chars": 21,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000115",
+            "char_errors": 16,
+            "reference_chars": 17,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000118",
+            "char_errors": 54,
+            "reference_chars": 55,
+            "word_errors": 17,
+            "reference_words": 17
+          }
+        ]
+      }
+    },
+    "train_all": {
+      "baseline": {
+        "samples": 48,
+        "cer": 0.9025702331141662,
+        "wer": 0.9893617021276596,
+        "char_errors": 1510,
+        "reference_chars": 1673,
+        "word_errors": 558,
+        "reference_words": 564,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 17,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 46,
+            "reference_chars": 53,
+            "word_errors": 17,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 38,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 57,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 49,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000024",
+            "char_errors": 39,
+            "reference_chars": 40,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000025",
+            "char_errors": 30,
+            "reference_chars": 37,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000026",
+            "char_errors": 51,
+            "reference_chars": 61,
+            "word_errors": 22,
+            "reference_words": 22
+          },
+          {
+            "id": "5TaVl7-lU4k/000027",
+            "char_errors": 52,
+            "reference_chars": 59,
+            "word_errors": 18,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000030",
+            "char_errors": 15,
+            "reference_chars": 15,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "5TaVl7-lU4k/000033",
+            "char_errors": 36,
+            "reference_chars": 38,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000036",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000038",
+            "char_errors": 46,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 17
+          },
+          {
+            "id": "5TaVl7-lU4k/000039",
+            "char_errors": 35,
+            "reference_chars": 41,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000040",
+            "char_errors": 45,
+            "reference_chars": 52,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000042",
+            "char_errors": 41,
+            "reference_chars": 45,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000043",
+            "char_errors": 37,
+            "reference_chars": 46,
+            "word_errors": 14,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000044",
+            "char_errors": 42,
+            "reference_chars": 47,
+            "word_errors": 17,
+            "reference_words": 18
+          },
+          {
+            "id": "5TaVl7-lU4k/000045",
+            "char_errors": 52,
+            "reference_chars": 56,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000046",
+            "char_errors": 52,
+            "reference_chars": 60,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000051",
+            "char_errors": 67,
+            "reference_chars": 68,
+            "word_errors": 24,
+            "reference_words": 24
+          },
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 13,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 17,
+            "reference_chars": 20,
+            "word_errors": 6,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 34,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 32,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 29,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 12,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 38,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          },
+          {
+            "id": "D-hzf2x_XO0/000063",
+            "char_errors": 38,
+            "reference_chars": 41,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 13,
+            "reference_chars": 16,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "D-hzf2x_XO0/000066",
+            "char_errors": 12,
+            "reference_chars": 13,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000067",
+            "char_errors": 22,
+            "reference_chars": 28,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000068",
+            "char_errors": 20,
+            "reference_chars": 23,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000076",
+            "char_errors": 40,
+            "reference_chars": 42,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "D-hzf2x_XO0/000090",
+            "char_errors": 26,
+            "reference_chars": 26,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000092",
+            "char_errors": 8,
+            "reference_chars": 8,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000094",
+            "char_errors": 23,
+            "reference_chars": 25,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 11,
+            "reference_chars": 12,
+            "word_errors": 4,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000096",
+            "char_errors": 31,
+            "reference_chars": 34,
+            "word_errors": 11,
+            "reference_words": 11
+          },
+          {
+            "id": "D-hzf2x_XO0/000098",
+            "char_errors": 21,
+            "reference_chars": 23,
+            "word_errors": 9,
+            "reference_words": 7
+          },
+          {
+            "id": "D-hzf2x_XO0/000104",
+            "char_errors": 21,
+            "reference_chars": 21,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000115",
+            "char_errors": 17,
+            "reference_chars": 17,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 6,
+            "reference_chars": 6,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000118",
+            "char_errors": 54,
+            "reference_chars": 55,
+            "word_errors": 17,
+            "reference_words": 17
+          }
+        ]
+      },
+      "small_head": {
+        "samples": 48,
+        "cer": 0.8457860131500299,
+        "wer": 1.0088652482269505,
+        "char_errors": 1415,
+        "reference_chars": 1673,
+        "word_errors": 569,
+        "reference_words": 564,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 22,
+            "reference_chars": 34,
+            "word_errors": 13,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 10,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 44,
+            "reference_chars": 53,
+            "word_errors": 18,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 34,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 53,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 46,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000024",
+            "char_errors": 38,
+            "reference_chars": 40,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000025",
+            "char_errors": 30,
+            "reference_chars": 37,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000026",
+            "char_errors": 55,
+            "reference_chars": 61,
+            "word_errors": 22,
+            "reference_words": 22
+          },
+          {
+            "id": "5TaVl7-lU4k/000027",
+            "char_errors": 52,
+            "reference_chars": 59,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000030",
+            "char_errors": 14,
+            "reference_chars": 15,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "5TaVl7-lU4k/000033",
+            "char_errors": 35,
+            "reference_chars": 38,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000036",
+            "char_errors": 30,
+            "reference_chars": 34,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000038",
+            "char_errors": 50,
+            "reference_chars": 55,
+            "word_errors": 21,
+            "reference_words": 17
+          },
+          {
+            "id": "5TaVl7-lU4k/000039",
+            "char_errors": 36,
+            "reference_chars": 41,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000040",
+            "char_errors": 45,
+            "reference_chars": 52,
+            "word_errors": 20,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000042",
+            "char_errors": 39,
+            "reference_chars": 45,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000043",
+            "char_errors": 37,
+            "reference_chars": 46,
+            "word_errors": 15,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000044",
+            "char_errors": 43,
+            "reference_chars": 47,
+            "word_errors": 18,
+            "reference_words": 18
+          },
+          {
+            "id": "5TaVl7-lU4k/000045",
+            "char_errors": 53,
+            "reference_chars": 56,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000046",
+            "char_errors": 54,
+            "reference_chars": 60,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000051",
+            "char_errors": 63,
+            "reference_chars": 68,
+            "word_errors": 24,
+            "reference_words": 24
+          },
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 3,
+            "reference_chars": 19,
+            "word_errors": 2,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 5,
+            "reference_chars": 20,
+            "word_errors": 4,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 23,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 29,
+            "reference_chars": 40,
+            "word_errors": 14,
+            "reference_words": 15
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 19,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 3,
+            "reference_chars": 15,
+            "word_errors": 6,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 44,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 27,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          },
+          {
+            "id": "D-hzf2x_XO0/000063",
+            "char_errors": 39,
+            "reference_chars": 41,
+            "word_errors": 15,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 15,
+            "reference_chars": 16,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "D-hzf2x_XO0/000066",
+            "char_errors": 14,
+            "reference_chars": 13,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000067",
+            "char_errors": 22,
+            "reference_chars": 28,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000068",
+            "char_errors": 21,
+            "reference_chars": 23,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000076",
+            "char_errors": 41,
+            "reference_chars": 42,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "D-hzf2x_XO0/000090",
+            "char_errors": 24,
+            "reference_chars": 26,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000092",
+            "char_errors": 8,
+            "reference_chars": 8,
+            "word_errors": 5,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000094",
+            "char_errors": 23,
+            "reference_chars": 25,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 11,
+            "reference_chars": 12,
+            "word_errors": 6,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000096",
+            "char_errors": 32,
+            "reference_chars": 34,
+            "word_errors": 11,
+            "reference_words": 11
+          },
+          {
+            "id": "D-hzf2x_XO0/000098",
+            "char_errors": 21,
+            "reference_chars": 23,
+            "word_errors": 10,
+            "reference_words": 7
+          },
+          {
+            "id": "D-hzf2x_XO0/000104",
+            "char_errors": 20,
+            "reference_chars": 21,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000115",
+            "char_errors": 17,
+            "reference_chars": 17,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 6,
+            "reference_chars": 6,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000118",
+            "char_errors": 52,
+            "reference_chars": 55,
+            "word_errors": 17,
+            "reference_words": 17
+          }
+        ]
+      },
+      "expanded_head": {
+        "samples": 48,
+        "cer": 0.8386132695756127,
+        "wer": 0.9804964539007093,
+        "char_errors": 1403,
+        "reference_chars": 1673,
+        "word_errors": 553,
+        "reference_words": 564,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "5TaVl7-lU4k/000005",
+            "char_errors": 29,
+            "reference_chars": 34,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000008",
+            "char_errors": 19,
+            "reference_chars": 19,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "5TaVl7-lU4k/000009",
+            "char_errors": 44,
+            "reference_chars": 53,
+            "word_errors": 18,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000015",
+            "char_errors": 37,
+            "reference_chars": 39,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000016",
+            "char_errors": 56,
+            "reference_chars": 58,
+            "word_errors": 21,
+            "reference_words": 21
+          },
+          {
+            "id": "5TaVl7-lU4k/000019",
+            "char_errors": 48,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000024",
+            "char_errors": 37,
+            "reference_chars": 40,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000025",
+            "char_errors": 28,
+            "reference_chars": 37,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000026",
+            "char_errors": 49,
+            "reference_chars": 61,
+            "word_errors": 21,
+            "reference_words": 22
+          },
+          {
+            "id": "5TaVl7-lU4k/000027",
+            "char_errors": 53,
+            "reference_chars": 59,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000030",
+            "char_errors": 11,
+            "reference_chars": 15,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "5TaVl7-lU4k/000033",
+            "char_errors": 36,
+            "reference_chars": 38,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000036",
+            "char_errors": 31,
+            "reference_chars": 34,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "5TaVl7-lU4k/000038",
+            "char_errors": 43,
+            "reference_chars": 55,
+            "word_errors": 16,
+            "reference_words": 17
+          },
+          {
+            "id": "5TaVl7-lU4k/000039",
+            "char_errors": 35,
+            "reference_chars": 41,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000040",
+            "char_errors": 40,
+            "reference_chars": 52,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "5TaVl7-lU4k/000042",
+            "char_errors": 39,
+            "reference_chars": 45,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "5TaVl7-lU4k/000043",
+            "char_errors": 38,
+            "reference_chars": 46,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000044",
+            "char_errors": 39,
+            "reference_chars": 47,
+            "word_errors": 18,
+            "reference_words": 18
+          },
+          {
+            "id": "5TaVl7-lU4k/000045",
+            "char_errors": 52,
+            "reference_chars": 56,
+            "word_errors": 19,
+            "reference_words": 19
+          },
+          {
+            "id": "5TaVl7-lU4k/000046",
+            "char_errors": 51,
+            "reference_chars": 60,
+            "word_errors": 16,
+            "reference_words": 16
+          },
+          {
+            "id": "5TaVl7-lU4k/000051",
+            "char_errors": 64,
+            "reference_chars": 68,
+            "word_errors": 24,
+            "reference_words": 24
+          },
+          {
+            "id": "8r1k9NLdSvE/000006",
+            "char_errors": 10,
+            "reference_chars": 19,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "8r1k9NLdSvE/000018",
+            "char_errors": 12,
+            "reference_chars": 20,
+            "word_errors": 4,
+            "reference_words": 5
+          },
+          {
+            "id": "8r1k9NLdSvE/000027",
+            "char_errors": 31,
+            "reference_chars": 37,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "8r1k9NLdSvE/000033",
+            "char_errors": 31,
+            "reference_chars": 40,
+            "word_errors": 15,
+            "reference_words": 15
+          },
+          {
+            "id": "D-hzf2x_XO0/000030",
+            "char_errors": 28,
+            "reference_chars": 32,
+            "word_errors": 12,
+            "reference_words": 12
+          },
+          {
+            "id": "D-hzf2x_XO0/000031",
+            "char_errors": 13,
+            "reference_chars": 13,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000032",
+            "char_errors": 10,
+            "reference_chars": 15,
+            "word_errors": 8,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 1,
+            "reference_chars": 4,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000052",
+            "char_errors": 42,
+            "reference_chars": 46,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000062",
+            "char_errors": 36,
+            "reference_chars": 45,
+            "word_errors": 14,
+            "reference_words": 15
+          },
+          {
+            "id": "D-hzf2x_XO0/000063",
+            "char_errors": 33,
+            "reference_chars": 41,
+            "word_errors": 13,
+            "reference_words": 13
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 10,
+            "reference_chars": 16,
+            "word_errors": 5,
+            "reference_words": 5
+          },
+          {
+            "id": "D-hzf2x_XO0/000066",
+            "char_errors": 5,
+            "reference_chars": 13,
+            "word_errors": 4,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000067",
+            "char_errors": 16,
+            "reference_chars": 28,
+            "word_errors": 7,
+            "reference_words": 8
+          },
+          {
+            "id": "D-hzf2x_XO0/000068",
+            "char_errors": 17,
+            "reference_chars": 23,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000076",
+            "char_errors": 40,
+            "reference_chars": 42,
+            "word_errors": 14,
+            "reference_words": 14
+          },
+          {
+            "id": "D-hzf2x_XO0/000090",
+            "char_errors": 25,
+            "reference_chars": 26,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000092",
+            "char_errors": 1,
+            "reference_chars": 8,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000094",
+            "char_errors": 20,
+            "reference_chars": 25,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 11,
+            "reference_chars": 12,
+            "word_errors": 4,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000096",
+            "char_errors": 30,
+            "reference_chars": 34,
+            "word_errors": 11,
+            "reference_words": 11
+          },
+          {
+            "id": "D-hzf2x_XO0/000098",
+            "char_errors": 15,
+            "reference_chars": 23,
+            "word_errors": 7,
+            "reference_words": 7
+          },
+          {
+            "id": "D-hzf2x_XO0/000104",
+            "char_errors": 16,
+            "reference_chars": 21,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "D-hzf2x_XO0/000115",
+            "char_errors": 16,
+            "reference_chars": 17,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000118",
+            "char_errors": 54,
+            "reference_chars": 55,
+            "word_errors": 17,
+            "reference_words": 17
+          }
+        ]
+      }
+    },
+    "validation": {
+      "baseline": {
+        "samples": 6,
+        "cer": 0.9571428571428572,
+        "wer": 1.0,
+        "char_errors": 67,
+        "reference_chars": 70,
+        "word_errors": 26,
+        "reference_words": 26,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "rGR4FdaIvw8/000004",
+            "char_errors": 3,
+            "reference_chars": 3,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000006",
+            "char_errors": 5,
+            "reference_chars": 5,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000008",
+            "char_errors": 8,
+            "reference_chars": 9,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000026",
+            "char_errors": 8,
+            "reference_chars": 8,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000040",
+            "char_errors": 16,
+            "reference_chars": 16,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "rGR4FdaIvw8/000047",
+            "char_errors": 27,
+            "reference_chars": 29,
+            "word_errors": 12,
+            "reference_words": 12
+          }
+        ]
+      },
+      "small_head": {
+        "samples": 6,
+        "cer": 0.9714285714285714,
+        "wer": 1.0384615384615385,
+        "char_errors": 68,
+        "reference_chars": 70,
+        "word_errors": 27,
+        "reference_words": 26,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "rGR4FdaIvw8/000004",
+            "char_errors": 3,
+            "reference_chars": 3,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000006",
+            "char_errors": 5,
+            "reference_chars": 5,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000008",
+            "char_errors": 9,
+            "reference_chars": 9,
+            "word_errors": 4,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000026",
+            "char_errors": 8,
+            "reference_chars": 8,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000040",
+            "char_errors": 16,
+            "reference_chars": 16,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "rGR4FdaIvw8/000047",
+            "char_errors": 27,
+            "reference_chars": 29,
+            "word_errors": 12,
+            "reference_words": 12
+          }
+        ]
+      },
+      "expanded_head": {
+        "samples": 6,
+        "cer": 1.0142857142857142,
+        "wer": 1.0769230769230769,
+        "char_errors": 71,
+        "reference_chars": 70,
+        "word_errors": 28,
+        "reference_words": 26,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "rGR4FdaIvw8/000004",
+            "char_errors": 3,
+            "reference_chars": 3,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000006",
+            "char_errors": 5,
+            "reference_chars": 5,
+            "word_errors": 1,
+            "reference_words": 1
+          },
+          {
+            "id": "rGR4FdaIvw8/000008",
+            "char_errors": 9,
+            "reference_chars": 9,
+            "word_errors": 5,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000026",
+            "char_errors": 8,
+            "reference_chars": 8,
+            "word_errors": 3,
+            "reference_words": 3
+          },
+          {
+            "id": "rGR4FdaIvw8/000040",
+            "char_errors": 19,
+            "reference_chars": 16,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "rGR4FdaIvw8/000047",
+            "char_errors": 27,
+            "reference_chars": 29,
+            "word_errors": 12,
+            "reference_words": 12
+          }
+        ]
+      }
+    }
+  },
+  "expanded_vs_small_head": {
+    "train_original": {
+      "better": 1,
+      "equal": 2,
+      "worse": 13
+    },
+    "train_added": {
+      "better": 23,
+      "equal": 2,
+      "worse": 7
+    },
+    "train_all": {
+      "better": 24,
+      "equal": 4,
+      "worse": 20
+    },
+    "validation": {
+      "better": 0,
+      "equal": 5,
+      "worse": 1
+    }
+  },
+  "interpretation": "Matched evaluation sets. Added train samples are training data for expanded head, not held-out test data.",
+  "limitations": [
+    "Same three training videos, not more verified speakers",
+    "Same previously inspected validation video, six utterances",
+    "Both heads use 200 full-batch updates; expanded training has greater total sample exposure"
+  ]
+}

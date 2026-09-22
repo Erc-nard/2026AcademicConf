@@ -1,0 +1,59 @@
+{
+  "split": "valid",
+  "seed": 2026,
+  "seeded_rank": 3,
+  "video_id": "VYLaaU2kAsE",
+  "domain": "dram",
+  "selected": [
+    {
+      "id": "VYLaaU2kAsE/000008",
+      "utterance": "000008",
+      "start_ms": 17478,
+      "end_ms": 18742
+    },
+    {
+      "id": "VYLaaU2kAsE/000019",
+      "utterance": "000019",
+      "start_ms": 82844,
+      "end_ms": 86469
+    },
+    {
+      "id": "VYLaaU2kAsE/000027",
+      "utterance": "000027",
+      "start_ms": 106760,
+      "end_ms": 108530
+    },
+    {
+      "id": "VYLaaU2kAsE/000032",
+      "utterance": "000032",
+      "start_ms": 119551,
+      "end_ms": 121835
+    },
+    {
+      "id": "VYLaaU2kAsE/000038",
+      "utterance": "000038",
+      "start_ms": 131598,
+      "end_ms": 133411
+    },
+    {
+      "id": "VYLaaU2kAsE/000045",
+      "utterance": "000045",
+      "start_ms": 177171,
+      "end_ms": 179754
+    }
+  ],
+  "selection": "third ranked unflagged valid video; first six utterances <=10 seconds",
+  "purpose": "additional unseen-video check after fixed head training, not replacement for private video",
+  "previous_private_video_retained": "_WF84v2g-jo",
+  "previous_validation_plan_sha256": "ad3b14135422501e38324be1f2331799f820a7e359ef3e3e0b89b975f2b13fa5",
+  "training_plan_sha256": "157448e0eba3507c144f693f50a1b873123a5164847c458ac75d77d4cc280aab",
+  "settings": {
+    "suite": "baseline",
+    "missing_policy": "mask",
+    "size": 96,
+    "target_fps": null,
+    "crop_scale": 1.7,
+    "decoder": "ctc_greedy"
+  },
+  "no_training_or_checkpoint_selection_on_this_video": true
+}
