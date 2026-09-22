@@ -1,0 +1,1525 @@
+{
+  "plan": {
+    "seed": 2026,
+    "steps": 1500,
+    "batch_size": 4,
+    "learning_rate": 0.001,
+    "optimizer": "Adam",
+    "selection": "Four shortest train utterances with all ROI frames observed and feasible CTC targets; duration then ID; no prediction-based selection",
+    "encoder": "frozen cached pre-medium features",
+    "batchnorm": "fixed running statistics",
+    "checkpoint_sha256": "f41d742380af11b72f9cafe178cd59d0a9016c02f5a976145f5f7595d44326a5",
+    "source_plan_sha256": "591a531af288a94a6983d3fb42f48c935e9f6190f0c66ef6ff2ea64170874db6",
+    "target": "official normalized graphemes plus EOS",
+    "stopping": "fixed 1500 steps; no early stopping",
+    "scope": "memorization of four training samples only; no validation accessed",
+    "selected": [
+      {
+        "id": "D-hzf2x_XO0/000117",
+        "duration_ms": 931,
+        "feature_sha256": "505f69a45eeabaf17090332724f11af32e2ec9e72e401302876972fd685caa7f",
+        "mouth_sha256": "7f1014d05477c747be783cb63d029bf24b6c77f1f8d29a9e5f690adfb299be73"
+      },
+      {
+        "id": "D-hzf2x_XO0/000034",
+        "duration_ms": 1181,
+        "feature_sha256": "650fca37e2e2db2f9ac69e21677df852ad59ebe528a1feb32afa23afba262598",
+        "mouth_sha256": "2e95c5a095e8f926b2a17e473660d7c2d736ae7d87c5c6a27f63d1a12beb377a"
+      },
+      {
+        "id": "D-hzf2x_XO0/000095",
+        "duration_ms": 1226,
+        "feature_sha256": "9a85eba8055f3261a3ab49b6d177dc6c4e48f725216295ff6446b2427e386aa8",
+        "mouth_sha256": "36200002a665e698bf0beb65afdbb74fcd3ac4e2cf9a0777b837e93c2988a20d"
+      },
+      {
+        "id": "D-hzf2x_XO0/000064",
+        "duration_ms": 1833,
+        "feature_sha256": "d0ece63033658cc57db12e6dfd83de5f2538548a2d5db3501946ce4e7027e993",
+        "mouth_sha256": "c7cd23e3e469bc4eb5a49c81840633779d3b1b5b1be6be93c2f7b9c7c9f2752b"
+      }
+    ]
+  },
+  "baseline_tokens_equal": true,
+  "trace": [
+    {
+      "step": 0,
+      "raw": {
+        "samples": 4,
+        "cer": 0.8947368421052632,
+        "wer": 1.0,
+        "char_errors": 34,
+        "reference_chars": 38,
+        "word_errors": 13,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 6,
+            "reference_chars": 6,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 11,
+            "reference_chars": 12,
+            "word_errors": 4,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 13,
+            "reference_chars": 16,
+            "word_errors": 5,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.8857142857142857,
+        "wer": 1.0,
+        "char_errors": 31,
+        "reference_chars": 35,
+        "word_errors": 13,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 5,
+            "reference_chars": 5,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 2,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 10,
+            "reference_chars": 11,
+            "word_errors": 4,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 12,
+            "reference_chars": 15,
+            "word_errors": 5,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 1,
+      "raw": {
+        "samples": 4,
+        "cer": 0.8157894736842105,
+        "wer": 1.2307692307692308,
+        "char_errors": 31,
+        "reference_chars": 38,
+        "word_errors": 16,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 5,
+            "reference_chars": 6,
+            "word_errors": 3,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 4,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 11,
+            "reference_chars": 12,
+            "word_errors": 4,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 11,
+            "reference_chars": 16,
+            "word_errors": 5,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.8285714285714286,
+        "wer": 1.2307692307692308,
+        "char_errors": 29,
+        "reference_chars": 35,
+        "word_errors": 16,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 5,
+            "reference_chars": 5,
+            "word_errors": 3,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 4,
+            "reference_chars": 4,
+            "word_errors": 4,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 10,
+            "reference_chars": 11,
+            "word_errors": 4,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 10,
+            "reference_chars": 15,
+            "word_errors": 5,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 100,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 200,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 300,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 400,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 500,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 600,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 700,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 800,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 900,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 1000,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 1100,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 1200,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 1300,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 1400,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    },
+    {
+      "step": 1500,
+      "raw": {
+        "samples": 4,
+        "cer": 0.07894736842105263,
+        "wer": 0.23076923076923078,
+        "char_errors": 3,
+        "reference_chars": 38,
+        "word_errors": 3,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 1,
+            "reference_chars": 6,
+            "word_errors": 1,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 1,
+            "reference_chars": 12,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 1,
+            "reference_chars": 16,
+            "word_errors": 1,
+            "reference_words": 5
+          }
+        ]
+      },
+      "normalized": {
+        "samples": 4,
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "reference_chars": 35,
+        "word_errors": 0,
+        "reference_words": 13,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "D-hzf2x_XO0/000117",
+            "char_errors": 0,
+            "reference_chars": 5,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000034",
+            "char_errors": 0,
+            "reference_chars": 4,
+            "word_errors": 0,
+            "reference_words": 2
+          },
+          {
+            "id": "D-hzf2x_XO0/000095",
+            "char_errors": 0,
+            "reference_chars": 11,
+            "word_errors": 0,
+            "reference_words": 4
+          },
+          {
+            "id": "D-hzf2x_XO0/000064",
+            "char_errors": 0,
+            "reference_chars": 15,
+            "word_errors": 0,
+            "reference_words": 5
+          }
+        ]
+      }
+    }
+  ],
+  "loss_trace": [
+    {
+      "step": 1,
+      "full_batch_loss_before_update": 4.15471887588501
+    },
+    {
+      "step": 100,
+      "full_batch_loss_before_update": 6.761021359125152e-05
+    },
+    {
+      "step": 200,
+      "full_batch_loss_before_update": 3.7148172850720584e-05
+    },
+    {
+      "step": 300,
+      "full_batch_loss_before_update": 2.322482760064304e-05
+    },
+    {
+      "step": 400,
+      "full_batch_loss_before_update": 1.597793016117066e-05
+    },
+    {
+      "step": 500,
+      "full_batch_loss_before_update": 1.1888594599440694e-05
+    },
+    {
+      "step": 600,
+      "full_batch_loss_before_update": 9.301194040745031e-06
+    },
+    {
+      "step": 700,
+      "full_batch_loss_before_update": 7.525020464527188e-06
+    },
+    {
+      "step": 800,
+      "full_batch_loss_before_update": 6.25291886535706e-06
+    },
+    {
+      "step": 900,
+      "full_batch_loss_before_update": 5.280846835375996e-06
+    },
+    {
+      "step": 1000,
+      "full_batch_loss_before_update": 4.530531896307366e-06
+    },
+    {
+      "step": 1100,
+      "full_batch_loss_before_update": 3.947409823013004e-06
+    },
+    {
+      "step": 1200,
+      "full_batch_loss_before_update": 3.43936039826076e-06
+    },
+    {
+      "step": 1300,
+      "full_batch_loss_before_update": 3.0302646791824372e-06
+    },
+    {
+      "step": 1400,
+      "full_batch_loss_before_update": 2.711007709876867e-06
+    },
+    {
+      "step": 1500,
+      "full_batch_loss_before_update": 2.402975496806903e-06
+    }
+  ],
+  "trainable_parameters": 546120,
+  "checkpoint_sha256": "72966734698134d62e051061996968e0d9bbf6127f9c5d20081f2d79cfa3bf9b"
+}

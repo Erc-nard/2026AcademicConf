@@ -3,7 +3,12 @@
 **최종 갱신: 2026-09-22.** 이 README는 실제 실행 결과를 정리한 보고서다.
 초기 아이디어와 예정 실험은 [최초 연구계획](docs/RESEARCH_PLAN.md)에 별도로 보존했다.
 
-**최신 모델 실험:** 준비된 train 48개·validation 12개를 실제 모델에 넣고,
+**최신 진단:** 짧은 train 발화 4개를 중간층+출력층으로 1,500회 학습했다.
+학습용 정답 기준 CER은 **88.57% → 0%**이며, 100회 측정부터 마지막까지 0%를 유지했다.
+원문 기준은 **89.47% → 7.89%**이고 남은 오류 3개는 학습 정규화에서 제거한 문장부호다.
+네 샘플의 암기 성공이며 일반화 성능 개선은 아니다. 상세 결과는 18절이다.
+
+**앞선 모델 실험:** 준비된 train 48개·validation 12개를 실제 모델에 넣고,
 출력층만 학습하는 조건과 중간 신경망까지 학습하는 조건을 각각 400회 실행했다.
 중간층+출력층 조건의 train CER은 **90.26% → 70.71%**였지만 validation은 **94.81% → 102.96%**였다.
 학습 자료 적합도 개선이 새 영상 성능으로 이어지지 않아 기본 모델을 유지한다. 상세 결과는 15–17절이다.
@@ -625,6 +630,42 @@ validation은 작은 개발 표본이며 이미 여러 번 평가됐으므로 �
 .venv/Scripts/python.exe -m kvsr.medium_experiment --output results/medium_experiment_repeat
 ```
 
+## 18. 네 발화 과적합 진단 (9/22)
+
+데이터 추가 정제 없이 기존 train 특징을 사용하여, 학습 경로가 작은 표본을 외울 수 있는지 확인했다.
+전체 프레임에 ROI 관측이 있고 CTC 정렬이 가능한 train 발화를 길이·ID 순으로 정렬해 첫 4개를 고정했다.
+인식 결과로 샘플을 고르지 않았다. 선택된 발화는 모두 `D-hzf2x_XO0` 영상의
+`000117`, `000034`, `000095`, `000064`이며 길이는 각각 0.931, 1.181, 1.226, 1.833초다.
+ROI 관측 여부는 시각적 선명도나 입 움직임의 정확한 정렬을 보장하지 않는다.
+
+- 기존 영상 encoder 특징을 고정하고 원본 가중치에서 중간 MLP+CTC 출력층 546,120개 파라미터를 학습했다.
+- seed 2026, CPU 2 threads, Adam 0.001, batch 4, gradient clip 1, BN running statistics 고정.
+- 1,500회 전체 배치 업데이트를 사전에 고정했다. 100회마다 측정했으며 조기 종료하지 않았다.
+- 공식 전사 정규화→자소 분해→EOS를 학습 target으로 사용했다. validation은 읽거나 평가하지 않았다.
+- 입력·특징 해시를 기록하고 학습 전 네 샘플의 greedy 토큰이 앞선 원본 모델 결과와 일치하는지 검사했다.
+
+| 정답 기준 | 원본 모델 | 100회 | 최종 1,500회 |
+|---|---:|---:|---:|
+| 원문 CER (기존 주 평가 규칙) | 34/38 = 89.47% | 3/38 = 7.89% | 3/38 = 7.89% |
+| 학습용 정규화 정답 CER (진단 보조 지표) | 31/35 = 88.57% | 0/35 = 0% | 0/35 = 0% |
+
+100회 측정부터 이후 모든 측정에서 학습용 정답을 맞혔다. 원문에 대한 마지막 오류 3개는
+정규화 과정에서 제거한 마침표 2개와 물음표 1개다. 기본 평가를 정규화 점수로 바꾸지 않는다.
+네 샘플의 학습·CTC 디코딩 경로가 암기를 수행할 수 있다는 증거이며, 영상 encoder의 품질이나
+다른 영상에서의 인식 성능을 입증하지 않는다. 앞선 validation 악화 결과도 그대로 유효하다.
+
+첫 실행은 출력층 state key 접두사 차이로 학습 시작 전에 실패했다. 매핑을 수정한 두 번째 실행에서
+원본 토큰 일치를 확인하고 1,500회를 완료했다. 성공 실행 디렉터리는
+`results/overfit_four_2026-09-22_run2`이며 실제 정답·출력은 그 안의 `sample_outputs.md`에 로컬로 보관했다.
+공개 보고서는 [수치·계획·학습 추이 JSON](experiments/overfit_four_2026-09-22.json)이다.
+
+```powershell
+.venv/Scripts/python.exe -m kvsr.overfit_four --output results/overfit_four_replay
+```
+
+다음 실험은 원본 모델이 기대하는 공식 예제·평가 입력에서 기준 추론을 확인하는 것이다.
+자료를 확보하면 현재 KMSAV 결과와 비교해 실행 경로 문제와 데이터 차이를 더 구분한다.
+
 ## 구현과 검증
 
 - `kvsr/nbest.py`: blank/반복 문자를 올바르게 합산하는 CTC prefix beam과 독립 oracle 평가.
@@ -642,6 +683,7 @@ validation은 작은 개발 표본이며 이미 여러 번 평가됐으므로 �
 - `kvsr/train_expansion.py`, `kvsr/adaptation_comparison.py`: 48개 train 선정·실행과 동일 표본 비교.
 - `kvsr/head_validation.py`: 학습 입력에 없는 추가 validation 영상에서 고정 head 평가.
 - `kvsr/medium_experiment.py`: 실제 영상 encoder 실행, 두 학습 조건 400 update, 60발화 평가와 로컬 자막 비교표.
+- `kvsr/overfit_four.py`: train 4개 고정, 1,500회 암기 진단, 원문·학습용 정답 점수 병기.
 - 로컬 `.venv`에서 **74개 테스트 통과**. CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
   EOS/반복 문자, 실패 누락 방지, 합성 마스크 범위, 보간 경계/길이 제한을 검증했다.
   이번에 축소 기준 일치, MP4 시간·색상 유지, 잘못된 입력 거부 검사를 추가했다.
@@ -693,13 +735,15 @@ validation은 작은 개발 표본이며 이미 여러 번 평가됐으므로 �
 | 동일 표본 head 비교 | [comparison JSON](experiments/adaptation_comparison_2026-09-20.json), [캐시 재현](experiments/feature_cache_regression_2026-09-20.json) |
 | 추가 validation | [계획](experiments/validation_extension_plan_2026-09-20.json), [전처리·baseline](experiments/validation_extension_2026-09-20.json), [head 비교](experiments/head_validation_extension_2026-09-20.json) |
 | 중간 신경망+출력층 학습 | [실험 JSON](experiments/medium_experiment_2026-09-22.json) |
+| 네 발화 암기 진단 | [실험 JSON](experiments/overfit_four_2026-09-22.json) |
 
 이전 단계 상세 기록: [1단계](docs/STAGE1.md), [2단계](docs/STAGE2.md),
 [3단계](docs/STAGE3.md), [4단계](docs/STAGE4.md), [5단계](docs/STAGE5.md).
 
 ## 남은 과제와 다음 진행 순서
 
-1. 데이터 접근 가능성을 포함한 더 큰 train·valid 표본과 화자 구성을 먼저 고정한다.
+1. 네 발화 암기 진단을 통과했으므로 원본 모델의 공식 예제·평가 입력에서 기준 추론을 확인한다.
+   이어 데이터 접근 가능성을 포함한 더 큰 train·valid 표본과 화자 구성을 고정한다.
    47개 train 발화의 출력층 및 중간층 적응도 validation 개선으로 이어지지 않았다.
    비공개 표본을 조용히 교체하거나, 성공한 발화만으로 정확도를 보고하지 않는다.
 2. 한국어 fine-tuned 가중치를 실제 확보하거나, 늘어난 데이터에서 특징 고정/부분 적응을 비교한다.
