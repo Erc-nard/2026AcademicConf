@@ -1,0 +1,87 @@
+{
+  "baseline_plan": {
+    "model": "Auto-AVSR vsr_trlrs2lrs3vox2avsp_base.pth",
+    "modality": "video",
+    "dataset": "WildVSR official author archive",
+    "selection": "12 lowest SHA256(UTF8(2026: + full ZIP member path)); exclude prior smoke 0000.mp4; no duration or outcome filtering",
+    "repository_commit": "182b62837773ab01052d4ac21ef1d2203ea7d267",
+    "checkpoint_sha256": "fbf7cd70ff1c0e694b3030fb779dbb4570f04e4b841d62f9296c229e94878ddb",
+    "archive_sha256": "b853e1b9255b9469861304ec4de3ba1f21e49d9e979d0fdc978912a80a6d64d1",
+    "beam_size": 40,
+    "ctc_weight": 0.1,
+    "lm_weight": 0.0,
+    "penalty": 0.0,
+    "device": "cpu",
+    "threads": 2,
+    "training": false,
+    "audio_read": false,
+    "reference_used_for_inference": false,
+    "scope": "fixed development subset; not final held-out test or full benchmark",
+    "preprocessing": "pre-cropped 96x96 ROI; RGB float /255; center crop 88; grayscale; (x-0.421)/0.165",
+    "selected": [
+      "WildVSR/videos/0893.mp4",
+      "WildVSR/videos/1770.mp4",
+      "WildVSR/videos/0323.mp4",
+      "WildVSR/videos/1041.mp4",
+      "WildVSR/videos/1707.mp4",
+      "WildVSR/videos/0618.mp4",
+      "WildVSR/videos/1757.mp4",
+      "WildVSR/videos/2431.mp4",
+      "WildVSR/videos/1241.mp4",
+      "WildVSR/videos/0596.mp4",
+      "WildVSR/videos/0009.mp4",
+      "WildVSR/videos/0293.mp4"
+    ],
+    "video_hashes": {
+      "WildVSR/videos/0893.mp4": "913a3b5d4d4d71281db737207ced19812ee2024ca866dad75059f2067d3e4784",
+      "WildVSR/videos/1770.mp4": "27573cd05870e15a6b897f5637191812323a4c71fa1436b7df7eed55ab5dc7be",
+      "WildVSR/videos/0323.mp4": "a66240ff491e569766aa6250e88e70bfe29a0fee18f3a92a734bfb818610e3b6",
+      "WildVSR/videos/1041.mp4": "f6d2a127edf1e0a5c2dcbd34890df5c51f7c41a746cff7214c9d4eb6ddf3f36b",
+      "WildVSR/videos/1707.mp4": "aea2d3a34eac78e314e92f7e12fe9df3a5cf458c31a47ba4e7c63bf4d62a6321",
+      "WildVSR/videos/0618.mp4": "69505ae5227513809c3dc0dad1bdbde1d64f64de075a93ddf6c2e378e7237cd8",
+      "WildVSR/videos/1757.mp4": "c19c46106a5da3e7c6e1f2263802b1fdade073a3a3ae9890046baa89b5afccad",
+      "WildVSR/videos/2431.mp4": "a3ad89745a7da75d0775113e068bfe9e97e97f6f848506a211026089bce26607",
+      "WildVSR/videos/1241.mp4": "6ee0239fc3f187f97f45795a70f77a65fd95b5ead44f5fd44982a18ac3e1d627",
+      "WildVSR/videos/0596.mp4": "58dc85b59f746b3d9c82117bf36e4ec3a40ed1de16a74c8057b112f92c7d646a",
+      "WildVSR/videos/0009.mp4": "e68c855fa9a6ff63714b2ba7083c7c4a8fc34e3d28f3701787126f17a653cb97",
+      "WildVSR/videos/0293.mp4": "a172743a3fd156cd2bff5a95c57118c7fce6b5d9afa4ce1ac303477702477f1d"
+    },
+    "failure_policy": "retain selected ID with empty prediction; no replacement"
+  },
+  "baseline_summary_sha256": "f1016d29e15d00831c719ceef3edb89bbed768e2c2fd0fe10ce9ec59042a8cac",
+  "conditions": [
+    0,
+    0.25,
+    0.5
+  ],
+  "mask": "central full-width horizontal band on post-crop 88x88 input, all frames",
+  "geometry": {
+    "25": {
+      "rows": [
+        33,
+        55
+      ],
+      "columns": [
+        0,
+        88
+      ]
+    },
+    "50": {
+      "rows": [
+        22,
+        66
+      ],
+      "columns": [
+        0,
+        88
+      ]
+    }
+  },
+  "coordinates": "zero-based half-open",
+  "fill": "normalized zero, grayscale mean 0.421 before normalization",
+  "percent_denominator": "area of 88x88 model input; not anatomical lip area",
+  "control": "all 12 clean input tensors and predictions hash-checked; first sample zero-mask inference replay",
+  "training": false,
+  "reference_used_for_inference": false,
+  "scope": "paired 12-sample development diagnostic, not held-out benchmark"
+}

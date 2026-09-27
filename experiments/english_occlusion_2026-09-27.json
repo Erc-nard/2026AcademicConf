@@ -1,0 +1,607 @@
+{
+  "plan": {
+    "baseline_plan": {
+      "model": "Auto-AVSR vsr_trlrs2lrs3vox2avsp_base.pth",
+      "modality": "video",
+      "dataset": "WildVSR official author archive",
+      "selection": "12 lowest SHA256(UTF8(2026: + full ZIP member path)); exclude prior smoke 0000.mp4; no duration or outcome filtering",
+      "repository_commit": "182b62837773ab01052d4ac21ef1d2203ea7d267",
+      "checkpoint_sha256": "fbf7cd70ff1c0e694b3030fb779dbb4570f04e4b841d62f9296c229e94878ddb",
+      "archive_sha256": "b853e1b9255b9469861304ec4de3ba1f21e49d9e979d0fdc978912a80a6d64d1",
+      "beam_size": 40,
+      "ctc_weight": 0.1,
+      "lm_weight": 0.0,
+      "penalty": 0.0,
+      "device": "cpu",
+      "threads": 2,
+      "training": false,
+      "audio_read": false,
+      "reference_used_for_inference": false,
+      "scope": "fixed development subset; not final held-out test or full benchmark",
+      "preprocessing": "pre-cropped 96x96 ROI; RGB float /255; center crop 88; grayscale; (x-0.421)/0.165",
+      "selected": [
+        "WildVSR/videos/0893.mp4",
+        "WildVSR/videos/1770.mp4",
+        "WildVSR/videos/0323.mp4",
+        "WildVSR/videos/1041.mp4",
+        "WildVSR/videos/1707.mp4",
+        "WildVSR/videos/0618.mp4",
+        "WildVSR/videos/1757.mp4",
+        "WildVSR/videos/2431.mp4",
+        "WildVSR/videos/1241.mp4",
+        "WildVSR/videos/0596.mp4",
+        "WildVSR/videos/0009.mp4",
+        "WildVSR/videos/0293.mp4"
+      ],
+      "video_hashes": {
+        "WildVSR/videos/0893.mp4": "913a3b5d4d4d71281db737207ced19812ee2024ca866dad75059f2067d3e4784",
+        "WildVSR/videos/1770.mp4": "27573cd05870e15a6b897f5637191812323a4c71fa1436b7df7eed55ab5dc7be",
+        "WildVSR/videos/0323.mp4": "a66240ff491e569766aa6250e88e70bfe29a0fee18f3a92a734bfb818610e3b6",
+        "WildVSR/videos/1041.mp4": "f6d2a127edf1e0a5c2dcbd34890df5c51f7c41a746cff7214c9d4eb6ddf3f36b",
+        "WildVSR/videos/1707.mp4": "aea2d3a34eac78e314e92f7e12fe9df3a5cf458c31a47ba4e7c63bf4d62a6321",
+        "WildVSR/videos/0618.mp4": "69505ae5227513809c3dc0dad1bdbde1d64f64de075a93ddf6c2e378e7237cd8",
+        "WildVSR/videos/1757.mp4": "c19c46106a5da3e7c6e1f2263802b1fdade073a3a3ae9890046baa89b5afccad",
+        "WildVSR/videos/2431.mp4": "a3ad89745a7da75d0775113e068bfe9e97e97f6f848506a211026089bce26607",
+        "WildVSR/videos/1241.mp4": "6ee0239fc3f187f97f45795a70f77a65fd95b5ead44f5fd44982a18ac3e1d627",
+        "WildVSR/videos/0596.mp4": "58dc85b59f746b3d9c82117bf36e4ec3a40ed1de16a74c8057b112f92c7d646a",
+        "WildVSR/videos/0009.mp4": "e68c855fa9a6ff63714b2ba7083c7c4a8fc34e3d28f3701787126f17a653cb97",
+        "WildVSR/videos/0293.mp4": "a172743a3fd156cd2bff5a95c57118c7fce6b5d9afa4ce1ac303477702477f1d"
+      },
+      "failure_policy": "retain selected ID with empty prediction; no replacement"
+    },
+    "baseline_summary_sha256": "f1016d29e15d00831c719ceef3edb89bbed768e2c2fd0fe10ce9ec59042a8cac",
+    "conditions": [
+      0,
+      0.25,
+      0.5
+    ],
+    "mask": "central full-width horizontal band on post-crop 88x88 input, all frames",
+    "geometry": {
+      "25": {
+        "rows": [
+          33,
+          55
+        ],
+        "columns": [
+          0,
+          88
+        ]
+      },
+      "50": {
+        "rows": [
+          22,
+          66
+        ],
+        "columns": [
+          0,
+          88
+        ]
+      }
+    },
+    "coordinates": "zero-based half-open",
+    "fill": "normalized zero, grayscale mean 0.421 before normalization",
+    "percent_denominator": "area of 88x88 model input; not anatomical lip area",
+    "control": "all 12 clean input tensors and predictions hash-checked; first sample zero-mask inference replay",
+    "training": false,
+    "reference_used_for_inference": false,
+    "scope": "paired 12-sample development diagnostic, not held-out benchmark"
+  },
+  "plan_sha256": "7f55231734fed0e9032218c0cb19d58530b79ee19a3a511c08fd18a23f8e3506",
+  "metrics": {
+    "0": {
+      "samples": 12,
+      "cer": 0.26697892271662765,
+      "wer": 0.3776595744680851,
+      "char_errors": 228,
+      "reference_chars": 854,
+      "word_errors": 71,
+      "reference_words": 188,
+      "normalization": "lowercase; collapse whitespace; WER whitespace words; CER removes whitespace; punctuation retained",
+      "details": [
+        {
+          "id": "WildVSR/videos/0893.mp4",
+          "char_errors": 20,
+          "reference_chars": 56,
+          "word_errors": 5,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/1770.mp4",
+          "char_errors": 3,
+          "reference_chars": 33,
+          "word_errors": 1,
+          "reference_words": 6
+        },
+        {
+          "id": "WildVSR/videos/0323.mp4",
+          "char_errors": 11,
+          "reference_chars": 102,
+          "word_errors": 5,
+          "reference_words": 25
+        },
+        {
+          "id": "WildVSR/videos/1041.mp4",
+          "char_errors": 19,
+          "reference_chars": 73,
+          "word_errors": 5,
+          "reference_words": 16
+        },
+        {
+          "id": "WildVSR/videos/1707.mp4",
+          "char_errors": 18,
+          "reference_chars": 155,
+          "word_errors": 7,
+          "reference_words": 33
+        },
+        {
+          "id": "WildVSR/videos/0618.mp4",
+          "char_errors": 0,
+          "reference_chars": 49,
+          "word_errors": 0,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/1757.mp4",
+          "char_errors": 2,
+          "reference_chars": 51,
+          "word_errors": 3,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/2431.mp4",
+          "char_errors": 37,
+          "reference_chars": 60,
+          "word_errors": 11,
+          "reference_words": 14
+        },
+        {
+          "id": "WildVSR/videos/1241.mp4",
+          "char_errors": 40,
+          "reference_chars": 83,
+          "word_errors": 14,
+          "reference_words": 21
+        },
+        {
+          "id": "WildVSR/videos/0596.mp4",
+          "char_errors": 8,
+          "reference_chars": 74,
+          "word_errors": 2,
+          "reference_words": 15
+        },
+        {
+          "id": "WildVSR/videos/0009.mp4",
+          "char_errors": 27,
+          "reference_chars": 40,
+          "word_errors": 8,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/0293.mp4",
+          "char_errors": 43,
+          "reference_chars": 78,
+          "word_errors": 10,
+          "reference_words": 18
+        }
+      ]
+    },
+    "25": {
+      "samples": 12,
+      "cer": 0.6557377049180327,
+      "wer": 0.8351063829787234,
+      "char_errors": 560,
+      "reference_chars": 854,
+      "word_errors": 157,
+      "reference_words": 188,
+      "normalization": "lowercase; collapse whitespace; WER whitespace words; CER removes whitespace; punctuation retained",
+      "details": [
+        {
+          "id": "WildVSR/videos/0893.mp4",
+          "char_errors": 31,
+          "reference_chars": 56,
+          "word_errors": 9,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/1770.mp4",
+          "char_errors": 17,
+          "reference_chars": 33,
+          "word_errors": 7,
+          "reference_words": 6
+        },
+        {
+          "id": "WildVSR/videos/0323.mp4",
+          "char_errors": 43,
+          "reference_chars": 102,
+          "word_errors": 12,
+          "reference_words": 25
+        },
+        {
+          "id": "WildVSR/videos/1041.mp4",
+          "char_errors": 67,
+          "reference_chars": 73,
+          "word_errors": 16,
+          "reference_words": 16
+        },
+        {
+          "id": "WildVSR/videos/1707.mp4",
+          "char_errors": 90,
+          "reference_chars": 155,
+          "word_errors": 24,
+          "reference_words": 33
+        },
+        {
+          "id": "WildVSR/videos/0618.mp4",
+          "char_errors": 34,
+          "reference_chars": 49,
+          "word_errors": 10,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/1757.mp4",
+          "char_errors": 40,
+          "reference_chars": 51,
+          "word_errors": 10,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/2431.mp4",
+          "char_errors": 45,
+          "reference_chars": 60,
+          "word_errors": 13,
+          "reference_words": 14
+        },
+        {
+          "id": "WildVSR/videos/1241.mp4",
+          "char_errors": 59,
+          "reference_chars": 83,
+          "word_errors": 17,
+          "reference_words": 21
+        },
+        {
+          "id": "WildVSR/videos/0596.mp4",
+          "char_errors": 52,
+          "reference_chars": 74,
+          "word_errors": 14,
+          "reference_words": 15
+        },
+        {
+          "id": "WildVSR/videos/0009.mp4",
+          "char_errors": 32,
+          "reference_chars": 40,
+          "word_errors": 10,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/0293.mp4",
+          "char_errors": 50,
+          "reference_chars": 78,
+          "word_errors": 15,
+          "reference_words": 18
+        }
+      ]
+    },
+    "50": {
+      "samples": 12,
+      "cer": 0.7494145199063232,
+      "wer": 0.9787234042553191,
+      "char_errors": 640,
+      "reference_chars": 854,
+      "word_errors": 184,
+      "reference_words": 188,
+      "normalization": "lowercase; collapse whitespace; WER whitespace words; CER removes whitespace; punctuation retained",
+      "details": [
+        {
+          "id": "WildVSR/videos/0893.mp4",
+          "char_errors": 41,
+          "reference_chars": 56,
+          "word_errors": 10,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/1770.mp4",
+          "char_errors": 39,
+          "reference_chars": 33,
+          "word_errors": 14,
+          "reference_words": 6
+        },
+        {
+          "id": "WildVSR/videos/0323.mp4",
+          "char_errors": 79,
+          "reference_chars": 102,
+          "word_errors": 24,
+          "reference_words": 25
+        },
+        {
+          "id": "WildVSR/videos/1041.mp4",
+          "char_errors": 57,
+          "reference_chars": 73,
+          "word_errors": 16,
+          "reference_words": 16
+        },
+        {
+          "id": "WildVSR/videos/1707.mp4",
+          "char_errors": 104,
+          "reference_chars": 155,
+          "word_errors": 29,
+          "reference_words": 33
+        },
+        {
+          "id": "WildVSR/videos/0618.mp4",
+          "char_errors": 37,
+          "reference_chars": 49,
+          "word_errors": 9,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/1757.mp4",
+          "char_errors": 42,
+          "reference_chars": 51,
+          "word_errors": 10,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/2431.mp4",
+          "char_errors": 45,
+          "reference_chars": 60,
+          "word_errors": 14,
+          "reference_words": 14
+        },
+        {
+          "id": "WildVSR/videos/1241.mp4",
+          "char_errors": 55,
+          "reference_chars": 83,
+          "word_errors": 20,
+          "reference_words": 21
+        },
+        {
+          "id": "WildVSR/videos/0596.mp4",
+          "char_errors": 53,
+          "reference_chars": 74,
+          "word_errors": 14,
+          "reference_words": 15
+        },
+        {
+          "id": "WildVSR/videos/0009.mp4",
+          "char_errors": 34,
+          "reference_chars": 40,
+          "word_errors": 10,
+          "reference_words": 10
+        },
+        {
+          "id": "WildVSR/videos/0293.mp4",
+          "char_errors": 54,
+          "reference_chars": 78,
+          "word_errors": 14,
+          "reference_words": 18
+        }
+      ]
+    }
+  },
+  "comparisons": {
+    "25": {
+      "improved": 0,
+      "unchanged": 0,
+      "worsened": 12,
+      "wer_delta": 0.4574468085106383,
+      "exact_sentences": 0
+    },
+    "50": {
+      "improved": 0,
+      "unchanged": 0,
+      "worsened": 12,
+      "wer_delta": 0.6010638297872339,
+      "exact_sentences": 0
+    }
+  },
+  "clean_tensor_hashes_verified": [
+    "WildVSR/videos/0893.mp4",
+    "WildVSR/videos/1770.mp4",
+    "WildVSR/videos/0323.mp4",
+    "WildVSR/videos/1041.mp4",
+    "WildVSR/videos/1707.mp4",
+    "WildVSR/videos/0618.mp4",
+    "WildVSR/videos/1757.mp4",
+    "WildVSR/videos/2431.mp4",
+    "WildVSR/videos/1241.mp4",
+    "WildVSR/videos/0596.mp4",
+    "WildVSR/videos/0009.mp4",
+    "WildVSR/videos/0293.mp4"
+  ],
+  "zero_mask_sentinel_equal": true,
+  "records": [
+    {
+      "id": "WildVSR/videos/0893.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "ac19a74411c93836c7378857ce24f709d5373e666ee025e09d71e816642d00a0",
+      "transcript_sha256": "c5db419458fd7c877348632cad40b7f28dbc96527c5391e9408f277cda6c3774",
+      "inference_seconds": 14.948282400000153
+    },
+    {
+      "id": "WildVSR/videos/0893.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "256d28a97aad1e4c068e910d5202fd606a08e0c235e258bc3dd69f42d96ccfd4",
+      "transcript_sha256": "7245c0a4dc21c51947ce757950fba30536bd505b015e082af48043b9f66bf450",
+      "inference_seconds": 18.752937599999996
+    },
+    {
+      "id": "WildVSR/videos/1770.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "407f49a92457fafcefe0e2e36d74a7defa4d104a79e41468cd84213afb4619ef",
+      "transcript_sha256": "ea2f6ea9d71f4033231daa6f4ce42b2e512af47dcd94eef12d334c7eeabc9167",
+      "inference_seconds": 9.960961500000167
+    },
+    {
+      "id": "WildVSR/videos/1770.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "fbd45c96df0c33de24d2b23104d2ddd8cd7c0b89af5e7d7819f4165d06b57eaf",
+      "transcript_sha256": "2f5519639da1b0b9242b2fb4564e9b9b67ea079824eee8826d7f046a4ed5a726",
+      "inference_seconds": 15.895674499999586
+    },
+    {
+      "id": "WildVSR/videos/0323.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "932c3312414d3a7dda06892485171860289ae87efc8bc767ccfbfb2d81e42e9b",
+      "transcript_sha256": "8e0e2298869786cf6e24e6ecf43e2b299f289713bfa8c733128a681a3574647b",
+      "inference_seconds": 25.043090399999983
+    },
+    {
+      "id": "WildVSR/videos/0323.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "a1440992bfa979f8143f43b428f73b80ba485892ff49092d73317c78ba27d444",
+      "transcript_sha256": "4b29902818fbeea10401aecac7e3d67e5e2fc4b82cb2136bf5c0b58f46e5f666",
+      "inference_seconds": 31.218709500000386
+    },
+    {
+      "id": "WildVSR/videos/1041.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "3d3c52eebb1a7dc9d6f1ce21abe37f9b8e04ce3331d44f9f71c423f04953c5b2",
+      "transcript_sha256": "304bc9496ce6be541bc1deda1ed740922d4e683d29f2fec2906a4895dcacb19f",
+      "inference_seconds": 11.179860200000348
+    },
+    {
+      "id": "WildVSR/videos/1041.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "8d034ea08b074f10664d033d58a6ea881ba07fa0a1f25ce15f91e574c2cf25b9",
+      "transcript_sha256": "4dade19aaf5222a99be3996b9f97836c835081d03ea21c145748c356d30a6b87",
+      "inference_seconds": 16.363595899999837
+    },
+    {
+      "id": "WildVSR/videos/1707.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "65dd6657451c196198da5348f2e156f1b78d460ad29ad26d1d7d1e0803615acb",
+      "transcript_sha256": "fdbd23c6be9079f0d3ae64fc3af2331743abfc94c26ccb7abb35942cd10db792",
+      "inference_seconds": 49.43825030000016
+    },
+    {
+      "id": "WildVSR/videos/1707.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "b0825ae9685fb67f288140c498f3bfa00b0c1924fb6e498ed0ed3287ca34897f",
+      "transcript_sha256": "3977826343d415e36faaeb9559a7162240b910ace1962e90e9a510e817c389fd",
+      "inference_seconds": 56.05474779999986
+    },
+    {
+      "id": "WildVSR/videos/0618.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "16d46ed44f3460b0e26dcee1a721859aefd6c00da2cac3d86fd7cf4a69bd17fe",
+      "transcript_sha256": "6264ff47d70e6ebae4544a1d8670793fb15db3bf7e50dac53bad90591fcef8af",
+      "inference_seconds": 29.01995739999984
+    },
+    {
+      "id": "WildVSR/videos/0618.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "69db6f0d0768c99d86dc6d284d27e675e88fe4289dea1d6e722baccfd685b2b6",
+      "transcript_sha256": "c5090040e0803e553bb62ef79f3c58cedf5dab9999ace80e9fde5ba0e0e44d95",
+      "inference_seconds": 36.5228247
+    },
+    {
+      "id": "WildVSR/videos/1757.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "130996ab20293916d6c4be63fffba42f9eae7c34c3df833966ff8bc5d3d79a7d",
+      "transcript_sha256": "85f4440cf7d039f39ba180ad7aef36d5dffa7b0a767473dd3498952f4b44f495",
+      "inference_seconds": 23.791605400000208
+    },
+    {
+      "id": "WildVSR/videos/1757.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "d7734a62f91a002bc1d0e278bfb59856f7664cac3eaf4fc5e75d06cb2c4ef441",
+      "transcript_sha256": "49ca34c015bb3d70049bf5371d90cbc45b158ad5423054e356f0f13276f0cfec",
+      "inference_seconds": 20.532465400000092
+    },
+    {
+      "id": "WildVSR/videos/2431.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "63981b4d0df100c31ca16636a6f5a508d475ab2a60a9e07235e521b1c219eac7",
+      "transcript_sha256": "d9d0ebceca10d544269f4bce3d6a682e63b85e5b0b443fd72754e9b3007a1f0f",
+      "inference_seconds": 17.323081000000002
+    },
+    {
+      "id": "WildVSR/videos/2431.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "c9480cf9bd6aacb1d4538bbde5ef2478cf06d9f45e120ea286c61e79259caf7c",
+      "transcript_sha256": "c9c328e328b85ea2c694d2bd46da89e50b2af079781fc2722fcbbaef6f2a0c3b",
+      "inference_seconds": 20.19028389999994
+    },
+    {
+      "id": "WildVSR/videos/1241.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "b9cd0542fa87a1df55fbc55377cbef56a136b853dc9ceec7b5f88bcfaa9a0bfa",
+      "transcript_sha256": "9db9c906b6345b6b0028787058fa2673578c94e55bd2593789f9df8e847344ba",
+      "inference_seconds": 20.98813650000011
+    },
+    {
+      "id": "WildVSR/videos/1241.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "efeda404eacd978f4fdaa0a2a5453546d0e71dfd816d4d84d624e575b6bdb4a8",
+      "transcript_sha256": "74cf8cd3aafd861e929cdfa1c576283e7586d9c186d5d84a60451726fdb0b382",
+      "inference_seconds": 19.72229849999985
+    },
+    {
+      "id": "WildVSR/videos/0596.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "5da3f511cd83dc322f5f59e2145a5b07001e054ff2a84a11b6bcfd577142a2f5",
+      "transcript_sha256": "24bd5e57f603e39050c12545677a9598d7ecf1d268b356f23107d58cf38338f5",
+      "inference_seconds": 18.290259100000185
+    },
+    {
+      "id": "WildVSR/videos/0596.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "3c7a159f727e2e47d2755ceab6e91b0593e107b3b472efb73fe831ac1eea06f4",
+      "transcript_sha256": "35c162d1b7ff031e61d8f592a882faaada7a4c9416f1ce04ee690af84cf0fe85",
+      "inference_seconds": 20.137070499999936
+    },
+    {
+      "id": "WildVSR/videos/0009.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "4e3442054d3faa6f5b54f9e945d3e090499955b65b09454e596287194251bd0f",
+      "transcript_sha256": "8ac6c2f0bae9b3a9ecf7311aa85a20b50f59e3eac1e2549b64a8aac6122a188f",
+      "inference_seconds": 6.637194800000088
+    },
+    {
+      "id": "WildVSR/videos/0009.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "30ae7dbf56231b2a11b4ab82ca674887a1a7285e3ac6ea7e8bd339396460cc4e",
+      "transcript_sha256": "ecf33801fbe007f8ec305afaf10b6e8c143d125b524abe8da56b5e6c7e6962f7",
+      "inference_seconds": 8.770875299999716
+    },
+    {
+      "id": "WildVSR/videos/0293.mp4",
+      "condition": "25",
+      "status": "ok",
+      "input_tensor_sha256": "c05d2b683429c8266f1b827c605ea553f01e98462817751e2bdf3fe0e5da8574",
+      "transcript_sha256": "efbd9389b8a31406467c83959c4fcb7f179859549e987f146d1531fd213947a9",
+      "inference_seconds": 25.41271110000025
+    },
+    {
+      "id": "WildVSR/videos/0293.mp4",
+      "condition": "50",
+      "status": "ok",
+      "input_tensor_sha256": "0eeb94876dedb3b3502c877858df6f4c5519b7a113206ed23f0181d758a28803",
+      "transcript_sha256": "63e6808a529c344057206e644cabcb4ae9d901ed97999d5a2fd9e8f8f6b0c770",
+      "inference_seconds": 26.519759199999953
+    }
+  ],
+  "successful": 24,
+  "failed": 0
+}
