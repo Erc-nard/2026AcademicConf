@@ -1,0 +1,278 @@
+{
+  "plan": {
+    "model": "Auto-AVSR vsr_trlrs2lrs3vox2avsp_base.pth",
+    "modality": "video",
+    "dataset": "WildVSR official author archive",
+    "selection": "12 lowest SHA256(UTF8(2026: + full ZIP member path)); exclude prior smoke 0000.mp4; no duration or outcome filtering",
+    "repository_commit": "182b62837773ab01052d4ac21ef1d2203ea7d267",
+    "checkpoint_sha256": "fbf7cd70ff1c0e694b3030fb779dbb4570f04e4b841d62f9296c229e94878ddb",
+    "archive_sha256": "b853e1b9255b9469861304ec4de3ba1f21e49d9e979d0fdc978912a80a6d64d1",
+    "beam_size": 40,
+    "ctc_weight": 0.1,
+    "lm_weight": 0.0,
+    "penalty": 0.0,
+    "device": "cpu",
+    "threads": 2,
+    "training": false,
+    "audio_read": false,
+    "reference_used_for_inference": false,
+    "scope": "fixed development subset; not final held-out test or full benchmark",
+    "preprocessing": "pre-cropped 96x96 ROI; RGB float /255; center crop 88; grayscale; (x-0.421)/0.165",
+    "selected": [
+      "WildVSR/videos/0893.mp4",
+      "WildVSR/videos/1770.mp4",
+      "WildVSR/videos/0323.mp4",
+      "WildVSR/videos/1041.mp4",
+      "WildVSR/videos/1707.mp4",
+      "WildVSR/videos/0618.mp4",
+      "WildVSR/videos/1757.mp4",
+      "WildVSR/videos/2431.mp4",
+      "WildVSR/videos/1241.mp4",
+      "WildVSR/videos/0596.mp4",
+      "WildVSR/videos/0009.mp4",
+      "WildVSR/videos/0293.mp4"
+    ],
+    "video_hashes": {
+      "WildVSR/videos/0893.mp4": "913a3b5d4d4d71281db737207ced19812ee2024ca866dad75059f2067d3e4784",
+      "WildVSR/videos/1770.mp4": "27573cd05870e15a6b897f5637191812323a4c71fa1436b7df7eed55ab5dc7be",
+      "WildVSR/videos/0323.mp4": "a66240ff491e569766aa6250e88e70bfe29a0fee18f3a92a734bfb818610e3b6",
+      "WildVSR/videos/1041.mp4": "f6d2a127edf1e0a5c2dcbd34890df5c51f7c41a746cff7214c9d4eb6ddf3f36b",
+      "WildVSR/videos/1707.mp4": "aea2d3a34eac78e314e92f7e12fe9df3a5cf458c31a47ba4e7c63bf4d62a6321",
+      "WildVSR/videos/0618.mp4": "69505ae5227513809c3dc0dad1bdbde1d64f64de075a93ddf6c2e378e7237cd8",
+      "WildVSR/videos/1757.mp4": "c19c46106a5da3e7c6e1f2263802b1fdade073a3a3ae9890046baa89b5afccad",
+      "WildVSR/videos/2431.mp4": "a3ad89745a7da75d0775113e068bfe9e97e97f6f848506a211026089bce26607",
+      "WildVSR/videos/1241.mp4": "6ee0239fc3f187f97f45795a70f77a65fd95b5ead44f5fd44982a18ac3e1d627",
+      "WildVSR/videos/0596.mp4": "58dc85b59f746b3d9c82117bf36e4ec3a40ed1de16a74c8057b112f92c7d646a",
+      "WildVSR/videos/0009.mp4": "e68c855fa9a6ff63714b2ba7083c7c4a8fc34e3d28f3701787126f17a653cb97",
+      "WildVSR/videos/0293.mp4": "a172743a3fd156cd2bff5a95c57118c7fce6b5d9afa4ce1ac303477702477f1d"
+    },
+    "failure_policy": "retain selected ID with empty prediction; no replacement"
+  },
+  "plan_sha256": "21acd838dd3ac3d690467869cec0fd9826c886456ea5a23674403df3a2c34767",
+  "metrics": {
+    "samples": 12,
+    "cer": 0.26697892271662765,
+    "wer": 0.3776595744680851,
+    "char_errors": 228,
+    "reference_chars": 854,
+    "word_errors": 71,
+    "reference_words": 188,
+    "normalization": "lowercase; collapse whitespace; WER whitespace words; CER removes whitespace; punctuation retained",
+    "details": [
+      {
+        "id": "WildVSR/videos/0893.mp4",
+        "char_errors": 20,
+        "reference_chars": 56,
+        "word_errors": 5,
+        "reference_words": 10
+      },
+      {
+        "id": "WildVSR/videos/1770.mp4",
+        "char_errors": 3,
+        "reference_chars": 33,
+        "word_errors": 1,
+        "reference_words": 6
+      },
+      {
+        "id": "WildVSR/videos/0323.mp4",
+        "char_errors": 11,
+        "reference_chars": 102,
+        "word_errors": 5,
+        "reference_words": 25
+      },
+      {
+        "id": "WildVSR/videos/1041.mp4",
+        "char_errors": 19,
+        "reference_chars": 73,
+        "word_errors": 5,
+        "reference_words": 16
+      },
+      {
+        "id": "WildVSR/videos/1707.mp4",
+        "char_errors": 18,
+        "reference_chars": 155,
+        "word_errors": 7,
+        "reference_words": 33
+      },
+      {
+        "id": "WildVSR/videos/0618.mp4",
+        "char_errors": 0,
+        "reference_chars": 49,
+        "word_errors": 0,
+        "reference_words": 10
+      },
+      {
+        "id": "WildVSR/videos/1757.mp4",
+        "char_errors": 2,
+        "reference_chars": 51,
+        "word_errors": 3,
+        "reference_words": 10
+      },
+      {
+        "id": "WildVSR/videos/2431.mp4",
+        "char_errors": 37,
+        "reference_chars": 60,
+        "word_errors": 11,
+        "reference_words": 14
+      },
+      {
+        "id": "WildVSR/videos/1241.mp4",
+        "char_errors": 40,
+        "reference_chars": 83,
+        "word_errors": 14,
+        "reference_words": 21
+      },
+      {
+        "id": "WildVSR/videos/0596.mp4",
+        "char_errors": 8,
+        "reference_chars": 74,
+        "word_errors": 2,
+        "reference_words": 15
+      },
+      {
+        "id": "WildVSR/videos/0009.mp4",
+        "char_errors": 27,
+        "reference_chars": 40,
+        "word_errors": 8,
+        "reference_words": 10
+      },
+      {
+        "id": "WildVSR/videos/0293.mp4",
+        "char_errors": 43,
+        "reference_chars": 78,
+        "word_errors": 10,
+        "reference_words": 18
+      }
+    ]
+  },
+  "exact_sentences": 1,
+  "successful": 12,
+  "failed": 0,
+  "records": [
+    {
+      "id": "WildVSR/videos/0893.mp4",
+      "status": "ok",
+      "frames": 123,
+      "duration_seconds": 4.92,
+      "input_tensor_sha256": "9a55a664b3299e8377737c4acc69954157257db2d171488fb5100347bb1755b1",
+      "inference_seconds": 15.236000299999887,
+      "transcript_sha256": "93c9855fe7b4ab97467a3e4377ea37df8f181352c3eebfeefabeedc3f2fd81f8",
+      "elapsed_seconds": 16.741945200000146
+    },
+    {
+      "id": "WildVSR/videos/1770.mp4",
+      "status": "ok",
+      "frames": 98,
+      "duration_seconds": 3.92,
+      "input_tensor_sha256": "ad38b8b82c23711599ce2fe323dc352cc293a6d8e91028b0fd69e402e8c48686",
+      "inference_seconds": 10.267454999999927,
+      "transcript_sha256": "c4b18db7ee608c129c40c31c1ee212b102402b615c0694942b14ac44f55a9cc4",
+      "elapsed_seconds": 10.406529799999817
+    },
+    {
+      "id": "WildVSR/videos/0323.mp4",
+      "status": "ok",
+      "frames": 132,
+      "duration_seconds": 5.28,
+      "input_tensor_sha256": "ca8584ab6a3d93f9f156f0518b30492ea61fb683921b57239aa06bb2ed8aea66",
+      "inference_seconds": 29.419207099999994,
+      "transcript_sha256": "cdba2a93edfb53304f88929b6bfc88c2c0d8c46e6cd9af653ee4a3c3cc61e0f8",
+      "elapsed_seconds": 29.50717899999995
+    },
+    {
+      "id": "WildVSR/videos/1041.mp4",
+      "status": "ok",
+      "frames": 100,
+      "duration_seconds": 4.0,
+      "input_tensor_sha256": "0ec269b60e668813d45ca8d937fb38cfd2d3a479a3d2ddde8f30003de9755daa",
+      "inference_seconds": 19.312022699999943,
+      "transcript_sha256": "95776ffd3e0184e55886a9a8d1b350e2672f24f967a0ebe57d3db0ba15c0de4a",
+      "elapsed_seconds": 19.64224279999985
+    },
+    {
+      "id": "WildVSR/videos/1707.mp4",
+      "status": "ok",
+      "frames": 192,
+      "duration_seconds": 7.68,
+      "input_tensor_sha256": "02d3d88560b852a6a0d25a88c5f3be7c98ac000fae49419fa197c4ca9d90f97d",
+      "inference_seconds": 57.46247400000016,
+      "transcript_sha256": "cf9be52e8a1bf1b106dc65f3f3370031ffdcbd6e5fc9d705c73fc810f97226b5",
+      "elapsed_seconds": 57.568973299999925
+    },
+    {
+      "id": "WildVSR/videos/0618.mp4",
+      "status": "ok",
+      "frames": 173,
+      "duration_seconds": 6.92,
+      "input_tensor_sha256": "fe0d9e4dd7ee3991d31beea863d95e13d4424a8aad765186976df9573033462f",
+      "inference_seconds": 16.509192400000074,
+      "transcript_sha256": "5be97654bfd9caae73489e03ea4f192ed4b9ce7620c40f31de686e485251ba47",
+      "elapsed_seconds": 16.64270600000009
+    },
+    {
+      "id": "WildVSR/videos/1757.mp4",
+      "status": "ok",
+      "frames": 171,
+      "duration_seconds": 6.84,
+      "input_tensor_sha256": "5ee8c0076f1cef85f5ecfb8c09130007686af57f3403c5c63025e11e57d7847a",
+      "inference_seconds": 18.78800790000014,
+      "transcript_sha256": "ee4611726b8a0d693eb7a151934a5af844dee3ba8984b3ba5afbfffada6f0f12",
+      "elapsed_seconds": 18.902060800000072
+    },
+    {
+      "id": "WildVSR/videos/2431.mp4",
+      "status": "ok",
+      "frames": 109,
+      "duration_seconds": 4.36,
+      "input_tensor_sha256": "31ba80861f7dd08902486a76111587a55613e4dab0c92768bb7e1a81b111f149",
+      "inference_seconds": 14.04059919999986,
+      "transcript_sha256": "3c1b321fda3d7b5779ce8178bc76ec24338eb180b93a937ee273f3558b114f49",
+      "elapsed_seconds": 14.112847399999964
+    },
+    {
+      "id": "WildVSR/videos/1241.mp4",
+      "status": "ok",
+      "frames": 129,
+      "duration_seconds": 5.16,
+      "input_tensor_sha256": "537d596eac87a1a48568f8333f984281fc52ade8389bb23f2a185bb6d11e471d",
+      "inference_seconds": 20.8467627,
+      "transcript_sha256": "7284d27396ab95277c93ff1774385f08e2c0e7fa81ecef9c61f483dd031a3f1c",
+      "elapsed_seconds": 20.93115469999998
+    },
+    {
+      "id": "WildVSR/videos/0596.mp4",
+      "status": "ok",
+      "frames": 104,
+      "duration_seconds": 4.16,
+      "input_tensor_sha256": "b026dea71b936907d7493a5b084240fb2bcdc7389228c1bd758cbf30cb07e94a",
+      "inference_seconds": 17.316687799999954,
+      "transcript_sha256": "87d7fd598c59449b5b5987d6c34ecd9cdc0d7691f6bf7dee1cc0fe53e5bb6c01",
+      "elapsed_seconds": 17.4056314999998
+    },
+    {
+      "id": "WildVSR/videos/0009.mp4",
+      "status": "ok",
+      "frames": 66,
+      "duration_seconds": 2.64,
+      "input_tensor_sha256": "f3b1eef30ea1c07c56d2a7062756ca10fdd3dcb15b1ac7ddd9c823c59811c65e",
+      "inference_seconds": 7.676944999999932,
+      "transcript_sha256": "729066b58f0a05058482f0660284011a5244861ec3f891d21d3e01fb871037fe",
+      "elapsed_seconds": 7.756717199999912
+    },
+    {
+      "id": "WildVSR/videos/0293.mp4",
+      "status": "ok",
+      "frames": 147,
+      "duration_seconds": 5.88,
+      "input_tensor_sha256": "7b8052ddf05f6cabd18cfb871af8663907c393a0029d0eac7d68cd7775ed4a5b",
+      "inference_seconds": 24.469663999999966,
+      "transcript_sha256": "ea9f097d9fad3e2bc8cf5fc57a0b78b11ac47e950d8743bf7596856b094e996d",
+      "elapsed_seconds": 24.556099600000152
+    }
+  ],
+  "versions": {
+    "torch": "2.14.0+cpu",
+    "numpy": "2.5.3",
+    "opencv": "5.0.0"
+  }
+}
