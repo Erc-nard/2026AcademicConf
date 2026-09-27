@@ -1,0 +1,243 @@
+{
+  "acquisition": {
+    "plan": {
+      "dataset": "MELD official author distribution",
+      "split": "train",
+      "url": "https://huggingface.co/datasets/declare-lab/MELD/resolve/main/MELD.Raw.tar.gz",
+      "repository_commit": "e8cedf27b5d2877e198332c957127e16eb214afe",
+      "metadata_sha256": "d2fa2d6529cf03cac2989efec05c9b27d8fd2f4c8fc5974c7ae88aa537fa02db",
+      "selection": "First 3 numeric dialogue IDs with utterance IDs 0,1,2; no visual or model-output filtering",
+      "files": [
+        "dia0_utt0.mp4",
+        "dia0_utt1.mp4",
+        "dia0_utt2.mp4",
+        "dia1_utt0.mp4",
+        "dia1_utt1.mp4",
+        "dia1_utt2.mp4",
+        "dia2_utt0.mp4",
+        "dia2_utt1.mp4",
+        "dia2_utt2.mp4"
+      ],
+      "scope": "conversation-context feasibility pilot, not VSR benchmark or final test",
+      "maximum_stream_bytes": 9663676416
+    },
+    "downloaded": {
+      "dia2_utt2.mp4": {
+        "bytes": 449948,
+        "sha256": "21c883303b594ca796f6a4eb05af9ddfc086051b20745e05c384df4a55ccfbe5"
+      },
+      "dia1_utt2.mp4": {
+        "bytes": 1743816,
+        "sha256": "0e0d360ca3ea2980f707b01896aa51136b9b3335678e40f95081b35411f3db95"
+      },
+      "dia1_utt0.mp4": {
+        "bytes": 516742,
+        "sha256": "17d295e0dc4371d89b62c14d7e3f90b6a36249dbf3f30a97c80b5a1a9da619f8"
+      },
+      "dia2_utt0.mp4": {
+        "bytes": 371972,
+        "sha256": "cc907f11dbb3ab4f43547b4bf45390a7631dd924ba3293acb307d1663cfe3b1c"
+      },
+      "dia0_utt2.mp4": {
+        "bytes": 364331,
+        "sha256": "f4fd254a9c214dc00ba7d1d93d036803edec07dc4c00e47f181aa30ab0207d84"
+      },
+      "dia0_utt1.mp4": {
+        "bytes": 181895,
+        "sha256": "c7686143bac35f57ec9ce866cff6f080cdffafb7c78a79ff813fa8c92e888531"
+      },
+      "dia2_utt1.mp4": {
+        "bytes": 416316,
+        "sha256": "6425e45896fca8866f5790f45c0cc92b786e473d7469532dacf53cce32e148e4"
+      },
+      "dia0_utt0.mp4": {
+        "bytes": 597313,
+        "sha256": "b4ca439918dd3e1a2c5f26721ac1149108ab5a2f3402438189e20d739fe307f9"
+      },
+      "dia1_utt1.mp4": {
+        "bytes": 714225,
+        "sha256": "3565f1daf0b402803fd8ee94e0067a46ea1412f8554eecaa12915a54ae8adb67"
+      }
+    },
+    "missing": [],
+    "transferred_bytes": 7570124800,
+    "seconds": 1371.7547997000006
+  },
+  "pairs": [
+    {
+      "id": "dia0_utt1",
+      "previous_id": "dia0_utt0",
+      "dialogue_id": 0,
+      "previous_utterance": 0,
+      "target_utterance": 1,
+      "gap_ms": 209,
+      "status": "eligible",
+      "reason": null,
+      "missing_video_ids": []
+    },
+    {
+      "id": "dia0_utt2",
+      "previous_id": "dia0_utt1",
+      "dialogue_id": 0,
+      "previous_utterance": 1,
+      "target_utterance": 2,
+      "gap_ms": 0,
+      "status": "eligible",
+      "reason": null,
+      "missing_video_ids": []
+    },
+    {
+      "id": "dia1_utt1",
+      "previous_id": "dia1_utt0",
+      "dialogue_id": 1,
+      "previous_utterance": 0,
+      "target_utterance": 1,
+      "gap_ms": 1544,
+      "status": "eligible",
+      "reason": null,
+      "missing_video_ids": []
+    },
+    {
+      "id": "dia1_utt2",
+      "previous_id": "dia1_utt1",
+      "dialogue_id": 1,
+      "previous_utterance": 1,
+      "target_utterance": 2,
+      "gap_ms": -2210,
+      "status": "excluded",
+      "reason": "overlap_or_episode_mismatch",
+      "missing_video_ids": []
+    },
+    {
+      "id": "dia2_utt1",
+      "previous_id": "dia2_utt0",
+      "dialogue_id": 2,
+      "previous_utterance": 0,
+      "target_utterance": 1,
+      "gap_ms": 1002,
+      "status": "eligible",
+      "reason": null,
+      "missing_video_ids": []
+    },
+    {
+      "id": "dia2_utt2",
+      "previous_id": "dia2_utt1",
+      "dialogue_id": 2,
+      "previous_utterance": 1,
+      "target_utterance": 2,
+      "gap_ms": 0,
+      "status": "eligible",
+      "reason": null,
+      "missing_video_ids": []
+    }
+  ],
+  "video_records": [
+    {
+      "id": "dia0_utt0",
+      "frames": 136,
+      "container_frames": 136,
+      "fps": 23.976023976023978,
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 5.672333333333333,
+      "decoded_all_expected_frames": true
+    },
+    {
+      "id": "dia0_utt1",
+      "frames": 36,
+      "container_frames": 36,
+      "fps": 23.976023976023978,
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 1.5014999999999998,
+      "decoded_all_expected_frames": true
+    },
+    {
+      "id": "dia0_utt2",
+      "frames": 70,
+      "container_frames": 70,
+      "fps": 23.976023976023978,
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 2.919583333333333,
+      "decoded_all_expected_frames": true
+    },
+    {
+      "id": "dia1_utt0",
+      "frames": 59,
+      "container_frames": 59,
+      "fps": 23.976042590949422,
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 2.460789756115614,
+      "decoded_all_expected_frames": true
+    },
+    {
+      "id": "dia1_utt1",
+      "frames": 53,
+      "container_frames": 53,
+      "fps": 23.976042590949422,
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 2.210539950408941,
+      "decoded_all_expected_frames": true
+    },
+    {
+      "id": "dia1_utt2",
+      "frames": 114,
+      "container_frames": 114,
+      "fps": 23.976042590949422,
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 4.754746308426779,
+      "decoded_all_expected_frames": true
+    },
+    {
+      "id": "dia2_utt0",
+      "frames": 26,
+      "container_frames": 26,
+      "fps": 23.976042590949422,
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 1.0844158247289146,
+      "decoded_all_expected_frames": true
+    },
+    {
+      "id": "dia2_utt1",
+      "frames": 35,
+      "container_frames": 35,
+      "fps": 23.976042590949422,
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 1.4597905332889234,
+      "decoded_all_expected_frames": true
+    },
+    {
+      "id": "dia2_utt2",
+      "frames": 43,
+      "container_frames": 43,
+      "fps": 23.976042590949422,
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 1.7934569408978203,
+      "decoded_all_expected_frames": true
+    }
+  ],
+  "eligible_pairs": 5,
+  "excluded_pairs": 1,
+  "oracle_control_rows": 15,
+  "oracle_control_conditions": [
+    "none",
+    "previous_oracle",
+    "wrong_previous_oracle"
+  ],
+  "raw_scene_frames_local_only": true,
+  "correction_executed": false,
+  "vsr_executed": false,
+  "safeguards": [
+    "Only strictly prior non-overlapping utterances qualify",
+    "Previous reference transcript is oracle-only, never realistic previous VSR",
+    "Target reference stored separately from correction inputs",
+    "Unmasked QA frames are not scene-context inputs"
+  ]
+}

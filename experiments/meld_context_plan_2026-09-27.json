@@ -1,0 +1,21 @@
+{
+  "dataset": "MELD official author distribution",
+  "split": "train",
+  "url": "https://huggingface.co/datasets/declare-lab/MELD/resolve/main/MELD.Raw.tar.gz",
+  "repository_commit": "e8cedf27b5d2877e198332c957127e16eb214afe",
+  "metadata_sha256": "d2fa2d6529cf03cac2989efec05c9b27d8fd2f4c8fc5974c7ae88aa537fa02db",
+  "selection": "First 3 numeric dialogue IDs with utterance IDs 0,1,2; no visual or model-output filtering",
+  "files": [
+    "dia0_utt0.mp4",
+    "dia0_utt1.mp4",
+    "dia0_utt2.mp4",
+    "dia1_utt0.mp4",
+    "dia1_utt1.mp4",
+    "dia1_utt2.mp4",
+    "dia2_utt0.mp4",
+    "dia2_utt1.mp4",
+    "dia2_utt2.mp4"
+  ],
+  "scope": "conversation-context feasibility pilot, not VSR benchmark or final test",
+  "maximum_stream_bytes": 9663676416
+}

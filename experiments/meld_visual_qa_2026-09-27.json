@@ -1,0 +1,22 @@
+{
+  "scope": "Assistant visual inspection of one midpoint frame per selected clip; not active-speaker tracking or a full-frame-sequence audit",
+  "source_contact_sheet": "results/meld_context_2026-09-27/midpoint_contact_sheet.jpg",
+  "scene_inputs_approved": false,
+  "vsr_inputs_approved": false,
+  "observations": [
+    {"id": "dia0_utt0", "tags": ["two_people", "wide_shot", "speaker_association_needed"]},
+    {"id": "dia0_utt1", "tags": ["one_frontal_face", "foreground_back_of_head"]},
+    {"id": "dia0_utt2", "tags": ["one_frontal_face"]},
+    {"id": "dia1_utt0", "tags": ["one_frontal_face"]},
+    {"id": "dia1_utt1", "tags": ["one_frontal_face"]},
+    {"id": "dia1_utt2", "tags": ["two_people", "wide_shot", "profile_view"]},
+    {"id": "dia2_utt0", "tags": ["multiple_people", "motion_blur", "foreground_person_occlusion"]},
+    {"id": "dia2_utt1", "tags": ["multiple_people", "profile_view", "speaker_association_needed"]},
+    {"id": "dia2_utt2", "tags": ["multiple_people", "profile_view", "speaker_association_needed"]}
+  ],
+  "limitations": [
+    "No scene descriptions generated from unmasked faces",
+    "No visible subtitle overlay observed in the nine reviewed midpoint frames; other frames not checked visually",
+    "Temporal eligibility is not visual-speech eligibility"
+  ]
+}

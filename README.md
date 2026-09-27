@@ -6,6 +6,11 @@
 **연구 방향 전환:** 한국어 baseline 개선은 중단하고, 영어 pretrained VSR을 고정한 상태에서
 입술 가림과 문맥 보정의 효과·악화를 분석한다. 기존 한국어 실험은 pilot study로 보존한다.
 
+**최신 문맥 자료:** MELD 공식 배포본에서 3개 대화·9개 원본 영상(총 23.86초)을 확보하고 모두 디코딩했다.
+이전→현재 연결 6쌍 중 시간 조건을 통과한 것은 **5쌍**이고, 전사 시간 겹침 1쌍은 제외했다.
+5쌍×3조건의 oracle 비교 입력 15개를 만들었지만, **MELD VSR·LLM 보정은 아직 실행하지 않았다**(22절).
+원본 장면이 있는 자료를 확보한 단계이며, 발화자 확인·얼굴 가림 후에 모델 입력으로 사용해야 한다.
+
 **최신 가림 실험:** 고정 12개에서 중앙 가로띠 25%·50% 가림 추론 24회를 모두 완료했다.
 WER은 **37.77% → 83.51% → 97.87%**, CER은 **26.70% → 65.57% → 74.94%**였다.
 두 가림 조건 모두 clean보다 12개 전부의 단어 오류가 늘었다. 면적은 88×88 모델 입력 기준이며 실제 입술 면적 비율은 아니다(21절).
@@ -859,6 +864,69 @@ Clean 12개 전체를 재추론한 것은 아니다. 추가 가림 추론 시간
 .venv/Scripts/python.exe -m kvsr.english_occlusion --output results/english_occlusion_replay
 ```
 
+## 22. 실제 이전 발화·장면이 있는 문맥 자료 확보 (9/27)
+
+WildVSR 공식 ZIP은 입 ROI와 `labels.json`만 제공하며, 원본 URL·발화 시간·대화 순서 연결 정보가 없다.
+따라서 기존 12개의 정답으로 임의의 이전 대화를 만들어 넣지 않는다.
+[VoxMM 공식 안내](https://mm.kaist.ac.kr/projects/voxmm/)는 풍부한 전사·원본 URL을 제공하지만 별도 신청 방식이다.
+이번 단계에서는 다운로드가 가능한 [MELD 공식 저장소](https://github.com/declare-lab/MELD)와
+그 저장소에서 연결한 [공식 영상 배포처](https://huggingface.co/datasets/declare-lab/MELD)를 사용했다.
+
+MELD는 원래 대화 감정 인식용 자료이며 VSR benchmark가 아니다. 이번 목적은 문맥 자료의 연결 가능성 확인이다.
+기존 Auto-AVSR/WildVSR clean·가림 결과는 그대로 보존하며 MELD 결과와 합산하지 않는다.
+
+자료를 보기 전에 train split에서 숫자순 첫 3개 대화의 발화 0·1·2, 총 9개를 선정했다.
+코드 commit·전사 CSV SHA-256·파일 목록을 [사전 계획](experiments/meld_context_plan_2026-09-27.json)에 저장했다.
+약 10GB의 이중 압축파일을 순차적으로 읽되 선정 영상만 로컬에 저장하고, 전체 아카이브는 저장하지 않는다.
+전송 상한은 9GiB이며, 실패한 샘플을 다른 영상으로 바꾸지 않는다.
+
+**확보 결과:** 선정 9개 전부 다운로드·SHA-256 확인·전체 디코딩에 성공했다. 1280×720, 약 23.976fps이며,
+실제 디코딩 프레임 수는 모든 파일에서 컨테이너의 프레임 수와 일치했다. 총 길이는 23.86초다.
+압축 내부의 순서 때문에 7.05GiB를 전송했지만, 저장한 원본 클립은 합계 **5.11MiB**다.
+이 다운로드를 다시 수행할 필요는 없으며, 아래 `build` 단계는 확보한 로컬 파일을 재사용한다.
+[확보·디코딩·문맥 검사 결과](experiments/meld_context_2026-09-27.json)에 파일별 해시·크기·프레임 수를 기록했다.
+
+문맥 연결은 같은 대화·에피소드의 바로 앞 발화만 사용하고, 이전 발화 종료가 목표 발화 시작보다 늦으면 제외한다.
+원문 시간 정보에 겹침이 있으므로 `Utterance_ID`가 작다는 이유만으로 이전 문맥으로 허용하지 않는다.
+
+| 이전 → 현재 | 이전 종료와 현재 시작 간격 | 시간·파일 연결 상태 |
+|---|---:|---|
+| dia0_utt0 → dia0_utt1 | 209ms | 통과 |
+| dia0_utt1 → dia0_utt2 | 0ms | 통과 |
+| dia1_utt0 → dia1_utt1 | 1,544ms | 통과 |
+| dia1_utt1 → dia1_utt2 | −2,210ms | 전사 시간 겹침으로 제외 |
+| dia2_utt0 → dia2_utt1 | 1,002ms | 통과 |
+| dia2_utt1 → dia2_utt2 | 0ms | 통과 |
+
+파일 연결과 시간 조건을 통과한 5쌍에 대해 oracle 비교 입력 15개를 생성했다.
+이것은 **문맥 없음 / 직전 전사 / 다른 대화의 전사** 조건이며, 실제 이전 VSR 출력을 이용하는 실험과 구분한다.
+현재 VSR 출력은 아직 없어 입력은 `ready_for_correction=false` 상태다. 보정 결과나 WER 개선 수치는 만들지 않았다.
+
+로컬 파일은 다음처럼 분리한다.
+
+- `target_references.json`: 현재 발화 정답. 보정 모델 입력과 분리한다.
+- `oracle_previous_context.json`: 시간 검사를 통과한 이전 전사. **oracle 문맥**으로만 사용한다.
+- `oracle_context_variants.json`: 문맥 없음 / 직전 전사 / 다른 대화 전사의 비교 입력. 현재 VSR이 없으면 실행 불가 상태다.
+- `pending_model_inputs.json`: 실제 이전 VSR 및 현재 VSR 출력을 넣을 위치. 전사 정답으로 대신 채우지 않는다.
+- `contact_frames/`: 원본 장면 QA용 프레임. 얼굴이 남아 있으므로 scene-context 모델에 그대로 입력하지 않는다.
+
+원본 장면에는 여러 인물, 옆얼굴, 지나가는 사람에 의한 자연 가림이 있다.
+화면의 가장 큰 얼굴을 무조건 발화자로 선택하지 않는다. 이후 활성 발화자·입 가시성을 확인한 뒤
+동일한 고정 Auto-AVSR로 이전/현재 발화를 추론해야 한다. 시각 문맥에는 모든 얼굴을 가린 별도 장면을 사용해야 한다.
+이 단계의 문맥 자료 확보는 LLM 보정 성능 측정이나 새로운 VSR baseline 재현을 뜻하지 않는다.
+
+9개 영상의 **중간 프레임 한 장씩**을 직접 검토했다. `dia2_utt0`에는 이동하는 인물의 가림과 흔들림이 보이며,
+여러 샘플은 복수 인물 또는 옆얼굴이다. [시각 QA 기록](experiments/meld_visual_qa_2026-09-27.json)을 남겼다.
+전체 프레임을 시각적으로 검토했거나 발화자 추적을 완료한 것은 아니다.
+로컬 `results/meld_context_2026-09-27/midpoint_contact_sheet.jpg`에서 9개 장면을 비교할 수 있다.
+이 이미지는 얼굴이 가려지지 않은 QA 자료이므로 장면 문맥 모델의 입력으로 승인하지 않았다.
+
+```powershell
+# 공식 메타데이터: git clone https://github.com/declare-lab/MELD.git external/meld
+.venv/Scripts/python.exe -m kvsr.meld_context acquire --output results/meld_context_replay
+.venv/Scripts/python.exe -m kvsr.meld_context build --output results/meld_context_replay
+```
+
 ## 구현과 검증
 
 - `kvsr/nbest.py`: blank/반복 문자를 올바르게 합산하는 CTC prefix beam과 독립 oracle 평가.
@@ -880,7 +948,9 @@ Clean 12개 전체를 재추론한 것은 아니다. 추가 가림 추론 시간
 - `kvsr/english_smoke.py`: 공식 영어 visual-only 모델, 고정 WildVSR 첫 영상 추론, 사후 정답 평가.
 - `kvsr/english_clean.py`: 모델·자료 해시 검사, 고정 12개 선택, 전체 추론 후 정답 평가·실패 보존.
 - `kvsr/english_occlusion.py`: 고정 중앙 가로띠, clean 무결성·0% 재현 확인, 동일 ID의 가림 결과 비교.
-- 로컬 `.venv`에서 **78개 테스트 통과**. 가림 면적·중첩·원본 보존 및 paired ID·오류 증감 집계를 검증했다.
+- `kvsr/meld_context.py`: 공식 영상 선택 추출, 이전 발화 시간 검사, 정답/문맥 분리 및 oracle 대조 조건 구성.
+- 로컬 `.venv`에서 **82개 테스트 통과**. 문맥 시간·에피소드·중복 검사, oracle 입력에서 목표 정답 제외를 검증했다.
+  가림 면적·중첩·원본 보존 및 paired ID·오류 증감 집계도 검증했다.
   영어 subset의 순서 독립성·기존 표본 제외·중복 거부도 검증했다.
   CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
   EOS/반복 문자, 실패 누락 방지, 합성 마스크 범위, 보간 경계/길이 제한을 검증했다.
@@ -937,6 +1007,7 @@ Clean 12개 전체를 재추론한 것은 아니다. 추가 가림 추론 시간
 | 영어 VSR 첫 추론 | [실험 JSON](experiments/english_smoke_2026-09-27.json) |
 | 영어 clean 12개 | [고정 계획](experiments/english_clean_plan_2026-09-27.json), [실험 JSON](experiments/english_clean_2026-09-27.json) |
 | 영어 가림 25%·50% | [고정 계획](experiments/english_occlusion_plan_2026-09-27.json), [실험 JSON](experiments/english_occlusion_2026-09-27.json) |
+| 실제 대화·장면 자료 | [MELD 선정 계획](experiments/meld_context_plan_2026-09-27.json), [확보 결과](experiments/meld_context_2026-09-27.json), [시각 QA](experiments/meld_visual_qa_2026-09-27.json) |
 
 이전 단계 상세 기록: [1단계](docs/STAGE1.md), [2단계](docs/STAGE2.md),
 [3단계](docs/STAGE3.md), [4단계](docs/STAGE4.md), [5단계](docs/STAGE5.md).
@@ -945,8 +1016,9 @@ Clean 12개 전체를 재추론한 것은 아니다. 추가 가림 추론 시간
 
 1. 완료한 영어 clean 12개 baseline과 모델·decoder·입력 변환을 유지한다.
 2. 완료한 동일 12개의 0/25/50% 가림 결과를 보정 전 기준으로 유지한다.
-3. 발화 순서와 원본 장면을 제공하는 영어 자료를 확보해 dialogue/visual context 평가 가능성을 확인한다.
-4. 문맥 없음/대화/장면/둘 다/잘못된 문맥을 비교하고 개선·악화율을 함께 평가한다.
+3. 확보한 MELD 5쌍에서 활성 발화자를 확인하고 시간 길이를 보존해 25fps로 변환한 뒤 이전·현재 VSR을 실행한다.
+4. 얼굴을 가린 장면 입력을 준비하고 문맥 없음/대화/장면/둘 다/잘못된 문맥의 개선·악화율을 평가한다.
+   이전 전사를 사용하는 oracle 조건과 실제 이전 VSR 조건을 분리한다. MELD와 WildVSR 점수를 합산하지 않는다.
 5. 최종 조건 고정 후 미사용 held-out test에서 평가한다. 한국어 OLKAVS 추가 튜닝은 진행하지 않는다.
 
 현재 완료한 것은 연구용 baseline과 실패·후보·가림 진단이다. 실사용 자막 시스템이나
