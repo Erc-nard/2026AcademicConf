@@ -1,0 +1,57 @@
+{
+  "plan": {
+    "model": "Auto-AVSR vsr_trlrs2lrs3vox2avsp_base.pth",
+    "modality": "video",
+    "dataset": "WildVSR official author archive",
+    "sample": "WildVSR/videos/0000.mp4",
+    "selection": "lexicographically first MP4",
+    "repository_commit": "182b62837773ab01052d4ac21ef1d2203ea7d267",
+    "checkpoint_sha256": "fbf7cd70ff1c0e694b3030fb779dbb4570f04e4b841d62f9296c229e94878ddb",
+    "archive_sha256": "b853e1b9255b9469861304ec4de3ba1f21e49d9e979d0fdc978912a80a6d64d1",
+    "video_sha256": "b85abbccfc869d01203190ce1106cfb1598d860359fce08774edc48826f7d509",
+    "beam_size": 40,
+    "ctc_weight": 0.1,
+    "lm_weight": 0.0,
+    "penalty": 0.0,
+    "device": "cpu",
+    "threads": 2,
+    "training": false,
+    "audio_read": false,
+    "reference_used_for_inference": false,
+    "scope": "one development smoke sample, not benchmark performance",
+    "preprocessing": "pre-cropped 96x96 ROI; RGB float /255; center crop 88; grayscale; (x-0.421)/0.165"
+  },
+  "frames": 185,
+  "fps": 25.0,
+  "duration_seconds": 7.4,
+  "parameters": 250383410,
+  "strict_checkpoint_load": true,
+  "encoder_seconds": 2.786944500000118,
+  "inference_seconds": 34.27469369999994,
+  "metrics": {
+    "samples": 1,
+    "cer": 0.08602150537634409,
+    "wer": 0.13043478260869565,
+    "char_errors": 8,
+    "reference_chars": 93,
+    "word_errors": 3,
+    "reference_words": 23,
+    "normalization": "lowercase; collapse whitespace; WER whitespace words; CER removes whitespace; punctuation retained",
+    "details": [
+      {
+        "id": "WildVSR/videos/0000.mp4",
+        "char_errors": 8,
+        "reference_chars": 93,
+        "word_errors": 3,
+        "reference_words": 23
+      }
+    ]
+  },
+  "versions": {
+    "torch": "2.14.0+cpu",
+    "numpy": "2.5.3",
+    "opencv": "5.0.0"
+  },
+  "input_tensor_sha256": "224c9b6645a0d81837ed14c3c1af9fddf2106ed88f23141c4754d748c965cc11",
+  "transcript_sha256": "7b75f3604a6c6b32845564d23b332b1928f892a4d89dcf3f93195cedd225a627"
+}

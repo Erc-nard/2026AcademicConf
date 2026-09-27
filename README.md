@@ -1,9 +1,18 @@
-# 2026 공과대학 학술제 — 한국어 VSR 진행 보고서
+# 2026 공과대학 학술제 — 입술 가림 환경의 문맥 기반 VSR 연구
 
-**최종 갱신: 2026-09-22.** 이 README는 실제 실행 결과를 정리한 보고서다.
+**최종 갱신: 2026-09-27.** 이 README는 실제 실행 결과를 정리한 보고서다.
 초기 아이디어와 예정 실험은 [최초 연구계획](docs/RESEARCH_PLAN.md)에 별도로 보존했다.
 
-**최신 진단:** 짧은 train 발화 4개를 중간층+출력층으로 1,500회 학습했다.
+**연구 방향 전환:** 한국어 baseline 개선은 중단하고, 영어 pretrained VSR을 고정한 상태에서
+입술 가림과 문맥 보정의 효과·악화를 분석한다. 기존 한국어 실험은 pilot study로 보존한다.
+
+**영어 첫 추론 성공:** **Auto-AVSR visual-only + WildVSR 공식 배포본**을 clean/occlusion 시작 조합으로 확정했다.
+결과와 무관하게 선택한 첫 영상 `0000.mp4`(7.4초)에서 WER **3/23 = 13.04%**, CER **8/93 = 8.60%**였다.
+음성·정답을 모델에 입력하지 않았고, 학습이나 decoder 튜닝 없이 CPU에서 34.27초에 추론했다.
+한 샘플의 실행 확인이며 전체 benchmark 성능을 뜻하지 않는다. 자세한 내용과 재실행은 19절이다.
+WildVSR 배포본은 입 ROI라 대화 순서·전체 장면을 요구하는 후속 연구용 자료까지 확정한 것은 아니다.
+
+**한국어 마지막 진단:** 짧은 train 발화 4개를 중간층+출력층으로 1,500회 학습했다.
 학습용 정답 기준 CER은 **88.57% → 0%**이며, 100회 측정부터 마지막까지 0%를 유지했다.
 원문 기준은 **89.47% → 7.89%**이고 남은 오류 3개는 학습 정규화에서 제거한 문장부호다.
 네 샘플의 암기 성공이며 일반화 성능 개선은 아니다. 상세 결과는 18절이다.
@@ -28,7 +37,7 @@
 복구된 발화는 0개였다. 옆얼굴 검출 실패와 얼굴 대신 자막 카드가 나오는 구간을 구분했으며,
 기본 전처리는 유지했다. 아래 6절에 결과를 기록했다.
 
-## 현재 결론
+## 한국어 pilot 결론 (보존)
 
 음성 없이 영상에서 한국어 자막을 만드는 실행·평가 파이프라인을 구현했다.
 그러나 **현재 인식 품질과 전처리 성공률로는 문맥 보정의 효과를 주장할 수 없다.**
@@ -666,6 +675,69 @@ ROI 관측 여부는 시각적 선명도나 입 움직임의 정확한 정렬을
 다음 실험은 원본 모델이 기대하는 공식 예제·평가 입력에서 기준 추론을 확인하는 것이다.
 자료를 확보하면 현재 KMSAV 결과와 비교해 실행 경로 문제와 데이터 차이를 더 구분한다.
 
+## 19. 영어 pretrained VSR + 데이터셋 확정 및 첫 추론 (9/27)
+
+이번 단계의 실행 조합은 다음과 같다. pretrained 가중치는 그대로 사용하며 추가 fine-tuning하지 않는다.
+
+| 항목 | 확정한 설정 |
+|---|---|
+| 모델 | Auto-AVSR `vsr_trlrs2lrs3vox2avsp_base.pth`, visual-only |
+| 코드 | 공식 `mpc001/auto_avsr`, commit `182b62837773ab01052d4ac21ef1d2203ea7d267` |
+| 데이터 | WildVSR 연구진의 공식 Google Drive ZIP, 영상 2,854개와 labels.json |
+| 샘플 | ZIP의 MP4 경로 사전순 첫 항목 `WildVSR/videos/0000.mp4` |
+| 입력 | 미리 잘린 96×96 입 ROI, 25fps, 185프레임, 7.4초 |
+| 모델 입력 변환 | RGB /255 → 중앙 88×88 → grayscale → mean 0.421/std 0.165 |
+| decoder | 공식 BatchBeamSearch, beam 40, CTC 0.1, attention 0.9, LM 0, length penalty 0 |
+| 연산 | CPU 2 threads, eval/inference mode, 250,383,410 parameters |
+| 결과 | WER 3/23 = **13.04%**, CER 8/93 = **8.60%** |
+| 속도 | 인코딩 2.79초, 인코딩+beam decoding 34.27초; 로딩·전처리 제외 |
+
+모델 선택 근거는 공개된 visual-only 가중치와 공식 추론 코드, 영어 문장 단위 출력 지원이다.
+[공식 모델 표](https://github.com/mpc001/auto_avsr#model-zoo)는 이 가중치의 **LRS3 WER 20.3%**를 보고한다.
+이 수치는 저자 보고값이며 이번 WildVSR 측정값과 직접 비교해 성능 우열을 판단할 수 없다.
+[WildVSR 공식 저장소](https://github.com/YasserdahouML/VSR_test_set)는 영어 VSR 평가용 영상과 정답을 제공한다.
+
+LRS3를 먼저 검토했으나 이번 세션에서 공식 다운로드를 확보하지 못했고,
+Auto-AVSR 튜토리얼의 Imperial College 데모 MP4 링크도 404였다.
+비공식 LRS3 미러를 사용하지 않고, 실제 접근 가능한 연구진의 WildVSR 배포본으로 전환했다.
+다운로드 성공 전에 LRS3 확보를 완료했다고 판단하지 않았다.
+
+모델의 state dict는 strict=True로 모두 로드했다. 체크포인트 MD5는
+`49f770f2c0d8b8d769347ee47ed1648f`이며 공식 표의 접두사 `49f77`와 일치한다.
+SHA-256, 코드 commit, 입력 tensor hash와 환경 버전은
+[실행 JSON](experiments/english_smoke_2026-09-27.json)에 기록했다.
+
+실제 오류는 `SENTENCES → SECONDS`, `TO → YOU`, `MILLION → BILLION`의 세 치환이다.
+WER은 소문자 변환 후 공백 단어 단위로 계산하며 문장부호는 유지한다.
+CER은 같은 문자열에서 공백을 제거해 계산했다. 원문 정답은 추론이 끝난 뒤에만 읽어 평가했다.
+전체 정답·출력 비교는 로컬 `results/english_smoke_2026-09-27/sample_output.md`에 보관하며,
+원본 영상·정답 전체·가중치는 Git에 올리지 않는다.
+
+실행 코드는 공식 E2E, encoder, decoder, beam search를 사용한다.
+영상 읽기는 OpenCV의 video frame API만 사용하므로 음성은 읽지 않는다.
+무거운 학습·오디오 의존성을 가져오지 않기 위해 공식 beam 생성 함수만 AST로 읽고,
+공식 test transform의 RGB grayscale 계수와 crop/정규화 식을 torch로 적용했다.
+WildVSR 자체 로더의 uint8 OpenCV grayscale과는 반올림 방식이 다르며, 여기서는 모델의 float RGB 변환을 따른다.
+MediaPipe용 별도 `.venv_english`도 준비했으나 이미 crop된 데이터라 이번 성공 실행에는 사용하지 않았다.
+실제 실행 환경은 기존 `.venv`의 torch 2.14.0+cpu, numpy 2.5.3, OpenCV 5.0.0이다.
+
+자료가 없는 환경에서는 아래 공식 자원을 확보한다. 모델·데이터의 이용 조건은 해당 배포처를 따른다.
+
+```powershell
+git clone https://github.com/mpc001/auto_avsr.git external/auto_avsr
+git -C external/auto_avsr checkout 182b62837773ab01052d4ac21ef1d2203ea7d267
+.venv/Scripts/python.exe -m gdown 1r1kx7l9sWnDOCnaFHIGvOtzuhFyFA88_ -O checkpoints/autoavsr_vsr_base.pth
+.venv/Scripts/python.exe -m gdown 1EUx-KffQSLQE5uc5MZaeHKQEZNeHdBwP -O data/raw/wildvsr.zip
+.venv/Scripts/python.exe -m kvsr.english_smoke --output results/english_smoke_replay
+```
+
+**범위와 다음 단계:** 이번에 확정한 조합은 clean 및 synthetic lip occlusion 시작용이다.
+공식 ZIP에는 입 ROI 영상과 정답만 있어 원본 장면·이전 발화 연결을 보장하지 못한다.
+따라서 dialogue/visual context 연구 전체의 데이터 적합성은 미해결이다.
+먼저 결과와 무관하게 개발용 고정 subset을 선정하고 clean WER을 측정한 뒤 동일 샘플에 0/25/50% 가림을 적용한다.
+이미 본 `0000.mp4`는 개발용으로 표시하고 최종 held-out test에서 제외한다.
+이후 문맥 연구용 자료는 시간 순서와 원본 장면을 실제 확보한 경우에만 사용하며, 정답을 문맥으로 넣지 않는다.
+
 ## 구현과 검증
 
 - `kvsr/nbest.py`: blank/반복 문자를 올바르게 합산하는 CTC prefix beam과 독립 oracle 평가.
@@ -684,6 +756,7 @@ ROI 관측 여부는 시각적 선명도나 입 움직임의 정확한 정렬을
 - `kvsr/head_validation.py`: 학습 입력에 없는 추가 validation 영상에서 고정 head 평가.
 - `kvsr/medium_experiment.py`: 실제 영상 encoder 실행, 두 학습 조건 400 update, 60발화 평가와 로컬 자막 비교표.
 - `kvsr/overfit_four.py`: train 4개 고정, 1,500회 암기 진단, 원문·학습용 정답 점수 병기.
+- `kvsr/english_smoke.py`: 공식 영어 visual-only 모델, 고정 WildVSR 첫 영상 추론, 사후 정답 평가.
 - 로컬 `.venv`에서 **74개 테스트 통과**. CTC 모든 경로 열거와 정확한 점수 일치, attention 트리 열거,
   EOS/반복 문자, 실패 누락 방지, 합성 마스크 범위, 보간 경계/길이 제한을 검증했다.
   이번에 축소 기준 일치, MP4 시간·색상 유지, 잘못된 입력 거부 검사를 추가했다.
@@ -736,23 +809,18 @@ ROI 관측 여부는 시각적 선명도나 입 움직임의 정확한 정렬을
 | 추가 validation | [계획](experiments/validation_extension_plan_2026-09-20.json), [전처리·baseline](experiments/validation_extension_2026-09-20.json), [head 비교](experiments/head_validation_extension_2026-09-20.json) |
 | 중간 신경망+출력층 학습 | [실험 JSON](experiments/medium_experiment_2026-09-22.json) |
 | 네 발화 암기 진단 | [실험 JSON](experiments/overfit_four_2026-09-22.json) |
+| 영어 VSR 첫 추론 | [실험 JSON](experiments/english_smoke_2026-09-27.json) |
 
 이전 단계 상세 기록: [1단계](docs/STAGE1.md), [2단계](docs/STAGE2.md),
 [3단계](docs/STAGE3.md), [4단계](docs/STAGE4.md), [5단계](docs/STAGE5.md).
 
 ## 남은 과제와 다음 진행 순서
 
-1. 네 발화 암기 진단을 통과했으므로 원본 모델의 공식 예제·평가 입력에서 기준 추론을 확인한다.
-   이어 데이터 접근 가능성을 포함한 더 큰 train·valid 표본과 화자 구성을 고정한다.
-   47개 train 발화의 출력층 및 중간층 적응도 validation 개선으로 이어지지 않았다.
-   비공개 표본을 조용히 교체하거나, 성공한 발화만으로 정확도를 보고하지 않는다.
-2. 한국어 fine-tuned 가중치를 실제 확보하거나, 늘어난 데이터에서 특징 고정/부분 적응을 비교한다.
-   학습 전 표본과 설정을 기록하고 validation 결과를 보고 반복 조정한 경우 이를 명시한다.
-   전체 모델 적응은 별도 연산 자원 검토가 필요하다. 현재 한계를 리사이즈 하나로 설명하지 않는다.
-3. 옆얼굴 ROI 획득과 미가용 입력 처리를 개선하고, 별도 자료에서 점수와 실제 오류를 보정한다.
-4. 후보 품질이 확보되면 정답 대신 이전 **인식 결과**를 사용하는 문맥 보정을 추가한다.
-   문맥 없음/문맥 사용/잘못된 문맥/손상 입력을 같은 표본에서 비교한다.
-5. 최종 조건을 고정한 뒤 held-out test, 처리 속도, 수정으로 새로 생긴 오류, 사용자 평가를 보고한다.
+1. 영어 Auto-AVSR 가중치·decoder·입력 변환을 고정하고 개발용 subset의 clean WER을 측정한다.
+2. 같은 샘플에 재현 가능한 0/25/50% 입 영역 가림을 적용한다.
+3. 발화 순서와 원본 장면을 제공하는 영어 자료를 확보해 dialogue/visual context 평가 가능성을 확인한다.
+4. 문맥 없음/대화/장면/둘 다/잘못된 문맥을 비교하고 개선·악화율을 함께 평가한다.
+5. 최종 조건 고정 후 미사용 held-out test에서 평가한다. 한국어 OLKAVS 추가 튜닝은 진행하지 않는다.
 
 현재 완료한 것은 연구용 baseline과 실패·후보·가림 진단이다. 실사용 자막 시스템이나
 문맥 기반 성능 향상, calibrated confidence, 논문 성능 재현을 완료했다고 표현하지 않는다.

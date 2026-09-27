@@ -1,6 +1,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+.venv_english/
 *.egg-info/
 .env
 data/raw/
@@ -13,4 +14,3 @@ external/
 *.pth
 *.mp4
 *.wav
-
