@@ -1,0 +1,82 @@
+{
+  "scope": "development only; five existing MELD targets",
+  "method": "SmolVLM2 masked midpoint caption -> demographic neutralization -> Qwen structured extraction -> lexical speech/emotion filter",
+  "vlm_calls": 5,
+  "structurer_calls": 4,
+  "successful_contexts": 4,
+  "failed_ids": [
+    "dia2_utt2"
+  ],
+  "failure": "caption token limit; retained with null visual context",
+  "model": {
+    "model": "SmolVLM2-2.2B-Instruct-Q4_K_M.gguf",
+    "model_revision": "1bc3c9f74ceafd4c8d4411cc9cf188bba3798f91",
+    "model_sha256": "0cf76814555b8665149075b74ab6b5c1d428ea1d3d01c1918c12012e8d7c9f58",
+    "projector_sha256": "db9a3a1648cab1ebc3af4a2b0c8145dd8faebf6f7dd7b16e7dc1842229f14ac4",
+    "structurer_sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e"
+  },
+  "contexts_sha256": "3e9cbd91b13c7e39699eefa49a7a900d001d3ea4acce82231b5c2e89f42b1138",
+  "records": [
+    {
+      "id": "dia0_utt1",
+      "frame_index": 18,
+      "time_seconds": 0.7507499999999999,
+      "image_sha256": "d28e2e39a62b97e40fa29f688d1f1cf1123d47b6df64a51367c4f78410a1abb2",
+      "qa_image_sha256": "d28e2e39a62b97e40fa29f688d1f1cf1123d47b6df64a51367c4f78410a1abb2",
+      "face_masked": true,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "id": "dia0_utt2",
+      "frame_index": 35,
+      "time_seconds": 1.4597916666666666,
+      "image_sha256": "0aa33b0856c135f0aacf25ef84f7460f6e43e3842855526aca6cfaa7da513c87",
+      "qa_image_sha256": "0aa33b0856c135f0aacf25ef84f7460f6e43e3842855526aca6cfaa7da513c87",
+      "face_masked": true,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "id": "dia1_utt1",
+      "frame_index": 26,
+      "time_seconds": 1.0844158247289146,
+      "image_sha256": "b05e0cbd088aecfa52a5e8748a7ee406ef2ae8dcfb8f577580507cf949e93fd2",
+      "qa_image_sha256": "b05e0cbd088aecfa52a5e8748a7ee406ef2ae8dcfb8f577580507cf949e93fd2",
+      "face_masked": true,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "id": "dia2_utt1",
+      "frame_index": 17,
+      "time_seconds": 0.7090411161689056,
+      "image_sha256": "09f4d8d038a0b825182433271d17f08542bbb347fe445985ff68dba238d5933c",
+      "qa_image_sha256": "09f4d8d038a0b825182433271d17f08542bbb347fe445985ff68dba238d5933c",
+      "face_masked": true,
+      "status": "ok",
+      "error": null
+    },
+    {
+      "id": "dia2_utt2",
+      "frame_index": 21,
+      "time_seconds": 0.8758743199733541,
+      "image_sha256": "edc249ad0a8b3b68b39a5bcc4ff72ed0f045d12829ae4ea5aafde700609662b0",
+      "qa_image_sha256": "edc249ad0a8b3b68b39a5bcc4ff72ed0f045d12829ae4ea5aafde700609662b0",
+      "face_masked": true,
+      "status": "failed",
+      "error": "Incomplete caption"
+    }
+  ],
+  "limitations": [
+    "Office described as courtroom",
+    "Black mask described as object",
+    "One still cannot establish speech or emotion",
+    "Lexical filtering is not semantic verification",
+    "No scene/object/action ablation; association only"
+  ],
+  "caption_run_date": "2026-09-29",
+  "structure_run_date": "2026-10-03",
+  "new_vlm_calls_on_structure_run": 0,
+  "raw_outputs_retained_locally": true
+}

@@ -1,0 +1,386 @@
+{
+  "split": "train, project-held-out dialogues and episodes; not official MELD test split",
+  "selection": "First numeric eligible pair per dialogue >=3, excluding all development episodes; durations .5-12s, non-overlap",
+  "excluded_episodes": [
+    [
+      "3",
+      "6"
+    ],
+    [
+      "8",
+      "21"
+    ],
+    [
+      "9",
+      "23"
+    ]
+  ],
+  "pairs": [
+    {
+      "id": "dia3_utt1",
+      "previous_id": "dia3_utt0",
+      "dialogue_id": 3,
+      "season": "3",
+      "episode": "12",
+      "durations_ms": [
+        2335,
+        1132
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia4_utt3",
+      "previous_id": "dia4_utt2",
+      "dialogue_id": 4,
+      "season": "3",
+      "episode": "11",
+      "durations_ms": [
+        1125,
+        2752
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia5_utt3",
+      "previous_id": "dia5_utt2",
+      "dialogue_id": 5,
+      "season": "3",
+      "episode": "15",
+      "durations_ms": [
+        2918,
+        2835
+      ],
+      "gap_ms": 2337
+    },
+    {
+      "id": "dia6_utt1",
+      "previous_id": "dia6_utt0",
+      "dialogue_id": 6,
+      "season": "8",
+      "episode": "22",
+      "durations_ms": [
+        3211,
+        1602
+      ],
+      "gap_ms": 668
+    },
+    {
+      "id": "dia7_utt1",
+      "previous_id": "dia7_utt0",
+      "dialogue_id": 7,
+      "season": "6",
+      "episode": "9",
+      "durations_ms": [
+        2877,
+        4087
+      ],
+      "gap_ms": 209
+    },
+    {
+      "id": "dia8_utt2",
+      "previous_id": "dia8_utt1",
+      "dialogue_id": 8,
+      "season": "6",
+      "episode": "23",
+      "durations_ms": [
+        7339,
+        1334
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia9_utt1",
+      "previous_id": "dia9_utt0",
+      "dialogue_id": 9,
+      "season": "2",
+      "episode": "5",
+      "durations_ms": [
+        2835,
+        6255
+      ],
+      "gap_ms": 210
+    },
+    {
+      "id": "dia10_utt1",
+      "previous_id": "dia10_utt0",
+      "dialogue_id": 10,
+      "season": "5",
+      "episode": "10",
+      "durations_ms": [
+        1460,
+        1396
+      ],
+      "gap_ms": 0
+    },
+    {
+      "id": "dia11_utt1",
+      "previous_id": "dia11_utt0",
+      "dialogue_id": 11,
+      "season": "4",
+      "episode": "23",
+      "durations_ms": [
+        1209,
+        3419
+      ],
+      "gap_ms": 1294
+    },
+    {
+      "id": "dia12_utt2",
+      "previous_id": "dia12_utt1",
+      "dialogue_id": 12,
+      "season": "6",
+      "episode": "4",
+      "durations_ms": [
+        8882,
+        3544
+      ],
+      "gap_ms": 1169
+    },
+    {
+      "id": "dia13_utt1",
+      "previous_id": "dia13_utt0",
+      "dialogue_id": 13,
+      "season": "8",
+      "episode": "8",
+      "durations_ms": [
+        4086,
+        9801
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia14_utt1",
+      "previous_id": "dia14_utt0",
+      "dialogue_id": 14,
+      "season": "8",
+      "episode": "11",
+      "durations_ms": [
+        11344,
+        2918
+      ],
+      "gap_ms": 3797
+    },
+    {
+      "id": "dia16_utt1",
+      "previous_id": "dia16_utt0",
+      "dialogue_id": 16,
+      "season": "3",
+      "episode": "25",
+      "durations_ms": [
+        1042,
+        2167
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia17_utt1",
+      "previous_id": "dia17_utt0",
+      "dialogue_id": 17,
+      "season": "5",
+      "episode": "19",
+      "durations_ms": [
+        3711,
+        4036
+      ],
+      "gap_ms": 2379
+    },
+    {
+      "id": "dia18_utt1",
+      "previous_id": "dia18_utt0",
+      "dialogue_id": 18,
+      "season": "5",
+      "episode": "21",
+      "durations_ms": [
+        4378,
+        1961
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia20_utt1",
+      "previous_id": "dia20_utt0",
+      "dialogue_id": 20,
+      "season": "7",
+      "episode": "7",
+      "durations_ms": [
+        3002,
+        1960
+      ],
+      "gap_ms": 251
+    },
+    {
+      "id": "dia21_utt1",
+      "previous_id": "dia21_utt0",
+      "dialogue_id": 21,
+      "season": "1",
+      "episode": "4",
+      "durations_ms": [
+        2210,
+        3169
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia22_utt1",
+      "previous_id": "dia22_utt0",
+      "dialogue_id": 22,
+      "season": "1",
+      "episode": "23",
+      "durations_ms": [
+        3419,
+        2335
+      ],
+      "gap_ms": 167
+    },
+    {
+      "id": "dia23_utt2",
+      "previous_id": "dia23_utt1",
+      "dialogue_id": 23,
+      "season": "3",
+      "episode": "11",
+      "durations_ms": [
+        2084,
+        1552
+      ],
+      "gap_ms": 961
+    },
+    {
+      "id": "dia24_utt1",
+      "previous_id": "dia24_utt0",
+      "dialogue_id": 24,
+      "season": "3",
+      "episode": "14",
+      "durations_ms": [
+        3670,
+        4670
+      ],
+      "gap_ms": 668
+    },
+    {
+      "id": "dia25_utt1",
+      "previous_id": "dia25_utt0",
+      "dialogue_id": 25,
+      "season": "4",
+      "episode": "4",
+      "durations_ms": [
+        3628,
+        3503
+      ],
+      "gap_ms": 251
+    },
+    {
+      "id": "dia26_utt1",
+      "previous_id": "dia26_utt0",
+      "dialogue_id": 26,
+      "season": "5",
+      "episode": "18",
+      "durations_ms": [
+        3544,
+        3002
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia27_utt1",
+      "previous_id": "dia27_utt0",
+      "dialogue_id": 27,
+      "season": "5",
+      "episode": "24",
+      "durations_ms": [
+        6213,
+        6297
+      ],
+      "gap_ms": 39958
+    },
+    {
+      "id": "dia28_utt4",
+      "previous_id": "dia28_utt3",
+      "dialogue_id": 28,
+      "season": "4",
+      "episode": "15",
+      "durations_ms": [
+        2001,
+        4754
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia30_utt1",
+      "previous_id": "dia30_utt0",
+      "dialogue_id": 30,
+      "season": "6",
+      "episode": "21",
+      "durations_ms": [
+        3920,
+        2418
+      ],
+      "gap_ms": 167
+    },
+    {
+      "id": "dia31_utt1",
+      "previous_id": "dia31_utt0",
+      "dialogue_id": 31,
+      "season": "6",
+      "episode": "22",
+      "durations_ms": [
+        3211,
+        2168
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia32_utt3",
+      "previous_id": "dia32_utt2",
+      "dialogue_id": 32,
+      "season": "1",
+      "episode": "12",
+      "durations_ms": [
+        1101,
+        2502
+      ],
+      "gap_ms": 108
+    },
+    {
+      "id": "dia33_utt1",
+      "previous_id": "dia33_utt0",
+      "dialogue_id": 33,
+      "season": "6",
+      "episode": "24",
+      "durations_ms": [
+        4378,
+        2210
+      ],
+      "gap_ms": 12639
+    },
+    {
+      "id": "dia34_utt2",
+      "previous_id": "dia34_utt1",
+      "dialogue_id": 34,
+      "season": "5",
+      "episode": "23",
+      "durations_ms": [
+        4671,
+        3299
+      ],
+      "gap_ms": 209
+    },
+    {
+      "id": "dia35_utt1",
+      "previous_id": "dia35_utt0",
+      "dialogue_id": 35,
+      "season": "7",
+      "episode": "9",
+      "durations_ms": [
+        1711,
+        1182
+      ],
+      "gap_ms": 0
+    }
+  ],
+  "metadata_sha256": "d2fa2d6529cf03cac2989efec05c9b27d8fd2f4c8fc5974c7ae88aa537fa02db",
+  "url": "https://huggingface.co/datasets/declare-lab/MELD/resolve/main/MELD.Raw.tar.gz",
+  "roi_screen": "Before any inference, require at least 10 detected speaker frames and 25% coverage in each member; document every candidate",
+  "final_selection": "First 20 candidates passing pre-inference ROI and all-face scene QA; no output-based replacement",
+  "inference_started": false,
+  "target_transcripts_in_plan": false
+}
