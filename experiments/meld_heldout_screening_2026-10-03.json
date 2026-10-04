@@ -1,0 +1,215 @@
+[
+  {
+    "id": "dia3_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia4_utt3",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia5_utt3",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia6_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia7_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia8_utt2",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia9_utt1",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia9_utt0: mouth coverage below fixed threshold",
+      "dia9_utt1: speaker ambiguous or unavailable",
+      "dia9_utt1: mouth coverage below fixed threshold"
+    ]
+  },
+  {
+    "id": "dia10_utt1",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia10_utt0: mouth coverage below fixed threshold",
+      "dia10_utt1: mouth coverage below fixed threshold"
+    ]
+  },
+  {
+    "id": "dia11_utt1",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia11_utt1: mouth coverage below fixed threshold"
+    ]
+  },
+  {
+    "id": "dia12_utt2",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia13_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia14_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia16_utt1",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia16_utt0: speaker ambiguous or unavailable",
+      "dia16_utt0: mouth coverage below fixed threshold",
+      "dia16_utt1: speaker ambiguous or unavailable",
+      "dia16_utt1: mouth coverage below fixed threshold"
+    ]
+  },
+  {
+    "id": "dia17_utt1",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia17_utt1: Crop follows background object in several frames; target-mouth tracking not reliable"
+    ]
+  },
+  {
+    "id": "dia18_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia20_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia21_utt1",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia21_utt0: speaker ambiguous or unavailable",
+      "dia21_utt0: mouth coverage below fixed threshold",
+      "dia21_utt1: mouth coverage below fixed threshold",
+      "all-face scene QA not approved"
+    ]
+  },
+  {
+    "id": "dia22_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia23_utt2",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia23_utt2: mouth coverage below fixed threshold"
+    ]
+  },
+  {
+    "id": "dia24_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia25_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia26_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia27_utt1",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia27_utt0: speaker ambiguous or unavailable",
+      "dia27_utt0: mouth coverage below fixed threshold",
+      "dia27_utt1: mouth coverage below fixed threshold"
+    ]
+  },
+  {
+    "id": "dia28_utt4",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia28_utt3: mouth coverage below fixed threshold",
+      "dia28_utt4: speaker ambiguous or unavailable",
+      "dia28_utt4: mouth coverage below fixed threshold"
+    ]
+  },
+  {
+    "id": "dia30_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia31_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia32_utt3",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia33_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  },
+  {
+    "id": "dia34_utt2",
+    "usable": false,
+    "selected": false,
+    "reasons": [
+      "dia34_utt1: Some observed crops switch to another face; target identity not reliable"
+    ]
+  },
+  {
+    "id": "dia35_utt1",
+    "usable": true,
+    "selected": true,
+    "reasons": []
+  }
+]

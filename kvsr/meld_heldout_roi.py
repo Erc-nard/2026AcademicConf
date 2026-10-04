@@ -79,6 +79,9 @@ def select(output,scene_approval,count=20):
     if (output/'final_plan.json').exists():raise ValueError('Final selection already frozen')
     crops={r['id']:r for r in base.read(output/'roi/crops.json')}
     annotations=base.read(output/'roi/speaker_annotations.json')
+    crop_qa=base.read(output/'roi/crop_qa.json')
+    if crop_qa['crops_sha256']!=base.sha(output/'roi/crops.json') or set(crop_qa['records'])!=set(crops):
+        raise ValueError('Crop QA must match every prepared candidate')
     from .visual_context import approved_image
     scenes=base.read(scene_approval);scene_index={r['id']:r for r in scenes}
     candidates=base.read(output/'candidate_plan.json')['pairs']
@@ -90,6 +93,7 @@ def select(output,scene_approval,count=20):
         for key in [pair['previous_id'],pair['id']]:
             row=crops[key]
             if not annotations[key]['qa_approved']:reasons.append(key+': speaker ambiguous or unavailable')
+            if not crop_qa['records'][key]['qa_approved']:reasons.append(key+': '+crop_qa['records'][key]['reason'])
             if row['detected_frames']<10 or row['detected_frames']/row['source_frames']<.25:
                 reasons.append(key+': mouth coverage below fixed threshold')
         scene=scene_index[pair['id']]
@@ -106,6 +110,7 @@ def select(output,scene_approval,count=20):
               wrong={key:selected[(i+1)%len(selected)]['previous_id'] for i,key in enumerate(keys)},
               selected=selected,settings_sha256=base.sha(output/'settings_plan.json'),
               screening_sha256=base.sha(output/'screening.json'),scene_approval_sha256=base.sha(scene_approval),
+              crop_qa_sha256=base.sha(output/'roi/crop_qa.json'),
               inference_started=False,selection='First passing pairs in candidate order; no model outputs or target references')
     base.save(output/'final_plan.json',plan)
 

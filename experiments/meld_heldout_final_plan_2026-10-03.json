@@ -1,0 +1,294 @@
+{
+  "pairs": {
+    "dia3_utt1": "dia3_utt0",
+    "dia4_utt3": "dia4_utt2",
+    "dia5_utt3": "dia5_utt2",
+    "dia6_utt1": "dia6_utt0",
+    "dia7_utt1": "dia7_utt0",
+    "dia8_utt2": "dia8_utt1",
+    "dia12_utt2": "dia12_utt1",
+    "dia13_utt1": "dia13_utt0",
+    "dia14_utt1": "dia14_utt0",
+    "dia18_utt1": "dia18_utt0",
+    "dia20_utt1": "dia20_utt0",
+    "dia22_utt1": "dia22_utt0",
+    "dia24_utt1": "dia24_utt0",
+    "dia25_utt1": "dia25_utt0",
+    "dia26_utt1": "dia26_utt0",
+    "dia30_utt1": "dia30_utt0",
+    "dia31_utt1": "dia31_utt0",
+    "dia32_utt3": "dia32_utt2",
+    "dia33_utt1": "dia33_utt0",
+    "dia35_utt1": "dia35_utt0"
+  },
+  "wrong": {
+    "dia3_utt1": "dia4_utt2",
+    "dia4_utt3": "dia5_utt2",
+    "dia5_utt3": "dia6_utt0",
+    "dia6_utt1": "dia7_utt0",
+    "dia7_utt1": "dia8_utt1",
+    "dia8_utt2": "dia12_utt1",
+    "dia12_utt2": "dia13_utt0",
+    "dia13_utt1": "dia14_utt0",
+    "dia14_utt1": "dia18_utt0",
+    "dia18_utt1": "dia20_utt0",
+    "dia20_utt1": "dia22_utt0",
+    "dia22_utt1": "dia24_utt0",
+    "dia24_utt1": "dia25_utt0",
+    "dia25_utt1": "dia26_utt0",
+    "dia26_utt1": "dia30_utt0",
+    "dia30_utt1": "dia31_utt0",
+    "dia31_utt1": "dia32_utt2",
+    "dia32_utt3": "dia33_utt0",
+    "dia33_utt1": "dia35_utt0",
+    "dia35_utt1": "dia3_utt0"
+  },
+  "selected": [
+    {
+      "id": "dia3_utt1",
+      "previous_id": "dia3_utt0",
+      "dialogue_id": 3,
+      "season": "3",
+      "episode": "12",
+      "durations_ms": [
+        2335,
+        1132
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia4_utt3",
+      "previous_id": "dia4_utt2",
+      "dialogue_id": 4,
+      "season": "3",
+      "episode": "11",
+      "durations_ms": [
+        1125,
+        2752
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia5_utt3",
+      "previous_id": "dia5_utt2",
+      "dialogue_id": 5,
+      "season": "3",
+      "episode": "15",
+      "durations_ms": [
+        2918,
+        2835
+      ],
+      "gap_ms": 2337
+    },
+    {
+      "id": "dia6_utt1",
+      "previous_id": "dia6_utt0",
+      "dialogue_id": 6,
+      "season": "8",
+      "episode": "22",
+      "durations_ms": [
+        3211,
+        1602
+      ],
+      "gap_ms": 668
+    },
+    {
+      "id": "dia7_utt1",
+      "previous_id": "dia7_utt0",
+      "dialogue_id": 7,
+      "season": "6",
+      "episode": "9",
+      "durations_ms": [
+        2877,
+        4087
+      ],
+      "gap_ms": 209
+    },
+    {
+      "id": "dia8_utt2",
+      "previous_id": "dia8_utt1",
+      "dialogue_id": 8,
+      "season": "6",
+      "episode": "23",
+      "durations_ms": [
+        7339,
+        1334
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia12_utt2",
+      "previous_id": "dia12_utt1",
+      "dialogue_id": 12,
+      "season": "6",
+      "episode": "4",
+      "durations_ms": [
+        8882,
+        3544
+      ],
+      "gap_ms": 1169
+    },
+    {
+      "id": "dia13_utt1",
+      "previous_id": "dia13_utt0",
+      "dialogue_id": 13,
+      "season": "8",
+      "episode": "8",
+      "durations_ms": [
+        4086,
+        9801
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia14_utt1",
+      "previous_id": "dia14_utt0",
+      "dialogue_id": 14,
+      "season": "8",
+      "episode": "11",
+      "durations_ms": [
+        11344,
+        2918
+      ],
+      "gap_ms": 3797
+    },
+    {
+      "id": "dia18_utt1",
+      "previous_id": "dia18_utt0",
+      "dialogue_id": 18,
+      "season": "5",
+      "episode": "21",
+      "durations_ms": [
+        4378,
+        1961
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia20_utt1",
+      "previous_id": "dia20_utt0",
+      "dialogue_id": 20,
+      "season": "7",
+      "episode": "7",
+      "durations_ms": [
+        3002,
+        1960
+      ],
+      "gap_ms": 251
+    },
+    {
+      "id": "dia22_utt1",
+      "previous_id": "dia22_utt0",
+      "dialogue_id": 22,
+      "season": "1",
+      "episode": "23",
+      "durations_ms": [
+        3419,
+        2335
+      ],
+      "gap_ms": 167
+    },
+    {
+      "id": "dia24_utt1",
+      "previous_id": "dia24_utt0",
+      "dialogue_id": 24,
+      "season": "3",
+      "episode": "14",
+      "durations_ms": [
+        3670,
+        4670
+      ],
+      "gap_ms": 668
+    },
+    {
+      "id": "dia25_utt1",
+      "previous_id": "dia25_utt0",
+      "dialogue_id": 25,
+      "season": "4",
+      "episode": "4",
+      "durations_ms": [
+        3628,
+        3503
+      ],
+      "gap_ms": 251
+    },
+    {
+      "id": "dia26_utt1",
+      "previous_id": "dia26_utt0",
+      "dialogue_id": 26,
+      "season": "5",
+      "episode": "18",
+      "durations_ms": [
+        3544,
+        3002
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia30_utt1",
+      "previous_id": "dia30_utt0",
+      "dialogue_id": 30,
+      "season": "6",
+      "episode": "21",
+      "durations_ms": [
+        3920,
+        2418
+      ],
+      "gap_ms": 167
+    },
+    {
+      "id": "dia31_utt1",
+      "previous_id": "dia31_utt0",
+      "dialogue_id": 31,
+      "season": "6",
+      "episode": "22",
+      "durations_ms": [
+        3211,
+        2168
+      ],
+      "gap_ms": 168
+    },
+    {
+      "id": "dia32_utt3",
+      "previous_id": "dia32_utt2",
+      "dialogue_id": 32,
+      "season": "1",
+      "episode": "12",
+      "durations_ms": [
+        1101,
+        2502
+      ],
+      "gap_ms": 108
+    },
+    {
+      "id": "dia33_utt1",
+      "previous_id": "dia33_utt0",
+      "dialogue_id": 33,
+      "season": "6",
+      "episode": "24",
+      "durations_ms": [
+        4378,
+        2210
+      ],
+      "gap_ms": 12639
+    },
+    {
+      "id": "dia35_utt1",
+      "previous_id": "dia35_utt0",
+      "dialogue_id": 35,
+      "season": "7",
+      "episode": "9",
+      "durations_ms": [
+        1711,
+        1182
+      ],
+      "gap_ms": 0
+    }
+  ],
+  "settings_sha256": "2461b4ac6d9897f541579341a8be2aa281aa7ded1d338f62b42d91953a0ea067",
+  "screening_sha256": "92e7deb29ec043e22c071ae1112bcd372514445593cf00b93a91a878ff4477ed",
+  "scene_approval_sha256": "fa0519486a6d5f1d9b3693d851e542f118a0c0acced04cdd5d07acc0c6ced7ec",
+  "crop_qa_sha256": "850bf9fb20b9e344465cfc662df2e2fa5825403edd67b1515c428a2b1589da3a",
+  "inference_started": false,
+  "selection": "First passing pairs in candidate order; no model outputs or target references"
+}
