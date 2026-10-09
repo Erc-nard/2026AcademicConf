@@ -1,0 +1,280 @@
+{
+  "scope": "development only; previously used 5 MELD targets",
+  "outputs_sha256": "eded0e1320339ed278fd16f9fe940a8e777ed166389090686c7bd2a1f8a54a9a",
+  "changed_proposals": 0,
+  "accepted_word_changes": 0,
+  "rejected_changed_proposals": 0,
+  "cases": [],
+  "ungated_comparisons": {
+    "0": {
+      "C0": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 4,
+        "exact_harm_rate": 0.0,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 1
+      },
+      "C0_LLM": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 4,
+        "exact_harm_rate": 0.0,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 1
+      },
+      "C1": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 4,
+        "exact_harm_rate": 0.0,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 1
+      },
+      "C2": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 4,
+        "exact_harm_rate": 0.0,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 1
+      },
+      "C3": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 4,
+        "exact_harm_rate": 0.0,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 1
+      },
+      "C4": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 4,
+        "exact_harm_rate": 0.0,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 1
+      },
+      "C5": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 4,
+        "exact_harm_rate": 0.0,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 1
+      }
+    },
+    "25": {
+      "C0": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C0_LLM": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C1": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C2": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C3": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C4": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C5": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      }
+    },
+    "50": {
+      "C0": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C0_LLM": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C1": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C2": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C3": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C4": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      },
+      "C5": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      }
+    }
+  },
+  "visual_success": 4,
+  "visual_failures": 1,
+  "visual_errors": {
+    "Incomplete caption": 1
+  },
+  "visual_information_present": 4,
+  "limitations": [
+    "Twenty project-held-out MELD train dialogues; not official test split",
+    "Same base show and model pretraining overlap not ruled out",
+    "No context-field ablation; cases are associations, not causal attribution",
+    "Masking and VLM failures retained; no post-score sample replacement"
+  ]
+}

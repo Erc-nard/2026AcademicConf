@@ -1,0 +1,27 @@
+{
+  "scope": "Post-hoc mathematical diagnostic, no model calls and not achieved performance",
+  "source_sha256": "2cd2eca3e86515d0e8c8904309956bca89fca04ef4641c4929b96a253951f7ef",
+  "bounds": {
+    "0": {
+      "minimum_possible_word_errors": 101,
+      "minimum_possible_wer": 0.6516129032258065,
+      "maximum_possible_exact_sentences": 1,
+      "samples": 20,
+      "interpretation": "Perfect reference-aware one-word edits; unavailable to the real gate/model"
+    },
+    "25": {
+      "minimum_possible_word_errors": 158,
+      "minimum_possible_wer": 1.0193548387096774,
+      "maximum_possible_exact_sentences": 1,
+      "samples": 20,
+      "interpretation": "Perfect reference-aware one-word edits; unavailable to the real gate/model"
+    },
+    "50": {
+      "minimum_possible_word_errors": 143,
+      "minimum_possible_wer": 0.9225806451612903,
+      "maximum_possible_exact_sentences": 0,
+      "samples": 20,
+      "interpretation": "Perfect reference-aware one-word edits; unavailable to the real gate/model"
+    }
+  }
+}
