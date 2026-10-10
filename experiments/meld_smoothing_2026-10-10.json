@@ -1,0 +1,480 @@
+{
+  "plan": {
+    "scope": "Same five known development targets; one-factor diagnostic, not new held-out evaluation",
+    "pairs": {
+      "dia0_utt1": "dia0_utt0",
+      "dia0_utt2": "dia0_utt1",
+      "dia1_utt1": "dia1_utt0",
+      "dia2_utt1": "dia2_utt0",
+      "dia2_utt2": "dia2_utt1"
+    },
+    "variant": "window_margin=12 within contiguous observed, manually shot-consistent runs",
+    "unchanged": "Detections, anchors, missing frames, 25fps floor mapping, 96->88 crop, normalization, model, beam40, masks",
+    "interpolation": false,
+    "baseline": "window_margin=1 per frame; reconstructed arrays must exactly match cached inputs",
+    "sources": {
+      "results\\meld_experiment_2026-09-28\\detections.json": "2197760ceacf66d4402fe0c1a0635f5d96d1a52388b540bb0f04e773b91e0436",
+      "results\\meld_experiment_2026-09-28\\detections_short.json": "93347c308a5ddc2f417e5b330732776a2d5c5a3dc7f0e1f836f27fee382b973b",
+      "results\\meld_experiment_2026-09-28\\crops.json": "06f562f18d644a75e42b96a0d71dc95642f81048ea508c3af03f085312a24c9a",
+      "results\\meld_experiment_2026-09-28\\vsr.json": "3376eac5ffc198fd9d1cafe99a1f7072eff960def8993bb5e6b69bdf7adb53d3",
+      "kvsr\\meld_experiment.py": "80a0ee3ac95e4dae159106b4acaba441bcec3fa61026174e6cd56d420dd26af4",
+      "external\\auto_avsr\\preparation\\detectors\\mediapipe\\video_process.py": "cf1ffd627b1691341e22a973b70bc8340ae0060724b08abd64a5232562a77b78",
+      "results\\meld_context_2026-09-27\\videos\\dia0_utt1.mp4": "c7686143bac35f57ec9ce866cff6f080cdffafb7c78a79ff813fa8c92e888531",
+      "results\\meld_context_2026-09-27\\videos\\dia0_utt2.mp4": "f4fd254a9c214dc00ba7d1d93d036803edec07dc4c00e47f181aa30ab0207d84",
+      "results\\meld_context_2026-09-27\\videos\\dia1_utt1.mp4": "3565f1daf0b402803fd8ee94e0067a46ea1412f8554eecaa12915a54ae8adb67",
+      "results\\meld_context_2026-09-27\\videos\\dia2_utt1.mp4": "6425e45896fca8866f5790f45c0cc92b786e473d7469532dacf53cce32e148e4",
+      "results\\meld_context_2026-09-27\\videos\\dia2_utt2.mp4": "21c883303b594ca796f6a4eb05af9ddfc086051b20745e05c384df4a55ccfbe5",
+      "results\\meld_experiment_2026-09-28\\dia0_utt1.npz": "a8f9313dd452556ba5a2ea22b01a02c410023b42eab4d0dadc57e81e76df2af5",
+      "results\\meld_experiment_2026-09-28\\dia0_utt2.npz": "67bdd067a3aad92b5ca17f9edae2ae3aef4ea923d39e80a4847807a5ff966e38",
+      "results\\meld_experiment_2026-09-28\\dia1_utt1.npz": "d09ed9bc9b34e7f74473f5d02a76b7cd083fdfd9ccf4085c5e9768e6a46c973d",
+      "results\\meld_experiment_2026-09-28\\dia2_utt1.npz": "fb11b6a26426534f3b3f2daf8d7a9f8a6305de35d44af34112a3b8bd858d9fe2",
+      "results\\meld_experiment_2026-09-28\\dia2_utt2.npz": "9c0dcd4c96398f94c7aa0c17457ae2828f6697cee9cbf963ffb7d9807df08192"
+    },
+    "source_sha256": "a5cf9cbfcd623c1d423bcaee0270521f06ab6e9be4d08ecd6f02a4d9182202e3",
+    "model_calls": 15,
+    "reference_access": "Only after all fifteen outputs; never used to choose crop/segments"
+  },
+  "input_audit": [
+    {
+      "id": "dia0_utt1",
+      "exact_baseline_replay": true,
+      "observed_source_frames": 36,
+      "source_frames": 36,
+      "fps": 23.976023976023978,
+      "model_frames": 38,
+      "segments": [
+        [
+          0,
+          36
+        ]
+      ],
+      "changed_model_frames": 35,
+      "mean_absolute_pixel_change": 2.43163359214249
+    },
+    {
+      "id": "dia0_utt2",
+      "exact_baseline_replay": true,
+      "observed_source_frames": 68,
+      "source_frames": 70,
+      "fps": 23.976023976023978,
+      "model_frames": 73,
+      "segments": [
+        [
+          2,
+          70
+        ]
+      ],
+      "changed_model_frames": 68,
+      "mean_absolute_pixel_change": 4.124902130991285
+    },
+    {
+      "id": "dia1_utt1",
+      "exact_baseline_replay": true,
+      "observed_source_frames": 35,
+      "source_frames": 53,
+      "fps": 23.976042590949422,
+      "model_frames": 55,
+      "segments": [
+        [
+          0,
+          32
+        ],
+        [
+          38,
+          39
+        ],
+        [
+          49,
+          50
+        ],
+        [
+          52,
+          53
+        ]
+      ],
+      "changed_model_frames": 31,
+      "mean_absolute_pixel_change": 2.9100591104497355
+    },
+    {
+      "id": "dia2_utt1",
+      "exact_baseline_replay": true,
+      "observed_source_frames": 11,
+      "source_frames": 35,
+      "fps": 23.976042590949422,
+      "model_frames": 36,
+      "segments": [
+        [
+          1,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          21,
+          22
+        ],
+        [
+          23,
+          28
+        ]
+      ],
+      "changed_model_frames": 3,
+      "mean_absolute_pixel_change": 1.1678438026094276
+    },
+    {
+      "id": "dia2_utt2",
+      "exact_baseline_replay": true,
+      "observed_source_frames": 43,
+      "source_frames": 43,
+      "fps": 23.976042590949422,
+      "model_frames": 45,
+      "segments": [
+        [
+          0,
+          43
+        ]
+      ],
+      "changed_model_frames": 42,
+      "mean_absolute_pixel_change": 6.342416794519811
+    }
+  ],
+  "scores": {
+    "0": {
+      "baseline": {
+        "samples": 5,
+        "cer": 0.6019417475728155,
+        "wer": 0.75,
+        "char_errors": 62,
+        "reference_chars": 103,
+        "word_errors": 21,
+        "reference_words": 28,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "dia0_utt1",
+            "char_errors": 14,
+            "reference_chars": 26,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "dia0_utt2",
+            "char_errors": 0,
+            "reference_chars": 16,
+            "word_errors": 0,
+            "reference_words": 6
+          },
+          {
+            "id": "dia1_utt1",
+            "char_errors": 2,
+            "reference_chars": 15,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "dia2_utt1",
+            "char_errors": 32,
+            "reference_chars": 39,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "dia2_utt2",
+            "char_errors": 14,
+            "reference_chars": 7,
+            "word_errors": 5,
+            "reference_words": 3
+          }
+        ]
+      },
+      "smooth12": {
+        "samples": 5,
+        "cer": 0.6407766990291263,
+        "wer": 0.8928571428571429,
+        "char_errors": 66,
+        "reference_chars": 103,
+        "word_errors": 25,
+        "reference_words": 28,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "dia0_utt1",
+            "char_errors": 14,
+            "reference_chars": 26,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "dia0_utt2",
+            "char_errors": 4,
+            "reference_chars": 16,
+            "word_errors": 4,
+            "reference_words": 6
+          },
+          {
+            "id": "dia1_utt1",
+            "char_errors": 2,
+            "reference_chars": 15,
+            "word_errors": 1,
+            "reference_words": 4
+          },
+          {
+            "id": "dia2_utt1",
+            "char_errors": 32,
+            "reference_chars": 39,
+            "word_errors": 9,
+            "reference_words": 9
+          },
+          {
+            "id": "dia2_utt2",
+            "char_errors": 14,
+            "reference_chars": 7,
+            "word_errors": 5,
+            "reference_words": 3
+          }
+        ]
+      },
+      "comparison": {
+        "improved": 0,
+        "unchanged": 4,
+        "worsened": 1,
+        "wer_delta": 0.1428571428571429,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 4,
+        "exact_harm_rate": 1.0,
+        "exact_harm_numerator": 1,
+        "exact_harm_denominator": 1
+      }
+    },
+    "25": {
+      "baseline": {
+        "samples": 5,
+        "cer": 1.0194174757281553,
+        "wer": 1.1428571428571428,
+        "char_errors": 105,
+        "reference_chars": 103,
+        "word_errors": 32,
+        "reference_words": 28,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "dia0_utt1",
+            "char_errors": 23,
+            "reference_chars": 26,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "dia0_utt2",
+            "char_errors": 15,
+            "reference_chars": 16,
+            "word_errors": 5,
+            "reference_words": 6
+          },
+          {
+            "id": "dia1_utt1",
+            "char_errors": 14,
+            "reference_chars": 15,
+            "word_errors": 5,
+            "reference_words": 4
+          },
+          {
+            "id": "dia2_utt1",
+            "char_errors": 32,
+            "reference_chars": 39,
+            "word_errors": 8,
+            "reference_words": 9
+          },
+          {
+            "id": "dia2_utt2",
+            "char_errors": 21,
+            "reference_chars": 7,
+            "word_errors": 8,
+            "reference_words": 3
+          }
+        ]
+      },
+      "smooth12": {
+        "samples": 5,
+        "cer": 0.9320388349514563,
+        "wer": 1.1071428571428572,
+        "char_errors": 96,
+        "reference_chars": 103,
+        "word_errors": 31,
+        "reference_words": 28,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "dia0_utt1",
+            "char_errors": 20,
+            "reference_chars": 26,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "dia0_utt2",
+            "char_errors": 13,
+            "reference_chars": 16,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "dia1_utt1",
+            "char_errors": 14,
+            "reference_chars": 15,
+            "word_errors": 5,
+            "reference_words": 4
+          },
+          {
+            "id": "dia2_utt1",
+            "char_errors": 32,
+            "reference_chars": 39,
+            "word_errors": 8,
+            "reference_words": 9
+          },
+          {
+            "id": "dia2_utt2",
+            "char_errors": 17,
+            "reference_chars": 7,
+            "word_errors": 6,
+            "reference_words": 3
+          }
+        ]
+      },
+      "comparison": {
+        "improved": 1,
+        "unchanged": 3,
+        "worsened": 1,
+        "wer_delta": -0.03571428571428559,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      }
+    },
+    "50": {
+      "baseline": {
+        "samples": 5,
+        "cer": 1.116504854368932,
+        "wer": 1.1785714285714286,
+        "char_errors": 115,
+        "reference_chars": 103,
+        "word_errors": 33,
+        "reference_words": 28,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "dia0_utt1",
+            "char_errors": 23,
+            "reference_chars": 26,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "dia0_utt2",
+            "char_errors": 18,
+            "reference_chars": 16,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "dia1_utt1",
+            "char_errors": 21,
+            "reference_chars": 15,
+            "word_errors": 5,
+            "reference_words": 4
+          },
+          {
+            "id": "dia2_utt1",
+            "char_errors": 32,
+            "reference_chars": 39,
+            "word_errors": 8,
+            "reference_words": 9
+          },
+          {
+            "id": "dia2_utt2",
+            "char_errors": 21,
+            "reference_chars": 7,
+            "word_errors": 8,
+            "reference_words": 3
+          }
+        ]
+      },
+      "smooth12": {
+        "samples": 5,
+        "cer": 1.1067961165048543,
+        "wer": 1.1785714285714286,
+        "char_errors": 114,
+        "reference_chars": 103,
+        "word_errors": 33,
+        "reference_words": 28,
+        "normalization": "NFC; collapse whitespace; CER excludes whitespace; punctuation preserved",
+        "details": [
+          {
+            "id": "dia0_utt1",
+            "char_errors": 22,
+            "reference_chars": 26,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "dia0_utt2",
+            "char_errors": 18,
+            "reference_chars": 16,
+            "word_errors": 6,
+            "reference_words": 6
+          },
+          {
+            "id": "dia1_utt1",
+            "char_errors": 21,
+            "reference_chars": 15,
+            "word_errors": 5,
+            "reference_words": 4
+          },
+          {
+            "id": "dia2_utt1",
+            "char_errors": 32,
+            "reference_chars": 39,
+            "word_errors": 8,
+            "reference_words": 9
+          },
+          {
+            "id": "dia2_utt2",
+            "char_errors": 21,
+            "reference_chars": 7,
+            "word_errors": 8,
+            "reference_words": 3
+          }
+        ]
+      },
+      "comparison": {
+        "improved": 0,
+        "unchanged": 5,
+        "worsened": 0,
+        "wer_delta": 0.0,
+        "correction_rate": 0.0,
+        "correction_numerator": 0,
+        "correction_denominator": 5,
+        "exact_harm_rate": null,
+        "exact_harm_numerator": 0,
+        "exact_harm_denominator": 0
+      }
+    }
+  },
+  "calls": 15,
+  "failures": 0,
+  "output_sha256": "681ddc50c96343dbc3bcc3e9af79fe5bc1570b5c653483d0332d5e7218b981a9"
+}
