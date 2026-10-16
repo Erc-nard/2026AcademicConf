@@ -1,0 +1,3808 @@
+{
+  "scope": "Post-hoc final report analysis of frozen twenty targets; no model calls or retuning",
+  "source_hashes": {
+    "experiments\\meld_heldout_evaluation_2026-10-04.json": "2cd2eca3e86515d0e8c8904309956bca89fca04ef4641c4929b96a253951f7ef",
+    "experiments\\meld_heldout_final_plan_2026-10-03.json": "0dd5925b1cbc10a2b19e9fb3241a5922fa20f9f0baf9bb6804eef103c67e672d",
+    "experiments\\meld_heldout_analysis_2026-10-04.json": "33ef9bf607ff54cea0af67e9a19cc2b010d9a8c65f60aa3c788d1a86fbf9e7ff",
+    "experiments\\meld_heldout_provenance_2026-10-04.json": "4bc60eaef232527488148e42581896c137cb92798dbb7e2fd66dc3010673f1dc"
+  },
+  "source_sha256": "4ff5270ff2d2efbdcf0c6983b482db5ec96d01acbcb86b790b60b990e52f0b41",
+  "method": {
+    "unit": "season+episode",
+    "clusters": 20,
+    "targets": 20,
+    "draws": 10000,
+    "seed": 20261017,
+    "interval": "2.5/97.5 linear percentiles of paired cluster bootstrap corpus-WER differences in percentage points",
+    "multiplicity": "Exploratory intervals, no simultaneous coverage or confirmatory p-values",
+    "caution": "Zero-width interval for identical observed errors does not establish population equivalence"
+  },
+  "audit": {
+    "output_rows": 420,
+    "model_calls": 360,
+    "execution_failures": 0,
+    "groups": {
+      "dia3_utt1": "S3E12",
+      "dia4_utt3": "S3E11",
+      "dia5_utt3": "S3E15",
+      "dia6_utt1": "S8E22",
+      "dia7_utt1": "S6E9",
+      "dia8_utt2": "S6E23",
+      "dia12_utt2": "S6E4",
+      "dia13_utt1": "S8E8",
+      "dia14_utt1": "S8E11",
+      "dia18_utt1": "S5E21",
+      "dia20_utt1": "S7E7",
+      "dia22_utt1": "S1E23",
+      "dia24_utt1": "S3E14",
+      "dia25_utt1": "S4E4",
+      "dia26_utt1": "S5E18",
+      "dia30_utt1": "S6E21",
+      "dia31_utt1": "S6E22",
+      "dia32_utt3": "S1E12",
+      "dia33_utt1": "S6E24",
+      "dia35_utt1": "S7E9"
+    },
+    "status_counts": {
+      "raw_vsr": 60,
+      "ok": 360
+    },
+    "outputs_sha256": "8dde0bc0a988ba9dd01de838a4138fc17ca6c41b61a3ee64d246d64637e60f9c"
+  },
+  "vs_raw": {
+    "0": {
+      "C0_LLM": {
+        "delta_wer_pp": 0.6451612903225806,
+        "percentile_95_interval_pp": [
+          0.0,
+          2.112676056338028
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 19,
+        "worsened": 1
+      },
+      "C1": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "C2": {
+        "delta_wer_pp": 0.6451612903225806,
+        "percentile_95_interval_pp": [
+          0.0,
+          2.112676056338028
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 19,
+        "worsened": 1
+      },
+      "C3": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "C4": {
+        "delta_wer_pp": 0.6451612903225806,
+        "percentile_95_interval_pp": [
+          0.0,
+          2.112676056338028
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 19,
+        "worsened": 1
+      },
+      "C5": {
+        "delta_wer_pp": 0.6451612903225806,
+        "percentile_95_interval_pp": [
+          0.0,
+          2.112676056338028
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 19,
+        "worsened": 1
+      }
+    },
+    "25": {
+      "C0_LLM": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "C1": {
+        "delta_wer_pp": -0.6451612903225806,
+        "percentile_95_interval_pp": [
+          -2.142857142857143,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 1,
+        "same": 19,
+        "worsened": 0
+      },
+      "C2": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "C3": {
+        "delta_wer_pp": -0.6451612903225806,
+        "percentile_95_interval_pp": [
+          -2.142857142857143,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 1,
+        "same": 19,
+        "worsened": 0
+      },
+      "C4": {
+        "delta_wer_pp": -0.6451612903225806,
+        "percentile_95_interval_pp": [
+          -2.142857142857143,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 1,
+        "same": 19,
+        "worsened": 0
+      },
+      "C5": {
+        "delta_wer_pp": -0.6451612903225806,
+        "percentile_95_interval_pp": [
+          -2.142857142857143,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 1,
+        "same": 19,
+        "worsened": 0
+      }
+    },
+    "50": {
+      "C0_LLM": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "C1": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "C2": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "C3": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "C4": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "C5": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      }
+    }
+  },
+  "context_controls": {
+    "0": {
+      "real_vs_wrong": {
+        "delta_wer_pp": -0.6451612903225806,
+        "percentile_95_interval_pp": [
+          -2.112676056338028,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 1,
+        "same": 19,
+        "worsened": 0
+      },
+      "combined_vs_dialogue": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      }
+    },
+    "25": {
+      "real_vs_wrong": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "combined_vs_dialogue": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      }
+    },
+    "50": {
+      "real_vs_wrong": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      },
+      "combined_vs_dialogue": {
+        "delta_wer_pp": 0.0,
+        "percentile_95_interval_pp": [
+          0.0,
+          0.0
+        ],
+        "clusters": 20,
+        "samples": 20,
+        "improved": 0,
+        "same": 20,
+        "worsened": 0
+      }
+    }
+  },
+  "masking": {
+    "mask25_vs_clean": {
+      "delta_wer_pp": 36.12903225806452,
+      "percentile_95_interval_pp": [
+        16.128491015371292,
+        57.067158385093144
+      ],
+      "clusters": 20,
+      "samples": 20,
+      "improved": 2,
+      "same": 6,
+      "worsened": 12
+    },
+    "mask50_vs_clean": {
+      "delta_wer_pp": 27.096774193548388,
+      "percentile_95_interval_pp": [
+        11.800328827183048,
+        41.714474929044464
+      ],
+      "clusters": 20,
+      "samples": 20,
+      "improved": 1,
+      "same": 6,
+      "worsened": 13
+    }
+  },
+  "visual_availability_subgroups": {
+    "visual_success": {
+      "0": {
+        "C0": {
+          "word_errors": 50,
+          "reference_words": 70,
+          "char_errors": 146,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 0.7142857142857143,
+          "cer": 0.5488721804511278,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 3,
+              "reference_chars": 47,
+              "word_errors": 1,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 21,
+              "reference_chars": 30,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 28,
+              "reference_chars": 72,
+              "word_errors": 8,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 20,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 20,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 4,
+              "reference_chars": 12,
+              "word_errors": 2,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 26,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C0_LLM": {
+          "word_errors": 50,
+          "reference_words": 70,
+          "char_errors": 146,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 0.7142857142857143,
+          "cer": 0.5488721804511278,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 3,
+              "reference_chars": 47,
+              "word_errors": 1,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 21,
+              "reference_chars": 30,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 28,
+              "reference_chars": 72,
+              "word_errors": 8,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 20,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 20,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 4,
+              "reference_chars": 12,
+              "word_errors": 2,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 26,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C1": {
+          "word_errors": 50,
+          "reference_words": 70,
+          "char_errors": 146,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 0.7142857142857143,
+          "cer": 0.5488721804511278,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 3,
+              "reference_chars": 47,
+              "word_errors": 1,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 21,
+              "reference_chars": 30,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 28,
+              "reference_chars": 72,
+              "word_errors": 8,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 20,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 20,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 4,
+              "reference_chars": 12,
+              "word_errors": 2,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 26,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C2": {
+          "word_errors": 50,
+          "reference_words": 70,
+          "char_errors": 146,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 0.7142857142857143,
+          "cer": 0.5488721804511278,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 3,
+              "reference_chars": 47,
+              "word_errors": 1,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 21,
+              "reference_chars": 30,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 28,
+              "reference_chars": 72,
+              "word_errors": 8,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 20,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 20,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 4,
+              "reference_chars": 12,
+              "word_errors": 2,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 26,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C3": {
+          "word_errors": 50,
+          "reference_words": 70,
+          "char_errors": 146,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 0.7142857142857143,
+          "cer": 0.5488721804511278,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 3,
+              "reference_chars": 47,
+              "word_errors": 1,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 21,
+              "reference_chars": 30,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 28,
+              "reference_chars": 72,
+              "word_errors": 8,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 20,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 20,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 4,
+              "reference_chars": 12,
+              "word_errors": 2,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 26,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C4": {
+          "word_errors": 50,
+          "reference_words": 70,
+          "char_errors": 146,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 0.7142857142857143,
+          "cer": 0.5488721804511278,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 3,
+              "reference_chars": 47,
+              "word_errors": 1,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 21,
+              "reference_chars": 30,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 28,
+              "reference_chars": 72,
+              "word_errors": 8,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 20,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 20,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 4,
+              "reference_chars": 12,
+              "word_errors": 2,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 26,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C5": {
+          "word_errors": 50,
+          "reference_words": 70,
+          "char_errors": 146,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 0.7142857142857143,
+          "cer": 0.5488721804511278,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 3,
+              "reference_chars": 47,
+              "word_errors": 1,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 21,
+              "reference_chars": 30,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 28,
+              "reference_chars": 72,
+              "word_errors": 8,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 20,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 20,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 4,
+              "reference_chars": 12,
+              "word_errors": 2,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 26,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        }
+      },
+      "25": {
+        "C0": {
+          "word_errors": 72,
+          "reference_words": 70,
+          "char_errors": 210,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.0285714285714285,
+          "cer": 0.7894736842105263,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 38,
+              "reference_chars": 47,
+              "word_errors": 12,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 27,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 54,
+              "reference_chars": 72,
+              "word_errors": 18,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 22,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 4,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 0,
+              "reference_chars": 12,
+              "word_errors": 0,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C0_LLM": {
+          "word_errors": 72,
+          "reference_words": 70,
+          "char_errors": 214,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.0285714285714285,
+          "cer": 0.8045112781954887,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 38,
+              "reference_chars": 47,
+              "word_errors": 12,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 27,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 54,
+              "reference_chars": 72,
+              "word_errors": 18,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 22,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 8,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 0,
+              "reference_chars": 12,
+              "word_errors": 0,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C1": {
+          "word_errors": 72,
+          "reference_words": 70,
+          "char_errors": 210,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.0285714285714285,
+          "cer": 0.7894736842105263,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 38,
+              "reference_chars": 47,
+              "word_errors": 12,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 27,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 54,
+              "reference_chars": 72,
+              "word_errors": 18,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 22,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 4,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 0,
+              "reference_chars": 12,
+              "word_errors": 0,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C2": {
+          "word_errors": 72,
+          "reference_words": 70,
+          "char_errors": 214,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.0285714285714285,
+          "cer": 0.8045112781954887,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 38,
+              "reference_chars": 47,
+              "word_errors": 12,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 27,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 54,
+              "reference_chars": 72,
+              "word_errors": 18,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 22,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 8,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 0,
+              "reference_chars": 12,
+              "word_errors": 0,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C3": {
+          "word_errors": 72,
+          "reference_words": 70,
+          "char_errors": 210,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.0285714285714285,
+          "cer": 0.7894736842105263,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 38,
+              "reference_chars": 47,
+              "word_errors": 12,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 27,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 54,
+              "reference_chars": 72,
+              "word_errors": 18,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 22,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 4,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 0,
+              "reference_chars": 12,
+              "word_errors": 0,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C4": {
+          "word_errors": 72,
+          "reference_words": 70,
+          "char_errors": 210,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.0285714285714285,
+          "cer": 0.7894736842105263,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 38,
+              "reference_chars": 47,
+              "word_errors": 12,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 27,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 54,
+              "reference_chars": 72,
+              "word_errors": 18,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 22,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 4,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 0,
+              "reference_chars": 12,
+              "word_errors": 0,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C5": {
+          "word_errors": 72,
+          "reference_words": 70,
+          "char_errors": 210,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.0285714285714285,
+          "cer": 0.7894736842105263,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 38,
+              "reference_chars": 47,
+              "word_errors": 12,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 27,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 54,
+              "reference_chars": 72,
+              "word_errors": 18,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 22,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 4,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 0,
+              "reference_chars": 12,
+              "word_errors": 0,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 19,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        }
+      },
+      "50": {
+        "C0": {
+          "word_errors": 73,
+          "reference_words": 70,
+          "char_errors": 216,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.042857142857143,
+          "cer": 0.8120300751879699,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 31,
+              "reference_chars": 47,
+              "word_errors": 9,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 24,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 58,
+              "reference_chars": 72,
+              "word_errors": 19,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 21,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 7,
+              "reference_chars": 12,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 32,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 20,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C0_LLM": {
+          "word_errors": 73,
+          "reference_words": 70,
+          "char_errors": 216,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.042857142857143,
+          "cer": 0.8120300751879699,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 31,
+              "reference_chars": 47,
+              "word_errors": 9,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 24,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 58,
+              "reference_chars": 72,
+              "word_errors": 19,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 21,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 7,
+              "reference_chars": 12,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 32,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 20,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C1": {
+          "word_errors": 73,
+          "reference_words": 70,
+          "char_errors": 219,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.042857142857143,
+          "cer": 0.8233082706766918,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 31,
+              "reference_chars": 47,
+              "word_errors": 9,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 24,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 58,
+              "reference_chars": 72,
+              "word_errors": 19,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 21,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 8,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 7,
+              "reference_chars": 12,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 32,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 20,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C2": {
+          "word_errors": 73,
+          "reference_words": 70,
+          "char_errors": 222,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.042857142857143,
+          "cer": 0.8345864661654135,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 31,
+              "reference_chars": 47,
+              "word_errors": 9,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 24,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 58,
+              "reference_chars": 72,
+              "word_errors": 19,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 21,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 11,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 7,
+              "reference_chars": 12,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 32,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 20,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C3": {
+          "word_errors": 73,
+          "reference_words": 70,
+          "char_errors": 222,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.042857142857143,
+          "cer": 0.8345864661654135,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 31,
+              "reference_chars": 47,
+              "word_errors": 9,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 24,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 58,
+              "reference_chars": 72,
+              "word_errors": 19,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 21,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 11,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 7,
+              "reference_chars": 12,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 32,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 20,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C4": {
+          "word_errors": 73,
+          "reference_words": 70,
+          "char_errors": 216,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.042857142857143,
+          "cer": 0.8120300751879699,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 31,
+              "reference_chars": 47,
+              "word_errors": 9,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 24,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 58,
+              "reference_chars": 72,
+              "word_errors": 19,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 21,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 5,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 7,
+              "reference_chars": 12,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 32,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 20,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        },
+        "C5": {
+          "word_errors": 73,
+          "reference_words": 70,
+          "char_errors": 219,
+          "reference_chars": 266,
+          "samples": 9,
+          "wer": 1.042857142857143,
+          "cer": 0.8233082706766918,
+          "details": [
+            {
+              "id": "dia12_utt2",
+              "char_errors": 31,
+              "reference_chars": 47,
+              "word_errors": 9,
+              "reference_words": 11
+            },
+            {
+              "id": "dia20_utt1",
+              "char_errors": 24,
+              "reference_chars": 30,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia24_utt1",
+              "char_errors": 58,
+              "reference_chars": 72,
+              "word_errors": 19,
+              "reference_words": 19
+            },
+            {
+              "id": "dia30_utt1",
+              "char_errors": 18,
+              "reference_chars": 24,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia31_utt1",
+              "char_errors": 21,
+              "reference_chars": 27,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia35_utt1",
+              "char_errors": 8,
+              "reference_chars": 6,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia3_utt1",
+              "char_errors": 7,
+              "reference_chars": 12,
+              "word_errors": 3,
+              "reference_words": 3
+            },
+            {
+              "id": "dia4_utt3",
+              "char_errors": 32,
+              "reference_chars": 39,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia5_utt3",
+              "char_errors": 20,
+              "reference_chars": 9,
+              "word_errors": 6,
+              "reference_words": 1
+            }
+          ]
+        }
+      }
+    },
+    "visual_failed": {
+      "0": {
+        "C0": {
+          "word_errors": 71,
+          "reference_words": 85,
+          "char_errors": 244,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 0.8352941176470589,
+          "cer": 0.6455026455026455,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 53,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 10,
+              "reference_chars": 4,
+              "word_errors": 3,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 13,
+              "reference_chars": 15,
+              "word_errors": 4,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 25,
+              "reference_chars": 39,
+              "word_errors": 8,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 31,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 9,
+              "reference_chars": 41,
+              "word_errors": 4,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 31,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 15,
+              "reference_chars": 26,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 11,
+              "reference_chars": 50,
+              "word_errors": 3,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 16,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C0_LLM": {
+          "word_errors": 72,
+          "reference_words": 85,
+          "char_errors": 248,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 0.8470588235294118,
+          "cer": 0.656084656084656,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 53,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 10,
+              "reference_chars": 4,
+              "word_errors": 3,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 13,
+              "reference_chars": 15,
+              "word_errors": 4,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 25,
+              "reference_chars": 39,
+              "word_errors": 8,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 31,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 9,
+              "reference_chars": 41,
+              "word_errors": 4,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 31,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 15,
+              "reference_chars": 26,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 15,
+              "reference_chars": 50,
+              "word_errors": 4,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 16,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C1": {
+          "word_errors": 71,
+          "reference_words": 85,
+          "char_errors": 244,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 0.8352941176470589,
+          "cer": 0.6455026455026455,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 53,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 10,
+              "reference_chars": 4,
+              "word_errors": 3,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 13,
+              "reference_chars": 15,
+              "word_errors": 4,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 25,
+              "reference_chars": 39,
+              "word_errors": 8,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 31,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 9,
+              "reference_chars": 41,
+              "word_errors": 4,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 31,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 15,
+              "reference_chars": 26,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 11,
+              "reference_chars": 50,
+              "word_errors": 3,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 16,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C2": {
+          "word_errors": 72,
+          "reference_words": 85,
+          "char_errors": 248,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 0.8470588235294118,
+          "cer": 0.656084656084656,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 53,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 10,
+              "reference_chars": 4,
+              "word_errors": 3,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 13,
+              "reference_chars": 15,
+              "word_errors": 4,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 25,
+              "reference_chars": 39,
+              "word_errors": 8,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 31,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 9,
+              "reference_chars": 41,
+              "word_errors": 4,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 31,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 15,
+              "reference_chars": 26,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 15,
+              "reference_chars": 50,
+              "word_errors": 4,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 16,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C3": {
+          "word_errors": 71,
+          "reference_words": 85,
+          "char_errors": 244,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 0.8352941176470589,
+          "cer": 0.6455026455026455,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 53,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 10,
+              "reference_chars": 4,
+              "word_errors": 3,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 13,
+              "reference_chars": 15,
+              "word_errors": 4,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 25,
+              "reference_chars": 39,
+              "word_errors": 8,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 31,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 9,
+              "reference_chars": 41,
+              "word_errors": 4,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 31,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 15,
+              "reference_chars": 26,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 11,
+              "reference_chars": 50,
+              "word_errors": 3,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 16,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C4": {
+          "word_errors": 72,
+          "reference_words": 85,
+          "char_errors": 248,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 0.8470588235294118,
+          "cer": 0.656084656084656,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 53,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 10,
+              "reference_chars": 4,
+              "word_errors": 3,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 13,
+              "reference_chars": 15,
+              "word_errors": 4,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 25,
+              "reference_chars": 39,
+              "word_errors": 8,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 31,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 9,
+              "reference_chars": 41,
+              "word_errors": 4,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 31,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 15,
+              "reference_chars": 26,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 15,
+              "reference_chars": 50,
+              "word_errors": 4,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 16,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C5": {
+          "word_errors": 72,
+          "reference_words": 85,
+          "char_errors": 248,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 0.8470588235294118,
+          "cer": 0.656084656084656,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 53,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 10,
+              "reference_chars": 4,
+              "word_errors": 3,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 13,
+              "reference_chars": 15,
+              "word_errors": 4,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 25,
+              "reference_chars": 39,
+              "word_errors": 8,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 31,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 9,
+              "reference_chars": 41,
+              "word_errors": 4,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 31,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 15,
+              "reference_chars": 26,
+              "word_errors": 5,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 15,
+              "reference_chars": 50,
+              "word_errors": 4,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 16,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        }
+      },
+      "25": {
+        "C0": {
+          "word_errors": 105,
+          "reference_words": 85,
+          "char_errors": 355,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.2352941176470589,
+          "cer": 0.9391534391534392,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 64,
+              "reference_chars": 53,
+              "word_errors": 25,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 11,
+              "reference_chars": 4,
+              "word_errors": 4,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 18,
+              "reference_chars": 15,
+              "word_errors": 5,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 35,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 36,
+              "reference_chars": 41,
+              "word_errors": 10,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 34,
+              "reference_chars": 40,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 21,
+              "reference_chars": 26,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 43,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C0_LLM": {
+          "word_errors": 105,
+          "reference_words": 85,
+          "char_errors": 355,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.2352941176470589,
+          "cer": 0.9391534391534392,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 64,
+              "reference_chars": 53,
+              "word_errors": 25,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 11,
+              "reference_chars": 4,
+              "word_errors": 4,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 18,
+              "reference_chars": 15,
+              "word_errors": 5,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 35,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 36,
+              "reference_chars": 41,
+              "word_errors": 10,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 34,
+              "reference_chars": 40,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 21,
+              "reference_chars": 26,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 43,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C1": {
+          "word_errors": 104,
+          "reference_words": 85,
+          "char_errors": 353,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.223529411764706,
+          "cer": 0.9338624338624338,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 64,
+              "reference_chars": 53,
+              "word_errors": 25,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 11,
+              "reference_chars": 4,
+              "word_errors": 4,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 18,
+              "reference_chars": 15,
+              "word_errors": 5,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 33,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 36,
+              "reference_chars": 41,
+              "word_errors": 10,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 34,
+              "reference_chars": 40,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 21,
+              "reference_chars": 26,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 43,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C2": {
+          "word_errors": 105,
+          "reference_words": 85,
+          "char_errors": 355,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.2352941176470589,
+          "cer": 0.9391534391534392,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 64,
+              "reference_chars": 53,
+              "word_errors": 25,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 11,
+              "reference_chars": 4,
+              "word_errors": 4,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 18,
+              "reference_chars": 15,
+              "word_errors": 5,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 35,
+              "reference_chars": 39,
+              "word_errors": 10,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 36,
+              "reference_chars": 41,
+              "word_errors": 10,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 34,
+              "reference_chars": 40,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 21,
+              "reference_chars": 26,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 43,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C3": {
+          "word_errors": 104,
+          "reference_words": 85,
+          "char_errors": 353,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.223529411764706,
+          "cer": 0.9338624338624338,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 64,
+              "reference_chars": 53,
+              "word_errors": 25,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 11,
+              "reference_chars": 4,
+              "word_errors": 4,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 18,
+              "reference_chars": 15,
+              "word_errors": 5,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 33,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 36,
+              "reference_chars": 41,
+              "word_errors": 10,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 34,
+              "reference_chars": 40,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 21,
+              "reference_chars": 26,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 43,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C4": {
+          "word_errors": 104,
+          "reference_words": 85,
+          "char_errors": 353,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.223529411764706,
+          "cer": 0.9338624338624338,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 64,
+              "reference_chars": 53,
+              "word_errors": 25,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 11,
+              "reference_chars": 4,
+              "word_errors": 4,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 18,
+              "reference_chars": 15,
+              "word_errors": 5,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 33,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 36,
+              "reference_chars": 41,
+              "word_errors": 10,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 34,
+              "reference_chars": 40,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 21,
+              "reference_chars": 26,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 43,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C5": {
+          "word_errors": 104,
+          "reference_words": 85,
+          "char_errors": 353,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.223529411764706,
+          "cer": 0.9338624338624338,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 64,
+              "reference_chars": 53,
+              "word_errors": 25,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 11,
+              "reference_chars": 4,
+              "word_errors": 4,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 18,
+              "reference_chars": 15,
+              "word_errors": 5,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 33,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 36,
+              "reference_chars": 41,
+              "word_errors": 10,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 34,
+              "reference_chars": 40,
+              "word_errors": 10,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 21,
+              "reference_chars": 26,
+              "word_errors": 7,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 43,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 4,
+              "reference_words": 4
+            }
+          ]
+        }
+      },
+      "50": {
+        "C0": {
+          "word_errors": 90,
+          "reference_words": 85,
+          "char_errors": 325,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.0588235294117647,
+          "cer": 0.8597883597883598,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 42,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 23,
+              "reference_chars": 4,
+              "word_errors": 5,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 17,
+              "reference_chars": 15,
+              "word_errors": 6,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 33,
+              "reference_chars": 41,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 32,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 20,
+              "reference_chars": 26,
+              "word_errors": 6,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 37,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 6,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C0_LLM": {
+          "word_errors": 90,
+          "reference_words": 85,
+          "char_errors": 325,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.0588235294117647,
+          "cer": 0.8597883597883598,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 42,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 23,
+              "reference_chars": 4,
+              "word_errors": 5,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 17,
+              "reference_chars": 15,
+              "word_errors": 6,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 33,
+              "reference_chars": 41,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 32,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 20,
+              "reference_chars": 26,
+              "word_errors": 6,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 37,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 6,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C1": {
+          "word_errors": 90,
+          "reference_words": 85,
+          "char_errors": 325,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.0588235294117647,
+          "cer": 0.8597883597883598,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 42,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 23,
+              "reference_chars": 4,
+              "word_errors": 5,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 17,
+              "reference_chars": 15,
+              "word_errors": 6,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 33,
+              "reference_chars": 41,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 32,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 20,
+              "reference_chars": 26,
+              "word_errors": 6,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 37,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 6,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C2": {
+          "word_errors": 90,
+          "reference_words": 85,
+          "char_errors": 325,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.0588235294117647,
+          "cer": 0.8597883597883598,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 42,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 23,
+              "reference_chars": 4,
+              "word_errors": 5,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 17,
+              "reference_chars": 15,
+              "word_errors": 6,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 33,
+              "reference_chars": 41,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 32,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 20,
+              "reference_chars": 26,
+              "word_errors": 6,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 37,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 6,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C3": {
+          "word_errors": 90,
+          "reference_words": 85,
+          "char_errors": 325,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.0588235294117647,
+          "cer": 0.8597883597883598,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 42,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 23,
+              "reference_chars": 4,
+              "word_errors": 5,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 17,
+              "reference_chars": 15,
+              "word_errors": 6,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 33,
+              "reference_chars": 41,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 32,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 20,
+              "reference_chars": 26,
+              "word_errors": 6,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 37,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 6,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C4": {
+          "word_errors": 90,
+          "reference_words": 85,
+          "char_errors": 325,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.0588235294117647,
+          "cer": 0.8597883597883598,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 42,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 23,
+              "reference_chars": 4,
+              "word_errors": 5,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 17,
+              "reference_chars": 15,
+              "word_errors": 6,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 33,
+              "reference_chars": 41,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 32,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 20,
+              "reference_chars": 26,
+              "word_errors": 6,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 37,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 6,
+              "reference_words": 4
+            }
+          ]
+        },
+        "C5": {
+          "word_errors": 90,
+          "reference_words": 85,
+          "char_errors": 325,
+          "reference_chars": 378,
+          "samples": 11,
+          "wer": 1.0588235294117647,
+          "cer": 0.8597883597883598,
+          "details": [
+            {
+              "id": "dia13_utt1",
+              "char_errors": 42,
+              "reference_chars": 53,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia14_utt1",
+              "char_errors": 23,
+              "reference_chars": 4,
+              "word_errors": 5,
+              "reference_words": 1
+            },
+            {
+              "id": "dia18_utt1",
+              "char_errors": 17,
+              "reference_chars": 15,
+              "word_errors": 6,
+              "reference_words": 4
+            },
+            {
+              "id": "dia22_utt1",
+              "char_errors": 28,
+              "reference_chars": 39,
+              "word_errors": 9,
+              "reference_words": 9
+            },
+            {
+              "id": "dia25_utt1",
+              "char_errors": 45,
+              "reference_chars": 53,
+              "word_errors": 12,
+              "reference_words": 14
+            },
+            {
+              "id": "dia26_utt1",
+              "char_errors": 33,
+              "reference_chars": 41,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia32_utt3",
+              "char_errors": 30,
+              "reference_chars": 36,
+              "word_errors": 8,
+              "reference_words": 8
+            },
+            {
+              "id": "dia33_utt1",
+              "char_errors": 32,
+              "reference_chars": 40,
+              "word_errors": 11,
+              "reference_words": 11
+            },
+            {
+              "id": "dia6_utt1",
+              "char_errors": 20,
+              "reference_chars": 26,
+              "word_errors": 6,
+              "reference_words": 7
+            },
+            {
+              "id": "dia7_utt1",
+              "char_errors": 37,
+              "reference_chars": 50,
+              "word_errors": 10,
+              "reference_words": 10
+            },
+            {
+              "id": "dia8_utt2",
+              "char_errors": 18,
+              "reference_chars": 21,
+              "word_errors": 6,
+              "reference_words": 4
+            }
+          ]
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Small fixed selection from MELD train, not official test",
+    "Visual success is parser completion, not verified semantic accuracy",
+    "Subgroups were analyzed after outcomes; descriptive sensitivity only",
+    "Same show; clusters may retain cross-episode dependence"
+  ]
+}
